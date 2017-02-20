@@ -1,0 +1,12 @@
+# IntelliJ specific files #
+.idea
+out
+
+# Compiled source #
+*.iml
+*.class
+*.dll
+*.exe
+*.o
+*.jar
+/bin/
