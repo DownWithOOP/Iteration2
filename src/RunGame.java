@@ -26,6 +26,6 @@ public class RunGame extends  Application{
         // lets create the game object
         System.out.println("Game has started running");
         Game game = new Game();
-        launch(args); // launch the GUI
+//        launch(args); // launch the GUI
     }
 }
