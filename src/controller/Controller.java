@@ -8,7 +8,7 @@ public abstract class Controller {
     // this will be the dispatch that the controller will use to communicate with the model to relay commands and update info
     private ControllerDispatch controllerDispatch;
 
-    public Controller(ControllerDispatch controllerDispatch){
+    public Controller(ControllerDispatch controllerDispatch, ControllerManager controllerManager){
         this.controllerDispatch = controllerDispatch;
     }
 

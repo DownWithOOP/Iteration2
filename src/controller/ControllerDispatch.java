@@ -1,9 +1,6 @@
 package controller;
 
-import controller.commands.TypeOfCommand;
 import model.GameModel;
-
-import java.util.HashMap;
 
 /**
  * Created by Konrad on 2/17/2017.
@@ -11,7 +8,7 @@ import java.util.HashMap;
 public class ControllerDispatch {
     private AvailableCommands availableCommands;
     private GameModel gameModel;
-//    private HashMap<TypeOfCommand,>
+//    private HashMap<CommandType,>
 
     public ControllerDispatch(int playerNumber){
         availableCommands=new AvailableCommands();
