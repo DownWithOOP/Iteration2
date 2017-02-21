@@ -12,4 +12,14 @@ public class WelcomeViewController extends Controller {
     public WelcomeViewController(ControllerDispatch controllerDispatch, ControllerManager controllerManager){
         super(controllerDispatch,controllerManager);
     }
+
+    @Override
+    protected void resumeController() {
+
+    }
+
+    @Override
+    protected void suspendController() {
+
+    }
 }
