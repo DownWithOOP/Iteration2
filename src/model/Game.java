@@ -21,6 +21,7 @@ public class Game {
         this.controllerManager = new ControllerManager(this.controllerDispatch);
 
         // now lets run the game
+        System.out.println("Game Loop Started");
         runGameLoop();
     }
 

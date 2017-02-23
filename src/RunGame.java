@@ -1,3 +1,7 @@
+import controller.keyboardinputhandler.KeyboardInputHandler;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.scene.input.KeyEvent;
 import model.Game;
 
 import javafx.application.Application;
@@ -14,9 +18,14 @@ public class RunGame extends  Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("resources/sample.fxml"));
+        Parent root = loader.load();
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.getScene().setOnKeyPressed(event -> {
+            KeyboardInputHandler controller = loader.getController();
+            controller.keyListener(event);
+        });
         primaryStage.show();
     }
 
@@ -25,7 +34,7 @@ public class RunGame extends  Application{
         // entry point of the appliction
         // lets create the game object
         System.out.println("Game has started running");
-        Game game = new Game();
-//        launch(args); // launch the GUI
+        launch(args); // launch the GUI
+        //Game game = new Game();
     }
 }
