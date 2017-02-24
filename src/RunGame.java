@@ -1,9 +1,15 @@
 import controller.keyboardinputhandler.WelcomeViewInputRecognizer;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -17,8 +23,10 @@ public class RunGame extends  Application{
     @Override
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("resources/welcomeView.fxml"));
-        Parent root = loader.load();
+        Pane root = loader.load();
         primaryStage.setTitle("Space Cats!");
+
+        //TODO Shouldn't we construct a scene, tell it to set the onKeyPressed, and then call primaryStage.setScene() ?
         primaryStage.setScene(new Scene(root, 600, 453));
         primaryStage.getScene().setOnKeyPressed(event -> {
             WelcomeViewInputRecognizer controller = loader.getController();
@@ -28,6 +36,24 @@ public class RunGame extends  Application{
                 e.printStackTrace();
             }
         });
+
+        //Create canvas that we need to draw map and everything else on.
+        final Canvas areaViewport = new Canvas(250,250);
+        GraphicsContext gc = areaViewport.getGraphicsContext2D();
+
+        //TODO how do we tell root where to put the area viewport?
+        root.getChildren().add(areaViewport);
+
+        new AnimationTimer()
+        {
+            public void handle(long currentNanoTime)
+            {
+               //TODO tell the game to update/render here
+            }
+        }.start();
+
+
+
         primaryStage.show();
     }
 
