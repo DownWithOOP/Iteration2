@@ -21,6 +21,7 @@ public class Game {
         this.controllerManager = new ControllerManager(this.controllerDispatch);
 
         // now lets run the game
+        System.out.println("Game Loop Started");
         runGameLoop();
     }
 
@@ -30,9 +31,9 @@ public class Game {
         // this is going to be the main game loop, constantly checking for updates and such
 
         //TODO: this is used for testing the endTurn function, delete this
-        Scanner input = new Scanner(System.in);
-        String test = input.nextLine();
-        System.out.println(test);
+        //Scanner input = new Scanner(System.in);
+        //String test = input.nextLine();
+        //System.out.println(test);
         controllerManager.switchControllers(ControllerType.mainViewController);
         ((MainViewController)controllerManager.activeController).transferAction();
         ((MainViewController)controllerManager.activeController).transferAction();
