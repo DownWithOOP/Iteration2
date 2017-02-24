@@ -32,7 +32,7 @@ public class MainViewInputRecognizer implements Initializable {
         // TODO: properly end all game logic in Game class when returning to main menu
         Stage stage;
         Parent root;
-        stage = (Stage) mainMenuBar.getScene().getWindow();
+        stage = getStage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/welcomeView.fxml"));
         root = loader.load();
         //root = FXMLLoader.load(getClass().getResource("/resources/sample.fxml"));
@@ -40,7 +40,7 @@ public class MainViewInputRecognizer implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.getScene().setOnKeyPressed(event -> {
-            MainViewInputRecognizer controller = loader.getController();
+            WelcomeViewInputRecognizer controller = loader.getController();
             try {
                 controller.keyListener(event);
             } catch (IOException e) {
