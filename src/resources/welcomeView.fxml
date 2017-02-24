@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="453.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.keyboardinputhandler.WelcomeViewInputRecognizer">
+   <children>
+      <VBox>
+         <children>
+            <ImageView fitHeight="425.0" fitWidth="719.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/SpaceCat.jpg" />
+               </image>
+            </ImageView>
+            <Button fx:id="startGameButton" mnemonicParsing="false" onAction="#handleStartGame" prefHeight="28.0" prefWidth="616.0" text="Start Game (ENTER)" />
+         </children>
+      </VBox>
+   </children>
+</FlowPane>

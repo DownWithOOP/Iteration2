@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 
-<GridPane alignment="center" hgap="10" onKeyPressed="#keyListener" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="controller.keyboardinputhandler.KeyboardInputHandler">
+<GridPane alignment="center" hgap="10" onKeyPressed="#keyListener" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="controller.keyboardinputhandler.WelcomeViewInputRecognizer">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
