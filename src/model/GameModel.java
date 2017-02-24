@@ -19,6 +19,7 @@ public class GameModel {
 
         // when game starts, player 1 is starting
         this.activePlayerIndex = 0;
+        playersList[activePlayerIndex].startTurn();
     }
 
     public void endTurn() {
