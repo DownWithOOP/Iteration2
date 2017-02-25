@@ -8,4 +8,10 @@ public class Player {
     public Player(){
 
     }
+    public void endTurn(){
+
+    }
+    public void startTurn(){
+
+    }
 }

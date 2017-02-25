@@ -22,4 +22,9 @@ public class WelcomeViewController extends Controller {
     protected void suspendController() {
 
     }
+
+    @Override
+    protected void setView() {
+
+    }
 }

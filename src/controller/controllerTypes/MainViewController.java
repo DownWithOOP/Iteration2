@@ -24,6 +24,11 @@ public class MainViewController extends Controller {
 
     }
 
+    @Override
+    protected void setView() {
+
+    }
+
     public void transferAction(){
         controllerDispatch.handleCommand(CommandType.endTurn);
     }

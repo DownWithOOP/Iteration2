@@ -1,34 +1,35 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by Konrad on 2/17/2017.
  */
 public class GameModel {
 
-    private Player[] players;
+    private Player[] playersList;
     private int activePlayerIndex; // this is the player whose current turn it is
 
-    public GameModel(int numberOfPlayers){
-        // TODO check for valid number of players
-        // for the moment, lets create 2 players
-        players = new Player[numberOfPlayers];
-        for(int i=0; i<numberOfPlayers; i++){
+    public GameModel(int numberOfPlayers) {
+        // TODO check for valid number of playersList
+        // for the moment, lets create 2 playersList
+        playersList = new Player[numberOfPlayers];
+        for (int i = 0; i < numberOfPlayers; i++) {
             Player temp = new Player();
-            players[i] = temp;
+            playersList[i] = temp;
         }
 
         // when game starts, player 1 is starting
         this.activePlayerIndex = 0;
+        playersList[activePlayerIndex].startTurn();
     }
 
-    public void endTurn(){
-     activePlayerIndex=next(activePlayerIndex,this.players.length);
+    public void endTurn() {
+        playersList[activePlayerIndex].endTurn();
+        activePlayerIndex = next(activePlayerIndex, this.playersList.length);
+        playersList[activePlayerIndex].startTurn();
     }
-    private int next(int index,int size){
-        index= (index + 1) % size;
+
+    private int next(int index, int size) {
+        index = (index + 1) % size;
         return index;
     }
 

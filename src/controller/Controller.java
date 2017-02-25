@@ -34,4 +34,16 @@ public abstract class Controller {
      * hence we have an abstract class
      */
     protected abstract void suspendController();
+
+    /**
+     * assign the different views to the different controllers
+     */
+    protected abstract void setView();
+
+    public void receiveInput(){
+
+    }
+    protected void manageInput(){
+
+    }
 }

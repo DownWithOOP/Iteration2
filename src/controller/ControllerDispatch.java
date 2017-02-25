@@ -1,5 +1,6 @@
 package controller;
 
+import controller.availablecommands.AvailableCommands;
 import controller.commands.CommandType;
 import model.GameModel;
 
