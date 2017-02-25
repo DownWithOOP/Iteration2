@@ -24,14 +24,12 @@ public class GameModel {
 
     public void endTurn() {
         playersList[activePlayerIndex].endTurn();
-        activePlayerIndex = next(activePlayerIndex, this.playersList.length);
+        activePlayerIndex = nextPlayerIndex(activePlayerIndex);
         playersList[activePlayerIndex].startTurn();
     }
 
-    private int next(int index, int size) {
-        index = (index + 1) % size;
+    private int nextPlayerIndex(int index) {
+        index = (index + 1) % this.playersList.length;
         return index;
     }
-
-
 }

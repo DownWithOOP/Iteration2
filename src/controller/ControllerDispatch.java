@@ -26,7 +26,7 @@ public class ControllerDispatch {
     }
 
     private void setGameModelMap() {
-        gameModelMap.put(CommandType.endTurn, new GameModelCommand() {
+        gameModelMap.put(CommandType.END_TURN, new GameModelCommand() {
             @Override
             public void execute() {
                 gameModel.endTurn();

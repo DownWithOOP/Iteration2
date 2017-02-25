@@ -30,7 +30,7 @@ public class MainViewController extends Controller {
     }
 
     public void transferAction(){
-        controllerDispatch.handleCommand(CommandType.endTurn);
+        controllerDispatch.handleCommand(CommandType.END_TURN);
     }
 
 }
