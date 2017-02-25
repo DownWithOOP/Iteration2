@@ -1,8 +1,8 @@
-package controller.keyboardinputhandler;
+package controller.ingamecontrollertypes;
 
+import controller.Controller;
 import controller.SwitchControllerRelay;
 import javafx.event.ActionEvent;
-import javafx.fxml.Initializable;
 import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
@@ -12,23 +12,39 @@ import java.util.ResourceBundle;
 /**
  * Created by Konrad on 2/25/2017.
  */
-public class UnitViewInputRecognizer implements Initializable {
+public class StructureViewController extends Controller{
 
     private SwitchControllerRelay switchControllerRelay;
-
-    public void takeInSwitchControllerRelay(SwitchControllerRelay switchControllerRelay){
+    @Override
+    protected void takeInSwitchControllerRelay(SwitchControllerRelay switchControllerRelay) {
         this.switchControllerRelay = switchControllerRelay;
     }
 
-    public void handleChangeToMainView(ActionEvent actionEvent) throws  IOException{
-        this.switchControllerRelay.changeToMain();
+    @Override
+    protected void resumeController() {
+
     }
 
+    @Override
+    protected void suspendController() {
+
+    }
+
+    @Override
+    protected void setView() {
+
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
+
+
+    public void handleChangeToMainView(ActionEvent actionEvent) throws IOException {
+        this.switchControllerRelay.changeToMain();
+    }
+
     public void keyListener(KeyEvent event) throws IOException {
         //TODO: add key menu shortcuts and command control recognition
 

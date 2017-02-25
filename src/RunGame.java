@@ -1,4 +1,4 @@
-import controller.keyboardinputhandler.WelcomeViewInputRecognizer;
+import controller.WelcomeViewController.WelcomeViewIndependentController;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -167,7 +167,7 @@ public class RunGame extends  Application{
                 scene.getStylesheets().addAll(this.getClass().getResource("resources/style.css").toExternalForm());
                 primaryStage.setScene(scene);
                 primaryStage.getScene().setOnKeyPressed(event -> {
-                    WelcomeViewInputRecognizer controller = loader.getController();
+                    WelcomeViewIndependentController controller = loader.getController();
                     try {
                         controller.keyListener(event);
                     } catch (IOException e) {

@@ -1,17 +1,12 @@
-package controller.keyboardinputhandler;
+package controller.WelcomeViewController;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import model.Game;
 
@@ -22,7 +17,7 @@ import java.util.ResourceBundle;
 /**
  * Created by jordi on 2/21/2017.
  */
-public class WelcomeViewInputRecognizer implements Initializable {
+public class WelcomeViewIndependentController implements Initializable {
 
     @FXML
     private Button startGameButton;

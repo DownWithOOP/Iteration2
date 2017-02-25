@@ -1,11 +1,6 @@
 package controller;
 
-import controller.controllerTypes.ControllerType;
-import controller.controllerTypes.MainViewController;
-import controller.controllerTypes.WelcomeViewController;
-import controller.keyboardinputhandler.MainViewInputRecognizer;
-import controller.keyboardinputhandler.StructureViewInputRecognizer;
-import controller.keyboardinputhandler.UnitViewInputRecognizer;
+import controller.ingamecontrollertypes.ControllerType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -32,7 +27,6 @@ public class ControllerManager {
 
         // primary stage that is essentially the window
         this.primaryStage = primaryStage;
-        initializeControllers(controllerDispatch);
         this.activeController = this.controllerMap.get(ControllerType.welcomeViewController);
 
         // used for communication between the inputReconginzers and the controllerManager when a controller needs to be switched
@@ -42,15 +36,8 @@ public class ControllerManager {
         changeToMainView();
     }
 
-    private void initializeControllers(ControllerDispatch controllerDispatch) {
-        controllerMap.put(ControllerType.mainViewController, new MainViewController(controllerDispatch, this));
-        controllerMap.put(ControllerType.welcomeViewController, new WelcomeViewController(controllerDispatch, this));
-
-    }
-
     public void switchControllers(ControllerType controllerType) {
         activeController = controllerMap.get(controllerType);
-        activeController.resumeController();
     }
 
 
@@ -60,7 +47,7 @@ public class ControllerManager {
         Parent root = loader.load();
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        MainViewInputRecognizer inputController = loader.getController();
+        Controller inputController = loader.getController();
         inputController.takeInSwitchControllerRelay(switchControllerRelay);
         primaryStage.show();
     }
@@ -72,7 +59,7 @@ public class ControllerManager {
         Parent root = loader.load();
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        StructureViewInputRecognizer inputController = loader.getController();
+        Controller inputController = loader.getController();
         System.out.println("this is the inputController" +loader.getController()    );
         inputController.takeInSwitchControllerRelay(switchControllerRelay);
         primaryStage.show();
@@ -85,15 +72,9 @@ public class ControllerManager {
         Parent root = loader.load();
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        UnitViewInputRecognizer inputController = loader.getController();
+        Controller inputController = loader.getController();
         inputController.takeInSwitchControllerRelay(switchControllerRelay);
         primaryStage.show();
     }
-
-
-
-
-
-
 
 }
