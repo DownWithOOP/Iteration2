@@ -45,7 +45,6 @@ public class WelcomeViewInputRecognizer implements Initializable {
 
     public void startGame() throws IOException {
         //start up the actual game/game logic
-        System.out.println("here");
         Game game = new Game((Stage) startGameButton.getScene().getWindow());
     }
 

@@ -25,7 +25,6 @@ public class MainViewInputRecognizer implements Initializable {
     private SwitchControllerRelay switchControllerRelay;
 
     public void takeInSwitchControllerRelay(SwitchControllerRelay switchControllerRelay){
-        System.out.println("this is working");
         this.switchControllerRelay = switchControllerRelay;
         System.out.println(this.switchControllerRelay.toString());
     }

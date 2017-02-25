@@ -28,6 +28,7 @@ public class RunGame extends  Application{
 
     // mediaplayer that is used for the intro sequences
     MediaPlayer mediaplayer;
+    private boolean WelcomeViewLoaded = false;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -150,6 +151,10 @@ public class RunGame extends  Application{
 
     // called when we want to transition to the welcomeViewController
     public void LoadWelcome(Stage primaryStage){
+
+            if(this.WelcomeViewLoaded == false){
+                this.WelcomeViewLoaded = true;
+
                 //TODO Shouldn't we construct a scene, tell it to set the onKeyPressed, and then call primaryStage.setScene() ?
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("resources/welcomeView.fxml"));
                 Pane root = null;
@@ -178,10 +183,7 @@ public class RunGame extends  Application{
                 root.getChildren().add(areaViewport);
 
 
-
-
-
-        new AnimationTimer()
+                new AnimationTimer()
                 {
                     public void handle(long currentNanoTime)
                     {
@@ -189,5 +191,8 @@ public class RunGame extends  Application{
                     }
                 }.start();
                 primaryStage.show();
+            }
+
+
     }
 }
