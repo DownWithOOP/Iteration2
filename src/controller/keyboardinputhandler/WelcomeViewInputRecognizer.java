@@ -45,36 +45,17 @@ public class WelcomeViewInputRecognizer implements Initializable {
 
     public void startGame() throws IOException {
         //start up the actual game/game logic
-        Game game = new Game();
-
-        Stage stage;
-        Parent root;
-        stage = (Stage) startGameButton.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/mainView.fxml"));
-        root = loader.load();
-        //root = FXMLLoader.load(getClass().getResource("/resources/sample.fxml"));
-        //create a new scene with root and set the stage
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.getScene().setOnKeyPressed(event -> {
-            MainViewInputRecognizer controller = loader.getController();
-            try {
-                controller.keyListener(event);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        stage.show();
+        System.out.println("here");
+        Game game = new Game((Stage) startGameButton.getScene().getWindow());
     }
 
     @FXML
     public void keyListener(KeyEvent event) throws IOException {
+        /*
         if (event.getCode() == KeyCode.ENTER) {
             startGame();
         }
-        //keyCode = event.getCode();
-        //System.out.println(keyCode.toString());
-        //keyPressed.setText("Key Pressed: " + keyCode);
+        */
     }
 
     @Override

@@ -36,6 +36,9 @@ public class RunGame extends  Application{
         primaryStage.setTitle("Space Cats!");
         primaryStage.setFullScreenExitHint("");
         primaryStage.setFullScreen(true);
+        // ---- here we send the primaryStage to the controllerManager which will manage everything
+
+
         // get the scene for playing the first video
         primaryStage.setScene(firstVideo(primaryStage));
         // play the first video

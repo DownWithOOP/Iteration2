@@ -1,5 +1,6 @@
 package controller.keyboardinputhandler;
 
+import controller.SwitchControllerRelay;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +12,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,37 +22,34 @@ import java.util.ResourceBundle;
  */
 public class MainViewInputRecognizer implements Initializable {
 
+    private SwitchControllerRelay switchControllerRelay;
+
+    public void takeInSwitchControllerRelay(SwitchControllerRelay switchControllerRelay){
+        System.out.println("this is working");
+        this.switchControllerRelay = switchControllerRelay;
+        System.out.println(this.switchControllerRelay.toString());
+    }
+
     @FXML
     MenuBar mainMenuBar;
 
     @FXML
+    public void handleChangeToStructureView(ActionEvent actionEvent) throws  IOException{
+        this.switchControllerRelay.changeToStructure();
+    }
+
+    public void handleChangeToUnitView(ActionEvent actionEvent) throws  IOException{
+        this.switchControllerRelay.changeToUnit();
+    }
+
+    @FXML
     public void handleReturnToMainMenu(ActionEvent actionEvent) throws IOException {
-        returnToMainMenu();
+       // returnToMainMenu();
     }
 
     public void returnToMainMenu() throws IOException {
         // TODO: properly end all game logic in Game class when returning to main menu
-        Stage stage;
-        Parent root;
-        stage = getStage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/welcomeView.fxml"));
-        root = loader.load();
-        //root = FXMLLoader.load(getClass().getResource("/resources/sample.fxml"));
-        //create a new scene with root and set the stage
-        Scene scene = new Scene(root);
-        System.out.println(this.getClass());
-
-        scene.getStylesheets().addAll(this.getClass().getResource("/resources/style.css").toExternalForm());
-        stage.setScene(scene);
-        stage.getScene().setOnKeyPressed(event -> {
-            WelcomeViewInputRecognizer controller = loader.getController();
-            try {
-                controller.keyListener(event);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        stage.show();
+          this.switchControllerRelay.changeToMain();
     }
 
     //quit the entire game application
@@ -67,6 +66,7 @@ public class MainViewInputRecognizer implements Initializable {
     public void keyListener(KeyEvent event) throws IOException {
         //TODO: add key menu shortcuts and command control recognition
     }
+
 
     @FXML
     private Stage getStage() {

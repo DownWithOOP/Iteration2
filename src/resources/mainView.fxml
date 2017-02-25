@@ -23,8 +23,8 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Viewports">
             <items>
-              <MenuItem mnemonicParsing="false" text="Unit Viewport" />
-                  <MenuItem mnemonicParsing="false" text="Structure Viewport" />
+              <MenuItem mnemonicParsing="false" onAction="#handleChangeToUnitView" text="Unit Viewport" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleChangeToStructureView" text="Structure Viewport" />
             </items>
           </Menu>
         </menus>
