@@ -19,8 +19,8 @@ public class ControllerManager {
 
     public ControllerManager(ControllerDispatch controllerDispatch) {
 
-        initializeControllers(controllerDispatch);                                                  // initializes all controllers
-        this.activeController = this.controllerMap.get(ControllerType.welcomeViewController);       // when the game is first initialized, we start at the welcomeView controller
+        initializeControllers(controllerDispatch);
+        this.activeController = this.controllerMap.get(ControllerType.welcomeViewController);
     }
 
     private void initializeControllers(ControllerDispatch controllerDispatch) {

@@ -37,7 +37,10 @@ public class WelcomeViewInputRecognizer implements Initializable {
     @FXML
     private void handleStartGame(ActionEvent event) throws IOException {
         startGame();
-
+    }
+    @FXML
+    private void exitGame(ActionEvent event) throws  IOException {
+        System.exit(0);
     }
 
     public void startGame() throws IOException {

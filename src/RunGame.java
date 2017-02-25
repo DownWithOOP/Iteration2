@@ -155,9 +155,9 @@ public class RunGame extends  Application{
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-                primaryStage.setScene(new Scene(root, 600, 453));
-
+                Scene scene = new Scene(root,600,600);
+                scene.getStylesheets().addAll(this.getClass().getResource("resources/style.css").toExternalForm());
+                primaryStage.setScene(scene);
                 primaryStage.getScene().setOnKeyPressed(event -> {
                     WelcomeViewInputRecognizer controller = loader.getController();
                     try {
@@ -168,13 +168,17 @@ public class RunGame extends  Application{
                 });
 
                 //Create canvas that we need to draw map and everything else on.
-                final Canvas areaViewport = new Canvas(250,250);
+                final Canvas areaViewport = new Canvas(600,600);
                 GraphicsContext gc = areaViewport.getGraphicsContext2D();
 
                 //TODO how do we tell root where to put the area viewport?
                 root.getChildren().add(areaViewport);
 
-                new AnimationTimer()
+
+
+
+
+        new AnimationTimer()
                 {
                     public void handle(long currentNanoTime)
                     {
