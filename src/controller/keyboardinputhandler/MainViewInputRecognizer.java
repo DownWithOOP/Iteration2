@@ -38,6 +38,9 @@ public class MainViewInputRecognizer implements Initializable {
         //root = FXMLLoader.load(getClass().getResource("/resources/sample.fxml"));
         //create a new scene with root and set the stage
         Scene scene = new Scene(root);
+        System.out.println(this.getClass());
+
+        scene.getStylesheets().addAll(this.getClass().getResource("/resources/style.css").toExternalForm());
         stage.setScene(scene);
         stage.getScene().setOnKeyPressed(event -> {
             WelcomeViewInputRecognizer controller = loader.getController();

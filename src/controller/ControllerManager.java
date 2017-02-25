@@ -24,6 +24,7 @@ public class ControllerManager implements Initializable{
 
         initializeControllers(new ControllerDispatch(2));                                                  // initializes all controllers
         this.activeController = this.controllerMap.get(ControllerType.welcomeViewController);       // when the game is first initialized, we start at the welcomeView controller
+
     }
 
     private void initializeControllers(ControllerDispatch controllerDispatch) {
