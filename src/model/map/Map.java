@@ -1,6 +1,6 @@
 package model.map;
 
-import javafx.geometry.Point2D;
+import model.common.Location;
 import model.map.tile.Tile;
 import utilities.Observer;
 import utilities.Subject;
@@ -16,13 +16,13 @@ public class Map implements Subject {
     private int height;
     private int width;
 
-    private HashMap<Point2D, Tile> tiles;
+    private HashMap<Location, Tile> tiles;
 
     private Observer observer;
 
     private final String XML_PATH = "res/map/Map.xml";
 
-    public Map(){
+    public Map() {
         init();
     }
 
@@ -30,11 +30,11 @@ public class Map implements Subject {
 
     }
 
-    public Tile getTile(Point2D point){
+    public Tile getTile(Location point){
         return null;
     }
 
-    public List<Tile> getAdjacentTiles(Point2D point){
+    public List<Tile> getAdjacentTiles(Location point){
         return null;
     }
 

@@ -7,4 +7,9 @@ package utilities;
  * This is the observer (usually a view)
  */
 public interface Observer {
+
+
+
+
+
 }
