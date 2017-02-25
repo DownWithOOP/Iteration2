@@ -3,13 +3,16 @@ package controller;
 import controller.controllerTypes.ControllerType;
 import controller.controllerTypes.MainViewController;
 import controller.controllerTypes.WelcomeViewController;
+import javafx.fxml.Initializable;
 
+import java.net.URL;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
 /**
  * Created by Konrad on 2/17/2017.
  */
-public class ControllerManager {
+public class ControllerManager implements Initializable{
 
     HashMap<ControllerType, Controller> controllerMap = new HashMap<>();
 
@@ -17,9 +20,9 @@ public class ControllerManager {
     //TODO: make this private
     public Controller activeController;
 
-    public ControllerManager(ControllerDispatch controllerDispatch) {
+    public ControllerManager() {
 
-        initializeControllers(controllerDispatch);                                                  // initializes all controllers
+        initializeControllers(new ControllerDispatch(2));                                                  // initializes all controllers
         this.activeController = this.controllerMap.get(ControllerType.welcomeViewController);       // when the game is first initialized, we start at the welcomeView controller
     }
 
@@ -34,5 +37,8 @@ public class ControllerManager {
         activeController.resumeController();
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
+    }
 }

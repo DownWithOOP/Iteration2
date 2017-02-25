@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="453.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.keyboardinputhandler.WelcomeViewInputRecognizer">
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="453.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerManager">
    <children>
       <VBox>
          <children>
@@ -16,7 +16,7 @@
                   <Image url="@images/SpaceCat.jpg" />
                </image>
             </ImageView>
-            <Button fx:id="startGameButton" mnemonicParsing="false" onAction="#handleStartGame" prefHeight="28.0" prefWidth="616.0" text="Start Game (ENTER)" />
+            <Button fx:id="startGameButton" mnemonicParsing="false"  prefHeight="28.0" prefWidth="616.0" text="Start Game (ENTER)" />
          </children>
       </VBox>
    </children>

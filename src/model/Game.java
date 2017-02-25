@@ -13,12 +13,10 @@ import java.util.Scanner;
 public class Game {
 
     private ControllerManager controllerManager;
-    private ControllerDispatch controllerDispatch;
 
     public Game(){
         //TODO:change hardcoded player number
-        this.controllerDispatch = new ControllerDispatch(2);
-        this.controllerManager = new ControllerManager(this.controllerDispatch);
+        this.controllerManager = new ControllerManager();
 
         // now lets run the game
         System.out.println("Game Loop Started");
