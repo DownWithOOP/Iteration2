@@ -68,6 +68,11 @@ public class IntroVideo {
                                                   }
                                               }
                                           });
+                    mediaplayer.setOnEndOfMedia(new Runnable() {
+                        public void run()
+                        {
+                            loadWelcome(primaryStage, welcomeLoader, cssSheet);
+                        }});
                     primaryStage.setScene(scene);
                     primaryStage.setFullScreenExitHint("");
                     primaryStage.setFullScreen(true);
@@ -89,6 +94,19 @@ public class IntroVideo {
                 mvh.bind(Bindings.selectDouble(mediaView.sceneProperty(), "height"));
                 mediaView.setPreserveRatio(false);
                 Scene scene = new Scene(new Group(mediaView), 1000, 1000);
+                scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                    public void handle(KeyEvent ke) {
+                        if (ke.getCode() == KeyCode.SPACE) {
+                            mediaplayer.stop();
+                            loadWelcome(primaryStage, welcomeLoader, cssSheet);
+                        }
+                    }
+                });
+                mediaplayer.setOnEndOfMedia(new Runnable() {
+                    public void run()
+                    {
+                        loadWelcome(primaryStage, welcomeLoader, cssSheet);
+                    }});
                 primaryStage.setScene(scene);
                 primaryStage.setFullScreenExitHint("");
                 primaryStage.setFullScreen(true);

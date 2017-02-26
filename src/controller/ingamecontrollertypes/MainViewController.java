@@ -132,17 +132,11 @@ public class MainViewController extends Controller {
 
         @FXML
         public void handleChangeToStructureView(ActionEvent actionEvent) throws  IOException{
-            this.switchControllerRelay.changeToStructure();
-        }
-
+            this.switchControllerRelay.changeToStructure();}
         public void handleChangeToUnitView(ActionEvent actionEvent) throws  IOException{
-            this.switchControllerRelay.changeToUnit();
-        }
-
+            this.switchControllerRelay.changeToUnit();}
         public void handleChangeToTechTreeView(ActionEvent actionEvent) throws  IOException{
-            this.switchControllerRelay.changeToTechTree();
-        }
-
+            this.switchControllerRelay.changeToTechTree();}
         @FXML
         public void handleReturnToMainMenu(ActionEvent actionEvent) throws IOException {
             // returnToMainMenu();
