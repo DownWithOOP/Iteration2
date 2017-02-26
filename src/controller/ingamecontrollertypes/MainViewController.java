@@ -2,6 +2,7 @@ package controller.ingamecontrollertypes;
 
 import controller.Controller;
 import controller.SwitchControllerRelay;
+import controller.commands.CommandType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuBar;
@@ -52,34 +53,43 @@ public class MainViewController extends Controller {
                     if (event.isControlDown() && event.getCode() == KeyCode.UP) {
                         // TODO: Cycle MODE next
                         System.out.println("Ctrl + UP");
+                        System.out.println("is controller dispatch null..? " + (controllerDispatch == null));
+                        controllerDispatch.handleCommand(CommandType.CYCLE_MODE_NEXT);
                     }
                     else if (event.isControlDown() && event.getCode() == KeyCode.DOWN) {
                         // TODO: Cycle MODE previous
                         System.out.println("Ctrl + DOWN");
+                        controllerDispatch.handleCommand(CommandType.CYCLE_MODE_PREV);
                     }
                     else if (event.isControlDown() && event.getCode() == KeyCode.LEFT) {
                         // TODO: Cycle TYPE previous
                         System.out.println("Ctrl + LEFT");
+                        controllerDispatch.handleCommand(CommandType.CYCLE_TYPE_PREV);
                     }
                     else if (event.isControlDown() && event.getCode() == KeyCode.RIGHT) {
                         // TODO: Cycle TYPE next
                         System.out.println("Ctrl + RIGHT");
+                        controllerDispatch.handleCommand(CommandType.CYCLE_TYPE_NEXT);
                     }
                     else if (event.getCode() == KeyCode.LEFT) {
                         // TODO: Cycle TYPE INSTANCES previous
                         System.out.println(event.getCode());
+                        controllerDispatch.handleCommand(CommandType.CYCLE_INSTANCE_PREV);
                     }
                     else if (event.getCode() == KeyCode.RIGHT) {
                         // TODO: Cycle TYPE INSTANCES next
                         System.out.println(event.getCode());
+                        controllerDispatch.handleCommand(CommandType.CYCLE_INSTANCE_NEXT);
                     }
                     else if (event.getCode() == KeyCode.UP) {
                         // TODO: Cycle COMMAND next
                         System.out.println(event.getCode());
+                        controllerDispatch.handleCommand(CommandType.CYCLE_COMMAND_NEXT);
                     }
                     else if (event.getCode() == KeyCode.DOWN) {
                         // TODO: Cycle COMMAND previous
                         System.out.println(event.getCode());
+                        controllerDispatch.handleCommand(CommandType.CYCLE_COMMAND_PREV);
                     }
                     else if (event.getCode() == KeyCode.NUMPAD1) {
                         // TODO: SW Direction
