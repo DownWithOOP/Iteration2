@@ -1,4 +1,4 @@
-import controller.keyboardinputhandler.WelcomeViewInputRecognizer;
+import controller.WelcomeViewController.WelcomeViewIndependentController;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -28,6 +28,7 @@ public class RunGame extends  Application{
 
     // mediaplayer that is used for the intro sequences
     MediaPlayer mediaplayer;
+    private boolean WelcomeViewLoaded = false;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -36,6 +37,9 @@ public class RunGame extends  Application{
         primaryStage.setTitle("Space Cats!");
         primaryStage.setFullScreenExitHint("");
         primaryStage.setFullScreen(true);
+        // ---- here we send the primaryStage to the controllerManager which will manage everything
+
+
         // get the scene for playing the first video
         primaryStage.setScene(firstVideo(primaryStage));
         // play the first video
@@ -129,6 +133,7 @@ public class RunGame extends  Application{
             public void handle(KeyEvent ke) {
                 if(ke.getCode() == KeyCode.SPACE){
                     // matches, we want to end the video and jump to the next one
+                    mediaplayer.stop();
                     LoadWelcome(primaryStage);
                 }
             }
@@ -147,6 +152,10 @@ public class RunGame extends  Application{
 
     // called when we want to transition to the welcomeViewController
     public void LoadWelcome(Stage primaryStage){
+
+            if(this.WelcomeViewLoaded == false){
+                this.WelcomeViewLoaded = true;
+
                 //TODO Shouldn't we construct a scene, tell it to set the onKeyPressed, and then call primaryStage.setScene() ?
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("resources/welcomeView.fxml"));
                 Pane root = null;
@@ -159,7 +168,7 @@ public class RunGame extends  Application{
                 scene.getStylesheets().addAll(this.getClass().getResource("resources/style.css").toExternalForm());
                 primaryStage.setScene(scene);
                 primaryStage.getScene().setOnKeyPressed(event -> {
-                    WelcomeViewInputRecognizer controller = loader.getController();
+                    WelcomeViewIndependentController controller = loader.getController();
                     try {
                         controller.keyListener(event);
                     } catch (IOException e) {
@@ -175,10 +184,7 @@ public class RunGame extends  Application{
                 root.getChildren().add(areaViewport);
 
 
-
-
-
-        new AnimationTimer()
+                new AnimationTimer()
                 {
                     public void handle(long currentNanoTime)
                     {
@@ -186,5 +192,8 @@ public class RunGame extends  Application{
                     }
                 }.start();
                 primaryStage.show();
+            }
+
+
     }
 }
