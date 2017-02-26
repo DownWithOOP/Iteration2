@@ -5,6 +5,7 @@ import controller.SwitchControllerRelay;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -36,8 +37,23 @@ public class StructureViewController extends Controller{
     @Override
     protected void enableKeyboardInput() {
         this.getStage().getScene().addEventFilter(KeyEvent.KEY_PRESSED,
-                event -> System.out.println("Pressed: "+event.getCode())
-                // TODO to whatever you want with this input
+                event -> {
+                    if (event.getCode() == KeyCode.U) { //shortcut to Unit Overview
+                        // Swap to Structure Overview screen
+                        try {
+                            this.switchControllerRelay.changeToUnit();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else if (event.getCode() == KeyCode.M) { //shortcut to Main view
+                        try {
+                            this.switchControllerRelay.changeToMain();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
         );
     }
 
