@@ -133,6 +133,7 @@ public class RunGame extends  Application{
             public void handle(KeyEvent ke) {
                 if(ke.getCode() == KeyCode.SPACE){
                     // matches, we want to end the video and jump to the next one
+                    mediaplayer.stop();
                     LoadWelcome(primaryStage);
                 }
             }

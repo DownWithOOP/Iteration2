@@ -49,6 +49,7 @@ public class ControllerManager {
         primaryStage.setScene(scene);
         Controller inputController = loader.getController();
         inputController.takeInSwitchControllerRelay(switchControllerRelay);
+        inputController.enableKeyboardInput();
         primaryStage.show();
     }
 
@@ -60,8 +61,8 @@ public class ControllerManager {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         Controller inputController = loader.getController();
-        System.out.println("this is the inputController" +loader.getController()    );
         inputController.takeInSwitchControllerRelay(switchControllerRelay);
+        inputController.enableKeyboardInput();
         primaryStage.show();
     }
 
@@ -74,6 +75,7 @@ public class ControllerManager {
         primaryStage.setScene(scene);
         Controller inputController = loader.getController();
         inputController.takeInSwitchControllerRelay(switchControllerRelay);
+        inputController.enableKeyboardInput();
         primaryStage.show();
     }
 

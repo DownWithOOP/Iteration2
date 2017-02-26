@@ -36,14 +36,24 @@ public class MainViewController extends Controller {
     protected void setView() {
 
     }
-        private SwitchControllerRelay switchControllerRelay;
+
+    private SwitchControllerRelay switchControllerRelay;
 
         public void takeInSwitchControllerRelay(SwitchControllerRelay switchControllerRelay){
             this.switchControllerRelay = switchControllerRelay;
         }
 
-        @FXML
-        MenuBar mainMenuBar;
+    @Override
+    protected void enableKeyboardInput() {
+
+        this.getStage().getScene().addEventFilter(KeyEvent.KEY_PRESSED,
+                event -> System.out.println("Pressed: "+event.getCode())
+                // TODO to whatever you want with this input
+        );
+    }
+
+    @FXML
+    MenuBar mainMenuBar;
 
         @FXML
         public void handleChangeToStructureView(ActionEvent actionEvent) throws  IOException{
@@ -77,8 +87,8 @@ public class MainViewController extends Controller {
         @FXML
         public void keyListener(KeyEvent event) throws IOException {
             //TODO: add key menu shortcuts and command control recognition
-        }
 
+        }
 
         @FXML
         private Stage getStage() {
