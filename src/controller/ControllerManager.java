@@ -92,6 +92,7 @@ public class ControllerManager {
         Controller inputController = loader.getController();
         inputController.takeInSwitchControllerRelay(switchControllerRelay);
         inputController.enableKeyboardInput();
+        inputController.setControllerDispatch(controllerDispatch);
         primaryStage.show();
     }
 
