@@ -134,7 +134,7 @@ public class RunGame extends  Application{
                 if(ke.getCode() == KeyCode.SPACE){
                     // matches, we want to end the video and jump to the next one
                     mediaplayer.stop();
-                    LoadWelcome(primaryStage);
+                    loadWelcome(primaryStage);
                 }
             }
         });
@@ -144,14 +144,14 @@ public class RunGame extends  Application{
             @Override
             public void run()
             {
-                LoadWelcome(primaryStage);
+                loadWelcome(primaryStage);
             }
         } )  ;
         return scene;
     }
 
     // called when we want to transition to the welcomeViewController
-    public void LoadWelcome(Stage primaryStage){
+    public void loadWelcome(Stage primaryStage){
 
             if(this.WelcomeViewLoaded == false){
                 this.WelcomeViewLoaded = true;
