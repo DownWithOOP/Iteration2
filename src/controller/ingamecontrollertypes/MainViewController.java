@@ -81,6 +81,37 @@ public class MainViewController extends Controller {
                         // TODO: Cycle COMMAND previous
                         System.out.println(event.getCode());
                     }
+                    else if (event.getCode() == KeyCode.NUMPAD1) {
+                        // TODO: SW Direction
+                    }
+                    else if (event.getCode() == KeyCode.NUMPAD2) {
+                        // TODO: S Direction
+                    }
+                    else if (event.getCode() == KeyCode.NUMPAD3) {
+                        // TODO: SE Direction
+                    }
+                    else if (event.getCode() == KeyCode.NUMPAD4) {
+                        // TODO: W Direction
+                    }
+                    else if (event.getCode() == KeyCode.NUMPAD5) {
+                        // TODO: Set viewport focus on the currently selected army/building/unit and,
+                        // when moving, to indicate that the tile the cursor is on is the new target location
+                    }
+                    else if (event.getCode() == KeyCode.NUMPAD6) {
+                        // TODO: E Direction
+                    }
+                    else if (event.getCode() == KeyCode.NUMPAD7) {
+                        // TODO: NW Direction
+                    }
+                    else if (event.getCode() == KeyCode.NUMPAD8) {
+                        // TODO: N Direction
+                    }
+                    else if (event.getCode() == KeyCode.NUMPAD9) {
+                        // TODO: NE Direction
+                    }
+                    else if (event.getCode() == KeyCode.ENTER) {
+                        // TODO: select/activate commands without arguments (e.g., disband)
+                    }
                     else if (event.getCode() == KeyCode.S) { //shortcut to Structure Overview
                         // Swap to Structure Overview screen
                         try {
