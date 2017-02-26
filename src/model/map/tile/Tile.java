@@ -12,7 +12,7 @@ public class Tile implements Subject {
     private boolean isPassable;
 //    private Terrain terrain;
 //    private AreaEffect areaEffect;
-//    private EntityID entityID;
+//    private EntityId entityID;
 
     public Tile(){
 
