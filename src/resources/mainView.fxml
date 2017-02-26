@@ -36,8 +36,8 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Viewports">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#handleChangeToUnitView" text="Unit Viewport" />
-                        <MenuItem mnemonicParsing="false" onAction="#handleChangeToStructureView" text="Structure Viewport" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleChangeToUnitView" text="Unit Viewport (U)" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleChangeToStructureView" text="Structure Viewport (S)" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Technology Tree" />
