@@ -32,4 +32,8 @@ public class GameModel {
         index = (index + 1) % this.playersList.length;
         return index;
     }
+
+    public Player getActivePlayer() {
+        return playersList[activePlayerIndex];
+    }
 }
