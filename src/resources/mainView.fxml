@@ -40,7 +40,10 @@
                         <MenuItem mnemonicParsing="false" onAction="#handleChangeToStructureView" text="Structure Viewport (S)" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Technology Tree" />
+                <Menu mnemonicParsing="false" onAction="#handleChangeToTechTreeView" text="Technology">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleChangeToTechTreeView" text="Technology Tree" />
+               </items></Menu>
             </menus>
         </MenuBar>
         <VBox prefHeight="424.0" prefWidth="602.0">

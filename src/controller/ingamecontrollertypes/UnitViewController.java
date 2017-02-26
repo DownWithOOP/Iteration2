@@ -54,22 +54,6 @@ public class UnitViewController extends Controller
         return stage;
     }
 
-
-    @Override
-    protected void resumeController() {
-
-    }
-
-    @Override
-    protected void suspendController() {
-
-    }
-
-    @Override
-    protected void setView() {
-
-    }
-
     public void handleChangeToMainView(ActionEvent actionEvent) throws IOException {
         this.switchControllerRelay.changeToMain();
     }

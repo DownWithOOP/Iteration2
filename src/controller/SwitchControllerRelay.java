@@ -22,4 +22,7 @@ public class SwitchControllerRelay {
     public void changeToUnit() throws IOException{
         this.controllerManager.changeToUnitView();
     }
+    public void changeToTechTree() throws IOException{
+        this.controllerManager.changeToTechTreeView();
+    }
 }

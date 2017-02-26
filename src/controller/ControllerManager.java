@@ -59,7 +59,6 @@ public class ControllerManager {
 
     // this method will be used to handle loading in the structureView
     public void changeToStructureView() throws IOException {
-        System.out.println("called");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/structureView.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
@@ -82,6 +81,17 @@ public class ControllerManager {
         inputController.takeInSwitchControllerRelay(switchControllerRelay);
         inputController.enableKeyboardInput();
         inputController.setControllerDispatch(controllerDispatch);
+        primaryStage.show();
+    }
+
+    public void changeToTechTreeView() throws  IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/techTree.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        Controller inputController = loader.getController();
+        inputController.takeInSwitchControllerRelay(switchControllerRelay);
+        inputController.enableKeyboardInput();
         primaryStage.show();
     }
 

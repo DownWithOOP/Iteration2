@@ -24,21 +24,6 @@ public class MainViewController extends Controller {
         super();
     }
 
-    @Override
-    protected void resumeController() {
-
-    }
-
-    @Override
-    protected void suspendController() {
-
-    }
-
-    @Override
-    protected void setView() {
-
-    }
-
     private SwitchControllerRelay switchControllerRelay;
 
         public void takeInSwitchControllerRelay(SwitchControllerRelay switchControllerRelay){
@@ -154,6 +139,10 @@ public class MainViewController extends Controller {
             this.switchControllerRelay.changeToUnit();
         }
 
+        public void handleChangeToTechTreeView(ActionEvent actionEvent) throws  IOException{
+            this.switchControllerRelay.changeToTechTree();
+        }
+
         @FXML
         public void handleReturnToMainMenu(ActionEvent actionEvent) throws IOException {
             // returnToMainMenu();
@@ -177,7 +166,6 @@ public class MainViewController extends Controller {
         @FXML
         public void keyListener(KeyEvent event) throws IOException {
             //TODO: add key menu shortcuts and command control recognition
-
         }
 
         @FXML
@@ -194,5 +182,7 @@ public class MainViewController extends Controller {
         public void transferAction(){
 
         }
+
+
     }
 
