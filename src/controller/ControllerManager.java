@@ -22,6 +22,7 @@ public class ControllerManager {
     private Stage primaryStage; // the stage is going to be kept track of here, whenever we are going to want to channge controllers,
     // it will be done here
     private SwitchControllerRelay switchControllerRelay;
+    private ControllerDispatch controllerDispatch;
 
     public ControllerManager(ControllerDispatch controllerDispatch, Stage primaryStage) throws IOException {
 
@@ -31,6 +32,8 @@ public class ControllerManager {
 
         // used for communication between the inputReconginzers and the controllerManager when a controller needs to be switched
         switchControllerRelay = new SwitchControllerRelay(this);
+
+        this.controllerDispatch = controllerDispatch;
 
         // when the controller manager is initialized, we start up the mainView
         changeToMainView();
@@ -50,6 +53,7 @@ public class ControllerManager {
         Controller inputController = loader.getController();
         inputController.takeInSwitchControllerRelay(switchControllerRelay);
         inputController.enableKeyboardInput();
+        inputController.setControllerDispatch(controllerDispatch);
         primaryStage.show();
     }
 
@@ -63,6 +67,7 @@ public class ControllerManager {
         Controller inputController = loader.getController();
         inputController.takeInSwitchControllerRelay(switchControllerRelay);
         inputController.enableKeyboardInput();
+        inputController.setControllerDispatch(controllerDispatch);
         primaryStage.show();
     }
 
@@ -76,6 +81,7 @@ public class ControllerManager {
         Controller inputController = loader.getController();
         inputController.takeInSwitchControllerRelay(switchControllerRelay);
         inputController.enableKeyboardInput();
+        inputController.setControllerDispatch(controllerDispatch);
         primaryStage.show();
     }
 
