@@ -8,8 +8,15 @@ public enum EntityType {
     EXPLORER,
     MELEE,
     RANGED,
-    BASE,
+    WORKER,
     ARMY,
     UNIT,
     STRUCTURE,
+    CAPITAL,
+    FARM,
+    MINE,
+    POWERPLANT,
+    FORT,
+    OBSERVATIONTOWER,
+    UNIVERSITY
 }
