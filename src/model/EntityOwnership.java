@@ -2,12 +2,13 @@ package model;
 
 //import controller.commands.ActionModifiers;
 //import model.common.Location;
+import controller.availablecommands.Commandable;
 import controller.commands.DirectionType;
 import model.entities.Entity;
-import model.entities.EntityId;
 import model.entities.EntityType;
 import model.entities.structure.Base;
 import model.entities.structure.Structure;
+import model.entities.unit.Colonist;
 import model.entities.unit.Explorer;
 import model.entities.unit.Melee;
 import model.entities.unit.Unit;
@@ -16,16 +17,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by jordi on 2/5/2017.
+ * Handles relationships between a Player and all of their Entities. The responsibilities of this class include
+ * 1) Maintaining status of all current Entitys the Player owns
+ * 2) Cycling through Entitys when told to by the Player
  */
-public class Cycler {
+public class EntityOwnership {
     //TODO not hardcode these indices
     List<List<Entity>> unitList;          //Ranged=0, Melee=1, Colonist=2, Explorer=3
     //TODO make this army actually be an army
     List<List<Entity>> structureList;         //base=0
-    List<List<Entity>> currentModeList;
-    List<RallyPoint> rallyPointList = new ArrayList<>();
-    Mode modeHolders[]={Mode.UNIT,Mode.STRUCTURE,Mode.ARMY,Mode.RALLY_POINT};
+    List<List<Entity>> currentModeList; //TODO refactor to a list of commandabls so that rallypoints can be handled like other cases
+    List<RallyPoint> rallyPointList;
+    Mode modeHolders[] = Mode.values();
 
     int typeRestriction = 10;
     int unitCap = 25;
@@ -42,15 +45,27 @@ public class Cycler {
     private int cycleTypeIndex = 0;
     private int cycleInstanceIndex = 0;
     private int selectedArmyIndex = 0;
-    private int cycleModeIndex=0;
+    private int cycleModeIndex = 1; //start in UNIT mode
 
-    Cycler() {
+    EntityOwnership() {
         unitList = new ArrayList<>(5);
         //armyList = new ArrayList<>(10);
         structureList = new ArrayList<>(1);
         rallyPointList= new ArrayList<>(20);
         initializeLists();
-        changeMode(modeHolders[0]);
+        initializeUnits();
+        initializeStructures();
+        changeMode(modeHolders[cycleModeIndex]);
+    }
+
+    private void initializeStructures() {
+        addStructure(EntityType.BASE, new Base());
+    }
+
+    private void initializeUnits() {
+        addUnit(EntityType.EXPLORER, new Explorer());
+        addUnit(EntityType.EXPLORER, new Explorer());
+        addUnit(EntityType.COLONIST, new Colonist());
     }
 
     private void initializeLists() {
@@ -224,6 +239,7 @@ public class Cycler {
     }
 
     private Entity changeMode(Mode currentMode) {
+        System.out.println("CHANGING mode to " + currentMode);
         resetIndices();
         switch (currentMode) {
             case ARMY:
@@ -242,11 +258,12 @@ public class Cycler {
                 selectedRallyPoint=null;
                 break;
             case RALLY_POINT:
-                selectedRallyPoint=rallyPointList.get(0);
-                currentModeList=null;
+                //TODO handle rally points
+                //selectedRallyPoint=rallyPointList.get(0);
+                //currentModeList=null;
                 break;
         }
-        return defineEntityReturned();
+        return returnEntityOnModeChange();
     }
 
     //TODO switch army
@@ -255,7 +272,7 @@ public class Cycler {
         return selectedRallyPoint;
     }
 
-    private Entity defineEntityReturned() {
+    private Entity returnEntityOnModeChange() {
         if (currentModeList != null &&!currentModeList.isEmpty()) {
             for (int i = 0; i < currentModeList.size(); i++) {
                 if (!currentModeList.get(i).isEmpty()) {
@@ -298,6 +315,7 @@ public class Cycler {
         }
     }
 
+    //TODO change this method so that it doesn't return units in order to render them
     public List<Unit> getUnit(){
         List<Unit> renderList= new ArrayList<>();
         for (List<Entity> list:
@@ -311,6 +329,7 @@ public class Cycler {
         return renderList;
     }
 
+    //TODO change this method so that it doesn't return structures in order to render them
     public List<Structure> getStructure(){
         List<Structure> renderList= new ArrayList<>();
         for (List<Entity> list:
@@ -324,6 +343,18 @@ public class Cycler {
         return renderList;
     }
 
+    /**
+     * @return current instance
+     */
+    public Commandable getCurrentInstance(){
+        System.out.println("GETTING current instance");
+        System.out.println("instance index " + cycleInstanceIndex);
+        System.out.println("type index " + cycleTypeIndex);
+        System.out.println("current mode list " + currentModeList);
+        System.out.println("type list " + currentModeList.get(cycleTypeIndex));
+        return currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex);
+    }
+
     //TODO get army
     //public List<Army> getArmy(){
         //return armyList;
@@ -331,7 +362,7 @@ public class Cycler {
 
 
     public static void main(String[] args) {
-        Cycler cycler = new Cycler();
+        EntityOwnership entityOwnership = new EntityOwnership();
         //Army army = new Army(new Player("hello", new Map()), new Location(1, 2));
         //Army army1 = new Army(new Player("world", new Map()), new Location(3, 2));
         Melee melee = new Melee();
@@ -343,55 +374,59 @@ public class Cycler {
         Base base = new Base();
 
         boolean check = false;
-        check = cycler.addEntity(explorer1);
-        check = cycler.addEntity(melee);
-        check = cycler.addEntity(melee1);
-        check = cycler.addEntity(melee2);
-        check = cycler.addEntity(melee3);
-        check = cycler.addEntity(melee4);
-        check = cycler.addEntity(base);
+        check = entityOwnership.addEntity(explorer1);
+        check = entityOwnership.addEntity(melee);
+        check = entityOwnership.addEntity(melee1);
+        check = entityOwnership.addEntity(melee2);
+        check = entityOwnership.addEntity(melee3);
+        check = entityOwnership.addEntity(melee4);
+        check = entityOwnership.addEntity(base);
 
         //TODO actually test army
-        Entity entity = cycler.changeMode(Mode.ARMY);
-        Entity entity1 = cycler.changeMode(Mode.UNIT);
-        System.out.println("currentmodelist after unit cycle" + cycler.currentModeList);
-        Melee entity2 = (Melee) cycler.cycleInstance(DirectionType.INCREMENT);
-        System.out.println("returned entity after instance cycle" + cycler.cycleInstanceIndex);
-        System.out.println("cycleinstanceindex after instance cycle" + entity2);
-        entity2 = (Melee) cycler.cycleInstance(DirectionType.INCREMENT);
-        entity2 = (Melee) cycler.cycleInstance(DirectionType.INCREMENT);
-        entity2 = (Melee) cycler.cycleInstance(DirectionType.DECREMENT);
-        entity = cycler.changeMode(Mode.ARMY);
-        entity = cycler.cycleInstance(DirectionType.INCREMENT);
-        entity = cycler.cycleInstance(DirectionType.INCREMENT);
-        entity = cycler.cycleInstance(DirectionType.INCREMENT);
-        entity = cycler.cycleInstance(DirectionType.DECREMENT);
-        entity = cycler.cycleInstance(DirectionType.INCREMENT);
-        entity = cycler.changeMode(Mode.UNIT);
+        //TODO change into assert statements?
+        Entity entity = entityOwnership.changeMode(Mode.ARMY);
+        Entity entity1 = entityOwnership.changeMode(Mode.UNIT);
+        System.out.println("currentmodelist after unit cycle" + entityOwnership.currentModeList);
+        Melee entity2 = (Melee) entityOwnership.cycleInstance(DirectionType.INCREMENT);
+        System.out.println("returned entity after instance cycle" + entity2);
+        System.out.println("cycleinstanceindex after instance cycle" + entityOwnership.cycleInstanceIndex);
+        entity2 = (Melee) entityOwnership.cycleInstance(DirectionType.INCREMENT);
+        entity2 = (Melee) entityOwnership.cycleInstance(DirectionType.INCREMENT);
+        entity2 = (Melee) entityOwnership.cycleInstance(DirectionType.DECREMENT);
+        entity = entityOwnership.changeMode(Mode.ARMY);
+        entity = entityOwnership.cycleInstance(DirectionType.INCREMENT);
+        entity = entityOwnership.cycleInstance(DirectionType.INCREMENT);
+        entity = entityOwnership.cycleInstance(DirectionType.INCREMENT);
+        entity = entityOwnership.cycleInstance(DirectionType.DECREMENT);
+        entity = entityOwnership.cycleInstance(DirectionType.INCREMENT);
+        entity = entityOwnership.changeMode(Mode.UNIT);
 
-        entity1 = cycler.cycleType(DirectionType.DECREMENT);
-        entity = cycler.cycleType(DirectionType.INCREMENT);
+        entity1 = entityOwnership.cycleType(DirectionType.DECREMENT);
+        System.out.println("returned entity after type cycle decrement " + entity1);
+        entity = entityOwnership.cycleType(DirectionType.INCREMENT);
+        System.out.println("returned entity after type cycle increment " + entity);
 
-        cycler.removeEntity(melee);
+        System.out.println("does getCurrentInstance work? " + entityOwnership.getCurrentInstance());
 
-        Entity enti3 = cycler.changeMode(Mode.STRUCTURE);
+        entityOwnership.removeEntity(melee);
 
-        //cycler.switchArmy(ActionModifiers.one); TODO test switch army
+        Entity enti3 = entityOwnership.changeMode(Mode.STRUCTURE);
+
+        //entityOwnership.switchArmy(ActionModifiers.one); TODO test switch army
         System.out.println("check " + check);
-        System.out.println("unitlist " + cycler.unitList);
-        System.out.println("structurelist " + cycler.structureList);
-        System.out.println("currentmodelist " + cycler.currentModeList);
-        System.out.println("rallypointlist " + cycler.rallyPointList);
-        System.out.println("selectedrallypoint " + cycler.selectedRallyPoint);
-        System.out.println("rangedindex " + cycler.rangedIndex);
-        System.out.println("meleeindex " + cycler.meleeIndex);
-        System.out.println("colonistindex " + cycler.colonistIndex);
-        System.out.println("explorerindex " + cycler.explorerIndex);
+        System.out.println("unitlist " + entityOwnership.unitList);
+        System.out.println("structurelist " + entityOwnership.structureList);
+        System.out.println("currentmodelist " + entityOwnership.currentModeList);
+        System.out.println("selectedrallypoint " + entityOwnership.selectedRallyPoint);
+        System.out.println("rangedindex " + entityOwnership.rangedIndex);
+        System.out.println("meleeindex " + entityOwnership.meleeIndex);
+        System.out.println("colonistindex " + entityOwnership.colonistIndex);
+        System.out.println("explorerindex " + entityOwnership.explorerIndex);
 
-        System.out.println("cycletypeindex " + cycler.cycleTypeIndex);
-        System.out.println("cycleinstanceindex " + cycler.cycleInstanceIndex);
-        System.out.println("selectedarmyindex " + cycler.selectedArmyIndex);
-        System.out.println("cyclemodeindex " + cycler.cycleModeIndex);
+        System.out.println("cycletypeindex " + entityOwnership.cycleTypeIndex);
+        System.out.println("cycleinstanceindex " + entityOwnership.cycleInstanceIndex);
+        System.out.println("selectedarmyindex " + entityOwnership.selectedArmyIndex);
+        System.out.println("cyclemodeindex " + entityOwnership.cycleModeIndex);
    }
 
 }
