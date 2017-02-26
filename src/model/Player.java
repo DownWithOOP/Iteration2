@@ -1,6 +1,6 @@
 package model;
 
-import controller.commands.DirectionType;
+import controller.commands.CycleDirection;
 
 /**
  * Created by Konrad on 2/17/2017.
@@ -23,19 +23,23 @@ public class Player {
 
     }
 
-    public void cycleMode(DirectionType direction){
+    public void cycleMode(CycleDirection direction){
         currentSelection.updateSelectedCommandable(entities.cycleMode(direction));
+        System.out.println("current mode " + entities.getCurrentMode());
     }
 
-    public void cycleType(DirectionType direction){
+    public void cycleType(CycleDirection direction){
         currentSelection.updateSelectedCommandable(entities.cycleType(direction));
+        System.out.println("current type " + entities.getCurrentType());
     }
 
-    public void cycleInstance(DirectionType direction){
+    public void cycleInstance(CycleDirection direction){
         currentSelection.updateSelectedCommandable(entities.cycleInstance(direction));
+        System.out.println("current instance " + entities.getCurrentInstance());
     }
 
-    public void cycleAction(DirectionType direction){
+    public void cycleCommand(CycleDirection direction){
         //TODO cycle through actions
+        System.out.println("command cycle not hooked up yet :(");
     }
 }
