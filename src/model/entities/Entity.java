@@ -6,6 +6,16 @@ import controller.availablecommands.Commandable;
  * Created by jordi on 2/24/2017.
  */
 public class Entity extends Commandable {
+
+    private EntityId entityId;
+
+    public Entity(EntityType entityType){
+        entityId = new EntityId(entityType);
+    }
+
+    public EntityId getEntityId(){
+        return entityId;
+    }
     public void getLocation(){
 
     }
