@@ -6,7 +6,7 @@ import controller.availablecommands.Commandable;
 import controller.commands.DirectionType;
 import model.entities.Entity;
 import model.entities.EntityType;
-import model.entities.structure.Base;
+import model.entities.structure.Capital;
 import model.entities.structure.Structure;
 import model.entities.unit.Colonist;
 import model.entities.unit.Explorer;
@@ -59,7 +59,7 @@ public class EntityOwnership {
     }
 
     private void initializeStructures() {
-        addStructure(EntityType.BASE, new Base());
+        addStructure(EntityType.CAPITAL, new Capital());
     }
 
     private void initializeUnits() {
@@ -94,7 +94,7 @@ public class EntityOwnership {
     public boolean addStructure(EntityType entityType, Entity entity) {
         boolean result = false;
         switch (entityType) {
-            case BASE:
+            case CAPITAL:
                 result = addToIndex(structureList, 0, entity);
                 break;
         }
@@ -297,7 +297,7 @@ public class EntityOwnership {
                 //armyList.remove(entity);
                 //rallyPointList.remove(((Army)entity).getRallyPoint());
                 //break;
-            case BASE:
+            case CAPITAL:
                 structureList.get(0).remove(entity);
                 break;
             case RANGED:
@@ -371,7 +371,7 @@ public class EntityOwnership {
         Melee melee3 = new Melee();
         Melee melee4 = new Melee();
         Explorer explorer1 = new Explorer();
-        Base base = new Base();
+        Capital base = new Capital();
 
         boolean check = false;
         check = entityOwnership.addEntity(explorer1);
