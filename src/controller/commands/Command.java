@@ -1,7 +1,11 @@
 package controller.commands;
 
+import java.util.function.Consumer;
+
 /**
  * Created by jordi on 2/20/2017.
  */
-public class Command {
+public interface Command {
+
+    void execute();
 }

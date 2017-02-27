@@ -1,50 +1,59 @@
 package model.entities;
 
-import controller.commands.Command;
-import utilities.id.CustomID;
-
-import java.util.ArrayDeque;
-import java.util.Queue;
+import controller.availablecommands.Commandable;
+import model.entities.Stats.Stats;
 
 /**
  * Created by jordi on 2/24/2017.
  */
-public abstract class Entity {
-    CustomID entityId, playerId;
-    Queue<Command> commandQueue= new ArrayDeque<>();
+public class Entity extends Commandable {
 
-   //  TODO:TAKE IN THE MOCK UP MAP, TAKE IN THE PLAYER ID
-    /**
-     *
-     * @param playerId
-     */
-    public Entity(CustomID playerId){
-        entityId=setId();
-        this.playerId=playerId;
+    private EntityId entityId;
+    private boolean isPoweredDown;
+
+    public Entity(EntityType entityType){
+        entityId = new EntityId(entityType);
+        this.isPoweredDown = false; // entity is powered up by default
     }
 
-    abstract CustomID setId();
-
+    public EntityId getEntityId(){
+        return entityId;
+    }
     public void getLocation(){
 
     }
 
-    public abstract void decommission();
+    public void decommision(){
 
+    }
     public void addToQueue(){
 
     }
     public void cancelQueue(){
 
     }
-    public void powerUp(){
+    public void powerUp(Stats entityStats) {
+        if (isPoweredDown()) {
+            int originalUpkeep = entityStats.getDefaultUpkeep();
+            entityStats.setUpkeep(originalUpkeep);
+            setPoweredDown(false);
+        }
+    }
+    public void powerDown(Stats entityStats) {
+        if (!isPoweredDown()) {
+            int upkeep = entityStats.getUpkeep();
+            int loweredUpkeep = Math.round((int)(upkeep * .25));
+            entityStats.setUpkeep(loweredUpkeep);
+            setPoweredDown(true);
+        }
 
     }
-    public void powerDown(){
 
-    }
-    public void changeStat(){
-
+    public boolean isPoweredDown() {
+        return isPoweredDown;
     }
 
+    public void setPoweredDown(boolean isPoweredDown) {
+        this.isPoweredDown = isPoweredDown;
+    }
 }
