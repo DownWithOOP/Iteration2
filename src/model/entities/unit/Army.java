@@ -11,8 +11,8 @@ public abstract class Army extends Entity implements Fighter {
     /**
      * @param playerId
      */
-    public Army(CustomID playerId) {
-        super(playerId);
+    public Army(CustomID playerId, String id) {
+        super(playerId, id);
     }
 
     @Override
