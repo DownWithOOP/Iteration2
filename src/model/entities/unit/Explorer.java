@@ -1,13 +1,25 @@
 package model.entities.unit;
 
 import model.entities.EntityType;
+import utilities.id.CustomID;
 
 /**
  * Created by jordi on 2/24/2017.
  */
 public class Explorer extends Unit{
-    public Explorer() {
-        super(EntityType.EXPLORER);
+
+
+    /**
+     * @param playerId
+     * @param id
+     */
+    public Explorer(CustomID playerId, String id) {
+        super(playerId, id);
+    }
+
+    @Override
+    protected CustomID setId(String id) {
+        return null;
     }
 
     @Override
@@ -17,6 +29,17 @@ public class Explorer extends Unit{
 
     @Override
     void joinArmy() {
+
+    }
+
+
+    @Override
+    public void decommission() {
+
+    }
+
+    @Override
+    public void decomission() {
 
     }
 }

@@ -1,12 +1,34 @@
 package model.entities.structure;
 
 import model.entities.EntityType;
+import utilities.id.CustomID;
 
 /**
  * Created by jordi on 2/24/2017.
  */
 public class Farm extends Structure {
-    public Farm() {
-        super(EntityType.FARM);
+
+
+    /**
+     * @param playerId
+     * @param id
+     */
+    public Farm(CustomID playerId, String id) {
+        super(playerId, id);
+    }
+
+    @Override
+    protected CustomID setId(String id) {
+        return null;
+    }
+
+    @Override
+    public void decommission() {
+
+    }
+
+    @Override
+    public void decomission() {
+
     }
 }

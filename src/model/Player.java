@@ -1,6 +1,8 @@
 package model;
 
 import controller.commands.CycleDirection;
+import utilities.id.CustomID;
+import utilities.id.IdType;
 
 /**
  * Created by Konrad on 2/17/2017.
@@ -9,11 +11,14 @@ public class Player {
 
     EntityOwnership entities;
     Selection currentSelection;
-
+    CustomID customID;
     public Player(){
 
-        entities = new EntityOwnership(); //TODO should entity ownership know Player?
+        //TODO add an id for player in the constructor
+        customID=new CustomID(IdType.player,"newPlayer");
+        entities = new EntityOwnership(customID); //TODO should entity ownership know Player?
         currentSelection = new Selection(entities.getCurrentInstance()); //TODO rename method?
+
 
     }
     public void endTurn(){

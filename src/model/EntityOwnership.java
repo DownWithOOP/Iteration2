@@ -12,6 +12,8 @@ import model.entities.unit.Colonist;
 import model.entities.unit.Explorer;
 import model.entities.unit.Melee;
 import model.entities.unit.Unit;
+import utilities.id.CustomID;
+import utilities.id.IdType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,8 +51,9 @@ public class EntityOwnership {
     private int cycleInstanceIndex = 0;
     private int selectedArmyIndex = 0;
     private int cycleModeIndex = 1; //start in UNIT mode
+    private CustomID playerId;
 
-    EntityOwnership() {
+    EntityOwnership(CustomID playerId) {
         unitList = new ArrayList<>(5);
         //armyList = new ArrayList<>(10);
         structureList = new ArrayList<>(1);
@@ -59,16 +62,19 @@ public class EntityOwnership {
         initializeUnits();
         initializeStructures();
         changeMode(modeHolders[cycleModeIndex]);
+        this.playerId=playerId;
     }
 
     private void initializeStructures() {
-        addStructure(EntityType.CAPITAL, new Capital());
+        //TODO change the id number
+        addStructure(IdType.capital, new Capital(playerId,"idnumber"));
     }
 
     private void initializeUnits() {
-        addUnit(EntityType.EXPLORER, new Explorer());
-        addUnit(EntityType.EXPLORER, new Explorer());
-        addUnit(EntityType.COLONIST, new Colonist());
+        //TODO change the id number
+        addUnit(IdType.explorer, new Explorer(playerId,"idnumber"));
+        addUnit(IdType.explorer, new Explorer(playerId,"idnumber"));
+        addUnit(IdType.colonist, new Colonist(playerId,"idnumber"));
     }
 
     private void initializeLists() {
@@ -82,7 +88,7 @@ public class EntityOwnership {
     }
 
     public boolean addEntity(Entity entity) {
-        EntityType entityType = entity.getEntityId().getEntityType();
+        IdType entityType = entity.getEntityType();
         boolean returnValue = false;
 
         //TODO handle adding army
@@ -94,10 +100,10 @@ public class EntityOwnership {
         return returnValue;
     }
 
-    public boolean addStructure(EntityType entityType, Entity entity) {
+    public boolean addStructure(IdType entityType, Entity entity) {
         boolean result = false;
         switch (entityType) {
-            case CAPITAL:
+            case capital:
                 result = addToIndex(structureList, 0, entity);
                 break;
         }
@@ -113,7 +119,7 @@ public class EntityOwnership {
         return false;
     }
 
-    private boolean addUnit(EntityType entityType, Entity entity) {
+    private boolean addUnit(IdType entityType, Entity entity) {
         int totalSize = 0;
         boolean returnValue = false;
         for (int i = 0; i < unitList.size(); i++) {
@@ -122,16 +128,16 @@ public class EntityOwnership {
         if (totalSize < unitCap) {
 
             switch (entityType) {
-                case COLONIST:
+                case colonist:
                     returnValue = addToIndex(unitList, colonistIndex, entity);
                     break;
-                case EXPLORER:
+                case explorer:
                     returnValue = addToIndex(unitList, explorerIndex, entity);
                     break;
-                case MELEE:
+                case melee:
                     returnValue = addToIndex(unitList, meleeIndex, entity);
                     break;
-                case RANGED:
+                case ranged:
                     returnValue = addToIndex(unitList, rangedIndex, entity);
                     break;
             }
@@ -296,25 +302,25 @@ public class EntityOwnership {
     }
 
     public void removeEntity(Entity entity){
-        EntityType entityType= entity.getEntityId().getEntityType();
+        IdType entityType= entity.getEntityType();
         switch (entityType){
             //case ARMY:
                 //armyList.remove(entity);
                 //rallyPointList.remove(((Army)entity).getRallyPoint());
                 //break;
-            case CAPITAL:
+            case capital:
                 structureList.get(0).remove(entity);
                 break;
-            case RANGED:
+            case ranged:
                 unitList.get(rangedIndex).remove(entity);
                 break;
-            case COLONIST:
+            case colonist:
                 unitList.get(colonistIndex).remove(entity);
                 break;
-            case EXPLORER:
+            case explorer:
                 unitList.get(explorerIndex).remove(entity);
                 break;
-            case MELEE:
+            case melee:
                 unitList.get(meleeIndex).remove(entity);
                 break;
         }
@@ -406,16 +412,16 @@ public class EntityOwnership {
 
 
     public static void main(String[] args) {
-        EntityOwnership entityOwnership = new EntityOwnership();
+        EntityOwnership entityOwnership = new EntityOwnership(new CustomID(IdType.player,"hello"));
         //Army army = new Army(new Player("hello", new Map()), new Location(1, 2));
         //Army army1 = new Army(new Player("world", new Map()), new Location(3, 2));
-        Melee melee = new Melee();
-        Melee melee1 = new Melee();
-        Melee melee2 = new Melee();
-        Melee melee3 = new Melee();
-        Melee melee4 = new Melee();
-        Explorer explorer1 = new Explorer();
-        Capital base = new Capital();
+        Melee melee = new Melee(new CustomID(IdType.player,"hello"),"5");
+        Melee melee1 = new Melee(new CustomID(IdType.player,"hello"),"5");
+        Melee melee2 = new Melee(new CustomID(IdType.player,"hello"),"5");
+        Melee melee3 = new Melee(new CustomID(IdType.player,"hello"),"5");
+        Melee melee4 = new Melee(new CustomID(IdType.player,"hello"),"5");
+        Explorer explorer1 = new Explorer(new CustomID(IdType.player,"hello"),"5");
+        Capital base = new Capital(new CustomID(IdType.player,"hello"),"5");
 
         boolean check = false;
         check = entityOwnership.addEntity(explorer1);

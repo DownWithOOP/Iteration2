@@ -1,31 +1,45 @@
 package model.entities;
 
 import controller.availablecommands.Commandable;
+import controller.commands.Command;
 import model.entities.Stats.Stats;
+import utilities.id.CustomID;
+import utilities.id.IdType;
+
+import java.util.ArrayDeque;
+import java.util.Queue;
 
 /**
  * Created by jordi on 2/24/2017.
  */
-public class Entity extends Commandable {
-
-    private EntityId entityId;
+public abstract class Entity extends Commandable {
+    CustomID entityId, playerId;
+    Queue<Command> commandQueue= new ArrayDeque<>();
     private boolean isPoweredDown;
 
-    public Entity(EntityType entityType){
-        entityId = new EntityId(entityType);
-        this.isPoweredDown = false; // entity is powered up by default
+   //  TODO:TAKE IN THE MOCK UP MAP, TAKE IN THE PLAYER ID
+    /**
+     *
+     * @param playerId
+     */
+    public Entity(CustomID playerId, String id){
+        entityId=setId(id);
+        this.playerId=playerId;
+        this.isPoweredDown=false;
     }
 
-    public EntityId getEntityId(){
-        return entityId;
+    protected abstract CustomID setId(String id);
+
+    public IdType getEntityType(){
+        return this.entityId.getIdType();
     }
+
     public void getLocation(){
 
     }
 
-    public void decommision(){
+    public abstract void decommission();
 
-    }
     public void addToQueue(){
 
     }
@@ -56,4 +70,6 @@ public class Entity extends Commandable {
     public void setPoweredDown(boolean isPoweredDown) {
         this.isPoweredDown = isPoweredDown;
     }
+
+    public abstract void decomission();
 }

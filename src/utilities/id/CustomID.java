@@ -6,7 +6,17 @@ package utilities.id;
 public class CustomID {
     //TODO:modify this accordingly
     IdType type;
-    public CustomID(IdType idType){
+    String id;
+
+    public CustomID(IdType idType, String id ){
         type=idType;
+        this.id=id;
+    }
+
+    public IdType getIdType(){
+        return type;
+    }
+    public String getId(){
+        return id;
     }
 }
