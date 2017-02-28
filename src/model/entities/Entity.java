@@ -23,12 +23,12 @@ public abstract class Entity extends Commandable {
      * @param playerId
      */
     public Entity(CustomID playerId, String id){
-        entityId=setId(id);
+        entityId=setId(id, playerId);
         this.playerId=playerId;
         this.isPoweredDown=false;
     }
 
-    protected abstract CustomID setId(String id);
+    protected abstract CustomID setId(String id, CustomID playerId);
 
     public IdType getEntityType(){
         return this.entityId.getIdType();

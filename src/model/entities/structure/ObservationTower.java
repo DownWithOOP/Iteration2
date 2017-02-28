@@ -1,7 +1,8 @@
 package model.entities.structure;
 
-import model.entities.EntityType;
+import model.entities.EntityId;
 import utilities.id.CustomID;
+import utilities.id.IdType;
 
 /**
  * Created by jordi on 2/24/2017.
@@ -17,8 +18,8 @@ public class ObservationTower extends Structure {
     }
 
     @Override
-    protected CustomID setId(String id) {
-        return null;
+    protected CustomID setId(String id, CustomID playerId) {
+        return new EntityId(IdType.observationTower,id, playerId);
     }
 
 
