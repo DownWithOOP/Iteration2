@@ -25,9 +25,11 @@ public class ControllerDispatch {
     public void handleCommand(CommandType commandType) {
         //TODO: add available actions in here
         System.out.println("is value null? " + (commandHashMap.get(commandType) == null));
-        commandHashMap.get(commandType).execute();
+        if (commandHashMap.containsKey(commandType)) {
+            commandHashMap.get(commandType).execute();
+        }
     }
-
+        //TODO: ASK  IF THIS WILL WORK WHEN THE PLAYERS ARE CHANGED
     private void setGameModelMap() {
         commandHashMap.put(CommandType.END_TURN, () -> gameModel.endTurn() );
         commandHashMap.put(CommandType.CYCLE_MODE_NEXT, new CycleModeNext(gameModel.getActivePlayer()));

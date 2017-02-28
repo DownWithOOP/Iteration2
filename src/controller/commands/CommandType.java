@@ -13,4 +13,13 @@ public enum CommandType {
     CYCLE_INSTANCE_PREV,
     CYCLE_COMMAND_NEXT,
     CYCLE_COMMAND_PREV,
+    SELECT,
+    NORTH,
+    SOUTH,
+    EAST,
+    WEST,
+    NORTH_EAST,
+    NORTH_WEST,
+    SOUTH_EAST,
+    SOUTH_WEST,
 }
