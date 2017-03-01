@@ -22,25 +22,25 @@ public class AvailableCommands {
         setDirections();
     }
 
-    public void executeCommand(CommandType command){
-
-    }
-
-    public void addCommands(Commandable commandable){
-        availableCommands.putAll(commandable.getCommands());
-    }
-    public void removeCommands(Commandable commandable){
-        HashMap<CommandType,Command> tempCommands=commandable.getCommands();
-        for (CommandType key:
-                tempCommands.keySet()) {
-            availableCommands.remove(key);
-        }
-    }
-
-    public void addActiveCommand(Command activeCommand){
-        this.activeCommand=activeCommand;
-
-    }
+//    public void executeCommand(CommandType command){
+//
+//    }
+//
+//    public void addCommands(Commandable commandable){
+//        availableCommands.putAll(commandable.getCommands());
+//    }
+//    public void removeCommands(Commandable commandable){
+//        HashMap<CommandType,Command> tempCommands=commandable.getCommands();
+//        for (CommandType key:
+//                tempCommands.keySet()) {
+//            availableCommands.remove(key);
+//        }
+//    }
+//
+//    public void addActiveCommand(Command activeCommand){
+//        this.activeCommand=activeCommand;
+//
+//    }
 
     private void setDirections(){
         direction.add(CommandType.NORTH);

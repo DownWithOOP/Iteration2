@@ -2,11 +2,13 @@ package model.entities;
 
 import controller.availablecommands.Commandable;
 import controller.commands.Command;
+import controller.commands.CommandType;
 import model.entities.Stats.Stats;
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Queue;
 
 /**
@@ -17,6 +19,14 @@ public abstract class Entity extends Commandable {
     Queue<Command> commandQueue= new ArrayDeque<>();
     private boolean isPoweredDown;
     Stats entityStats;
+    static ArrayList<CommandType> entityCommand= new ArrayList<>();
+    static {
+        entityCommand.add(CommandType.CANCEL_QUEUE);
+        entityCommand.add(CommandType.DECOMISSION);
+        entityCommand.add(CommandType.POWER_DOWN);
+        entityCommand.add(CommandType.POWER_UP);
+    }
+
    //  TODO:TAKE IN THE MOCK UP MAP, TAKE IN THE PLAYER ID
     /**
      *
@@ -27,8 +37,8 @@ public abstract class Entity extends Commandable {
         entityStats=setEntityStats();
         this.playerId=playerId;
         this.isPoweredDown=false;
+        addAllCommands(entityCommand);
     }
-
 
     protected abstract CustomID setId(String id, CustomID playerId);
 

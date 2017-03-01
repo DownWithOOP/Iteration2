@@ -46,6 +46,12 @@ public class CommandFactory {
 
     }
 
+    /**
+     * Command that can be executed without any modifier
+     * @param commandType
+     * @param entity
+     * @return
+     */
     public Command createSimpleCommand(CommandType commandType, Entity entity) {
 
         try {
@@ -60,6 +66,13 @@ public class CommandFactory {
         return null;
     }
 
+    /**
+     * For cursors the game cursor or the rallyPoint
+     * @param commandType
+     * @param cursor
+     * @param direction
+     * @return
+     */
     public Command createActionableCommand(CommandType commandType, Cursor cursor, Direction direction) {
 
         if (actionableCommandResult.containsKey(commandType)) {
@@ -69,6 +82,15 @@ public class CommandFactory {
         return null;
     }
 
+    /**
+     * takes in all the actions that can be modified
+     * attack, one could attack north, south, east, west
+     * joinArmy one could join a different army with a different number
+     * @param commandType
+     * @param entity
+     * @param modifier
+     * @return
+     */
     public Command createActionableCommand(CommandType commandType, Entity entity, Modifier modifier) {
 
         try {
@@ -123,8 +145,14 @@ public class CommandFactory {
         command = commandFactory.createActionableCommand(CommandType.ATTACK, army, modifier);
         command.execute();
 
+
         command = commandFactory.createActionableCommand(CommandType.JOIN_ARMY, colonist, modifier);
         command.execute();
+
+        if (colonist.containsCommand(CommandType.ATTACK)) {
+            command = commandFactory.createActionableCommand(CommandType.ATTACK, colonist, modifier);
+            command.execute();
+        }
 
         modifier.setModifier(Direction.WEST);
         command = commandFactory.createActionableCommand(CommandType.DEFEND, army, modifier);

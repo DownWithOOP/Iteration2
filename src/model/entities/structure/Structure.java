@@ -14,5 +14,6 @@ public abstract class Structure extends Entity {
      */
     public Structure(CustomID playerId, String id) {
         super(playerId, id);
+        //TODO: addAllCommands to be placed here after all the structure actions are defined
     }
 }
