@@ -21,8 +21,8 @@ public class Farm extends Structure {
     }
 
     @Override
-    protected CustomID setId(String id, CustomID playerId) {
-        return new EntityId(IdType.farm,id, playerId);
+    protected IdType getIdType() {
+        return IdType.farm;
     }
 
     @Override

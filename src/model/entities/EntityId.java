@@ -10,13 +10,17 @@ public class EntityId extends CustomID {
 
     private CustomID playerId;
 
-    public EntityId(IdType idType, String id, CustomID playerId) {
+    public EntityId(IdType idType, CustomID playerId, String id) {
         super(idType, id);
-        this.playerId=playerId;
+        this.playerId = playerId;
     }
 
-    public String getPlayerId(){
+    public String getPlayerId() {
         return playerId.getId();
     }
 
+
+    public boolean equals(EntityId entityId) {
+        return (super.equals(entityId) && playerId.equals(entityId.getPlayerId()));
+    }
 }

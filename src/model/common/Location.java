@@ -35,4 +35,12 @@ public class Location {
         x++;
     }
 
+    public boolean equals(Location location){
+        int xCoord=location.getX();
+        int yCoord=location.getY();
+
+        return (x==xCoord && y==yCoord);
+
+    }
+
 }

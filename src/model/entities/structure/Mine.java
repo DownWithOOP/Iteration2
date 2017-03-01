@@ -21,8 +21,8 @@ public class Mine extends Structure {
     }
 
     @Override
-    protected CustomID setId(String id, CustomID playerId) {
-        return new EntityId(IdType.mine,id, playerId);
+    protected IdType getIdType() {
+        return IdType.mine;
     }
 
     @Override

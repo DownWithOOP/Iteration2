@@ -21,8 +21,8 @@ public class Explorer extends Unit{
     }
 
     @Override
-    protected CustomID setId(String id, CustomID playerId) {
-        return new EntityId(IdType.explorer,id, playerId);
+    protected IdType getIdType() {
+        return IdType.explorer;
     }
 
     @Override

@@ -2,7 +2,6 @@ package model.entities.unit;
 
 import model.entities.EntityId;
 import model.entities.Stats.Stats;
-import model.entities.Stats.StructureStats;
 import model.entities.Stats.UnitStats;
 import utilities.id.CustomID;
 import utilities.id.IdType;
@@ -22,8 +21,8 @@ public class Colonist extends Unit{
     }
 
     @Override
-    protected CustomID setId(String id, CustomID playerId) {
-        return new EntityId(IdType.colonist,id, playerId);
+    protected IdType getIdType() {
+        return IdType.colonist;
     }
 
     @Override

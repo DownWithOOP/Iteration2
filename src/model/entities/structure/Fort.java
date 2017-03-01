@@ -20,8 +20,8 @@ public class Fort extends Structure {
     }
 
     @Override
-    protected CustomID setId(String id, CustomID playerId) {
-        return new EntityId(IdType.fort,id, playerId);
+    protected IdType getIdType() {
+        return IdType.fort;
     }
 
     @Override

@@ -21,8 +21,8 @@ public class Melee extends Unit{
     }
 
     @Override
-    protected CustomID setId(String id, CustomID playerId) {
-        return new EntityId(IdType.melee,id, playerId);
+    protected IdType getIdType() {
+        return IdType.melee;
     }
 
     @Override

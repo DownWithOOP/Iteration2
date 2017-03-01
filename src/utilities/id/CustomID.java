@@ -8,15 +8,21 @@ public class CustomID {
     IdType type;
     String id;
 
-    public CustomID(IdType idType, String id ){
-        type=idType;
-        this.id=id;
+    public CustomID(IdType idType, String id) {
+        type = idType;
+        this.id = id;
     }
 
-    public IdType getIdType(){
+    public IdType getIdType() {
         return type;
     }
-    public String getId(){
+
+    public String getId() {
         return id;
+    }
+
+
+    public boolean equals(CustomID customID) {
+        return (type == customID.getIdType() && id.equals(customID.getId()));
     }
 }

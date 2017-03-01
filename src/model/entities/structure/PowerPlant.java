@@ -20,8 +20,8 @@ public class PowerPlant extends Structure {
     }
 
     @Override
-    protected CustomID setId(String id, CustomID playerId) {
-        return new EntityId(IdType.powerPlant,id, playerId);
+    protected IdType getIdType() {
+        return IdType.powerPlant;
     }
 
     @Override

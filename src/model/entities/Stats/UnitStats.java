@@ -46,4 +46,9 @@ public class UnitStats extends Stats {
     public int getMovement() {
         return statsMap.get(StatsType.MOVEMENT);
     }
+
+    public UnitStats clone(){
+        UnitStats temp= new UnitStats(getOffensiveDamage(),getDefensiveDamage(),getArmor(),getMovement(),getHealth(),getUpkeep(),getVisionRadius(),getRange());
+        return temp;
+    }
 }

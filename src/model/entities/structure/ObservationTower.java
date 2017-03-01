@@ -20,8 +20,8 @@ public class ObservationTower extends Structure {
     }
 
     @Override
-    protected CustomID setId(String id, CustomID playerId) {
-        return new EntityId(IdType.observationTower,id, playerId);
+    protected IdType getIdType() {
+        return IdType.observationTower;
     }
 
     @Override

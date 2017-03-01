@@ -20,8 +20,8 @@ public class University extends Structure {
     }
 
     @Override
-    protected CustomID setId(String id, CustomID playerId) {
-        return new EntityId(IdType.university,id, playerId);
+    protected IdType getIdType() {
+        return IdType.university;
     }
 
     @Override

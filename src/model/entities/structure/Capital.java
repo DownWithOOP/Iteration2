@@ -22,8 +22,8 @@ public class Capital extends Structure {
     }
 
     @Override
-    protected CustomID setId(String id, CustomID playerId) {
-        return new EntityId(IdType.capital,id, playerId);
+    protected IdType getIdType() {
+        return IdType.capital;
     }
 
     @Override

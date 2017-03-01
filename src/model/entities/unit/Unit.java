@@ -1,7 +1,10 @@
 package model.entities.unit;
 
 import controller.commands.CommandType;
+import model.common.Location;
 import model.entities.Entity;
+import model.entities.Stats.Stats;
+import model.entities.Stats.UnitStats;
 import utilities.id.CustomID;
 
 import java.util.ArrayList;
@@ -38,5 +41,16 @@ public abstract class Unit extends Entity {
 
     }
 
+
+    public int getUnitMovement(){
+        return ((UnitStats)entityStats).getMovement();
+    }
+    public int getVisionRadius(){
+        return entityStats.getVisionRadius();
+    }
+
+    public UnitStats getUnitStats(){
+        return ((UnitStats)entityStats).clone();
+    }
 
 }

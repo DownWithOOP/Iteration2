@@ -7,13 +7,13 @@ import model.entities.unit.Army;
 /**
  * Created by jordi on 2/28/2017.
  */
-public class DefendCommand implements Command {
+public class DefendCommand extends ArmyCommand{
 
-    Army army;
     Direction direction;
+
     public DefendCommand(Army army, Direction direction){
-        this.army=army;
-        this.direction=direction;
+        super(army);
+        this.direction = direction;
     }
 
     @Override

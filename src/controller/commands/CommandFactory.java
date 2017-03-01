@@ -1,5 +1,6 @@
 package controller.commands;
 
+import controller.commands.entitycommand.armycommand.DisbandCommand;
 import controller.commands.entitycommand.entitycommand.CancelQueueCommand;
 import controller.commands.entitycommand.entitycommand.DecommissionCommand;
 import controller.commands.entitycommand.armycommand.AttackCommand;
@@ -31,10 +32,13 @@ public class CommandFactory {
 
     static {
         simpleCommandResult.put(CommandType.DECOMISSION, (entity) -> (new DecommissionCommand(entity)));
-        simpleCommandResult.put(CommandType.ABANDON_ARMY, (entity) -> (new AbandonArmy((Unit) entity)));
         simpleCommandResult.put(CommandType.CANCEL_QUEUE, (entity) -> (new CancelQueueCommand(entity)));
         simpleCommandResult.put(CommandType.POWER_UP, (entity) -> (new PowerUpCommand(entity)));
         simpleCommandResult.put(CommandType.POWER_DOWN, (entity) -> (new PowerDownCommand(entity)));
+
+        simpleCommandResult.put(CommandType.DISBAND,(entity) -> (new DisbandCommand((Army) entity)));
+        simpleCommandResult.put(CommandType.ABANDON_ARMY, (entity) -> (new AbandonArmy((Unit) entity)));
+
 
         //cursor
         actionableCommandResult.put(CommandType.MOVE, (cursor, direction) -> (new MoveCommand(cursor, direction)));

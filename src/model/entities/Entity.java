@@ -3,6 +3,7 @@ package model.entities;
 import controller.availablecommands.Commandable;
 import controller.commands.Command;
 import controller.commands.CommandType;
+import model.common.Location;
 import model.entities.Stats.Stats;
 import utilities.id.CustomID;
 import utilities.id.IdType;
@@ -15,11 +16,14 @@ import java.util.Queue;
  * Created by jordi on 2/24/2017.
  */
 public abstract class Entity extends Commandable {
-    CustomID entityId, playerId;
-    Queue<Command> commandQueue= new ArrayDeque<>();
+    protected EntityId entityId;
+    protected CustomID playerId;
+    Queue<Command> commandQueue = new ArrayDeque<>();
     private boolean isPoweredDown;
-    Stats entityStats;
-    static ArrayList<CommandType> entityCommand= new ArrayList<>();
+    protected Stats entityStats;
+
+    static ArrayList<CommandType> entityCommand = new ArrayList<>();
+
     static {
         entityCommand.add(CommandType.CANCEL_QUEUE);
         entityCommand.add(CommandType.DECOMISSION);
@@ -27,39 +31,47 @@ public abstract class Entity extends Commandable {
         entityCommand.add(CommandType.POWER_UP);
     }
 
-   //  TODO:TAKE IN THE MOCK UP MAP, TAKE IN THE PLAYER ID
+    //  TODO:TAKE IN THE MOCK UP MAP, TAKE IN THE PLAYER ID
+
     /**
-     *
      * @param playerId
      */
-    public Entity(CustomID playerId, String id){
-        entityId=setId(id, playerId);
-        entityStats=setEntityStats();
-        this.playerId=playerId;
-        this.isPoweredDown=false;
+    public Entity(CustomID playerId, String id) {
+        setId(playerId, id);
+        entityStats = setEntityStats();
+        this.playerId = playerId;
+        this.isPoweredDown = false;
         addAllCommands(entityCommand);
     }
 
-    protected abstract CustomID setId(String id, CustomID playerId);
+    private void setId(CustomID playerId, String id) {
+        IdType idType = getIdType();
+        entityId = new EntityId(idType, playerId, id);
+    }
+
+    protected abstract IdType getIdType();
 
     protected abstract Stats setEntityStats();
 
-    public IdType getEntityType(){
+    public IdType getEntityType() {
         return this.entityId.getIdType();
     }
 
-    public void getLocation(){
-
+    public Location getLocation() {
+        //TODO: FINISH THIS METHOD
+        return null;
     }
 
     public abstract void decommission();
 
-    public void addToQueue(){
+    public void addToQueue() {
 
     }
-    public void cancelQueue(){
+
+    public void cancelQueue() {
 
     }
+
     public void powerUp() {
         System.out.println("powerUP");
         if (isPoweredDown()) {
@@ -68,11 +80,12 @@ public abstract class Entity extends Commandable {
             setPoweredDown(false);
         }
     }
+
     public void powerDown() {
         System.out.println("powerDown");
         if (!isPoweredDown()) {
             int upkeep = entityStats.getUpkeep();
-            int loweredUpkeep = Math.round((int)(upkeep * .25));
+            int loweredUpkeep = Math.round((int) (upkeep * .25));
             entityStats.setUpkeep(loweredUpkeep);
             setPoweredDown(true);
         }
@@ -87,4 +100,10 @@ public abstract class Entity extends Commandable {
         this.isPoweredDown = isPoweredDown;
     }
 
+    public EntityId getEntityId(){
+        return entityId;
+    }
+    public CustomID getPlayerId(){
+        return playerId;
+    }
 }
