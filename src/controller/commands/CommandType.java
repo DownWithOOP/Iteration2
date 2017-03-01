@@ -22,4 +22,7 @@ public enum CommandType {
     NORTH_WEST,
     SOUTH_EAST,
     SOUTH_WEST,
+    MOVE,
+    DECOMISSION,
+    DEFEND, ATTACK
 }

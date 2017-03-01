@@ -38,8 +38,4 @@ public class Worker extends Unit {
 
     }
 
-    @Override
-    public void decomission() {
-
-    }
 }

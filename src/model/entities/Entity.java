@@ -71,5 +71,4 @@ public abstract class Entity extends Commandable {
         this.isPoweredDown = isPoweredDown;
     }
 
-    public abstract void decomission();
 }

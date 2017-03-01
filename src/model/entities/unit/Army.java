@@ -1,5 +1,6 @@
 package model.entities.unit;
 
+import controller.commands.Direction;
 import model.entities.Entity;
 import model.entities.EntityId;
 import model.entities.Fighter;
@@ -9,7 +10,7 @@ import utilities.id.IdType;
 /**
  * Created by jordi on 2/24/2017.
  */
-public abstract class Army extends Entity implements Fighter {
+public  class Army extends Entity implements Fighter {
     /**
      * @param playerId
      */
@@ -18,19 +19,21 @@ public abstract class Army extends Entity implements Fighter {
     }
 
     @Override
-    public void attack() {
-
+    public void attack(Direction direction) {
+        System.out.println("attack "+direction.toString());
     }
 
     @Override
-    public void defend() {
-
+    public void defend(Direction direction) {
+        System.out.println( "defend "+direction.toString());
     }
+
 
     @Override
     public void decommission() {
-
+        System.out.println("army decommission");
     }
+
 
     //TODO: fix this
     @Override

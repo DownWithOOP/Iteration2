@@ -28,8 +28,4 @@ public class Fort extends Structure {
 
     }
 
-    @Override
-    public void decomission() {
-
-    }
 }

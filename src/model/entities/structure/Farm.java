@@ -28,8 +28,4 @@ public class Farm extends Structure {
 
     }
 
-    @Override
-    public void decomission() {
-
-    }
 }

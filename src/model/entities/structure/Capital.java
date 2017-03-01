@@ -64,8 +64,4 @@ public class Capital extends Structure {
 
     }
 
-    @Override
-    public void decomission() {
-
-    }
 }

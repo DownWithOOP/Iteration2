@@ -27,8 +27,4 @@ public class PowerPlant extends Structure {
 
     }
 
-    @Override
-    public void decomission() {
-
-    }
 }

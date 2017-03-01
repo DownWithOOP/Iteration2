@@ -10,19 +10,31 @@ import java.util.PriorityQueue;
  * Created by jordi on 2/21/2017.
  */
 public class Commandable {
-    HashMap<CommandType,Command> totalCommands=new HashMap<>();
-    protected void removeAvailableCommands(){
+    HashMap<CommandType, Command> totalCommands = new HashMap<>();
+    AvailableCommands availableCommands;
 
-    }
-    protected void addAvailableCommands(){
-
-    }
-
-    protected void addAllActions(){
-
+    protected void removeAvailableCommands() {
+        if (availableCommands!=null){
+            availableCommands.removeCommands(this);
+        }
     }
 
-    protected HashMap<CommandType,Command> getCommands(){
+    protected void addAvailableCommands(AvailableCommands availableCommands) {
+        this.availableCommands = availableCommands;
+        if (availableCommands!=null){
+            availableCommands.addCommands(this);
+        }
+    }
+
+    protected void addAllActions() {
+
+    }
+
+    public void addAction(){
+
+    }
+
+    protected HashMap<CommandType, Command> getCommands() {
         return totalCommands;
     }
 }

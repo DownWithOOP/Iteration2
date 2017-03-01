@@ -36,11 +36,8 @@ public class Colonist extends Unit{
 
     @Override
     public void decommission() {
-
+        System.out.println("colonist decommission");
     }
 
-    @Override
-    public void decomission() {
 
-    }
 }

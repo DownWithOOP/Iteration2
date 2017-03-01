@@ -20,7 +20,7 @@ public class MVCInputHandler {
     }
 
     public CommandType interpretInput(KeyEvent event) {
-        String keyCode = event.getCode() + "";
+        String keyCode = event.getCode()  + "";
 
         if (event.isControlDown()) {
             keyCode += control;

@@ -28,8 +28,5 @@ public class ObservationTower extends Structure {
 
     }
 
-    @Override
-    public void decomission() {
 
-    }
 }

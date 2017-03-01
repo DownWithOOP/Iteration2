@@ -22,14 +22,10 @@ public class Mine extends Structure {
         return new EntityId(IdType.mine,id, playerId);
     }
 
-
     @Override
     public void decommission() {
 
     }
 
-    @Override
-    public void decomission() {
 
-    }
 }

@@ -35,11 +35,10 @@ public class Melee extends Unit{
 
     @Override
     public void decommission() {
-
+        System.out.println("melee decommission");
     }
 
-    @Override
-    public void decomission() {
 
-    }
+
+
 }

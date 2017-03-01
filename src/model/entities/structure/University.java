@@ -28,8 +28,4 @@ public class University extends Structure {
 
     }
 
-    @Override
-    public void decomission() {
-
-    }
 }

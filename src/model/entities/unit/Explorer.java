@@ -39,8 +39,5 @@ public class Explorer extends Unit{
 
     }
 
-    @Override
-    public void decomission() {
 
-    }
 }
