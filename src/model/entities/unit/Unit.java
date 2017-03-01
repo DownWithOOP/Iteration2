@@ -1,7 +1,6 @@
 package model.entities.unit;
 
 import model.entities.Entity;
-import model.entities.EntityType;
 import utilities.id.CustomID;
 
 /**
@@ -18,10 +17,15 @@ public abstract class Unit extends Entity {
         super(playerId, id);
     }
 
-    abstract void abandonArmy();
-    abstract void joinArmy();
+
+    public abstract void abandonArmy();
+    public abstract void joinArmy(int armyNumber);
 
     public void moveUnit(){
+
+    }
+
+    public void advanceToRallyPoint(int number){
 
     }
 

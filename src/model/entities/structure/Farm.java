@@ -1,6 +1,8 @@
 package model.entities.structure;
 
 import model.entities.EntityId;
+import model.entities.Stats.Stats;
+import model.entities.Stats.StructureStats;
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
@@ -21,6 +23,11 @@ public class Farm extends Structure {
     @Override
     protected CustomID setId(String id, CustomID playerId) {
         return new EntityId(IdType.farm,id, playerId);
+    }
+
+    @Override
+    protected Stats setEntityStats() {
+        return new StructureStats(0,0,0,0,0);
     }
 
     @Override

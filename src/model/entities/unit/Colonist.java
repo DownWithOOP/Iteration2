@@ -1,6 +1,9 @@
 package model.entities.unit;
 
 import model.entities.EntityId;
+import model.entities.Stats.Stats;
+import model.entities.Stats.StructureStats;
+import model.entities.Stats.UnitStats;
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
@@ -8,6 +11,7 @@ import utilities.id.IdType;
  * Created by jordi on 2/24/2017.
  */
 public class Colonist extends Unit{
+
 
     /**
      * @param playerId
@@ -22,15 +26,20 @@ public class Colonist extends Unit{
         return new EntityId(IdType.colonist,id, playerId);
     }
 
+    @Override
+    protected Stats setEntityStats() {
+        return new UnitStats(0,0,0,0,0,0,0,0);
+    }
+
 
     @Override
-    void abandonArmy() {
-
+    public void abandonArmy() {
+        System.out.println("abandon army");
     }
 
     @Override
-    void joinArmy() {
-
+    public void joinArmy(int armyNumber) {
+        System.out.println("joined army "+ armyNumber);
     }
 
 

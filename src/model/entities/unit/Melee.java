@@ -1,6 +1,8 @@
 package model.entities.unit;
 
 import model.entities.EntityId;
+import model.entities.Stats.Stats;
+import model.entities.Stats.UnitStats;
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
@@ -24,13 +26,18 @@ public class Melee extends Unit{
     }
 
     @Override
-    void abandonArmy() {
+    protected Stats setEntityStats() {
+        return new UnitStats(0,0,0,0,0,0,0,0);
+    }
+
+    @Override
+    public void abandonArmy() {
 
     }
 
     @Override
-    void joinArmy() {
-
+    public void joinArmy(int armyNumber) {
+        System.out.println("joined army"+ armyNumber);
     }
 
     @Override

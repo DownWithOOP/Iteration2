@@ -4,6 +4,8 @@ import controller.commands.Direction;
 import model.entities.Entity;
 import model.entities.EntityId;
 import model.entities.Fighter;
+import model.entities.Stats.Stats;
+import model.entities.Stats.UnitStats;
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
@@ -39,6 +41,11 @@ public  class Army extends Entity implements Fighter {
     @Override
     protected CustomID setId(String id, CustomID playerId){
        return new EntityId(IdType.army,id, playerId);
+    }
+
+    @Override
+    protected Stats setEntityStats() {
+        return new UnitStats(0,0,0,0,0,0,0,0);
     }
 
     public void disband(){

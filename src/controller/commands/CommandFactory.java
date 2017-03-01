@@ -1,17 +1,20 @@
 package controller.commands;
 
-import controller.commands.entitycommand.DecommissionCommand;
+import controller.commands.entitycommand.entitycommand.CancelQueueCommand;
+import controller.commands.entitycommand.entitycommand.DecommissionCommand;
 import controller.commands.entitycommand.armycommand.AttackCommand;
 import controller.commands.entitycommand.armycommand.DefendCommand;
 import controller.commands.entitycommand.cursorcommand.MoveCommand;
+import controller.commands.entitycommand.entitycommand.PowerDownCommand;
+import controller.commands.entitycommand.entitycommand.PowerUpCommand;
+import controller.commands.entitycommand.unitcommand.AbandonArmy;
+import controller.commands.entitycommand.unitcommand.AdvanceToRallyPointCommand;
+import controller.commands.entitycommand.unitcommand.JoinArmyCommand;
 import model.Cursor;
 import model.RallyPoint;
 import model.common.Location;
 import model.entities.Entity;
-import model.entities.unit.Army;
-import model.entities.unit.Colonist;
-import model.entities.unit.Melee;
-import model.entities.unit.Ranged;
+import model.entities.unit.*;
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
@@ -22,31 +25,42 @@ import java.util.HashMap;
  */
 public class CommandFactory {
 
-    static final private HashMap<CommandType,SimpleCommandWrapper> simpleCommandResult = new HashMap<>();
-    static final private HashMap<CommandType,ActionableCommandWrapper> actionableCommandResult = new HashMap<>();
-    static final private HashMap<CommandType,ActionableCommandWrapperArmy> actionableCommandArmy = new HashMap<>();
+    static final private HashMap<CommandType, SimpleCommandWrapper> simpleCommandResult = new HashMap<>();
+    static final private HashMap<CommandType, ActionableCommandWrapper> actionableCommandResult = new HashMap<>();
+    static final private HashMap<CommandType, ActionableCommandWrapperEntity> actionableCommandEntity = new HashMap<>();
 
     static {
         simpleCommandResult.put(CommandType.DECOMISSION, (entity) -> (new DecommissionCommand(entity)));
+        simpleCommandResult.put(CommandType.ABANDON_ARMY, (entity) -> (new AbandonArmy((Unit) entity)));
+        simpleCommandResult.put(CommandType.CANCEL_QUEUE, (entity) -> (new CancelQueueCommand(entity)));
+        simpleCommandResult.put(CommandType.POWER_UP, (entity) -> (new PowerUpCommand(entity)));
+        simpleCommandResult.put(CommandType.POWER_DOWN, (entity) -> (new PowerDownCommand(entity)));
 
         //cursor
         actionableCommandResult.put(CommandType.MOVE, (cursor, direction) -> (new MoveCommand(cursor, direction)));
         //army
-        actionableCommandArmy.put(CommandType.ATTACK, (army, direction) -> (new AttackCommand(army, direction)));
-        actionableCommandArmy.put(CommandType.DEFEND, (army, direction) -> (new DefendCommand(army, direction)));
+        actionableCommandEntity.put(CommandType.ATTACK, (entity, modifier) -> (new AttackCommand((Army) entity, modifier.direction)));
+        actionableCommandEntity.put(CommandType.DEFEND, (entity, modifier) -> (new DefendCommand((Army) entity, modifier.direction)));
+        actionableCommandEntity.put(CommandType.JOIN_ARMY, (entity, modifier) -> (new JoinArmyCommand((Unit) entity, modifier.number)));
+        actionableCommandEntity.put(CommandType.ADVANCE_TO_RALLY_POINT, (entity, modifier) -> (new AdvanceToRallyPointCommand((Unit) entity, modifier.number)));
 
     }
 
-    public Command createSimpleCommand(CommandType commandType, Entity entity){
+    public Command createSimpleCommand(CommandType commandType, Entity entity) {
 
-        if (simpleCommandResult.containsKey(commandType)) {
-            return simpleCommandResult.get(commandType).createCommand(entity);
+        try {
+            if (simpleCommandResult.containsKey(commandType)) {
+                return simpleCommandResult.get(commandType).createCommand(entity);
+            }
+        } catch (Exception e) {
+            System.out.println("check for the class type and the action to be performed");
+            e.printStackTrace();
         }
 
         return null;
     }
 
-    public Command createActionableCommand(CommandType commandType, Cursor cursor, Direction direction){
+    public Command createActionableCommand(CommandType commandType, Cursor cursor, Direction direction) {
 
         if (actionableCommandResult.containsKey(commandType)) {
             return actionableCommandResult.get(commandType).createCommand(cursor, direction);
@@ -55,10 +69,15 @@ public class CommandFactory {
         return null;
     }
 
-    public Command createActionableCommand(CommandType commandType, Army army, Direction direction){
+    public Command createActionableCommand(CommandType commandType, Entity entity, Modifier modifier) {
 
-        if (actionableCommandArmy.containsKey(commandType)) {
-            return actionableCommandArmy.get(commandType).createCommand(army, direction);
+        try {
+            if (actionableCommandEntity.containsKey(commandType)) {
+                return actionableCommandEntity.get(commandType).createCommand(entity, modifier);
+            }
+        } catch (Exception e) {
+            System.out.println("check for the class type and the action to be performed");
+            e.printStackTrace();
         }
 
         return null;
@@ -72,41 +91,52 @@ public class CommandFactory {
         Command createCommand(Cursor cursor, Direction direction);
     }
 
-    private interface ActionableCommandWrapperArmy {
-        Command createCommand(Army army, Direction direction);
+    private interface ActionableCommandWrapperEntity {
+        Command createCommand(Entity entity, Modifier modifier);
     }
 
     public static void main(String[] args) {
-        CustomID customID= new CustomID(IdType.player,"5");
+        CustomID customID = new CustomID(IdType.player, "5");
 
-        Melee melee= new Melee(customID,"6");
-        Colonist colonist= new Colonist(customID,"6");
-        Army army= new Army(customID,"6");
-        RallyPoint rallyPoint= new RallyPoint(new Location(5,6));
-        Cursor cursor= new Cursor(new Location(5,6));
+        Melee melee = new Melee(customID, "6");
+        Colonist colonist = new Colonist(customID, "6");
+        Army army = new Army(customID, "6");
+        RallyPoint rallyPoint = new RallyPoint(new Location(5, 6));
+        Cursor cursor = new Cursor(new Location(5, 6));
 
         Command command;
-        CommandFactory commandFactory= new CommandFactory();
+        CommandFactory commandFactory = new CommandFactory();
 
-        command=commandFactory.createSimpleCommand(CommandType.DECOMISSION, melee);
+        command = commandFactory.createSimpleCommand(CommandType.DECOMISSION, melee);
         command.execute();
 
-        command=commandFactory.createSimpleCommand(CommandType.DECOMISSION, colonist);
+        command = commandFactory.createSimpleCommand(CommandType.ABANDON_ARMY, colonist);
         command.execute();
 
-        command=commandFactory.createSimpleCommand(CommandType.DECOMISSION, army);
+        command = commandFactory.createSimpleCommand(CommandType.POWER_UP, army);
         command.execute();
 
-        command=commandFactory.createActionableCommand(CommandType.ATTACK,army,Direction.EAST);
+        Modifier modifier = new Modifier();
+        modifier.setModifier(Direction.EAST);
+        modifier.setModifier(5);
+
+        command = commandFactory.createActionableCommand(CommandType.ATTACK, army, modifier);
         command.execute();
 
-        command=commandFactory.createActionableCommand(CommandType.DEFEND,army,Direction.WEST);
+        command = commandFactory.createActionableCommand(CommandType.JOIN_ARMY, colonist, modifier);
         command.execute();
 
-        command=commandFactory.createActionableCommand(CommandType.MOVE,rallyPoint,Direction.WEST);
+        modifier.setModifier(Direction.WEST);
+        command = commandFactory.createActionableCommand(CommandType.DEFEND, army, modifier);
         command.execute();
 
-        command=commandFactory.createActionableCommand(CommandType.MOVE,cursor,Direction.WEST);
+        command = commandFactory.createActionableCommand(CommandType.MOVE, rallyPoint, Direction.WEST);
+        command.execute();
+
+        command = commandFactory.createActionableCommand(CommandType.MOVE, cursor, Direction.WEST);
+        command.execute();
+
+        command = commandFactory.createActionableCommand(CommandType.MOVE, cursor, Direction.EAST);
         command.execute();
 
 

@@ -16,7 +16,7 @@ public abstract class Entity extends Commandable {
     CustomID entityId, playerId;
     Queue<Command> commandQueue= new ArrayDeque<>();
     private boolean isPoweredDown;
-
+    Stats entityStats;
    //  TODO:TAKE IN THE MOCK UP MAP, TAKE IN THE PLAYER ID
     /**
      *
@@ -24,11 +24,15 @@ public abstract class Entity extends Commandable {
      */
     public Entity(CustomID playerId, String id){
         entityId=setId(id, playerId);
+        entityStats=setEntityStats();
         this.playerId=playerId;
         this.isPoweredDown=false;
     }
 
+
     protected abstract CustomID setId(String id, CustomID playerId);
+
+    protected abstract Stats setEntityStats();
 
     public IdType getEntityType(){
         return this.entityId.getIdType();
@@ -46,14 +50,16 @@ public abstract class Entity extends Commandable {
     public void cancelQueue(){
 
     }
-    public void powerUp(Stats entityStats) {
+    public void powerUp() {
+        System.out.println("powerUP");
         if (isPoweredDown()) {
             int originalUpkeep = entityStats.getDefaultUpkeep();
             entityStats.setUpkeep(originalUpkeep);
             setPoweredDown(false);
         }
     }
-    public void powerDown(Stats entityStats) {
+    public void powerDown() {
+        System.out.println("powerDown");
         if (!isPoweredDown()) {
             int upkeep = entityStats.getUpkeep();
             int loweredUpkeep = Math.round((int)(upkeep * .25));
