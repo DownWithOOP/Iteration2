@@ -61,9 +61,12 @@ public class AreaViewPortController {
 
         Image image = new Image("resources/images/grass1.png");
         Image image2 = new Image("resources/images/water1.png");
+        Image image3 = new Image("resources/images/dirt1.png");
+        Image image4 = new Image("resources/images/mountain1.png");
 
 
         // TODO just a few sample tiles atm, in future will connect with actual map
+        /*
         gc.drawImage(image,0+ cameraX,0 + cameraY);
         gc.drawImage(image,0 + cameraX,image.getHeight() + cameraY);
         gc.drawImage(image,image.getWidth()*0.75 + cameraX,image.getHeight()*0.5 + cameraY);
@@ -72,8 +75,30 @@ public class AreaViewPortController {
         gc.drawImage(image2,image.getWidth()*1.5 + cameraX,image.getHeight() + cameraY);
         gc.drawImage(image2,image.getWidth()*1.5 + cameraX,0 + cameraY);
         gc.drawImage(image,image.getWidth()*2.25 + cameraX,image.getHeight()*-0.5 + cameraY);
-        gc.drawImage(image,image.getWidth()*2.25 + cameraX,image.getHeight()*0.5 + cameraY);
-        gc.drawImage(image,image.getWidth()*2.25 + cameraX,image.getHeight()*1.5 + cameraY);
+        gc.drawImage(image3,image.getWidth()*2.25 + cameraX,image.getHeight()*0.5 + cameraY);
+        gc.drawImage(image4,image.getWidth()*2.25 + cameraX,image.getHeight()*1.5 + cameraY);
+        gc.drawImage(image4,image.getWidth()*3 + cameraX,image.getHeight()*-1 + cameraY);
+        gc.drawImage(image3,image.getWidth()*3 + cameraX,0 + cameraY);
+        gc.drawImage(image4,image.getWidth()*3 + cameraX,image.getHeight() + cameraY);
+        gc.drawImage(image4,image.getWidth()*3 + cameraX,image.getHeight()*2 + cameraY);
+        */
+
+        double width = image.getWidth();
+        double height = image.getHeight();
+
+        for(int j=-5; j<5; j+=2){ // this handles even rows
+            gc.drawImage(image,0.75*width*j+ cameraX,height*-0.5+ cameraY);
+            gc.drawImage(image,0.75*width*j+ cameraX,height*0.5 + cameraY);
+            gc.drawImage(image4,0.75*width*j+ cameraX,height*1.5 + cameraY);
+            gc.drawImage(image,0.75*width*j+ cameraX,height*2.5+ cameraY);
+        }
+        for(int j=-4; j<5; j+=2){ // this handles odd rows
+            gc.drawImage(image,0.75*width*j+ cameraX,height*-1+ cameraY);
+            gc.drawImage(image,0.75*width*j+ cameraX,height*0 + cameraY);
+            gc.drawImage(image2,0.75*width*j+ cameraX,height*1 + cameraY);
+            gc.drawImage(image3,0.75*width*j+ cameraX,height*2+ cameraY);
+
+        }
 
     }
 

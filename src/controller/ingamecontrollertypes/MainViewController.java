@@ -71,16 +71,16 @@ public class MainViewController extends Controller {
         }
 
         @FXML void moveUp(ActionEvent actionEvent) throws  IOException{
-            this.areaViewPortController.changeCameraYMinus();
-        }
-        @FXML void moveDown(ActionEvent actionEvent) throws  IOException{
             this.areaViewPortController.changeCameraYPlus();
         }
+        @FXML void moveDown(ActionEvent actionEvent) throws  IOException{
+            this.areaViewPortController.changeCameraYMinus();
+        }
         @FXML void moveLeft(ActionEvent actionEvent) throws  IOException{
-            this.areaViewPortController.changeCameraXMinus();
+            this.areaViewPortController.changeCameraXPlus();
         }
         @FXML void moveRight(ActionEvent actionEvent) throws  IOException{
-            this.areaViewPortController.changeCameraXPlus();
+            this.areaViewPortController.changeCameraXMinus();
         }
         @FXML void cameraFaster(ActionEvent actionEvent) throws  IOException{
             this.areaViewPortController.fasterCamera();
@@ -88,7 +88,6 @@ public class MainViewController extends Controller {
         @FXML void cameraSlower(ActionEvent actionEvent) throws  IOException{
             this.areaViewPortController.slowerCamer();
         }
-
 
 
 
