@@ -42,6 +42,8 @@ public class CommandFactory {
 
         //cursor
         actionableCommandResult.put(CommandType.MOVE, (cursor, direction) -> (new MoveCommand(cursor, direction)));
+        // TODO add W,A,S,D move_map_Camera stuff
+
         //army
         actionableCommandEntity.put(CommandType.ATTACK, (entity, modifier) -> (new AttackCommand((Army) entity, modifier.direction)));
         actionableCommandEntity.put(CommandType.DEFEND, (entity, modifier) -> (new DefendCommand((Army) entity, modifier.direction)));

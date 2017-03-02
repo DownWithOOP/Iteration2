@@ -58,6 +58,12 @@ public class MVCInputHandler {
         handleCommand.put(KeyCode.NUMPAD8 + "", CommandType.NORTH);
         handleCommand.put(KeyCode.NUMPAD9 + "", CommandType.NORTH_EAST);
 
+        // adding these to be able to move around the map with W,A,S,D
+        handleCommand.put(KeyCode.W+ "", CommandType.MOVE_CAMERA_UP);
+        handleCommand.put(KeyCode.S + "", CommandType.MOVE_CAMERA_DOWN);
+        handleCommand.put(KeyCode.A + "", CommandType.MOVE_CAMERA_LEFT);
+        handleCommand.put(KeyCode.D + "", CommandType.MOVE_CAMERA_RIGHT);
+
     }
 
 

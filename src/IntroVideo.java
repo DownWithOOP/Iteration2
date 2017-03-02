@@ -130,7 +130,7 @@ public class IntroVideo {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Scene scene = new Scene(root,600,600);
+            Scene scene = new Scene(root,700,700);
 
             scene.getStylesheets().addAll(cssSheet);
             primaryStage.setScene(scene);
@@ -147,6 +147,7 @@ public class IntroVideo {
             GameLoop timer = new GameLoop();
             timer.start();
             primaryStage.show();
+
         }
 
     }

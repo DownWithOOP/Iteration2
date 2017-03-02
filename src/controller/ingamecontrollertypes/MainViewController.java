@@ -10,7 +10,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.MenuBar;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -23,6 +23,14 @@ import java.util.ResourceBundle;
  */
 public class MainViewController extends Controller {
 
+
+    @FXML
+    MenuBar mainMenuBar;
+    @FXML
+    Canvas canvas;
+    @FXML
+    VBox vbox;
+    private AreaViewPortController areaViewPortController;
 
     public MainViewController(){
         super();
@@ -51,79 +59,38 @@ public class MainViewController extends Controller {
         );
     }
 
-    @FXML
-    MenuBar mainMenuBar;
-    @FXML
-    Canvas canvas;
 
         @FXML
         public void drawOnCanvas(ActionEvent actionEvent) throws  IOException{
-            GraphicsContext gc = canvas.getGraphicsContext2D();
+            if(this.areaViewPortController == null){
+                this.areaViewPortController = new AreaViewPortController(vbox, canvas); // TODO, gonna change this
+            }
 
-            this.drawMap(gc,10,10);
+            this.areaViewPortController.drawSomething();
+            System.out.println(vbox.getChildren().size() + " size");
         }
 
-        // just for testing, pretty terrible at the moment, needs ALOT of work, working concept
-        private void drawMap(GraphicsContext gc, int rows, int columns){
-
-            double[] x1 = {12,20,30,38,30,20,12};
-            double[] y1 = {20,10,10,20,30,30,20};
-
-            gc.setFill(Color.GREEN);
-            gc.setStroke(Color.YELLOW);
-
-            double offsetx = 40;
-            double offsety = 20;
-            for(int m=0;m<rows; m++){
-                for(int i=0; i<columns; i++){
-                    double[] xx2 = x1;
-
-                    for (int j = 0; j < 7; j++) {
-                        xx2[j] += offsetx;
-                    }
-                    gc.strokePolyline(xx2, y1, 7);
-                    gc.fillPolygon(xx2,y1,7);
-                }
-                for(int i=0; i<7; i++){
-                    x1[i] -= (offsetx*columns);
-                }
-                for(int i=0; i<7; i++){
-                    y1[i] += offsety;
-                }
-            }
-
-            // at this point the first row and stuff was done
-            double[] x11 = {12,20,30,38,30,20,12};
-            double[] y11 = {20,10,10,20,30,30,20};
-
-            double change1 = 20;
-            double change2 = 10;
-            for(int i=0; i<7; i++){
-                x11[i] += change1;
-            }
-            for(int i=0; i<7; i++){
-                y11[i] += change2;
-            }
-            offsetx = 40;
-            offsety = 20;
-            for(int m=0;m<rows; m++) {
-                for (int i = 0; i < columns; i++) {
-                    double[] xx2 = x11;
-
-                    for (int j = 0; j < 7; j++) {
-                        xx2[j] += offsetx;
-                    }
-                    gc.strokePolyline(x11, y11, 7);
-                    gc.fillPolygon(x11, y11, 7);
-                }
-                for (int i = 0; i < 7; i++) {
-                    x11[i] -= (offsetx * columns);
-                }
-                for (int i = 0; i < 7; i++) {
-                    y11[i] += offsety;
-                }
-            }
+        @FXML void moveUp(ActionEvent actionEvent) throws  IOException{
+            this.areaViewPortController.changeCameraYMinus();
         }
+        @FXML void moveDown(ActionEvent actionEvent) throws  IOException{
+            this.areaViewPortController.changeCameraYPlus();
+        }
+        @FXML void moveLeft(ActionEvent actionEvent) throws  IOException{
+            this.areaViewPortController.changeCameraXMinus();
+        }
+        @FXML void moveRight(ActionEvent actionEvent) throws  IOException{
+            this.areaViewPortController.changeCameraXPlus();
+        }
+        @FXML void cameraFaster(ActionEvent actionEvent) throws  IOException{
+            this.areaViewPortController.fasterCamera();
+        }
+        @FXML void cameraSlower(ActionEvent actionEvent) throws  IOException{
+            this.areaViewPortController.slowerCamer();
+        }
+
+
+
 
         @FXML
         public void handleChangeToStructureView(ActionEvent actionEvent) throws  IOException{
