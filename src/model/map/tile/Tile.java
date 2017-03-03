@@ -1,12 +1,12 @@
 package model.map.tile;
 
-import model.entities.EntityID;
 import model.map.tile.areaeffects.AreaEffect;
 import model.map.tile.item.Item;
 import model.map.tile.resources.Resource;
 import model.map.tile.terrain.Terrain;
 import utilities.Observer;
 import utilities.Subject;
+import utilities.id.CustomID;
 
 /**
  * Created by cduica on 2/21/17.
@@ -19,7 +19,7 @@ public class Tile implements Subject {
 
     private Terrain terrain;
     private AreaEffect areaEffect;
-    private EntityID entityID;
+    private CustomID entityID;
     private Resource resource;
     private Item item;
 
@@ -35,7 +35,7 @@ public class Tile implements Subject {
      * Entity related stuff
      */
 
-    public void setEntity(EntityID entityID){
+    public void setEntity(CustomID entityID){
         this.entityID = entityID;
         this.hasEntity = true;
     }
@@ -69,7 +69,7 @@ public class Tile implements Subject {
         return areaEffect;
     }
 
-    public EntityID getEntityID() {
+    public CustomID getEntityID() {
         return entityID;
     }
 
