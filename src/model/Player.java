@@ -1,24 +1,31 @@
 package model;
 
 import controller.commands.CycleDirection;
+import model.map.Map;
+import utilities.Subject;
 import utilities.id.CustomID;
 import utilities.id.IdType;
+
+import java.util.ArrayList;
+import java.util.Observer;
 
 /**
  * Created by Konrad on 2/17/2017.
  */
-public class Player {
+public class Player implements MapSubject{
 
     EntityOwnership entities;
     Selection currentSelection;
     CustomID customID;
+    Map playerMap; // this map will contain the map that the specific player can see
+    private ArrayList<MapObserver> observers = new ArrayList<MapObserver>(); // will contain observers that get notified of changes
+
     public Player(){
 
         //TODO add an id for player in the constructor
         customID=new CustomID(IdType.player,"newPlayer");
         entities = new EntityOwnership(customID); //TODO should entity ownership know Player?
-        currentSelection = new Selection(entities.getCurrentInstance()); //TODO rename method?
-
+        currentSelection = new Selection(entities.getCurrentInstance()); //TODO rename method
 
     }
     public void endTurn(){
@@ -46,5 +53,20 @@ public class Player {
     public void cycleCommand(CycleDirection direction){
         //TODO cycle through actions
         System.out.println("command cycle not hooked up yet :(");
+    }
+
+    @Override
+    public void register(MapObserver o) {
+        observers.add(o);
+    }
+    @Override
+    public void unregister(MapObserver o) {
+        observers.remove(o);
+    }
+    @Override
+    public void notifyObservers() {
+        for(MapObserver mapObserver : observers){
+            mapObserver.update(this.playerMap);
+        }
     }
 }

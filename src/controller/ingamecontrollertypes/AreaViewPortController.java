@@ -6,12 +6,14 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import model.MapObserver;
+import model.map.Map;
 
 /**
  * Created by Konrad on 3/1/2017.
  */
 // this will be used to represent just the canvas area that will display a subset area of the map
-public class AreaViewPortController {
+public class AreaViewPortController implements MapObserver{
 
     private double cameraX;
     private double cameraY;
@@ -102,4 +104,8 @@ public class AreaViewPortController {
 
     }
 
+    @Override // whenever the map gets updated then this gets called. 
+    public void update(Map map) {
+
+    }
 }

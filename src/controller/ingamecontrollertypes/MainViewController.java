@@ -12,16 +12,20 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.MapObserver;
+import model.map.Map;
+import utilities.Observer;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Observable;
 import java.util.ResourceBundle;
 
 
 /**
  * Created by Konrad on 2/17/2017.
  */
-public class MainViewController extends Controller {
+public class MainViewController extends Controller{
 
 
     @FXML
@@ -45,7 +49,6 @@ public class MainViewController extends Controller {
 
     @Override
     protected void enableKeyboardInput() {
-
         this.getStage().getScene().addEventFilter(KeyEvent.KEY_PRESSED,
                 event -> {
                     CommandType receivedCommand;
@@ -65,11 +68,9 @@ public class MainViewController extends Controller {
             if(this.areaViewPortController == null){
                 this.areaViewPortController = new AreaViewPortController(vbox, canvas); // TODO, gonna change this
             }
-
             this.areaViewPortController.drawSomething();
             System.out.println(vbox.getChildren().size() + " size");
         }
-
         @FXML void moveUp(ActionEvent actionEvent) throws  IOException{
             this.areaViewPortController.changeCameraYPlus();
         }
@@ -133,6 +134,5 @@ public class MainViewController extends Controller {
         public void initialize(URL location, ResourceBundle resources) {
 
         }
-
-    }
+}
 

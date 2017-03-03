@@ -34,8 +34,6 @@ public class MVCInputHandler {
         return null;
     }
 
-
-
     public void initializeMapValues() {
 
         handleCommand.put(KeyCode.UP + control, CommandType.CYCLE_MODE_NEXT);
