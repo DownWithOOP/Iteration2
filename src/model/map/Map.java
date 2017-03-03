@@ -46,6 +46,9 @@ public class Map implements Subject {
             e.printStackTrace();
         }
 
+        height = Integer.parseInt(mapXMLParser.getMapAttribute("height"));
+        width = Integer.parseInt(mapXMLParser.getMapAttribute("width"));
+
         ArrayList<HashMap<String, String>> tileList = mapXMLParser.parseDocument();
 
         AreaEffectFactory areaEffectFactory = new AreaEffectFactory();
@@ -56,9 +59,10 @@ public class Map implements Subject {
         for(int i = 0; i < tileList.size(); i++){
 
             HashMap<String , String > map = tileList.get(i);
-            ResourceType resourceType= ResourceType.EMPTY;
-            DecalType decalType= DecalType.EMPTY;
-            TerrainType terrainType= TerrainType.EMPTY;
+            ResourceType resourceType = ResourceType.EMPTY;
+            DecalType decalType = DecalType.EMPTY;
+            TerrainType terrainType = TerrainType.EMPTY;
+            AreaEffectType areaEffectType = AreaEffectType.EMPTY;
 
             if (!map.get("Resource").equals("")) {
                 resourceType = ResourceType.valueOf(map.get("Resource"));
@@ -69,8 +73,10 @@ public class Map implements Subject {
             if (!map.get("Decal").equals("")) {
                 decalType = DecalType.valueOf(map.get("Decal"));
             }
-
-            AreaEffect areaEffect = areaEffectFactory.createAreaEffect(AreaEffectType.valueOf(map.get("AreaEffect")));
+            if (!map.get("AreaEffect").equals("")){
+                areaEffectType = AreaEffectType.valueOf(map.get("AreaEffect"));
+            }
+            AreaEffect areaEffect = areaEffectFactory.createAreaEffect(areaEffectType);
 
             Tile tile = new Tile(
                     new Terrain(terrainType, decalType),
@@ -79,17 +85,15 @@ public class Map implements Subject {
                     null
             );
 
-            if(i%width==0){
-                y++;
-            }
-
-            if(y%width == 0){
-                x = 0;
-            } else {
-                x++;
-            }
 
             Location location = new Location(x, y);
+
+            if( y!=0 && y % (width - 1) == 0){
+                x++;
+                y = 0;
+            } else {
+                y++;
+            }
 
             tiles.put(location, tile);
 
@@ -115,4 +119,9 @@ public class Map implements Subject {
     public void notifyObserver(){
 
     }
+
+    public static void main(String[] args){
+        Map map = new Map();
+    }
+
 }
