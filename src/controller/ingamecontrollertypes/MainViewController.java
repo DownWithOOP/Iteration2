@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
@@ -35,6 +36,8 @@ public class MainViewController extends Controller{
     Canvas canvas;
     @FXML
     VBox vbox;
+    @FXML
+    Label coordinateInfo;
     private Map currentMap;
     private AreaViewPortController areaViewPortController;
 
@@ -63,36 +66,47 @@ public class MainViewController extends Controller{
                 }
         );
     }
-
-
         @FXML
-        public void drawOnCanvas(ActionEvent actionEvent) throws  IOException{
-            if(this.areaViewPortController == null){
-                this.areaViewPortController = new AreaViewPortController(vbox, canvas); // TODO, gonna change this
-            }
-            this.currentMap = this.observer.share();
-            this.areaViewPortController.UpdateRenderInfo(currentMap.returnRenderInformation());
-            System.out.println(vbox.getChildren().size() + " size");
+        public void drawOnCanvas() throws  IOException{
+                this.currentMap = this.observer.share();
+                this.areaViewPortController.UpdateRenderInfo(currentMap.returnRenderInformation());
         }
         @FXML void moveUp(ActionEvent actionEvent) throws  IOException{
-            this.areaViewPortController.changeCameraYPlus();
+            this.areaViewPortController.changeCameraYPlus(); // TODO hook this up to some keyboard input
         }
         @FXML void moveDown(ActionEvent actionEvent) throws  IOException{
-            this.areaViewPortController.changeCameraYMinus();
+            this.areaViewPortController.changeCameraYMinus(); // TODO hook this up to some keyboard input
         }
         @FXML void moveLeft(ActionEvent actionEvent) throws  IOException{
-            this.areaViewPortController.changeCameraXPlus();
+            this.areaViewPortController.changeCameraXPlus(); // TODO hook this up to some keyboard input
         }
         @FXML void moveRight(ActionEvent actionEvent) throws  IOException{
-            this.areaViewPortController.changeCameraXMinus();
+            this.areaViewPortController.changeCameraXMinus(); // TODO hook this up to some keyboard input
         }
         @FXML void cameraFaster(ActionEvent actionEvent) throws  IOException{
-            this.areaViewPortController.fasterCamera();
+            this.areaViewPortController.fasterCamera();  // TODO hook this up to some keyboard input
         }
         @FXML void cameraSlower(ActionEvent actionEvent) throws  IOException{
-            this.areaViewPortController.slowerCamer();
+            this.areaViewPortController.slowerCamer();  // TODO hook this up to some keyboard input
         }
-
+        @FXML void selectNorth() throws IOException{
+            this.areaViewPortController.selectNorth(); // TODO hook this up to some keyboard input
+        }
+        @FXML void selectSouth() throws IOException{
+            this.areaViewPortController.selectSouth(); // TODO hook this up to some keyboard input
+        }
+        @FXML void selectNE() throws IOException{
+            this.areaViewPortController.selectNE(); // TODO hook this up to some keyboard input
+        }
+        @FXML void selectSE() throws IOException{
+            this.areaViewPortController.selectSE(); // TODO hook this up to some keyboard input
+        }
+        @FXML void selectSW() throws IOException{
+            this.areaViewPortController.selectSW(); // TODO hook this up to some keyboard input
+        }
+        @FXML void selectNW() throws IOException{
+            this.areaViewPortController.selectNW();  // TODO hook this up to some keyboard input
+        }
         @FXML
         public void handleChangeToStructureView(ActionEvent actionEvent) throws  IOException{
             this.switchControllerRelay.changeToStructure();}
@@ -132,8 +146,10 @@ public class MainViewController extends Controller{
         }
 
         @Override
-        public void initialize(URL location, ResourceBundle resources) {
-
+        public void initialize(URL location, ResourceBundle resources) { // initialized the component correctly
+            this.areaViewPortController = new AreaViewPortController(vbox, canvas);
         }
+
+
 }
 

@@ -2,6 +2,7 @@ package controller;
 
 import controller.Observers.MainViewObserver;
 import controller.ingamecontrollertypes.ControllerType;
+import controller.ingamecontrollertypes.MainViewController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -58,6 +59,8 @@ public class ControllerManager {
         inputController.enableKeyboardInput();
         inputController.setDispatch(controllerDispatch);
         inputController.takeInObserver(mainViewObserver);
+        MainViewController temp =  (MainViewController)inputController; // Sketchy but we have to downCast to the MainView Controller type
+        temp.drawOnCanvas(); // at this point everything is guaranteed to have loaded in and we can display the map
         primaryStage.show();
     }
 
@@ -99,6 +102,5 @@ public class ControllerManager {
         inputController.setDispatch(controllerDispatch);
         primaryStage.show();
     }
-
 
 }
