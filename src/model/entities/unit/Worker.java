@@ -1,8 +1,12 @@
 package model.entities.unit;
 
+import utilities.id.CustomID;
 import model.entities.EntityType;
 import model.entities.StructureFactory;
 import model.entities.structure.Structure;
+import model.entities.Stats.Stats;
+import model.entities.Stats.UnitStats;
+import utilities.id.IdType;
 
 /**
  * Created by jordi on 2/24/2017.
@@ -10,24 +14,44 @@ import model.entities.structure.Structure;
 public class Worker extends Unit {
     private StructureFactory structureFactory;
 
-    public Worker() {
-        super(EntityType.WORKER);
+    public Worker(CustomID playerId, String id) {
+        super(playerId, id);
+        this.structureFactory = new StructureFactory();
     }
 
-    public Structure buildStructure(EntityType entityType) {
+    @Override
+    protected IdType getIdType() {
+        return IdType.worker;
+    }
+
+    //todo:this should not have attacking, defensive damage, range, only fighters have these
+    @Override
+    protected Stats setEntityStats() {
+        return new UnitStats(0,0,0,0,0,0,0,0);
+    }
+
+    // Worker can build all structures except capital
+    public Structure buildStructure(EntityType entityType, CustomID customID, String id) {
         if (!entityType.equals(EntityType.CAPITAL)) {
-            return structureFactory.getStructure(entityType);
+            return structureFactory.getStructure(entityType, customID, id);
         }
         return null;
     }
 
     @Override
-    void abandonArmy() {
+    public void abandonArmy() {
 
     }
 
     @Override
-    void joinArmy() {
+    public void joinArmy(int armyNumber) {
 
     }
+
+
+    @Override
+    public void decommission() {
+
+    }
+
 }

@@ -3,7 +3,7 @@ package controller.commands;
 /**
  * Created by Jonathen on 2/25/2017.
  */
-public enum DirectionType {
+public enum CycleDirection {
     INCREMENT,
     DECREMENT;
 }

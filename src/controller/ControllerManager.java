@@ -1,5 +1,6 @@
 package controller;
 
+import controller.Observers.MainViewObserver;
 import controller.ingamecontrollertypes.ControllerType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,15 +23,20 @@ public class ControllerManager {
     private Stage primaryStage; // the stage is going to be kept track of here, whenever we are going to want to channge controllers,
     // it will be done here
     private SwitchControllerRelay switchControllerRelay;
+    private ControllerDispatch controllerDispatch;
+    private MainViewObserver mainViewObserver;
 
-    public ControllerManager(ControllerDispatch controllerDispatch, Stage primaryStage) throws IOException {
+    public ControllerManager(ControllerDispatch controllerDispatch, Stage primaryStage, MainViewObserver mainViewObserver) throws IOException {
 
         // primary stage that is essentially the window
         this.primaryStage = primaryStage;
         this.activeController = this.controllerMap.get(ControllerType.welcomeViewController);
+        this.mainViewObserver = mainViewObserver;
 
         // used for communication between the inputReconginzers and the controllerManager when a controller needs to be switched
         switchControllerRelay = new SwitchControllerRelay(this);
+
+        this.controllerDispatch = controllerDispatch;
 
         // when the controller manager is initialized, we start up the mainView
         changeToMainView();
@@ -50,12 +56,13 @@ public class ControllerManager {
         Controller inputController = loader.getController();
         inputController.takeInSwitchControllerRelay(switchControllerRelay);
         inputController.enableKeyboardInput();
+        inputController.setDispatch(controllerDispatch);
+        inputController.takeInObserver(mainViewObserver);
         primaryStage.show();
     }
 
     // this method will be used to handle loading in the structureView
     public void changeToStructureView() throws IOException {
-        System.out.println("called");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/structureView.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
@@ -63,6 +70,7 @@ public class ControllerManager {
         Controller inputController = loader.getController();
         inputController.takeInSwitchControllerRelay(switchControllerRelay);
         inputController.enableKeyboardInput();
+        inputController.setDispatch(controllerDispatch);
         primaryStage.show();
     }
 
@@ -76,7 +84,21 @@ public class ControllerManager {
         Controller inputController = loader.getController();
         inputController.takeInSwitchControllerRelay(switchControllerRelay);
         inputController.enableKeyboardInput();
+        inputController.setDispatch(controllerDispatch);
         primaryStage.show();
     }
+
+    public void changeToTechTreeView() throws  IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/techTree.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        Controller inputController = loader.getController();
+        inputController.takeInSwitchControllerRelay(switchControllerRelay);
+        inputController.enableKeyboardInput();
+        inputController.setDispatch(controllerDispatch);
+        primaryStage.show();
+    }
+
 
 }

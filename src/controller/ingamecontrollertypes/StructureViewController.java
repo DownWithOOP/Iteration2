@@ -64,21 +64,6 @@ public class StructureViewController extends Controller{
     }
 
     @Override
-    protected void resumeController() {
-
-    }
-
-    @Override
-    protected void suspendController() {
-
-    }
-
-    @Override
-    protected void setView() {
-
-    }
-
-    @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }

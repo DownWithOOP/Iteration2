@@ -6,6 +6,7 @@ package model.map.tile.areaeffects;
 public enum AreaEffectType {
     HEAL_DAMAGE,
     TAKE_DAMAGE,
-    INSTANT_DEATH
+    INSTANT_DEATH,
+    EMPTY
 }
 

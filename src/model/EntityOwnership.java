@@ -3,7 +3,7 @@ package model;
 //import controller.commands.ActionModifiers;
 //import model.common.Location;
 import controller.availablecommands.Commandable;
-import controller.commands.DirectionType;
+import controller.commands.CycleDirection;
 import model.entities.Entity;
 import model.entities.EntityType;
 import model.entities.structure.Capital;
@@ -12,6 +12,8 @@ import model.entities.unit.Colonist;
 import model.entities.unit.Explorer;
 import model.entities.unit.Melee;
 import model.entities.unit.Unit;
+import utilities.id.CustomID;
+import utilities.id.IdType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +22,16 @@ import java.util.List;
  * Handles relationships between a Player and all of their Entities. The responsibilities of this class include
  * 1) Maintaining status of all current Entitys the Player owns
  * 2) Cycling through Entitys when told to by the Player
+ *
+ * TODO use commandable instead of entity for currentModeList so that rally points (and armies? idk if armies are entities) can be cycled
+ * TODO don't return nulls, throw exceptions instead so that methods calling this class's methods don't have to null check
  */
 public class EntityOwnership {
     //TODO not hardcode these indices
     List<List<Entity>> unitList;          //Ranged=0, Melee=1, Colonist=2, Explorer=3
     //TODO make this army actually be an army
     List<List<Entity>> structureList;         //base=0
-    List<List<Entity>> currentModeList; //TODO refactor to a list of commandabls so that rallypoints can be handled like other cases
+    List<List<Entity>> currentModeList;
     List<RallyPoint> rallyPointList;
     Mode modeHolders[] = Mode.values();
 
@@ -46,8 +51,9 @@ public class EntityOwnership {
     private int cycleInstanceIndex = 0;
     private int selectedArmyIndex = 0;
     private int cycleModeIndex = 1; //start in UNIT mode
+    private CustomID playerId;
 
-    EntityOwnership() {
+    EntityOwnership(CustomID playerId) {
         unitList = new ArrayList<>(5);
         //armyList = new ArrayList<>(10);
         structureList = new ArrayList<>(1);
@@ -56,16 +62,19 @@ public class EntityOwnership {
         initializeUnits();
         initializeStructures();
         changeMode(modeHolders[cycleModeIndex]);
+        this.playerId=playerId;
     }
 
     private void initializeStructures() {
-        addStructure(EntityType.CAPITAL, new Capital());
+        //TODO change the id number
+        addStructure(IdType.capital, new Capital(playerId,"idnumber"));
     }
 
     private void initializeUnits() {
-        addUnit(EntityType.EXPLORER, new Explorer());
-        addUnit(EntityType.EXPLORER, new Explorer());
-        addUnit(EntityType.COLONIST, new Colonist());
+        //TODO change the id number
+        addUnit(IdType.explorer, new Explorer(playerId,"idnumber"));
+        addUnit(IdType.explorer, new Explorer(playerId,"idnumber"));
+        addUnit(IdType.colonist, new Colonist(playerId,"idnumber"));
     }
 
     private void initializeLists() {
@@ -79,7 +88,7 @@ public class EntityOwnership {
     }
 
     public boolean addEntity(Entity entity) {
-        EntityType entityType = entity.getEntityId().getEntityType();
+        IdType entityType = entity.getEntityType();
         boolean returnValue = false;
 
         //TODO handle adding army
@@ -91,10 +100,10 @@ public class EntityOwnership {
         return returnValue;
     }
 
-    public boolean addStructure(EntityType entityType, Entity entity) {
+    public boolean addStructure(IdType entityType, Entity entity) {
         boolean result = false;
         switch (entityType) {
-            case CAPITAL:
+            case capital:
                 result = addToIndex(structureList, 0, entity);
                 break;
         }
@@ -110,7 +119,7 @@ public class EntityOwnership {
         return false;
     }
 
-    private boolean addUnit(EntityType entityType, Entity entity) {
+    private boolean addUnit(IdType entityType, Entity entity) {
         int totalSize = 0;
         boolean returnValue = false;
         for (int i = 0; i < unitList.size(); i++) {
@@ -119,16 +128,16 @@ public class EntityOwnership {
         if (totalSize < unitCap) {
 
             switch (entityType) {
-                case COLONIST:
+                case colonist:
                     returnValue = addToIndex(unitList, colonistIndex, entity);
                     break;
-                case EXPLORER:
+                case explorer:
                     returnValue = addToIndex(unitList, explorerIndex, entity);
                     break;
-                case MELEE:
+                case melee:
                     returnValue = addToIndex(unitList, meleeIndex, entity);
                     break;
-                case RANGED:
+                case ranged:
                     returnValue = addToIndex(unitList, rangedIndex, entity);
                     break;
             }
@@ -153,16 +162,17 @@ public class EntityOwnership {
         return index;
     }
 
-    public Entity cycleType(DirectionType direction) {
+    public Entity cycleType(CycleDirection direction) {
         cycleInstanceIndex = 0;
         Entity temp = null;
         if (currentModeList == null) {
+            System.out.println("Cycle type cannot do anything b/c currentModeList is null");
             return null;
         }
-        if (direction == DirectionType.INCREMENT) {
+        if (direction == CycleDirection.INCREMENT) {
             temp=incrementType();
         }
-        if (direction == DirectionType.DECREMENT) {
+        if (direction == CycleDirection.DECREMENT) {
             temp=decrementType();
         }
         return temp;
@@ -200,39 +210,39 @@ public class EntityOwnership {
     }
 
 
-    public Entity cycleInstance(DirectionType direction) {
+    public Entity cycleInstance(CycleDirection direction) {
 
         if (currentModeList == null || currentModeList.get(cycleTypeIndex).size()==0) {
             return null;
         }
-        if (direction == DirectionType.INCREMENT) {
+        if (direction == CycleDirection.INCREMENT) {
             cycleInstanceIndex = next(currentModeList.get(cycleTypeIndex).size(), cycleInstanceIndex);
         }
-        if (direction == DirectionType.DECREMENT) {
+        if (direction == CycleDirection.DECREMENT) {
             cycleInstanceIndex = previous(currentModeList.get(cycleTypeIndex).size(), cycleInstanceIndex);
         }
         return currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex);
     }
 
-    public RallyPoint cycleInstanceOfRallyPoint(DirectionType direction){
+    public RallyPoint cycleInstanceOfRallyPoint(CycleDirection direction){
         if (rallyPointList == null) {
             return null;
         }
-        if (direction == DirectionType.INCREMENT) {
+        if (direction == CycleDirection.INCREMENT) {
             cycleInstanceIndex = next(rallyPointList.size(), cycleInstanceIndex);
         }
-        if (direction == DirectionType.DECREMENT) {
+        if (direction == CycleDirection.DECREMENT) {
             cycleInstanceIndex = previous(rallyPointList.size(), cycleInstanceIndex);
         }
         return rallyPointList.get(cycleInstanceIndex);
 
     }
 
-    public Entity cycleMode(DirectionType direction){
-        if (direction == DirectionType.INCREMENT){
+    public Entity cycleMode(CycleDirection direction){
+        if (direction == CycleDirection.INCREMENT){
             cycleModeIndex=next(modeHolders.length,cycleModeIndex);
         }
-        if (direction == DirectionType.DECREMENT){
+        if (direction == CycleDirection.DECREMENT){
             cycleModeIndex=previous(modeHolders.length,cycleModeIndex);
         }
         return changeMode(modeHolders[cycleModeIndex]);
@@ -247,6 +257,7 @@ public class EntityOwnership {
                 //if (selectedArmy != null) {
                     //currentModeList = selectedArmy.getCircleTypeList();
                 //}
+                currentModeList = null;
                 selectedRallyPoint=null;
                 break;
             case UNIT:
@@ -260,7 +271,7 @@ public class EntityOwnership {
             case RALLY_POINT:
                 //TODO handle rally points
                 //selectedRallyPoint=rallyPointList.get(0);
-                //currentModeList=null;
+                currentModeList=null;
                 break;
         }
         return returnEntityOnModeChange();
@@ -291,25 +302,25 @@ public class EntityOwnership {
     }
 
     public void removeEntity(Entity entity){
-        EntityType entityType= entity.getEntityId().getEntityType();
+        IdType entityType= entity.getEntityType();
         switch (entityType){
             //case ARMY:
                 //armyList.remove(entity);
                 //rallyPointList.remove(((Army)entity).getRallyPoint());
                 //break;
-            case CAPITAL:
+            case capital:
                 structureList.get(0).remove(entity);
                 break;
-            case RANGED:
+            case ranged:
                 unitList.get(rangedIndex).remove(entity);
                 break;
-            case COLONIST:
+            case colonist:
                 unitList.get(colonistIndex).remove(entity);
                 break;
-            case EXPLORER:
+            case explorer:
                 unitList.get(explorerIndex).remove(entity);
                 break;
-            case MELEE:
+            case melee:
                 unitList.get(meleeIndex).remove(entity);
                 break;
         }
@@ -347,12 +358,46 @@ public class EntityOwnership {
      * @return current instance
      */
     public Commandable getCurrentInstance(){
+        System.out.println("GETTING CURRENT INSTANCE");
+        if (currentModeList == null) {
+            System.out.println("No current mode list available");
+            return null;
+        }
+        else if (currentModeList.get(cycleTypeIndex) == null) {
+            System.out.println("No current type list available");
+            return null;
+        }
+        else if (currentModeList.get(cycleTypeIndex).isEmpty()) {
+            System.out.println("Type list is empty");
+            return null;
+        }
+
         System.out.println("GETTING current instance");
         System.out.println("instance index " + cycleInstanceIndex);
         System.out.println("type index " + cycleTypeIndex);
         System.out.println("current mode list " + currentModeList);
         System.out.println("type list " + currentModeList.get(cycleTypeIndex));
+
         return currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex);
+    }
+
+    //TODO get rid of this; only for debugging purposes
+    public List<Entity> getCurrentType() {
+        System.out.println("GETTING CURRENT TYPE");
+        if (currentModeList == null) {
+            System.out.println("No current mode list available");
+            return null;
+        }
+        else if (currentModeList.get(cycleTypeIndex) == null) {
+            System.out.println("No current type list available");
+            return null;
+        }
+        else if (currentModeList.get(cycleTypeIndex).isEmpty()) {
+            System.out.println("Type list is empty");
+            return null;
+        }
+
+        return currentModeList.get(cycleTypeIndex);
     }
 
     //TODO get army
@@ -360,18 +405,23 @@ public class EntityOwnership {
         //return armyList;
     //}
 
+    //TODO get rid of this; only for debugging purposes
+    public Mode getCurrentMode() {
+        return modeHolders[cycleModeIndex];
+    }
+
 
     public static void main(String[] args) {
-        EntityOwnership entityOwnership = new EntityOwnership();
+        EntityOwnership entityOwnership = new EntityOwnership(new CustomID(IdType.player,"hello"));
         //Army army = new Army(new Player("hello", new Map()), new Location(1, 2));
         //Army army1 = new Army(new Player("world", new Map()), new Location(3, 2));
-        Melee melee = new Melee();
-        Melee melee1 = new Melee();
-        Melee melee2 = new Melee();
-        Melee melee3 = new Melee();
-        Melee melee4 = new Melee();
-        Explorer explorer1 = new Explorer();
-        Capital base = new Capital();
+        Melee melee = new Melee(new CustomID(IdType.player,"hello"),"5");
+        Melee melee1 = new Melee(new CustomID(IdType.player,"hello"),"5");
+        Melee melee2 = new Melee(new CustomID(IdType.player,"hello"),"5");
+        Melee melee3 = new Melee(new CustomID(IdType.player,"hello"),"5");
+        Melee melee4 = new Melee(new CustomID(IdType.player,"hello"),"5");
+        Explorer explorer1 = new Explorer(new CustomID(IdType.player,"hello"),"5");
+        Capital base = new Capital(new CustomID(IdType.player,"hello"),"5");
 
         boolean check = false;
         check = entityOwnership.addEntity(explorer1);
@@ -387,23 +437,23 @@ public class EntityOwnership {
         Entity entity = entityOwnership.changeMode(Mode.ARMY);
         Entity entity1 = entityOwnership.changeMode(Mode.UNIT);
         System.out.println("currentmodelist after unit cycle" + entityOwnership.currentModeList);
-        Melee entity2 = (Melee) entityOwnership.cycleInstance(DirectionType.INCREMENT);
+        Melee entity2 = (Melee) entityOwnership.cycleInstance(CycleDirection.INCREMENT);
         System.out.println("returned entity after instance cycle" + entity2);
         System.out.println("cycleinstanceindex after instance cycle" + entityOwnership.cycleInstanceIndex);
-        entity2 = (Melee) entityOwnership.cycleInstance(DirectionType.INCREMENT);
-        entity2 = (Melee) entityOwnership.cycleInstance(DirectionType.INCREMENT);
-        entity2 = (Melee) entityOwnership.cycleInstance(DirectionType.DECREMENT);
+        entity2 = (Melee) entityOwnership.cycleInstance(CycleDirection.INCREMENT);
+        entity2 = (Melee) entityOwnership.cycleInstance(CycleDirection.INCREMENT);
+        entity2 = (Melee) entityOwnership.cycleInstance(CycleDirection.DECREMENT);
         entity = entityOwnership.changeMode(Mode.ARMY);
-        entity = entityOwnership.cycleInstance(DirectionType.INCREMENT);
-        entity = entityOwnership.cycleInstance(DirectionType.INCREMENT);
-        entity = entityOwnership.cycleInstance(DirectionType.INCREMENT);
-        entity = entityOwnership.cycleInstance(DirectionType.DECREMENT);
-        entity = entityOwnership.cycleInstance(DirectionType.INCREMENT);
+        entity = entityOwnership.cycleInstance(CycleDirection.INCREMENT);
+        entity = entityOwnership.cycleInstance(CycleDirection.INCREMENT);
+        entity = entityOwnership.cycleInstance(CycleDirection.INCREMENT);
+        entity = entityOwnership.cycleInstance(CycleDirection.DECREMENT);
+        entity = entityOwnership.cycleInstance(CycleDirection.INCREMENT);
         entity = entityOwnership.changeMode(Mode.UNIT);
 
-        entity1 = entityOwnership.cycleType(DirectionType.DECREMENT);
+        entity1 = entityOwnership.cycleType(CycleDirection.DECREMENT);
         System.out.println("returned entity after type cycle decrement " + entity1);
-        entity = entityOwnership.cycleType(DirectionType.INCREMENT);
+        entity = entityOwnership.cycleType(CycleDirection.INCREMENT);
         System.out.println("returned entity after type cycle increment " + entity);
 
         System.out.println("does getCurrentInstance work? " + entityOwnership.getCurrentInstance());

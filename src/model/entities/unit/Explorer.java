@@ -1,22 +1,50 @@
 package model.entities.unit;
 
-import model.entities.EntityType;
+import model.entities.EntityId;
+import model.entities.Stats.Stats;
+import model.entities.Stats.UnitStats;
+import utilities.id.CustomID;
+import utilities.id.IdType;
 
 /**
  * Created by jordi on 2/24/2017.
  */
 public class Explorer extends Unit{
-    public Explorer() {
-        super(EntityType.EXPLORER);
+
+
+    /**
+     * @param playerId
+     * @param id
+     */
+    public Explorer(CustomID playerId, String id) {
+        super(playerId, id);
     }
 
     @Override
-    void abandonArmy() {
+    protected IdType getIdType() {
+        return IdType.explorer;
+    }
+
+    @Override
+    protected Stats setEntityStats() {
+        return new UnitStats(0,0,0,0,0,0,0,0);
+    }
+
+    @Override
+    public void abandonArmy() {
 
     }
 
     @Override
-    void joinArmy() {
+    public void joinArmy(int armyNumber) {
 
     }
+
+
+    @Override
+    public void decommission() {
+
+    }
+
+
 }

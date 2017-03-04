@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.effect.SepiaTone?>
 <?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="453.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ingamecontrollertypes.MainViewController">
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="726.0" prefWidth="1221.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ingamecontrollertypes.MainViewController">
     <children>
-        <MenuBar fx:id="mainMenuBar" prefHeight="29.0" prefWidth="601.0">
+        <MenuBar fx:id="mainMenuBar" prefHeight="29.0" prefWidth="1222.0">
             <menus>
                 <Menu mnemonicParsing="false" text="Menu">
                     <items>
@@ -40,19 +40,18 @@
                         <MenuItem mnemonicParsing="false" onAction="#handleChangeToStructureView" text="Structure Viewport (S)" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Technology Tree" />
+                <Menu mnemonicParsing="false" onAction="#handleChangeToTechTreeView" text="Technology">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleChangeToTechTreeView" text="Technology Tree" />
+               </items></Menu>
             </menus>
         </MenuBar>
-        <VBox prefHeight="424.0" prefWidth="602.0">
+        <VBox fx:id="vbox" prefHeight="699.0" prefWidth="1218.0">
             <children>
-                <Pane prefHeight="388.0" prefWidth="602.0">
-                    <effect>
-                        <SepiaTone />
-                    </effect>
-                </Pane>
-                <HBox prefHeight="207.0" prefWidth="602.0">
+            <Canvas fx:id="canvas" height="532.0" width="1218.0" />
+                <HBox prefHeight="165.0" prefWidth="1218.0">
                     <children>
-                        <VBox alignment="TOP_CENTER" prefHeight="122.0" prefWidth="276.0" style="-fx-border-color: black;">
+                        <VBox alignment="TOP_CENTER" prefHeight="162.0" prefWidth="326.0" style="-fx-border-color: black;">
                             <children>
                                 <Label alignment="CENTER" prefHeight="28.0" prefWidth="75.0" text="Mode:">
                                     <font>
@@ -76,14 +75,14 @@
                                 </Label>
                             </children>
                         </VBox>
-                        <VBox alignment="TOP_CENTER" prefHeight="122.0" prefWidth="328.0" style="-fx-border-color: black;">
+                        <VBox alignment="TOP_CENTER" prefHeight="165.0" prefWidth="651.0" style="-fx-border-color: black;">
                             <children>
                                 <Label alignment="CENTER" prefHeight="28.0" prefWidth="186.0" text="Selected Entity:">
                                     <font>
                                         <Font name="System Bold" size="13.0" />
                                     </font>
                                 </Label>
-                                <GridPane alignment="TOP_CENTER">
+                                <GridPane alignment="TOP_CENTER" prefHeight="90.0" prefWidth="482.0">
                                     <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -104,6 +103,38 @@
                                 </GridPane>
                             </children>
                         </VBox>
+                  <VBox alignment="TOP_CENTER" layoutX="286.0" layoutY="10.0" prefHeight="127.0" prefWidth="246.0" style="-fx-border-color: black;">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="28.0" prefWidth="186.0" text="Map Control">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <GridPane alignment="CENTER" prefHeight="118.0" prefWidth="243.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="59.5" minWidth="10.0" prefWidth="37.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="71.0" minWidth="10.0" prefWidth="50.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="75.5" minWidth="10.0" prefWidth="51.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="124.0" minWidth="10.0" prefWidth="107.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#moveUp" prefHeight="25.0" prefWidth="86.0" text="Up" GridPane.columnIndex="1" />
+                              <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#moveLeft" prefHeight="25.0" prefWidth="40.0" text="Left" GridPane.rowIndex="1" />
+                              <Button mnemonicParsing="false" onAction="#moveDown" prefHeight="25.0" prefWidth="92.0" text="Down" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Button mnemonicParsing="false" onAction="#moveRight" prefHeight="25.0" prefWidth="92.0" text="Right" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <Button mnemonicParsing="false" onAction="#drawOnCanvas" prefHeight="25.0" prefWidth="109.0" text="Initialize" GridPane.columnIndex="3" />
+                              <Button mnemonicParsing="false" onAction="#cameraFaster" prefHeight="25.0" prefWidth="112.0" text="Scroll Faster" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <Button mnemonicParsing="false" onAction="#cameraSlower" prefHeight="25.0" prefWidth="120.0" text="Scroll Slower" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </VBox>
                     </children>
                 </HBox>
             </children>
