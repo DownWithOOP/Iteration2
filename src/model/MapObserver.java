@@ -7,4 +7,5 @@ import model.map.Map;
  */
 public interface MapObserver {
     void update(Map map );
+    Map share();
 }

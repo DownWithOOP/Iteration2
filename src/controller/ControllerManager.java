@@ -1,5 +1,6 @@
 package controller;
 
+import controller.Observers.MainViewObserver;
 import controller.ingamecontrollertypes.ControllerType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,12 +24,14 @@ public class ControllerManager {
     // it will be done here
     private SwitchControllerRelay switchControllerRelay;
     private ControllerDispatch controllerDispatch;
+    private MainViewObserver mainViewObserver;
 
-    public ControllerManager(ControllerDispatch controllerDispatch, Stage primaryStage) throws IOException {
+    public ControllerManager(ControllerDispatch controllerDispatch, Stage primaryStage, MainViewObserver mainViewObserver) throws IOException {
 
         // primary stage that is essentially the window
         this.primaryStage = primaryStage;
         this.activeController = this.controllerMap.get(ControllerType.welcomeViewController);
+        this.mainViewObserver = mainViewObserver;
 
         // used for communication between the inputReconginzers and the controllerManager when a controller needs to be switched
         switchControllerRelay = new SwitchControllerRelay(this);
@@ -53,7 +56,8 @@ public class ControllerManager {
         Controller inputController = loader.getController();
         inputController.takeInSwitchControllerRelay(switchControllerRelay);
         inputController.enableKeyboardInput();
-        inputController.setControllerDispatch(controllerDispatch);
+        inputController.setDispatch(controllerDispatch);
+        inputController.takeInObserver(mainViewObserver);
         primaryStage.show();
     }
 
@@ -66,7 +70,7 @@ public class ControllerManager {
         Controller inputController = loader.getController();
         inputController.takeInSwitchControllerRelay(switchControllerRelay);
         inputController.enableKeyboardInput();
-        inputController.setControllerDispatch(controllerDispatch);
+        inputController.setDispatch(controllerDispatch);
         primaryStage.show();
     }
 
@@ -80,7 +84,7 @@ public class ControllerManager {
         Controller inputController = loader.getController();
         inputController.takeInSwitchControllerRelay(switchControllerRelay);
         inputController.enableKeyboardInput();
-        inputController.setControllerDispatch(controllerDispatch);
+        inputController.setDispatch(controllerDispatch);
         primaryStage.show();
     }
 
@@ -92,7 +96,7 @@ public class ControllerManager {
         Controller inputController = loader.getController();
         inputController.takeInSwitchControllerRelay(switchControllerRelay);
         inputController.enableKeyboardInput();
-        inputController.setControllerDispatch(controllerDispatch);
+        inputController.setDispatch(controllerDispatch);
         primaryStage.show();
     }
 

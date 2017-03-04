@@ -97,7 +97,15 @@
     </Tile>
 
     <Tile>
-        <Terrain>DIRT</Terrain>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
         <Resource></Resource>
         <Decal></Decal>
         <Item></Item>
@@ -113,15 +121,7 @@
     </Tile>
 
     <Tile>
-        <Terrain>DIRT</Terrain>
-        <Resource></Resource>
-        <Decal></Decal>
-        <Item></Item>
-        <AreaEffect></AreaEffect>
-    </Tile>
-
-    <Tile>
-        <Terrain>DIRT</Terrain>
+        <Terrain>GRASS</Terrain>
         <Resource></Resource>
         <Decal></Decal>
         <Item></Item>

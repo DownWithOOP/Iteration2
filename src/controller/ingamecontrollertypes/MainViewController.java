@@ -1,6 +1,7 @@
 package controller.ingamecontrollertypes;
 
 import controller.Controller;
+import controller.Observers.MainViewObserver;
 import controller.SwitchControllerRelay;
 import controller.commands.CommandType;
 import controller.inputhandler.MVCInputHandler;
@@ -34,6 +35,7 @@ public class MainViewController extends Controller{
     Canvas canvas;
     @FXML
     VBox vbox;
+    private Map currentMap;
     private AreaViewPortController areaViewPortController;
 
     public MainViewController(){
@@ -68,7 +70,8 @@ public class MainViewController extends Controller{
             if(this.areaViewPortController == null){
                 this.areaViewPortController = new AreaViewPortController(vbox, canvas); // TODO, gonna change this
             }
-            this.areaViewPortController.drawSomething();
+            this.currentMap = this.observer.share();
+            this.areaViewPortController.UpdateRenderInfo(currentMap.returnRenderInformation());
             System.out.println(vbox.getChildren().size() + " size");
         }
         @FXML void moveUp(ActionEvent actionEvent) throws  IOException{

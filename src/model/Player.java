@@ -1,5 +1,6 @@
 package model;
 
+import controller.AbstractObserver;
 import controller.commands.CycleDirection;
 import model.map.Map;
 import utilities.Subject;
@@ -20,19 +21,20 @@ public class Player implements MapSubject{
     Map playerMap; // this map will contain the map that the specific player can see
     private ArrayList<MapObserver> observers = new ArrayList<MapObserver>(); // will contain observers that get notified of changes
 
-    public Player(){
+    public Player(Map map, AbstractObserver observer){
 
         //TODO add an id for player in the constructor
         customID=new CustomID(IdType.player,"newPlayer");
         entities = new EntityOwnership(customID); //TODO should entity ownership know Player?
         currentSelection = new Selection(entities.getCurrentInstance()); //TODO rename method
-
+        this.playerMap = map; // TODO for the moment global map is shared, later each player will have own map
+        this.register(observer); // used to communicate
     }
     public void endTurn(){
 
     }
     public void startTurn(){
-
+        this.notifyObservers();
     }
 
     public void cycleMode(CycleDirection direction){

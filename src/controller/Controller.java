@@ -10,12 +10,13 @@ public abstract class Controller implements Initializable {
 
     // this will be the dispatch that the controller will use to communicate with the model to relay commands and update info
     protected ControllerDispatch controllerDispatch;
+    protected AbstractObserver observer;
 
     public Controller(){
 
     }
 
-    protected void setControllerDispatch(ControllerDispatch controllerDispatch){
+    protected void setDispatch(ControllerDispatch controllerDispatch){
         this.controllerDispatch = controllerDispatch;
     }
 
@@ -26,6 +27,10 @@ public abstract class Controller implements Initializable {
      * hence we have an abstract class
      */
 
+    // this method take in the observer object that communicates wiht the model
+    protected void takeInObserver(AbstractObserver observer){
+        this.observer = observer;
+    }
 
     // this method is just bad OOP but it's the only way with FXML it would work
     protected abstract void takeInSwitchControllerRelay(SwitchControllerRelay switchControllerRelay);

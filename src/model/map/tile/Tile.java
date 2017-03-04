@@ -4,6 +4,7 @@ import model.map.tile.areaeffects.AreaEffect;
 import model.map.tile.item.Item;
 import model.map.tile.resources.Resource;
 import model.map.tile.terrain.Terrain;
+import model.map.tile.terrain.TerrainType;
 import utilities.Observer;
 import utilities.Subject;
 import utilities.id.CustomID;
@@ -64,6 +65,7 @@ public class Tile implements Subject {
     public Terrain getTerrain() {
         return terrain;
     }
+
 
     public AreaEffect getAreaEffect() {
         return areaEffect;

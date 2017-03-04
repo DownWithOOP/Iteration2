@@ -1,6 +1,7 @@
 package model.map;
 
 import model.common.Location;
+import model.map.tile.MapRenderInformation;
 import model.map.tile.Tile;
 import model.map.tile.areaeffects.AreaEffect;
 import model.map.tile.areaeffects.AreaEffectFactory;
@@ -20,7 +21,7 @@ import java.util.HashMap;
 /**
  * Created by cduica on 2/21/17.
  */
-public class Map implements Subject {
+public class Map {
 
     private int height;
     private int width;
@@ -29,7 +30,7 @@ public class Map implements Subject {
 
     private Observer observer;
 
-    private final String XML_PATH = "res/map/Map.xml";
+    private final String XML_PATH = "Iteration2/res/map/Map.xml";
 
     public Map() {
         tiles = new HashMap<>();
@@ -94,15 +95,20 @@ public class Map implements Subject {
             } else {
                 y++;
             }
-
             tiles.put(location, tile);
-
         }
+    }
 
+    // object given to MainView that will be used to render the canvas
+    public MapRenderInformation returnRenderInformation(){
+            MapRenderInformation renderInfo = new MapRenderInformation(this.width,this.height);
+            for(Location location : tiles.keySet() ){
+                    renderInfo.addTileToRenderObject(tiles.get(location),location.getX(),location.getY());
+            }
+            return renderInfo;
     }
 
     public HashMap<Location, Tile> getAdjacentTiles(Location location){
-
         return null;
     }
 
@@ -110,15 +116,6 @@ public class Map implements Subject {
         return tiles.get(location);
     }
 
-    @Override
-    public void setObserver(Observer o){
-
-    }
-
-    @Override
-    public void notifyObserver(){
-
-    }
 
     public static void main(String[] args){
         Map map = new Map();

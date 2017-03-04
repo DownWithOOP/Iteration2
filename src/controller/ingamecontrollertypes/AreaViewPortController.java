@@ -7,19 +7,24 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import model.MapObserver;
+import model.common.Location;
 import model.map.Map;
+import model.map.MapRenderObject;
+import model.map.tile.MapRenderInformation;
+import model.map.tile.terrain.TerrainType;
 
 /**
  * Created by Konrad on 3/1/2017.
  */
 // this will be used to represent just the canvas area that will display a subset area of the map
-public class AreaViewPortController implements MapObserver{
+public class AreaViewPortController{
 
     private double cameraX;
     private double cameraY;
     private VBox vBox;
     private Canvas canvas;
     private int cameraSpeed;
+    private MapRenderInformation mapRenderInformation;
 
     public AreaViewPortController(VBox vbox, Canvas canvas){
         this.cameraX = 0;
@@ -53,8 +58,71 @@ public class AreaViewPortController implements MapObserver{
             this.cameraSpeed = 1;
         }
     }
+    public void UpdateRenderInfo(MapRenderInformation renderMap){
+        this.mapRenderInformation = renderMap;
+       this.drawSomething();
+
+    }
 
     public void drawSomething(){
+        MapRenderObject[][] renderObjects = this.mapRenderInformation.getRenderObjectMap();
+
+        Image image = new Image("resources/images/grass1.png");
+        Image image2 = new Image("resources/images/water1.png");
+        Image image3 = new Image("resources/images/dirt1.png");
+        Image image4 = new Image("resources/images/mountain1.png");
+
+
+        double width = image.getWidth();
+        double height = image.getHeight();
+
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.setFill(Color.TRANSPARENT);
+        gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
+        gc.setFill(Color.WHITE);
+        gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
+        double xOffset = 0;
+        double yOffset = 0;
+
+        for(int i=0; i<mapRenderInformation.getY()   ; i++){
+            for(int j=0; j<mapRenderInformation.getY(); j++){
+                TerrainType current = renderObjects[i][j].getTerrainType();
+                if(j%2 == 0){
+                    if(current.equals(TerrainType.GRASS)){
+                        System.out.print(" GRASS ");
+                        gc.drawImage(image,0.75*width*j+ cameraX,height*1*i+ cameraY + width*0.45);
+                    } else if(current.equals(TerrainType.DIRT)){
+                        System.out.print(" DIRT ");
+                        gc.drawImage(image3,0.75*width*j+ cameraX,height*1*i+ cameraY+ width*0.45);
+                    } else if(current.equals(TerrainType.WATER)){
+                        System.out.print(" WATER ");
+                        gc.drawImage(image2,0.75*width*j+ cameraX,height*1*i+ cameraY + width*0.45);
+                    }
+
+                }
+                else {
+                    if(current.equals(TerrainType.GRASS)){
+                        System.out.print(" GRASS ");
+                        gc.drawImage(image,0.75*width*j+ cameraX,height*1*i+ cameraY);
+                    } else if(current.equals(TerrainType.DIRT)){
+                        System.out.print(" DIRT ");
+                        gc.drawImage(image3,0.75*width*j+ cameraX,height*1*i+ cameraY);
+                    } else if(current.equals(TerrainType.WATER)){
+                        System.out.print(" WATER ");
+                        gc.drawImage(image2,0.75*width*j+ cameraX,height*1*i+ cameraY);
+                    }
+                }
+
+
+            }
+            System.out.println();
+        }
+        System.out.println("---------------");
+
+
+        // TODO just a few sample tiles atm, in future will connect with actual map
+        /*
+
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setFill(Color.TRANSPARENT);
         gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
@@ -65,10 +133,6 @@ public class AreaViewPortController implements MapObserver{
         Image image2 = new Image("resources/images/water1.png");
         Image image3 = new Image("resources/images/dirt1.png");
         Image image4 = new Image("resources/images/mountain1.png");
-
-
-        // TODO just a few sample tiles atm, in future will connect with actual map
-        /*
         gc.drawImage(image,0+ cameraX,0 + cameraY);
         gc.drawImage(image,0 + cameraX,image.getHeight() + cameraY);
         gc.drawImage(image,image.getWidth()*0.75 + cameraX,image.getHeight()*0.5 + cameraY);
@@ -83,7 +147,7 @@ public class AreaViewPortController implements MapObserver{
         gc.drawImage(image3,image.getWidth()*3 + cameraX,0 + cameraY);
         gc.drawImage(image4,image.getWidth()*3 + cameraX,image.getHeight() + cameraY);
         gc.drawImage(image4,image.getWidth()*3 + cameraX,image.getHeight()*2 + cameraY);
-        */
+
 
         double width = image.getWidth();
         double height = image.getHeight();
@@ -101,11 +165,7 @@ public class AreaViewPortController implements MapObserver{
             gc.drawImage(image3,0.75*width*j+ cameraX,height*2+ cameraY);
 
         }
-
-    }
-
-    @Override // whenever the map gets updated then this gets called. 
-    public void update(Map map) {
+        */
 
     }
 }
