@@ -93,8 +93,6 @@ public class MainViewController extends Controller{
             this.areaViewPortController.slowerCamer();
         }
 
-
-
         @FXML
         public void handleChangeToStructureView(ActionEvent actionEvent) throws  IOException{
             this.switchControllerRelay.changeToStructure();}
