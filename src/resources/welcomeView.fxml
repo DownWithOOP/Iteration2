@@ -6,17 +6,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox id="welcome" prefHeight="448.0" prefWidth="584.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.keyboardinputhandler.WelcomeViewInputRecognizer">
+<VBox id="welcome" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="726.0" prefWidth="1221.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WelcomeViewController.WelcomeViewIndependentController">
    <children>
       <AnchorPane prefHeight="429.0" prefWidth="489.0">
          <children>
-            <Button layoutX="258.0" layoutY="287.0" mnemonicParsing="false" onAction="#exitGame" text="Exit Game" />
-            <Button fx:id="startGameButton" layoutX="233.0" layoutY="228.0" mnemonicParsing="false" onAction="#handleStartGame" text="Start Game (ENTER)" textOverrun="LEADING_WORD_ELLIPSIS">
+            <Button layoutX="585.0" layoutY="289.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="34.0" prefWidth="144.0" text="Exit Game" />
+            <Button fx:id="startGameButton" layoutX="585.0" layoutY="208.0" mnemonicParsing="false" onAction="#handleStartGame" prefHeight="34.0" prefWidth="144.0" text="Start Game (ENTER)" textOverrun="LEADING_WORD_ELLIPSIS">
                <font>
                   <Font name="Goudy Old Style" size="12.0" />
                </font>
             </Button>
-            <Label layoutX="48.0" layoutY="37.0" prefHeight="105.0" prefWidth="381.0" text="Space Cats " textFill="WHITE">
+            <Label layoutX="85.0" layoutY="48.0" prefHeight="105.0" prefWidth="411.0" text="Space Cats " textFill="WHITE">
                <font>
                   <Font size="72.0" />
                </font>
