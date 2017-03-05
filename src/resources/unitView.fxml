@@ -16,26 +16,31 @@
             <Font size="29.0" />
          </font>
       </Label>
+
       <Label layoutX="283.0" layoutY="68.0" prefHeight="40.0" prefWidth="78.0" text="Units">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
+
       <ScrollPane hbarPolicy="NEVER" layoutX="39.0" layoutY="111.0" prefHeight="533.0" prefWidth="549.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="572.0" prefWidth="547.0" />
         </content>
       </ScrollPane>
       <Label layoutX="713.0" layoutY="68.0" prefHeight="38.0" prefWidth="397.0" text="Stats                                                   Mission" textAlignment="CENTER">
+
          <font>
             <Font size="17.0" />
          </font>
       </Label>
+
       <Label alignment="CENTER" layoutX="851.0" layoutY="377.0" prefHeight="25.0" prefWidth="122.0" text="Armies" textAlignment="CENTER">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
+     
       <TextFlow layoutX="274.0" layoutY="90.0" prefHeight="133.0" prefWidth="149.0" />
       <TextFlow layoutX="442.0" layoutY="90.0" prefHeight="122.0" prefWidth="136.0" />
       <TextFlow layoutX="269.0" layoutY="249.0" prefHeight="113.0" prefWidth="309.0" />

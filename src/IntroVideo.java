@@ -130,6 +130,7 @@ public class IntroVideo {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
             Scene scene = new Scene(root,1221,726);
 
             scene.getStylesheets().addAll(cssSheet);

@@ -7,10 +7,6 @@ import model.entities.structure.*;
  */
 public class StructureRenderer {
 
-    void render(final Base base) {
-
-    }
-
     void render(final Capital capital) {
 
     }
