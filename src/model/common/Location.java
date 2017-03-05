@@ -1,46 +1,40 @@
 package model.common;
 
+import java.awt.*;
+import java.awt.geom.Point2D;
+
+
 /**
  * Created by cduica on 2/25/17.
  */
-public class Location {
-
-    private int x;
-    private int y;
+public class Location extends Point {
 
     public Location(int x, int y) {
-        this.x = x;
-        this.y = y;
+        super(x, y);
     }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
 
     public void moveNorth(){
-        y--;
+        super.setLocation(this.getX()+1, this.getY());
     }
+
     public void moveSouth(){
-        y++;
+        super.setLocation(this.getX()-1, this.getY());
     }
+
     public void moveWest(){
-        x--;
+        super.setLocation(this.getX(), this.getY()-1);
     }
+
     public void moveEast(){
-        x++;
+        super.setLocation(this.getX(), this.getY()+1);
     }
 
-    public boolean equals(Location location){
-        int xCoord=location.getX();
-        int yCoord=location.getY();
-
-        return (x==xCoord && y==yCoord);
-
-    }
+//    public boolean equals(Location location){
+//        int xCoord=location.getX();
+//        int yCoord=location.getY();
+//
+//        return (x==xCoord && y==yCoord);
+//
+//    }
 
 }

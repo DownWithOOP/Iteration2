@@ -1,5 +1,6 @@
 package model.map;
 
+import javafx.geometry.Point2D;
 import model.common.Location;
 import model.map.tile.MapRenderInformation;
 import model.map.tile.Tile;
@@ -15,6 +16,7 @@ import utilities.MapXMLParser;
 import utilities.Observer;
 import utilities.Subject;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -106,6 +108,7 @@ public class Map {
 
 
             Location location = new Location(x, y);
+            //Point2D location = new Point2D(x, y);
 
             if( y!=0 && y % (width - 1) == 0){
                 x++;
@@ -120,9 +123,9 @@ public class Map {
     // object given to MainView that will be used to render the canvas
     public MapRenderInformation returnRenderInformation(){
             MapRenderInformation renderInfo = new MapRenderInformation(this.width,this.height);
-            for(Location location : tiles.keySet() ){
-                    renderInfo.addTileToRenderObject(tiles.get(location),location.getX(),location.getY());
-            }
+            //for(Location location : tiles.keySet() ){
+            //        renderInfo.addTileToRenderObject(tiles.get(location),location.getX(),location.getY());
+            //}
             return renderInfo;
     }
 
@@ -134,9 +137,11 @@ public class Map {
         return tiles.get(location);
     }
 
+    // titties
 
     public static void main(String[] args){
         Map map = new Map();
+        System.out.println(map.getTile(new Location(0, 1)));
     }
 
 }
