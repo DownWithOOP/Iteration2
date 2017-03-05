@@ -12,7 +12,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import utilities.Renderer;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -51,11 +50,6 @@ public class ControllerManager {
 
     public void switchControllers(ControllerType controllerType) {
         activeController = controllerMap.get(controllerType);
-    }
-
-    //TODO define interface for update method?
-    public void renderCurrentView() {
-        controllerDispatch.drawGameModel(activeController.getRenderer());
     }
 
 

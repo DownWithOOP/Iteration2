@@ -3,7 +3,6 @@ package model;
 <<<<<<< Updated upstream
 import controller.AbstractObserver;
 import model.map.Map;
-import utilities.Renderer;
 
 ||||||| merged common ancestors
 =======
@@ -53,9 +52,5 @@ public class GameModel {
 
     public Player getActivePlayer() {
         return playersList[activePlayerIndex];
-    }
-
-    public void draw(Renderer r) {
-        playersList[activePlayerIndex].draw(r);
     }
 }

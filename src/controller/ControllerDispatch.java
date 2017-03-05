@@ -6,7 +6,6 @@ import controller.commands.Command;
 import controller.commands.CommandType;
 import controller.commands.playercommands.*;
 import model.GameModel;
-import utilities.Renderer;
 
 import java.util.HashMap;
 
@@ -26,21 +25,12 @@ public class ControllerDispatch {
 
     public void handleCommand(CommandType commandType) {
         //TODO: add available actions in here
-<<<<<<< Updated upstream
         System.out.println("is value null in command map in ControllerDispatch? " + (commandHashMap.get(commandType) == null));
         if (commandHashMap.containsKey(commandType)) {
             commandHashMap.get(commandType).execute();
         }
-||||||| merged common ancestors
-        System.out.println("is value null? " + (commandHashMap.get(commandType) == null));
-        commandHashMap.get(commandType).execute();
-=======
-        System.out.println("is value null in command map in ControllerDispatch? " + (commandHashMap.get(commandType) == null));
-        commandHashMap.get(commandType).execute();
->>>>>>> Stashed changes
     }
-
-    //TODO: ASK  IF THIS WILL WORK WHEN THE PLAYERS ARE CHANGED
+        //TODO: ASK  IF THIS WILL WORK WHEN THE PLAYERS ARE CHANGED
     private void setGameModelMap() {
         commandHashMap.put(CommandType.END_TURN, () -> gameModel.endTurn() );
         commandHashMap.put(CommandType.CYCLE_MODE_NEXT, new CycleModeNext(gameModel.getActivePlayer()));
@@ -51,11 +41,6 @@ public class ControllerDispatch {
         commandHashMap.put(CommandType.CYCLE_INSTANCE_PREV, new CycleInstancePrev(gameModel.getActivePlayer()));
         commandHashMap.put(CommandType.CYCLE_COMMAND_NEXT, new CycleCommandNext(gameModel.getActivePlayer()));
         commandHashMap.put(CommandType.CYCLE_COMMAND_PREV, new CycleCommandPrev(gameModel.getActivePlayer()));
-    }
-
-    //TODO don't do this
-    public void drawGameModel(Renderer r){
-        gameModel.draw(r);
     }
 
 }

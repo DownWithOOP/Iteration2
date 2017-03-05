@@ -12,7 +12,6 @@ public enum CommandType {
     CYCLE_INSTANCE_NEXT,
     CYCLE_INSTANCE_PREV,
     CYCLE_COMMAND_NEXT,
-<<<<<<< Updated upstream
     CYCLE_COMMAND_PREV,
     SELECT,
     NORTH,
@@ -27,9 +26,4 @@ public enum CommandType {
     DECOMISSION,
     DEFEND, EXPLORE, JOIN_ARMY, ADVANCE_TO_RALLY_POINT, ABANDON_ARMY, CANCEL_QUEUE, POWER_DOWN, POWER_UP, DISBAND, ATTACK,
     MOVE_CAMERA_UP, MOVE_CAMERA_DOWN, MOVE_CAMERA_LEFT, MOVE_CAMERA_RIGHT
-||||||| merged common ancestors
-    CYCLE_COMMAND_PREV,
-=======
-    CYCLE_COMMAND_PREV;
->>>>>>> Stashed changes
 }
