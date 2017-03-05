@@ -123,9 +123,9 @@ public class Map {
     // object given to MainView that will be used to render the canvas
     public MapRenderInformation returnRenderInformation(){
             MapRenderInformation renderInfo = new MapRenderInformation(this.width,this.height);
-            //for(Location location : tiles.keySet() ){
-            //        renderInfo.addTileToRenderObject(tiles.get(location),location.getX(),location.getY());
-            //}
+            for(Location location : tiles.keySet() ){
+                   renderInfo.addTileToRenderObject(tiles.get(location), (int)location.getX(),(int)location.getY());
+            }
             return renderInfo;
     }
 
