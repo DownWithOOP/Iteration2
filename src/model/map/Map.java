@@ -33,7 +33,7 @@ public class Map {
     private Observer observer;
 
     private static String OS = System.getProperty("os.name").toLowerCase();
-    private final String XML_PATH = "res/map/Map.xml";
+    private final String XML_PATH = "Iteration2/res/map/Map.xml";
     private final String XML_PATH2 = "res/map/Map.xml";
 
     public Map() {
