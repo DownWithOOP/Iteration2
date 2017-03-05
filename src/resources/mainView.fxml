@@ -41,13 +41,16 @@
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" onAction="#handleChangeToTechTreeView" text="Technology">
+
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#handleChangeToTechTreeView" text="Technology Tree" />
                </items></Menu>
+
             </menus>
         </MenuBar>
         <VBox fx:id="vbox" prefHeight="699.0" prefWidth="1218.0">
             <children>
+
             <Canvas fx:id="canvas" height="574.0" width="1218.0" />
                 <HBox prefHeight="165.0" prefWidth="1218.0">
                     <children>
@@ -103,6 +106,7 @@
                                 </GridPane>
                             </children>
                         </VBox>
+
                   <VBox alignment="TOP_CENTER" layoutX="286.0" layoutY="10.0" prefHeight="127.0" prefWidth="246.0" style="-fx-border-color: black;">
                      <children>
                         <Label alignment="CENTER" prefHeight="28.0" prefWidth="186.0" text="TIle Control">
@@ -171,3 +175,4 @@
         </VBox>
     </children>
 </FlowPane>
+
