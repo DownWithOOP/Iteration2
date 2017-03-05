@@ -3,6 +3,7 @@ package model;
 import controller.AbstractObserver;
 import controller.commands.CycleDirection;
 import model.map.Map;
+import utilities.Renderer;
 import utilities.Subject;
 import utilities.id.CustomID;
 import utilities.id.IdType;
@@ -71,4 +72,9 @@ public class Player implements MapSubject{
             mapObserver.update(this.playerMap);
         }
     }
+
+    public void draw(Renderer r) {
+        draw(r);
+    }
+
 }

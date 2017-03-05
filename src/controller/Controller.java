@@ -2,8 +2,7 @@ package controller;
 
 import controller.ingamecontrollertypes.ControllerType;
 import javafx.fxml.Initializable;
-
-import javax.swing.*;
+import utilities.Renderer;
 
 /**
  * Created by Konrad on 2/17/2017.
@@ -23,6 +22,14 @@ public abstract class Controller implements Initializable {
         this.controllerDispatch = controllerDispatch;
     }
 
+    protected void setRenderer(Renderer r) {
+        this.renderer = r;
+    }
+
+    public Renderer getRenderer() {
+        return renderer;
+    }
+
 
     /**
      * different controllers require different implementations
@@ -40,5 +47,4 @@ public abstract class Controller implements Initializable {
 
     // method used by controller manager to active event handler for input for the entire scene
     protected abstract void enableKeyboardInput();
-
 }

@@ -2,6 +2,7 @@ package model;
 
 import controller.AbstractObserver;
 import model.map.Map;
+import utilities.Renderer;
 
 /**
  * Created by Konrad on 2/17/2017.
@@ -46,5 +47,9 @@ public class GameModel {
 
     public Player getActivePlayer() {
         return playersList[activePlayerIndex];
+    }
+
+    public void draw(Renderer r) {
+        playersList[activePlayerIndex].draw(r);
     }
 }
