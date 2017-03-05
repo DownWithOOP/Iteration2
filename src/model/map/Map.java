@@ -32,19 +32,37 @@ public class Map {
 
     private Observer observer;
 
-    private final String XML_PATH = "res/map/Map.xml";
+    private static String OS = System.getProperty("os.name").toLowerCase();
+    private final String XML_PATH = "Iteration2/res/map/Map.xml";
+    private final String XML_PATH2 = "res/map/Map.xml";
 
     public Map() {
         tiles = new HashMap<>();
         init();
     }
 
+    // TODO maybe move this to seperate package/file
+    private static boolean isWindows() {
+        return (OS.indexOf("win") >= 0);
+    }
+
+    // TODO maybe move this to seperate package/file
+    private static boolean isMac() {
+        return (OS.indexOf("mac") >= 0);
+    }
     private void init(){
 
         MapXMLParser mapXMLParser = new MapXMLParser();
 
+
+
         try {
-            mapXMLParser.loadDocument(XML_PATH);
+            if(isWindows()){
+                mapXMLParser.loadDocument(XML_PATH);
+            } else{
+                mapXMLParser.loadDocument(XML_PATH2);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
