@@ -1,22 +1,22 @@
 package model.entities.unit;
 
-import model.entities.EntityId;
+import utilities.id.CustomID;
+import model.entities.EntityType;
+import model.entities.StructureFactory;
+import model.entities.structure.Structure;
 import model.entities.Stats.Stats;
 import model.entities.Stats.UnitStats;
-import utilities.id.CustomID;
 import utilities.id.IdType;
 
 /**
  * Created by jordi on 2/24/2017.
  */
 public class Worker extends Unit {
+    private StructureFactory structureFactory;
 
-    /**
-     * @param playerId
-     * @param id
-     */
     public Worker(CustomID playerId, String id) {
         super(playerId, id);
+        this.structureFactory = new StructureFactory();
     }
 
     @Override
@@ -28,6 +28,14 @@ public class Worker extends Unit {
     @Override
     protected Stats setEntityStats() {
         return new UnitStats(0,0,0,0,0,0,0,0);
+    }
+
+    // Worker can build all structures except capital
+    public Structure buildStructure(EntityType entityType, CustomID customID, String id) {
+        if (!entityType.equals(EntityType.CAPITAL)) {
+            return structureFactory.getStructure(entityType, customID, id);
+        }
+        return null;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package model.entities.unit;
 
-import model.entities.EntityId;
 import model.entities.Stats.Stats;
 import model.entities.Stats.UnitStats;
 import utilities.id.CustomID;

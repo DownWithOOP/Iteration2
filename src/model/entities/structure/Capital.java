@@ -1,8 +1,9 @@
 package model.entities.structure;
 
-import model.entities.EntityId;
+import model.entities.EntityType;
 import model.entities.Stats.Stats;
 import model.entities.Stats.StructureStats;
+import model.entities.UnitFactory;
 import model.entities.unit.*;
 import utilities.id.CustomID;
 import utilities.id.IdType;
@@ -11,14 +12,21 @@ import utilities.id.IdType;
  * Created by jordi on 2/24/2017.
  */
 public class Capital extends Structure {
+    private UnitFactory unitFactory;
     private StructureStats capitalStats;
 
-    /**
-     * @param playerId
-     */
     public Capital(CustomID playerId, String id) {
         super(playerId, id);
+        this.unitFactory = new UnitFactory();
         this.capitalStats = new StructureStats(10,100,3,2,2);
+    }
+
+    // Capital produces explorers and workers
+    public Unit createUnit(EntityType entityType, CustomID customID, String id) {
+        if (entityType.equals(EntityType.EXPLORER) || entityType.equals(EntityType.WORKER)) {
+            return unitFactory.getEntity(entityType, customID, id);
+        }
+        return null;
     }
 
     @Override
@@ -31,28 +39,6 @@ public class Capital extends Structure {
         return new StructureStats(0,0,0,0,0);
     }
 
-//    public Capital() {
-//        super(EntityType.CAPITAL);
-//    }
-//TODO: Consider using a factory to create units
-//    public Unit createUnit(EntityType entityType, boolean isReinforcement) {
-//        Unit newUnit;
-//        if (entityType.equals(EntityType.COLONIST)) {
-//            newUnit = new Colonist();
-//        }
-//        else if (entityType.equals(EntityType.EXPLORER)) {
-//            newUnit = new Explorer();
-//        }
-//        else if (entityType.equals(EntityType.MELEE)) {
-//            newUnit = new Melee();
-//        }
-//        else if (entityType.equals(EntityType.RANGED)) {
-//            newUnit = new Colonist();
-//        }
-//        else if (entityType.equals(EntityType.WORKER)) {
-//            newUnit = new Worker();
-//        }
-//    }
 
     public void healUnit(Unit unitToHeal) {
 //        int currentHealth = unitToHeal.getHealth();
