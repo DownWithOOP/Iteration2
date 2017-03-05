@@ -1,9 +1,15 @@
 package model;
 
+<<<<<<< Updated upstream
 import controller.AbstractObserver;
 import model.map.Map;
 import utilities.Renderer;
 
+||||||| merged common ancestors
+=======
+import utilities.Renderer;
+
+>>>>>>> Stashed changes
 /**
  * Created by Konrad on 2/17/2017.
  */

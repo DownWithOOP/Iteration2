@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<<<<<<< Updated upstream
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
+||||||| merged common ancestors
+=======
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+>>>>>>> Stashed changes
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -15,9 +25,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<<<<<<< Updated upstream
 <FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="726.0" prefWidth="1221.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ingamecontrollertypes.MainViewController">
    <children>
         <MenuBar fx:id="mainMenuBar" prefHeight="29.0" prefWidth="1222.0">
+||||||| merged common ancestors
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="453.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ingamecontrollertypes.MainViewController">
+    <children>
+        <MenuBar fx:id="mainMenuBar" prefHeight="29.0" prefWidth="601.0">
+=======
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="453.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ingamecontrollertypes.MainViewController">
+    <children>
+        <MenuBar fx:id="mainMenuBar" prefHeight="29.0" prefWidth="601.0">
+>>>>>>> Stashed changes
             <menus>
                 <Menu mnemonicParsing="false" text="Menu">
                     <items>

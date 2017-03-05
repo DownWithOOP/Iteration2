@@ -26,10 +26,18 @@ public class ControllerDispatch {
 
     public void handleCommand(CommandType commandType) {
         //TODO: add available actions in here
+<<<<<<< Updated upstream
         System.out.println("is value null in command map in ControllerDispatch? " + (commandHashMap.get(commandType) == null));
         if (commandHashMap.containsKey(commandType)) {
             commandHashMap.get(commandType).execute();
         }
+||||||| merged common ancestors
+        System.out.println("is value null? " + (commandHashMap.get(commandType) == null));
+        commandHashMap.get(commandType).execute();
+=======
+        System.out.println("is value null in command map in ControllerDispatch? " + (commandHashMap.get(commandType) == null));
+        commandHashMap.get(commandType).execute();
+>>>>>>> Stashed changes
     }
 
     //TODO: ASK  IF THIS WILL WORK WHEN THE PLAYERS ARE CHANGED

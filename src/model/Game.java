@@ -14,8 +14,13 @@ public class Game {
 
     private ControllerManager controllerManager;
     private ControllerDispatch controllerDispatch;
+<<<<<<< Updated upstream
     private MainViewObserver mainViewObserver;
     private GameLoop gameLoop;
+||||||| merged common ancestors
+=======
+    private GameLoop gameLoop;
+>>>>>>> Stashed changes
 
     public Game(Stage primaryStage) throws IOException {
 

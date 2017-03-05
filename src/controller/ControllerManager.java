@@ -1,6 +1,11 @@
 package controller;
 
+<<<<<<< Updated upstream
 import controller.Observers.MainViewObserver;
+||||||| merged common ancestors
+=======
+import controller.commands.CommandType;
+>>>>>>> Stashed changes
 import controller.ingamecontrollertypes.ControllerType;
 import controller.ingamecontrollertypes.MainViewController;
 import javafx.fxml.FXMLLoader;

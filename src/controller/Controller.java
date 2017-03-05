@@ -11,8 +11,13 @@ public abstract class Controller implements Initializable {
 
     // this will be the dispatch that the controller will use to communicate with the model to relay commands and update info
     protected ControllerDispatch controllerDispatch;
+<<<<<<< Updated upstream
     protected AbstractObserver observer;
     private Renderer renderer;
+||||||| merged common ancestors
+=======
+    private Renderer renderer;
+>>>>>>> Stashed changes
 
     public Controller(){
 
