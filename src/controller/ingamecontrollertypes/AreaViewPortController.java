@@ -46,6 +46,8 @@ public class AreaViewPortController{
         this.alteranteColumn = true;
 
     }
+    /** Camera Navigation Controls **/
+
     public void changeCameraXPlus(){
         this.cameraX += cameraSpeed;
         if(this.cameraX > 0){
@@ -70,13 +72,16 @@ public class AreaViewPortController{
     }
     public void changeCameraYMinus(){
 
-        if(this.cameraY - cameraSpeed < (image.getHeight()*1.5)){
-            this.cameraY = image.getHeight()*1.5;
+        if(this.cameraY - cameraSpeed < (image.getHeight()*0.5)){
+            this.cameraY = image.getHeight()*0.5;
         } else {
             this.cameraY -= cameraSpeed;
         }
         this.drawSomething();
     }
+
+    /** camera speed, controls how much canvas is moved by each time
+     */
     public void fasterCamera(){
         this.cameraSpeed += 10;
     }
@@ -106,6 +111,9 @@ public class AreaViewPortController{
             gc.drawImage(image5,0.75*width*selectX+ cameraX,height*1*-selectY+ cameraY + width*0.9);
         }
     }
+
+    /** selection control **/
+
     public void selectNorth(){
         this.selectY++; // update value
         if(this.selectY >= gridSizeY){
@@ -123,27 +131,37 @@ public class AreaViewPortController{
     }
     public void selectNE(){ // TODO check edge cases
         this.selectX++; // update value
-        if(this.alteranteColumn){
-            this.alteranteColumn = false;
+        if(this.alteranteColumn){  // column #1
             this.selectY++;
-            if(this.selectY >= this.gridSizeY){
-                this.selectY = this.gridSizeY-1;
+            if(this.selectX+1 > this.gridSizeX || this.selectY+1 > gridSizeY){
+                this.selectX--; // reset to original position and don't alternate if out of bounds
+                this.selectY--;
+            } else {
+                this.alteranteColumn = false;
             }
-        } else {
-            this.alteranteColumn = true;
+        } else { // column #2
+            if(this.selectX+1 > this.gridSizeX){
+                this.selectX--; // restore to original position if out of bounds and don't rotate
+            } else {  this.alteranteColumn = true; }
         }
         drawSomething(); // rerender entire map
     }
     public void selectSE(){ // TODO check edge cases
         this.selectX++; // update value
         if(this.alteranteColumn){
-            this.alteranteColumn = false;
+            if(selectX+1 > gridSizeX){ // out of bounds, don't alternate, stay in same place
+                this.selectX--;
+            } else {
+                this.alteranteColumn = false;
+            }
         } else {
             this.selectY--;
-            if(this.selectY < 0){
-                this.selectY = 0;
+            if(this.selectY < 0 || this.selectX+1 > gridSizeX  ){ // out of bounds, keep in original position, don't change column
+                this.selectY++;
+                this.selectX--;
+            } else {
+                this.alteranteColumn = true;
             }
-            this.alteranteColumn = true;
         }
         drawSomething();
     }
@@ -158,30 +176,47 @@ public class AreaViewPortController{
     public void selectSW(){ // TODO check edge cases
         this.selectX--; // update value
         if(this.alteranteColumn){
-            this.alteranteColumn = false;
-            if(this.selectY < 0){
-                this.selectY = 0;
+            if(this.selectX < 0){
+                this.selectX++;
+            } else {
+                this.alteranteColumn = false;
             }
         } else {
             this.selectY--;
-            this.alteranteColumn = true;
+            if(this.selectY < 0 || this.selectX < 0){ // out of bounds, keep original position, don't alternate
+                this.selectX++;
+                this.selectY++;
+            } else{
+                this.alteranteColumn = true;
+            }
         }
          drawSomething();
     }
     public void selectNW(){ // TODO check edge cases
         this.selectX--; // update value
         if(this.alteranteColumn){
-            this.alteranteColumn = false;
-            this.selectY++;
-            if(this.selectY < 0){
-                this.selectY = 0;
+                this.selectY++;
+                if(this.selectY+1 > gridSizeY || this.selectX < 0){ // out of bounds, restore to original place, don't alternatete
+                    this.selectX++;
+                    this.selectY--;
+                } else{
+                    this.alteranteColumn = false; // coordinates are valid
+                }
             }
-        } else {
-            this.alteranteColumn = true;
+        else {
+            if (this.selectX < 0) {
+                this.selectX++;  // bad, reset to original
+            } else {
+                this.alteranteColumn = true; // coordinate is good
+            }
         }
         drawSomething();
     }
 
+
+    /** actually draws and renders the map that is currently stored in teh mapRenderInformation
+     *
+     */
     public void drawSomething(){
         MapRenderObject[][] renderObjects = this.mapRenderInformation.getRenderObjectMap();
 
@@ -210,22 +245,19 @@ public class AreaViewPortController{
                       //  System.out.print(" WATER ");
                         gc.drawImage(image2,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
                     }
-
                 }
                 else {
                     if(current.equals(TerrainType.GRASS)){
                        // System.out.print(" GRASS ");
-                        gc.drawImage(image,0.75*width*j+ cameraX,height*1*-i+ cameraY);
+                        gc.drawImage(image,0.75*width*j+ cameraX,height*1*-i+ cameraY  +height);
                     } else if(current.equals(TerrainType.DIRT)){
                        // System.out.print(" DIRT ");
-                        gc.drawImage(image3,0.75*width*j+ cameraX,height*1*-i+ cameraY);
+                        gc.drawImage(image3,0.75*width*j+ cameraX,height*1*-i+ cameraY +height);
                     } else if(current.equals(TerrainType.WATER)){
                         //System.out.print(" WATER ");
-                        gc.drawImage(image2,0.75*width*j+ cameraX,height*1*-i+ cameraY);
+                        gc.drawImage(image2,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
                     }
                 }
-
-
             }
             //System.out.println();
         }

@@ -129,7 +129,6 @@
                               <Button mnemonicParsing="false" onAction="#selectNE" prefHeight="25.0" prefWidth="41.0" text="NE" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                               <Button mnemonicParsing="false" onAction="#selectSW" prefHeight="25.0" prefWidth="39.0" text="SW" GridPane.rowIndex="2" />
                               <Button mnemonicParsing="false" onAction="#selectSE" prefHeight="25.0" prefWidth="42.0" text="SE" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                              <Button mnemonicParsing="false" text="jumpTo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Label fx:id="coordinateInfo" text="x:0 y:0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>

@@ -91,22 +91,32 @@ public class MainViewController extends Controller{
         }
         @FXML void selectNorth() throws IOException{
             this.areaViewPortController.selectNorth(); // TODO hook this up to some keyboard input
+            updateCoordinatesForDebugging();
         }
         @FXML void selectSouth() throws IOException{
             this.areaViewPortController.selectSouth(); // TODO hook this up to some keyboard input
+            updateCoordinatesForDebugging();
         }
         @FXML void selectNE() throws IOException{
             this.areaViewPortController.selectNE(); // TODO hook this up to some keyboard input
+            updateCoordinatesForDebugging();
         }
         @FXML void selectSE() throws IOException{
             this.areaViewPortController.selectSE(); // TODO hook this up to some keyboard input
+            updateCoordinatesForDebugging();
         }
         @FXML void selectSW() throws IOException{
             this.areaViewPortController.selectSW(); // TODO hook this up to some keyboard input
+            updateCoordinatesForDebugging();
         }
         @FXML void selectNW() throws IOException{
             this.areaViewPortController.selectNW();  // TODO hook this up to some keyboard input
+            updateCoordinatesForDebugging();
         }
+        private void updateCoordinatesForDebugging(){ // for debugging, once game is working we can get rid of this
+            this.coordinateInfo.setText(areaViewPortController.returnXCoordinate() + " " + areaViewPortController.returnYCoordinate());
+        }
+
         @FXML
         public void handleChangeToStructureView(ActionEvent actionEvent) throws  IOException{
             this.switchControllerRelay.changeToStructure();}
