@@ -145,8 +145,6 @@ public class IntroVideo {
                 }
             });
 
-            GameLoop timer = new GameLoop();
-            timer.start();
             primaryStage.show();
 
         }

@@ -65,8 +65,9 @@ public class ControllerManager {
         inputController.enableKeyboardInput();
         inputController.setDispatch(controllerDispatch);
         inputController.takeInObserver(mainViewObserver);
-        MainViewController temp =  (MainViewController)inputController; // Sketchy but we have to downCast to the MainView Controller type
-        temp.drawOnCanvas(); // at this point everything is guaranteed to have loaded in and we can display the map
+        // Sketchy but we have to downCast to the MainView Controller type
+        ((MainViewController)inputController).drawOnCanvas(); // at this point everything is guaranteed to have loaded in and we can display the map
+        switchControllers(ControllerType.mainViewController);
         primaryStage.show();
     }
 
