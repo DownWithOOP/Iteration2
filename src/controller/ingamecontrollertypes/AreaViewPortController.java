@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import model.map.MapRenderObject;
 import model.map.tile.MapRenderInformation;
 import model.map.tile.terrain.TerrainType;
+import view.utilities.Assets;
 
 /**
  * Created by Konrad on 3/1/2017.
@@ -29,11 +30,11 @@ public class AreaViewPortController{
     private int gridSizeY;
     private boolean alteranteColumn;
 
-    Image image = new Image("resources/images/smallgrass1.png");
-    Image image2 = new Image("resources/images/smallwater1.png");
-    Image image3 = new Image("resources/images/smalldirt1.png");
-   // Image image4 = new Image("resources/images/smallgrass1.png"); TODO for mountain
-    Image image5 = new Image("resources/images/smallselect.png");
+    Image grass = Assets.getInstance().GRASS;
+    Image water = Assets.getInstance().WATER;
+    Image dirt = Assets.getInstance().DIRT;
+    Image mountain = Assets.getInstance().CRATER;
+    Image select = Assets.getInstance().SELECT;
 
     public AreaViewPortController(VBox vbox, Canvas canvas){
         this.cameraX = 100; // default camera shift/starting position
@@ -72,8 +73,8 @@ public class AreaViewPortController{
     }
     public void changeCameraYMinus(){
 
-        if(this.cameraY - cameraSpeed < (image.getHeight()*0.5)){
-            this.cameraY = image.getHeight()*0.5;
+        if(this.cameraY - cameraSpeed < (grass.getHeight()*0.5)){
+            this.cameraY = grass.getHeight()*0.5;
         } else {
             this.cameraY -= cameraSpeed;
         }
@@ -95,20 +96,20 @@ public class AreaViewPortController{
         this.mapRenderInformation = renderMap;
         this.gridSizeX = mapRenderInformation.getX();
         this.gridSizeY = mapRenderInformation.getY();
-            this.YBound = ((double) this.mapRenderInformation.getY()) * image.getHeight()*0.75 + image.getHeight()*2;
-            this.XBound = ((double) this.mapRenderInformation.getX()) * image.getWidth()*0.7 + image.getWidth() - this.canvas.getWidth();
+            this.YBound = ((double) this.mapRenderInformation.getY()) * grass.getHeight()*0.75 + grass.getHeight()*2;
+            this.XBound = ((double) this.mapRenderInformation.getX()) * grass.getWidth()*0.7 + grass.getWidth() - this.canvas.getWidth();
        this.drawSomething();
 
     }
 
     public void drawSelection(){
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        double width = image.getWidth();
-        double height = image.getHeight();
+        double width = grass.getWidth();
+        double height = grass.getHeight();
         if(alteranteColumn){
-            gc.drawImage(image5,0.75*width*selectX+ cameraX,height*1*-selectY+ cameraY + width*0.45);
+            gc.drawImage(select,0.75*width*selectX+ cameraX,height*1*-selectY+ cameraY + width*0.45);
         } else {
-            gc.drawImage(image5,0.75*width*selectX+ cameraX,height*1*-selectY+ cameraY + width*0.9);
+            gc.drawImage(select,0.75*width*selectX+ cameraX,height*1*-selectY+ cameraY + width*0.9);
         }
     }
 
@@ -224,8 +225,8 @@ public class AreaViewPortController{
         MapRenderObject[][] renderObjects = this.mapRenderInformation.getRenderObjectMap();
 
 
-        double width = image.getWidth();
-        double height = image.getHeight();
+        double width = grass.getWidth();
+        double height = grass.getHeight();
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setFill(Color.TRANSPARENT);
@@ -240,25 +241,25 @@ public class AreaViewPortController{
                 if(j%2 == 0){
                     if(current.equals(TerrainType.GRASS)){
                       //  System.out.print(" GRASS ");
-                        gc.drawImage(image,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                        gc.drawImage(grass,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
                     } else if(current.equals(TerrainType.DIRT)){
                      //   System.out.print(" DIRT ");
-                        gc.drawImage(image3,0.75*width*j+ cameraX,height*1*-i+ cameraY+ width*0.45);
+                        gc.drawImage(dirt,0.75*width*j+ cameraX,height*1*-i+ cameraY+ width*0.45);
                     } else if(current.equals(TerrainType.WATER)){
                       //  System.out.print(" WATER ");
-                        gc.drawImage(image2,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                        gc.drawImage(water,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
                     }
                 }
                 else {
                     if(current.equals(TerrainType.GRASS)){
                        // System.out.print(" GRASS ");
-                        gc.drawImage(image,0.75*width*j+ cameraX,height*1*-i+ cameraY  +height);
+                        gc.drawImage(grass,0.75*width*j+ cameraX,height*1*-i+ cameraY  +height);
                     } else if(current.equals(TerrainType.DIRT)){
                        // System.out.print(" DIRT ");
-                        gc.drawImage(image3,0.75*width*j+ cameraX,height*1*-i+ cameraY +height);
+                        gc.drawImage(dirt,0.75*width*j+ cameraX,height*1*-i+ cameraY +height);
                     } else if(current.equals(TerrainType.WATER)){
                         //System.out.print(" WATER ");
-                        gc.drawImage(image2,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                        gc.drawImage(water,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
                     }
                 }
             }
