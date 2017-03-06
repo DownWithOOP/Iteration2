@@ -144,9 +144,6 @@ public class IntroVideo {
                     e.printStackTrace();
                 }
             });
-
-            GameLoop timer = new GameLoop();
-            timer.start();
             primaryStage.show();
 
         }

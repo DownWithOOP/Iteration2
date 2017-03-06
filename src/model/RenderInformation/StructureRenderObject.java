@@ -2,6 +2,7 @@ package model.RenderInformation;
 
 import model.entities.EntityType;
 import utilities.id.CustomID;
+import utilities.id.IdType;
 
 /**
  * Created by Konrad on 3/5/2017.
@@ -9,26 +10,19 @@ import utilities.id.CustomID;
 public class StructureRenderObject {
     private int locationX; // X location on the map the Structure is located
     private int locationY; // Y location on the map the Structure is located
-    private EntityType entityType; // type of Structure so we know which assets to render
-    private CustomID playerID; // we need to know to who this structure belongs to, might be ours, might be some enemies
-    // TODO later more information such as strucutre mission
+    private IdType idType; // type of Structure so we know which assets to render
+    // TODO later more information such as structure missions
 
-    public StructureRenderObject(EntityType entityType, int locationX, int locationY, CustomID playerID){
-        this.entityType = entityType;
+    public StructureRenderObject(IdType idType, int locationX, int locationY){
+        this.idType = idType;
         this.locationX = locationX;
         this.locationY = locationY;
-        this.playerID = playerID;
     }
-    public EntityType getEntityType(){
-        return this.entityType;
-    }
+    public IdType getIdType() { return this.idType; };
     public int getLocationX(){
         return this.locationX;
     }
     public int getLocationY(){
         return this.locationY;
-    }
-    public CustomID getCustomID(){
-        return this.playerID;
     }
 }

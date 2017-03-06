@@ -32,4 +32,6 @@ public abstract class Controller implements Initializable {
     // method used by controller manager to active event handler for input for the entire scene
     protected abstract void enableKeyboardInput();
 
+    protected abstract void render();
+
 }

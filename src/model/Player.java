@@ -28,7 +28,9 @@ public class Player implements MapSubject, UnitSubject, StructureSubject {
         entities = new EntityOwnership(customID); //TODO should entity ownership know Player?
         currentSelection = new Selection(entities.getCurrentInstance()); //TODO rename method
         this.playerMap = map; // TODO for the moment global map is shared, later each player will have own map
-        this.register(observer); // used to communicate
+        this.registerMapObserver(observer);
+        this.registerUnitObserver(unitObserver);
+        this.registerStructureObserver(structureObserver);
     }
     public void endTurn(){
 
@@ -58,39 +60,30 @@ public class Player implements MapSubject, UnitSubject, StructureSubject {
         System.out.println("command cycle not hooked up yet :(");
     }
 
-    //TODO implement methods elsewhere so this compiles
-    //public UnitRenderInformation returnUnitRenderInformation() {
-        //return entities.returnUnitRenderInformation();
-    //}
-//
-    //public StructureRenderInformation returnStructurRenderInformation() {
-        //return entities.returnStructureRenderInformation();
-    //}
-
     @Override
-    public void register(MapObserver o) {
+    public void registerMapObserver(MapObserver o) {
         mapObservers.add(o);
     }
     @Override
     public void unregister(MapObserver o) {mapObservers.remove(o);}
     @Override
-    public void register(UnitObserver o) {unitObservers.add(o);}
+    public void registerUnitObserver(UnitObserver o) {unitObservers.add(o);}
     @Override
     public void unregister(UnitObserver o) {unitObservers.remove(o);}
     @Override
-    public void register(StructureObserver o) {structureObservers.add(o);}
+    public void registerStructureObserver(StructureObserver o) {structureObservers.add(o);}
     @Override
     public void unregister(StructureObserver o) { structureObservers.add(o);}
     @Override
     public void notifyUnitObservers() {
         for(UnitObserver unitObserver : unitObservers){
-            // TODO get unit render information
+            unitObserver.update(entities.returnUnitRenderInformation());
         }
     }
     @Override
     public void notifyStructureObservers() {
         for(StructureObserver structureObserver : structureObservers){
-            // TODO get structure render information
+            structureObserver.update(entities.returnStructureRenderInformation());
         }
     }
     @Override

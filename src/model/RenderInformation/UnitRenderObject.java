@@ -1,7 +1,6 @@
 package model.RenderInformation;
 
-import model.entities.EntityType;
-import utilities.id.CustomID;
+import utilities.id.IdType;
 
 /**
  * Created by Konrad on 3/5/2017.
@@ -10,26 +9,22 @@ public class UnitRenderObject {
 
     private int locationX; // X location on map Unit is located
     private int locationY; // Y location on map Unit is located
-    private EntityType entityType; // type of unit so we know which assets to render
-    private CustomID playerID; // we need to know to who this unit belongs to, might be ours, might be some enemies
+    private IdType idType; // type of unit so we know which assets to render, along with unit ownership
+    // TODO later add more info like stats
 
-    public UnitRenderObject(EntityType entityType, int locationX, int locationY, CustomID playerID){
-        this.entityType = entityType;
+    public UnitRenderObject(IdType idType, int locationX, int locationY){
+        this.idType = idType;
         this.locationX = locationX;
         this.locationY = locationY;
-        this.playerID = playerID;
     }
-    public EntityType getEntityType(){
-        return this.entityType;
+    public IdType getIdType(){
+        return this.idType;
     }
     public int getLocationX(){
         return this.locationX;
     }
     public int getLocationY(){
         return this.locationY;
-    }
-    public CustomID getPlayerID(){
-        return this.playerID;
     }
 
 }

@@ -48,6 +48,12 @@ public class UnitViewController extends Controller
                 }
         );
     }
+
+    @Override
+    protected void render() {
+
+    }
+
     @FXML
     private Stage getStage() {
         Stage stage = (Stage) ap.getScene().getWindow();

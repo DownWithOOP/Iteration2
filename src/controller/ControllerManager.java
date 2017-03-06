@@ -30,6 +30,7 @@ public class ControllerManager {
     private MapObserver mapObserver;
     private UnitObserver unitObserver;
     private StructureObserver structureObserver;
+    private GameLoop timer;
 
     public ControllerManager(ControllerDispatch controllerDispatch, Stage primaryStage, MapObserver mapObserver, UnitObserver unitObserver, StructureObserver structureObserver) throws IOException {
 
@@ -47,10 +48,15 @@ public class ControllerManager {
 
         // when the controller manager is initialized, we start up the mainView
         changeToMainView();
+
+        timer = new GameLoop(activeController); // gameloop is here now so we can render on each of the controllers
+        timer.start();
+
+
     }
 
-    public void switchControllers(ControllerType controllerType) {
-        activeController = controllerMap.get(controllerType);
+    public void switchControllers(Controller newActiveController) {
+        timer.updateController(newActiveController); // will can render() in new active Controller
     }
 
 
@@ -66,7 +72,12 @@ public class ControllerManager {
         inputController.setDispatch(controllerDispatch);
         MainViewController temp =  (MainViewController)inputController; // Sketchy but we have to downCast to the MainView Controller type
         temp.setObservers(mapObserver,unitObserver,structureObserver);
-        temp.drawOnCanvas(); // at this point everything is guaranteed to have loaded in and we can display the map
+        this.activeController = temp;
+        if(timer == null){
+            // start of game, don't call yet
+        } else {
+            switchControllers(temp);
+        }
         primaryStage.show();
     }
 
@@ -80,6 +91,7 @@ public class ControllerManager {
         inputController.takeInSwitchControllerRelay(switchControllerRelay);
         inputController.enableKeyboardInput();
         inputController.setDispatch(controllerDispatch);
+        switchControllers(inputController);
         primaryStage.show();
     }
 
@@ -94,6 +106,7 @@ public class ControllerManager {
         inputController.takeInSwitchControllerRelay(switchControllerRelay);
         inputController.enableKeyboardInput();
         inputController.setDispatch(controllerDispatch);
+        switchControllers(inputController);
         primaryStage.show();
     }
 
@@ -106,6 +119,8 @@ public class ControllerManager {
         inputController.takeInSwitchControllerRelay(switchControllerRelay);
         inputController.enableKeyboardInput();
         inputController.setDispatch(controllerDispatch);
+        this.activeController = null; // TODO change later once render() is implemented properly
+        switchControllers(inputController);
         primaryStage.show();
     }
 

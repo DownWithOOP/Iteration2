@@ -32,6 +32,12 @@ public class TechTreeController extends Controller {
                 // TODO to whatever you want with this input
         );
     }
+
+    @Override
+    protected void render() {
+
+    }
+
     @FXML
     private Stage getStage() {
         Stage stage = (Stage) ap.getScene().getWindow();
