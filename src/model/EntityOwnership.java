@@ -9,6 +9,7 @@ import model.RenderInformation.StructureRenderObject;
 import model.RenderInformation.UnitRenderInformation;
 import model.RenderInformation.UnitRenderObject;
 import model.entities.Entity;
+import model.entities.Stats.UnitStats;
 import model.entities.structure.Capital;
 import model.entities.structure.Structure;
 import model.entities.unit.Colonist;
@@ -335,8 +336,9 @@ public class EntityOwnership {
         for (List<Entity> list : unitList) {
             for (Entity entity : list) {
                 Unit unit = (Unit) entity;
-                    UnitRenderObject temp = new UnitRenderObject(unit.getEntityType(), (int)(unit.getLocation().getX()), (int)(unit.getLocation().getY()));
-                    renderInfo.addUnit(temp);
+                UnitStats unitStats = unit.getUnitStats().clone(); // deep clone so as not to mess anything up
+                UnitRenderObject temp = new UnitRenderObject(unit.getEntityType(), (int)(unit.getLocation().getX()), (int)(unit.getLocation().getY()), unitStats);
+                renderInfo.addUnit(temp);
             }
         }
         return renderInfo;
