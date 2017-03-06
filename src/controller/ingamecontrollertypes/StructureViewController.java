@@ -10,6 +10,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import utilities.ObserverInterfaces.StructureObserver;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,6 +22,7 @@ import java.util.ResourceBundle;
 public class StructureViewController extends Controller{
 
     private SwitchControllerRelay switchControllerRelay;
+    private StructureObserver structureObserver; // observer from model that has all the info we need for rendering/display
 
     public StructureViewController(){
         super();
@@ -55,6 +57,10 @@ public class StructureViewController extends Controller{
                     }
                 }
         );
+    }
+
+    public void setObservers(StructureObserver structureObserver){
+        this.structureObserver = structureObserver;
     }
 
     @Override

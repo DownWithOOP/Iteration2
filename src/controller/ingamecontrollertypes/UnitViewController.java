@@ -8,6 +8,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import utilities.ObserverInterfaces.UnitObserver;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,6 +22,7 @@ public class UnitViewController extends Controller
     @FXML
     private Pane ap;
     private SwitchControllerRelay switchControllerRelay;
+    private UnitObserver unitObserver; // this observer gets all the information from the model that we need for rendering/displaying
     @Override
     protected void takeInSwitchControllerRelay(SwitchControllerRelay switchControllerRelay) {
         this.switchControllerRelay = switchControllerRelay;
@@ -52,6 +54,10 @@ public class UnitViewController extends Controller
     @Override
     protected void render() {
 
+    }
+
+    public void setObservers(UnitObserver unitObserver){
+        this.unitObserver = unitObserver;
     }
 
     @FXML

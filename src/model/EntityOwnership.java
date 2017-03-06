@@ -334,8 +334,8 @@ public class EntityOwnership {
         for (List<Entity> list : unitList) {
             for (Entity entity : list) {
                 Unit unit = (Unit) entity;
-                UnitRenderObject temp = new UnitRenderObject(unit.getEntityType(), (int)(unit.getLocation().getX()), (int)(unit.getLocation().getY()));
-                renderInfo.addUnit(temp);
+                    UnitRenderObject temp = new UnitRenderObject(unit.getEntityType(), (int)(unit.getLocation().getX()), (int)(unit.getLocation().getY()));
+                    renderInfo.addUnit(temp);
             }
         }
         return renderInfo;

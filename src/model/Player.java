@@ -40,6 +40,10 @@ public class Player implements MapSubject, UnitSubject, StructureSubject {
     public void startTurn(){
         System.out.println(this.toString() + " is starting their turn");
         this.notifyMapObservers(); // at the start of the game we want to give the player map to render
+
+        // TODO uncomment these once units and strucutres get properly initialized with location values, right now crashes because no locations set
+        //this.notifyStructureObservers(); // we also want to update everyone with all our structure information
+        //this.notifyUnitObservers(); // and lets not forget the units
     }
 
     public void cycleMode(CycleDirection direction){
@@ -88,19 +92,19 @@ public class Player implements MapSubject, UnitSubject, StructureSubject {
     @Override
     public void unregister(StructureObserver o) { structureObservers.add(o);}
     @Override
-    public void notifyUnitObservers() {
+    public void notifyUnitObservers() { // IMPORTANT!! CALL THIS WHENEVER ANY ENTITIES/UNITS ARE UPDATED SO THE VIEW REFRESHES
         for(UnitObserver unitObserver : unitObservers){
             unitObserver.update(entities.returnUnitRenderInformation());
         }
     }
     @Override
-    public void notifyStructureObservers() {
+    public void notifyStructureObservers() { // IMPORTANT!! CALL THIS WHENEVER ANY ENTITIES/STRUCTURES ARE UPDATED SO THE VIEW REFRESHES
         for(StructureObserver structureObserver : structureObservers){
             structureObserver.update(entities.returnStructureRenderInformation());
         }
     }
     @Override
-    public void notifyMapObservers() {
+    public void notifyMapObservers() { // IMPORTANT!! CALL THIS WHENEVER THE MAP IS UPDATED SO THE VIEW REFRESHES
         for(MapObserver mapObserver : mapObservers){
             mapObserver.update(playerMap.returnRenderInformation());
         }
