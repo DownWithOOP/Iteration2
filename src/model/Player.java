@@ -13,10 +13,11 @@ import java.util.ArrayList;
  */
 public class Player implements MapSubject, UnitSubject, StructureSubject {
 
-    EntityOwnership entities;
-    Selection currentSelection;
-    CustomID customID;
-    Map playerMap; // this map will contain the map that the specific player can see
+
+    private EntityOwnership entities;
+    private Selection currentSelection;
+    private CustomID customID;
+    private Map playerMap; // this map will contain the map that the specific player can see
     private ArrayList<MapObserver> mapObservers = new ArrayList<MapObserver>(); // will contain observers that get notified of changes
     private ArrayList<UnitObserver> unitObservers = new ArrayList<UnitObserver>(); // will contain observers that get notified of changes
     private ArrayList<StructureObserver> structureObservers = new ArrayList<StructureObserver>(); // will contain observers that get notified of changes
@@ -33,10 +34,11 @@ public class Player implements MapSubject, UnitSubject, StructureSubject {
         this.registerStructureObserver(structureObserver);
     }
     public void endTurn(){
+        System.out.println(this.toString() + " is ending their turn");
 
     }
     public void startTurn(){
-
+        System.out.println(this.toString() + " is starting their turn");
         this.notifyMapObservers(); // at the start of the game we want to give the player map to render
     }
 
@@ -60,8 +62,18 @@ public class Player implements MapSubject, UnitSubject, StructureSubject {
         System.out.println("command cycle not hooked up yet :(");
     }
 
+    //TODO implement methods elsewhere so this compiles
+    //public UnitRenderInformation returnUnitRenderInformation() {
+        //return entities.returnUnitRenderInformation();
+    //}
+//
+    //public StructureRenderInformation returnStructurRenderInformation() {
+        //return entities.returnStructureRenderInformation();
+    //}
+
     @Override
     public void registerMapObserver(MapObserver o) {
+
         mapObservers.add(o);
     }
     @Override
@@ -72,6 +84,7 @@ public class Player implements MapSubject, UnitSubject, StructureSubject {
     public void unregister(UnitObserver o) {unitObservers.remove(o);}
     @Override
     public void registerStructureObserver(StructureObserver o) {structureObservers.add(o);}
+
     @Override
     public void unregister(StructureObserver o) { structureObservers.add(o);}
     @Override
@@ -93,7 +106,7 @@ public class Player implements MapSubject, UnitSubject, StructureSubject {
         }
     }
 
-
-
-
+    public CustomID getCustomID() {
+        return customID;
+    }
 }

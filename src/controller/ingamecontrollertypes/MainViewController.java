@@ -81,6 +81,7 @@ public class MainViewController extends Controller{
     @FXML
         public void drawOnCanvas() throws  IOException{
                // this.areaViewPortController.UpdateRenderInfo(this.mapObserver.share());
+
         }
         @FXML void moveUp(ActionEvent actionEvent) throws  IOException{
             this.areaViewPortController.changeCameraYPlus(); // TODO hook this up to some keyboard input
@@ -138,6 +139,10 @@ public class MainViewController extends Controller{
         @FXML
         public void handleReturnToMainMenu(ActionEvent actionEvent) throws IOException {
             // returnToMainMenu();
+        }
+
+        public void handleEndTurn(ActionEvent actionEvent) {
+            controllerDispatch.handleCommand(CommandType.END_TURN);
         }
 
         public void returnToMainMenu() throws IOException {
