@@ -107,6 +107,10 @@ public class MainViewController extends Controller{
             // returnToMainMenu();
         }
 
+        public void handleEndTurn(ActionEvent actionEvent) {
+            controllerDispatch.handleCommand(CommandType.END_TURN);
+        }
+
         public void returnToMainMenu() throws IOException {
             // TODO: properly end all game logic in Game class when returning to main menu
             this.switchControllerRelay.changeToMain();
