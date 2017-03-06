@@ -7,6 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import utilities.ObserverInterfaces.StructureObserver;
+import utilities.ObserverInterfaces.UnitObserver;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -26,13 +28,17 @@ public class ControllerManager {
     private SwitchControllerRelay switchControllerRelay;
     private ControllerDispatch controllerDispatch;
     private MapObserver mapObserver;
+    private UnitObserver unitObserver;
+    private StructureObserver structureObserver;
 
-    public ControllerManager(ControllerDispatch controllerDispatch, Stage primaryStage, MapObserver mapObserver) throws IOException {
+    public ControllerManager(ControllerDispatch controllerDispatch, Stage primaryStage, MapObserver mapObserver, UnitObserver unitObserver, StructureObserver structureObserver) throws IOException {
 
         // primary stage that is essentially the window
         this.primaryStage = primaryStage;
         this.activeController = this.controllerMap.get(ControllerType.welcomeViewController);
         this.mapObserver = mapObserver;
+        this.unitObserver = unitObserver;
+        this.structureObserver = structureObserver;
 
         // used for communication between the inputReconginzers and the controllerManager when a controller needs to be switched
         switchControllerRelay = new SwitchControllerRelay(this);
@@ -58,8 +64,8 @@ public class ControllerManager {
         inputController.takeInSwitchControllerRelay(switchControllerRelay);
         inputController.enableKeyboardInput();
         inputController.setDispatch(controllerDispatch);
-        inputController.takeInObserver(mapObserver);
         MainViewController temp =  (MainViewController)inputController; // Sketchy but we have to downCast to the MainView Controller type
+        temp.setObservers(mapObserver,unitObserver,structureObserver);
         temp.drawOnCanvas(); // at this point everything is guaranteed to have loaded in and we can display the map
         primaryStage.show();
     }

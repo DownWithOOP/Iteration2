@@ -13,6 +13,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.map.Map;
+import utilities.ObserverInterfaces.MapObserver;
+import utilities.ObserverInterfaces.StructureObserver;
+import utilities.ObserverInterfaces.UnitObserver;
 
 import java.io.IOException;
 import java.net.URL;
@@ -35,10 +38,18 @@ public class MainViewController extends Controller{
     Label coordinateInfo;
     private Map currentMap;
     private AreaViewPortController areaViewPortController;
+    private MapObserver mapObserver;
+    private UnitObserver unitObserver;
+    private StructureObserver structureObserver;
 
     public MainViewController(){
         super();
 
+    }
+    public void setObservers(MapObserver mapObserver, UnitObserver unitObserver, StructureObserver structureObserver){
+        this.mapObserver = mapObserver;
+        this.unitObserver = unitObserver;
+        this.structureObserver = structureObserver;
     }
 
     private SwitchControllerRelay switchControllerRelay;
@@ -63,7 +74,7 @@ public class MainViewController extends Controller{
     }
         @FXML
         public void drawOnCanvas() throws  IOException{
-                this.areaViewPortController.UpdateRenderInfo(this.observer.share());
+                this.areaViewPortController.UpdateRenderInfo(this.mapObserver.share());
         }
         @FXML void moveUp(ActionEvent actionEvent) throws  IOException{
             this.areaViewPortController.changeCameraYPlus(); // TODO hook this up to some keyboard input

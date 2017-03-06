@@ -1,6 +1,5 @@
 package model;
 
-import controller.AbstractObserver;
 import controller.commands.CycleDirection;
 import utilities.ObserverInterfaces.*;
 import model.map.Map;
@@ -22,7 +21,7 @@ public class Player implements MapSubject, UnitSubject, StructureSubject {
     private ArrayList<UnitObserver> unitObservers = new ArrayList<UnitObserver>(); // will contain observers that get notified of changes
     private ArrayList<StructureObserver> structureObservers = new ArrayList<StructureObserver>(); // will contain observers that get notified of changes
 
-    public Player(Map map, AbstractObserver observer){
+    public Player(Map map, MapObserver observer, UnitObserver unitObserver, StructureObserver structureObserver){
 
         //TODO add an id for player in the constructor
         customID=new CustomID(IdType.player,"newPlayer");

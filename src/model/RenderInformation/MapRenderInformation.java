@@ -1,6 +1,6 @@
-package model.map.tile;
+package model.RenderInformation;
 
-import model.map.MapRenderObject;
+import model.map.tile.Tile;
 
 /**
  * Created by Konrad on 3/3/2017.

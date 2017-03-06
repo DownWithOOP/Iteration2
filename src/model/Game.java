@@ -4,6 +4,8 @@ import controller.ControllerDispatch;
 import controller.ControllerManager;
 import controller.Observers.MapObserver;
 import javafx.stage.Stage;
+import utilities.ObserverInterfaces.StructureObserver;
+import utilities.ObserverInterfaces.UnitObserver;
 
 import java.io.IOException;
 
@@ -15,13 +17,17 @@ public class Game {
     private ControllerManager controllerManager;
     private ControllerDispatch controllerDispatch;
     private MapObserver mapObserver;
+    private UnitObserver unitObserver;
+    private StructureObserver structureObserver;
 
     public Game(Stage primaryStage) throws IOException {
 
         //TODO:change hardcoded player number
         this.mapObserver = new MapObserver();
-        this.controllerDispatch = new ControllerDispatch(2, mapObserver);
-        this.controllerManager = new ControllerManager(this.controllerDispatch, primaryStage, mapObserver);
+        this.unitObserver = new controller.Observers.UnitObserver();
+        this.structureObserver = new controller.Observers.StructureObserver();
+        this.controllerDispatch = new ControllerDispatch(2, mapObserver, unitObserver, structureObserver);
+        this.controllerManager = new ControllerManager(this.controllerDispatch, primaryStage, mapObserver, unitObserver, structureObserver);
 
     }
 

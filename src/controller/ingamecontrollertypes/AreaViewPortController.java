@@ -5,8 +5,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import model.map.MapRenderObject;
-import model.map.tile.MapRenderInformation;
+import model.RenderInformation.MapRenderObject;
+import model.RenderInformation.MapRenderInformation;
 import model.map.tile.terrain.TerrainType;
 import view.utilities.Assets;
 

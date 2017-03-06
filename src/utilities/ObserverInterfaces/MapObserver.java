@@ -1,7 +1,7 @@
 package utilities.ObserverInterfaces;
 
 
-import model.map.tile.MapRenderInformation;
+import model.RenderInformation.MapRenderInformation;
 
 /**
  * Created by Konrad on 3/3/2017.

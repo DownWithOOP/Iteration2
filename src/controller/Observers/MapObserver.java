@@ -1,14 +1,11 @@
 package controller.Observers;
 
-import controller.AbstractObserver;
-import model.map.Map;
-import model.map.MapRenderObject;
-import model.map.tile.MapRenderInformation;
+import model.RenderInformation.MapRenderInformation;
 
 /**
  * Created by Konrad on 3/3/2017.
  */
-public class MapObserver extends AbstractObserver {
+public class MapObserver implements utilities.ObserverInterfaces.MapObserver{
 
     private MapRenderInformation mapRenderInformation;
 

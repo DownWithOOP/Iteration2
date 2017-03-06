@@ -1,8 +1,7 @@
 package model.map;
 
-import javafx.geometry.Point2D;
 import model.common.Location;
-import model.map.tile.MapRenderInformation;
+import model.RenderInformation.MapRenderInformation;
 import model.map.tile.Tile;
 import model.map.tile.areaeffects.AreaEffect;
 import model.map.tile.areaeffects.AreaEffectFactory;
@@ -14,9 +13,7 @@ import model.map.tile.terrain.Terrain;
 import model.map.tile.terrain.TerrainType;
 import utilities.MapXMLParser;
 import utilities.Observer;
-import utilities.Subject;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
