@@ -49,4 +49,9 @@ public class GameModel {
     public Player getActivePlayer() {
         return playersList[activePlayerIndex];
     }
+
+    public int getActivePlayerIndex() {
+        return activePlayerIndex;
+    }
 }
+

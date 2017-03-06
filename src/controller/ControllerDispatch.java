@@ -45,4 +45,7 @@ public class ControllerDispatch {
         commandHashMap.put(CommandType.CYCLE_COMMAND_PREV, new CycleCommandPrev(gameModel.getActivePlayer()));
     }
 
+    public int getActivePlayerNumber() {
+        return gameModel.getActivePlayerIndex() + 1;
+    }
 }
