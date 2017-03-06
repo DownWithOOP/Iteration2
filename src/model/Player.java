@@ -1,27 +1,27 @@
 package model;
 
-import controller.AbstractObserver;
 import controller.commands.CycleDirection;
+import utilities.ObserverInterfaces.*;
 import model.map.Map;
-import utilities.Subject;
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
 import java.util.ArrayList;
-import java.util.Observer;
 
 /**
  * Created by Konrad on 2/17/2017.
  */
-public class Player implements MapSubject{
+public class Player implements MapSubject, UnitSubject, StructureSubject {
 
-    EntityOwnership entities;
-    Selection currentSelection;
-    CustomID customID;
-    Map playerMap; // this map will contain the map that the specific player can see
-    private ArrayList<MapObserver> observers = new ArrayList<MapObserver>(); // will contain observers that get notified of changes
+    private EntityOwnership entities;
+    private Selection currentSelection;
+    private CustomID customID;
+    private Map playerMap; // this map will contain the map that the specific player can see
+    private ArrayList<MapObserver> mapObservers = new ArrayList<MapObserver>(); // will contain observers that get notified of changes
+    private ArrayList<UnitObserver> unitObservers = new ArrayList<UnitObserver>(); // will contain observers that get notified of changes
+    private ArrayList<StructureObserver> structureObservers = new ArrayList<StructureObserver>(); // will contain observers that get notified of changes
 
-    public Player(Map map, AbstractObserver observer){
+    public Player(Map map, MapObserver observer, UnitObserver unitObserver, StructureObserver structureObserver){
 
         //TODO add an id for player in the constructor
         customID=new CustomID(IdType.player,"newPlayer");
@@ -31,10 +31,12 @@ public class Player implements MapSubject{
         this.register(observer); // used to communicate
     }
     public void endTurn(){
+        System.out.println(this.toString() + " is ending their turn");
 
     }
     public void startTurn(){
-        this.notifyObservers();
+        System.out.println(this.toString() + " is starting their turn");
+        this.notifyMapObservers(); // at the start of the game we want to give the player map to render
     }
 
     public void cycleMode(CycleDirection direction){
@@ -57,18 +59,49 @@ public class Player implements MapSubject{
         System.out.println("command cycle not hooked up yet :(");
     }
 
+    //TODO implement methods elsewhere so this compiles
+    //public UnitRenderInformation returnUnitRenderInformation() {
+        //return entities.returnUnitRenderInformation();
+    //}
+//
+    //public StructureRenderInformation returnStructurRenderInformation() {
+        //return entities.returnStructureRenderInformation();
+    //}
+
     @Override
     public void register(MapObserver o) {
-        observers.add(o);
+        mapObservers.add(o);
     }
     @Override
-    public void unregister(MapObserver o) {
-        observers.remove(o);
-    }
+    public void unregister(MapObserver o) {mapObservers.remove(o);}
     @Override
-    public void notifyObservers() {
-        for(MapObserver mapObserver : observers){
-            mapObserver.update(this.playerMap);
+    public void register(UnitObserver o) {unitObservers.add(o);}
+    @Override
+    public void unregister(UnitObserver o) {unitObservers.remove(o);}
+    @Override
+    public void register(StructureObserver o) {structureObservers.add(o);}
+    @Override
+    public void unregister(StructureObserver o) { structureObservers.add(o);}
+    @Override
+    public void notifyUnitObservers() {
+        for(UnitObserver unitObserver : unitObservers){
+            // TODO get unit render information
         }
+    }
+    @Override
+    public void notifyStructureObservers() {
+        for(StructureObserver structureObserver : structureObservers){
+            // TODO get structure render information
+        }
+    }
+    @Override
+    public void notifyMapObservers() {
+        for(MapObserver mapObserver : mapObservers){
+            mapObserver.update(playerMap.returnRenderInformation());
+        }
+    }
+
+    public CustomID getCustomID() {
+        return customID;
     }
 }

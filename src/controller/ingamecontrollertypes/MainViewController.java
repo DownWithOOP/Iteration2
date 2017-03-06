@@ -1,25 +1,24 @@
 package controller.ingamecontrollertypes;
 
 import controller.Controller;
-import controller.Observers.MainViewObserver;
 import controller.SwitchControllerRelay;
 import controller.commands.CommandType;
 import controller.inputhandler.MVCInputHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import model.MapObserver;
 import model.map.Map;
-import utilities.Observer;
+import utilities.ObserverInterfaces.MapObserver;
+import utilities.ObserverInterfaces.StructureObserver;
+import utilities.ObserverInterfaces.UnitObserver;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Observable;
 import java.util.ResourceBundle;
 
 
@@ -35,12 +34,22 @@ public class MainViewController extends Controller{
     Canvas canvas;
     @FXML
     VBox vbox;
+    @FXML
+    Label coordinateInfo;
     private Map currentMap;
     private AreaViewPortController areaViewPortController;
+    private MapObserver mapObserver;
+    private UnitObserver unitObserver;
+    private StructureObserver structureObserver;
 
     public MainViewController(){
         super();
 
+    }
+    public void setObservers(MapObserver mapObserver, UnitObserver unitObserver, StructureObserver structureObserver){
+        this.mapObserver = mapObserver;
+        this.unitObserver = unitObserver;
+        this.structureObserver = structureObserver;
     }
 
     private SwitchControllerRelay switchControllerRelay;
@@ -63,37 +72,55 @@ public class MainViewController extends Controller{
                 }
         );
     }
-
-
         @FXML
-        public void drawOnCanvas(ActionEvent actionEvent) throws  IOException{
-            if(this.areaViewPortController == null){
-                this.areaViewPortController = new AreaViewPortController(vbox, canvas); // TODO, gonna change this
-            }
-            this.currentMap = this.observer.share();
-            this.areaViewPortController.UpdateRenderInfo(currentMap.returnRenderInformation());
-            System.out.println(vbox.getChildren().size() + " size");
+        public void drawOnCanvas() throws  IOException{
+                this.areaViewPortController.UpdateRenderInfo(this.mapObserver.share());
         }
         @FXML void moveUp(ActionEvent actionEvent) throws  IOException{
-            this.areaViewPortController.changeCameraYPlus();
+            this.areaViewPortController.changeCameraYPlus(); // TODO hook this up to some keyboard input
         }
         @FXML void moveDown(ActionEvent actionEvent) throws  IOException{
-            this.areaViewPortController.changeCameraYMinus();
+            this.areaViewPortController.changeCameraYMinus(); // TODO hook this up to some keyboard input
         }
         @FXML void moveLeft(ActionEvent actionEvent) throws  IOException{
-            this.areaViewPortController.changeCameraXPlus();
+            this.areaViewPortController.changeCameraXPlus(); // TODO hook this up to some keyboard input
         }
         @FXML void moveRight(ActionEvent actionEvent) throws  IOException{
-            this.areaViewPortController.changeCameraXMinus();
+            this.areaViewPortController.changeCameraXMinus(); // TODO hook this up to some keyboard input
         }
         @FXML void cameraFaster(ActionEvent actionEvent) throws  IOException{
-            this.areaViewPortController.fasterCamera();
+            this.areaViewPortController.fasterCamera();  // TODO hook this up to some keyboard input
         }
         @FXML void cameraSlower(ActionEvent actionEvent) throws  IOException{
-            this.areaViewPortController.slowerCamer();
+            this.areaViewPortController.slowerCamer();  // TODO hook this up to some keyboard input
         }
-
-
+        @FXML void selectNorth() throws IOException{
+            this.areaViewPortController.selectNorth(); // TODO hook this up to some keyboard input
+            updateCoordinatesForDebugging();
+        }
+        @FXML void selectSouth() throws IOException{
+            this.areaViewPortController.selectSouth(); // TODO hook this up to some keyboard input
+            updateCoordinatesForDebugging();
+        }
+        @FXML void selectNE() throws IOException{
+            this.areaViewPortController.selectNE(); // TODO hook this up to some keyboard input
+            updateCoordinatesForDebugging();
+        }
+        @FXML void selectSE() throws IOException{
+            this.areaViewPortController.selectSE(); // TODO hook this up to some keyboard input
+            updateCoordinatesForDebugging();
+        }
+        @FXML void selectSW() throws IOException{
+            this.areaViewPortController.selectSW(); // TODO hook this up to some keyboard input
+            updateCoordinatesForDebugging();
+        }
+        @FXML void selectNW() throws IOException{
+            this.areaViewPortController.selectNW();  // TODO hook this up to some keyboard input
+            updateCoordinatesForDebugging();
+        }
+        private void updateCoordinatesForDebugging(){ // for debugging, once game is working we can get rid of this
+            this.coordinateInfo.setText(areaViewPortController.returnXCoordinate() + " " + areaViewPortController.returnYCoordinate());
+        }
 
         @FXML
         public void handleChangeToStructureView(ActionEvent actionEvent) throws  IOException{
@@ -138,8 +165,10 @@ public class MainViewController extends Controller{
         }
 
         @Override
-        public void initialize(URL location, ResourceBundle resources) {
-
+        public void initialize(URL location, ResourceBundle resources) { // initialized the component correctly
+            this.areaViewPortController = new AreaViewPortController(vbox, canvas);
         }
+
+
 }
 
