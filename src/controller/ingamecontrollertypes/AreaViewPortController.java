@@ -1,22 +1,19 @@
 package controller.ingamecontrollertypes;
 
-import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import model.MapObserver;
-import model.common.Location;
-import model.map.Map;
-import model.map.MapRenderObject;
-import model.map.tile.MapRenderInformation;
+import model.RenderInformation.MapRenderObject;
+import model.RenderInformation.MapRenderInformation;
 import model.map.tile.terrain.TerrainType;
+import view.utilities.Assets;
 
 /**
  * Created by Konrad on 3/1/2017.
  */
-// this will be used to represent just the canvas area that will display a subset area of the map
+// this will be control the canvas area that is used to display the areaViewport
 public class AreaViewPortController{
 
     private double cameraX;
@@ -25,30 +22,67 @@ public class AreaViewPortController{
     private Canvas canvas;
     private int cameraSpeed;
     private MapRenderInformation mapRenderInformation;
+    private double XBound;
+    private double YBound;
+    private int selectX;
+    private int selectY;
+    private int gridSizeX;
+    private int gridSizeY;
+    private boolean alteranteColumn;
+
+    Image grass = Assets.getInstance().GRASS;
+    Image water = Assets.getInstance().WATER;
+    Image dirt = Assets.getInstance().DIRT;
+    Image mountain = Assets.getInstance().CRATER;
+    Image select = Assets.getInstance().SELECT;
 
     public AreaViewPortController(VBox vbox, Canvas canvas){
-        this.cameraX = 0;
-        this.cameraY = 0;
+        this.cameraX = 100; // default camera shift/starting position
+        this.cameraY = 600; // default camera shift/starting position
         this.vBox = vbox;
         this.canvas = canvas;
-        this.cameraSpeed = 31;
+        this.cameraSpeed = 101;
+        this.selectX = 6; // starting X of selected tile
+        this.selectY = 6; // starting Y of selected tile
+        this.alteranteColumn = true;
+
     }
+    /** Camera Navigation Controls **/
+
     public void changeCameraXPlus(){
         this.cameraX += cameraSpeed;
+        if(this.cameraX > 0){
+            this.cameraX = 0; // keep in bounds
+        }
         this.drawSomething();
     }
     public void changeCameraYPlus(){
         this.cameraY += cameraSpeed;
+        if(this.cameraY > this.YBound){
+            this.cameraY = this.YBound; // keep in bounds;
+        }
         this.drawSomething();
     }
     public void changeCameraXMinus(){
-        this.cameraX -= cameraSpeed;
+        if(this.cameraX - cameraSpeed < (this.XBound*-1)){
+            this.cameraX = this.XBound * -1;
+        } else {
+            this.cameraX -= cameraSpeed;
+        }
         this.drawSomething();
     }
     public void changeCameraYMinus(){
-        this.cameraY -= cameraSpeed;
+
+        if(this.cameraY - cameraSpeed < (grass.getHeight()*0.5)){
+            this.cameraY = grass.getHeight()*0.5;
+        } else {
+            this.cameraY -= cameraSpeed;
+        }
         this.drawSomething();
     }
+
+    /** camera speed, controls how much canvas is moved by each time
+     */
     public void fasterCamera(){
         this.cameraSpeed += 10;
     }
@@ -60,112 +94,178 @@ public class AreaViewPortController{
     }
     public void UpdateRenderInfo(MapRenderInformation renderMap){
         this.mapRenderInformation = renderMap;
+        this.gridSizeX = mapRenderInformation.getX();
+        this.gridSizeY = mapRenderInformation.getY();
+            this.YBound = ((double) this.mapRenderInformation.getY()) * grass.getHeight()*0.75 + grass.getHeight()*2;
+            this.XBound = ((double) this.mapRenderInformation.getX()) * grass.getWidth()*0.7 + grass.getWidth() - this.canvas.getWidth();
        this.drawSomething();
 
     }
 
+    public void drawSelection(){
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        double width = grass.getWidth();
+        double height = grass.getHeight();
+        if(alteranteColumn){
+            gc.drawImage(select,0.75*width*selectX+ cameraX,height*1*-selectY+ cameraY + width*0.45);
+        } else {
+            gc.drawImage(select,0.75*width*selectX+ cameraX,height*1*-selectY+ cameraY + width*0.9);
+        }
+    }
+
+    /** selection control **/
+
+    public void selectNorth(){
+        this.selectY++; // update value
+        if(this.selectY >= gridSizeY){
+            this.selectY = gridSizeY-1;
+        }
+        drawSomething(); // rerender entire map
+    }
+    public void selectSouth(){
+        this.selectY--; // update value
+        if(this.selectY < 0){
+            this.selectY = 0;
+        }
+        drawSomething(); // rerender entire map
+
+    }
+    public void selectNE(){
+        this.selectX++; // update value
+        if(this.alteranteColumn){  // column #1
+            this.selectY++;
+            if(this.selectX+1 > this.gridSizeX || this.selectY+1 > gridSizeY){
+                this.selectX--; // reset to original position and don't alternate if out of bounds
+                this.selectY--;
+            } else {
+                this.alteranteColumn = false;
+            }
+        } else { // column #2
+            if(this.selectX+1 > this.gridSizeX){
+                this.selectX--; // restore to original position if out of bounds and don't rotate
+            } else {  this.alteranteColumn = true; }
+        }
+        drawSomething(); // rerender entire map
+    }
+    public void selectSE(){
+        this.selectX++; // update value
+        if(this.alteranteColumn){
+            if(selectX+1 > gridSizeX){ // out of bounds, don't alternate, stay in same place
+                this.selectX--;
+            } else {
+                this.alteranteColumn = false;
+            }
+        } else {
+            this.selectY--;
+            if(this.selectY < 0 || this.selectX+1 > gridSizeX  ){ // out of bounds, keep in original position, don't change column
+                this.selectY++;
+                this.selectX--;
+            } else {
+                this.alteranteColumn = true;
+            }
+        }
+        drawSomething();
+    }
+
+    public void selectSW(){
+        this.selectX--; // update value
+        if(this.alteranteColumn){
+            if(this.selectX < 0){
+                this.selectX++;
+            } else {
+                this.alteranteColumn = false;
+            }
+        } else {
+            this.selectY--;
+            if(this.selectY < 0 || this.selectX < 0){ // out of bounds, keep original position, don't alternate
+                this.selectX++;
+                this.selectY++;
+            } else{
+                this.alteranteColumn = true;
+            }
+        }
+         drawSomething();
+    }
+    public void selectNW(){
+        this.selectX--; // update value
+        if(this.alteranteColumn){
+                this.selectY++;
+                if(this.selectY+1 > gridSizeY || this.selectX < 0){ // out of bounds, restore to original place, don't alternatete
+                    this.selectX++;
+                    this.selectY--;
+                } else{
+                    this.alteranteColumn = false; // coordinates are valid
+                }
+            }
+        else {
+            if (this.selectX < 0) {
+                this.selectX++;  // bad, reset to original
+            } else {
+                this.alteranteColumn = true; // coordinate is good
+            }
+        }
+        drawSomething();
+    }
+
+    /**
+     * Currently these 2 methods are for debugging to see if moving around the map works correctly
+     */
+
+    public int returnXCoordinate(){
+        return this.selectX;
+    }
+    public int returnYCoordinate(){
+        return this.selectY;
+    }
+
+    /** actually draws and renders the map that is currently stored in teh mapRenderInformation
+     *
+     */
     public void drawSomething(){
         MapRenderObject[][] renderObjects = this.mapRenderInformation.getRenderObjectMap();
 
-        Image image = new Image("resources/images/grass1.png");
-        Image image2 = new Image("resources/images/water1.png");
-        Image image3 = new Image("resources/images/dirt1.png");
-        Image image4 = new Image("resources/images/mountain1.png");
 
-
-        double width = image.getWidth();
-        double height = image.getHeight();
+        double width = grass.getWidth();
+        double height = grass.getHeight();
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setFill(Color.TRANSPARENT);
         gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
-        gc.setFill(Color.WHITE);
+        gc.setFill(Color.BLACK);
         gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
-        double xOffset = 0;
-        double yOffset = 0;
+
 
         for(int i=0; i<mapRenderInformation.getY()   ; i++){
             for(int j=0; j<mapRenderInformation.getY(); j++){
                 TerrainType current = renderObjects[i][j].getTerrainType();
                 if(j%2 == 0){
                     if(current.equals(TerrainType.GRASS)){
-                        System.out.print(" GRASS ");
-                        gc.drawImage(image,0.75*width*j+ cameraX,height*1*i+ cameraY + width*0.45);
+                      //  System.out.print(" GRASS ");
+                        gc.drawImage(grass,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
                     } else if(current.equals(TerrainType.DIRT)){
-                        System.out.print(" DIRT ");
-                        gc.drawImage(image3,0.75*width*j+ cameraX,height*1*i+ cameraY+ width*0.45);
+                     //   System.out.print(" DIRT ");
+                        gc.drawImage(dirt,0.75*width*j+ cameraX,height*1*-i+ cameraY+ width*0.45);
                     } else if(current.equals(TerrainType.WATER)){
-                        System.out.print(" WATER ");
-                        gc.drawImage(image2,0.75*width*j+ cameraX,height*1*i+ cameraY + width*0.45);
+                      //  System.out.print(" WATER ");
+                        gc.drawImage(water,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
                     }
-
                 }
                 else {
                     if(current.equals(TerrainType.GRASS)){
-                        System.out.print(" GRASS ");
-                        gc.drawImage(image,0.75*width*j+ cameraX,height*1*i+ cameraY);
+                       // System.out.print(" GRASS ");
+                        gc.drawImage(grass,0.75*width*j+ cameraX,height*1*-i+ cameraY  +height);
                     } else if(current.equals(TerrainType.DIRT)){
-                        System.out.print(" DIRT ");
-                        gc.drawImage(image3,0.75*width*j+ cameraX,height*1*i+ cameraY);
+                       // System.out.print(" DIRT ");
+                        gc.drawImage(dirt,0.75*width*j+ cameraX,height*1*-i+ cameraY +height);
                     } else if(current.equals(TerrainType.WATER)){
-                        System.out.print(" WATER ");
-                        gc.drawImage(image2,0.75*width*j+ cameraX,height*1*i+ cameraY);
+                        //System.out.print(" WATER ");
+                        gc.drawImage(water,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
                     }
                 }
-
-
             }
-            System.out.println();
+            //System.out.println();
         }
-        System.out.println("---------------");
-
-
-        // TODO just a few sample tiles atm, in future will connect with actual map
-        /*
-
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.setFill(Color.TRANSPARENT);
-        gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
-        gc.setFill(Color.WHITE);
-        gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
-
-        Image image = new Image("resources/images/grass1.png");
-        Image image2 = new Image("resources/images/water1.png");
-        Image image3 = new Image("resources/images/dirt1.png");
-        Image image4 = new Image("resources/images/mountain1.png");
-        gc.drawImage(image,0+ cameraX,0 + cameraY);
-        gc.drawImage(image,0 + cameraX,image.getHeight() + cameraY);
-        gc.drawImage(image,image.getWidth()*0.75 + cameraX,image.getHeight()*0.5 + cameraY);
-        gc.drawImage(image,image.getWidth()*0.75 + cameraX,image.getHeight()*1.5 + cameraY);
-        gc.drawImage(image,image.getWidth()*0.75 + cameraX,image.getHeight()*-0.5 + cameraY);
-        gc.drawImage(image2,image.getWidth()*1.5 + cameraX,image.getHeight() + cameraY);
-        gc.drawImage(image2,image.getWidth()*1.5 + cameraX,0 + cameraY);
-        gc.drawImage(image,image.getWidth()*2.25 + cameraX,image.getHeight()*-0.5 + cameraY);
-        gc.drawImage(image3,image.getWidth()*2.25 + cameraX,image.getHeight()*0.5 + cameraY);
-        gc.drawImage(image4,image.getWidth()*2.25 + cameraX,image.getHeight()*1.5 + cameraY);
-        gc.drawImage(image4,image.getWidth()*3 + cameraX,image.getHeight()*-1 + cameraY);
-        gc.drawImage(image3,image.getWidth()*3 + cameraX,0 + cameraY);
-        gc.drawImage(image4,image.getWidth()*3 + cameraX,image.getHeight() + cameraY);
-        gc.drawImage(image4,image.getWidth()*3 + cameraX,image.getHeight()*2 + cameraY);
-
-
-        double width = image.getWidth();
-        double height = image.getHeight();
-
-        for(int j=-5; j<5; j+=2){ // this handles even rows
-            gc.drawImage(image,0.75*width*j+ cameraX,height*-0.5+ cameraY);
-            gc.drawImage(image,0.75*width*j+ cameraX,height*0.5 + cameraY);
-            gc.drawImage(image4,0.75*width*j+ cameraX,height*1.5 + cameraY);
-            gc.drawImage(image,0.75*width*j+ cameraX,height*2.5+ cameraY);
-        }
-        for(int j=-4; j<5; j+=2){ // this handles odd rows
-            gc.drawImage(image,0.75*width*j+ cameraX,height*-1+ cameraY);
-            gc.drawImage(image,0.75*width*j+ cameraX,height*0 + cameraY);
-            gc.drawImage(image2,0.75*width*j+ cameraX,height*1 + cameraY);
-            gc.drawImage(image3,0.75*width*j+ cameraX,height*2+ cameraY);
-
-        }
-        */
-
+       // System.out.println("---------------");
+        drawSelection();
     }
 }

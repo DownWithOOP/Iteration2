@@ -57,6 +57,11 @@ public class StructureViewController extends Controller{
         );
     }
 
+    @Override
+    protected void render() {
+
+    }
+
     @FXML
     private Stage getStage() {
         Stage stage = (Stage) ap.getScene().getWindow();

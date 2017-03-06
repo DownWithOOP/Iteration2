@@ -1,7 +1,9 @@
 package model;
 
-import controller.AbstractObserver;
 import model.map.Map;
+import utilities.ObserverInterfaces.MapObserver;
+import utilities.ObserverInterfaces.StructureObserver;
+import utilities.ObserverInterfaces.UnitObserver;
 
 /**
  * Created by Konrad on 2/17/2017.
@@ -12,13 +14,13 @@ public class GameModel {
     private int activePlayerIndex; // this is the player whose current turn it is
     private Map masterMap; // the map that will have the global map, each player will have their own map as well
 
-    public GameModel(int numberOfPlayers, AbstractObserver observer) {
+    public GameModel(int numberOfPlayers, MapObserver observer, UnitObserver unitObserver, StructureObserver structureObserver) {
 
         playersList = new Player[numberOfPlayers];
         // we create the master map
         this.masterMap = initializeMap();
         for (int i = 0; i < numberOfPlayers; i++) {
-            Player temp = new Player(masterMap,observer); // TODO, give players unique maps
+            Player temp = new Player(masterMap,observer, unitObserver, structureObserver); // TODO, give players unique maps
             playersList[i] = temp;
         }
         // when game starts, player 1 is starting

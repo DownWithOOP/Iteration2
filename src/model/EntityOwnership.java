@@ -4,6 +4,10 @@ package model;
 //import model.common.Location;
 import controller.availablecommands.Commandable;
 import controller.commands.CycleDirection;
+import model.RenderInformation.StructureRenderInformation;
+import model.RenderInformation.StructureRenderObject;
+import model.RenderInformation.UnitRenderInformation;
+import model.RenderInformation.UnitRenderObject;
 import model.entities.Entity;
 import model.entities.EntityType;
 import model.entities.structure.Capital;
@@ -326,18 +330,30 @@ public class EntityOwnership {
         }
     }
 
-    //TODO change this method so that it doesn't return units in order to render them
-    public List<Unit> getUnit(){
-        List<Unit> renderList= new ArrayList<>();
-        for (List<Entity> list:
-                unitList) {
-            for (Entity ent:
-                    list) {
-                Unit temp=(Unit)ent;
-                renderList.add(temp);
+    //TODO implement methods elsewhere so this compiles
+    public UnitRenderInformation returnUnitRenderInformation() {
+        UnitRenderInformation renderInfo = new UnitRenderInformation();
+        for (List<Entity> list : unitList) {
+            for (Entity entity : list) {
+                Unit unit = (Unit) entity;
+                UnitRenderObject temp = new UnitRenderObject(unit.getEntityType(), (int)(unit.getLocation().getX()), (int)(unit.getLocation().getY()));
+                renderInfo.addUnit(temp);
             }
         }
-        return renderList;
+        return renderInfo;
+    }
+
+    //TODO implement methods elsewhere so this compiles
+    public StructureRenderInformation returnStructureRenderInformation() {
+        StructureRenderInformation renderInfo = new StructureRenderInformation();
+        for (List<Entity> list : structureList) {
+            for (Entity entity : list) {
+                Structure structure = (Structure) entity;
+                StructureRenderObject temp = new StructureRenderObject( structure.getEntityType(),(int)(structure.getLocation().getX()),(int)(structure.getLocation().getY()));
+                renderInfo.addStructure(temp);
+            }
+        }
+        return renderInfo;
     }
 
     //TODO change this method so that it doesn't return structures in order to render them

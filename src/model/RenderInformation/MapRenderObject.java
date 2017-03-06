@@ -1,4 +1,4 @@
-package model.map;
+package model.RenderInformation;
 
 import model.map.tile.resources.ResourceType;
 import model.map.tile.terrain.TerrainType;
