@@ -2,22 +2,23 @@ package controller.Observers;
 
 import controller.AbstractObserver;
 import model.map.Map;
+import model.map.MapRenderObject;
+import model.map.tile.MapRenderInformation;
 
 /**
  * Created by Konrad on 3/3/2017.
  */
 public class MainViewObserver  extends AbstractObserver {
-    private Map map;
+
+    private MapRenderInformation mapRenderInformation;
 
     @Override
-    public void update(Map map) {
-        this.map = map;
+    public void update(MapRenderInformation mapRenderInformation) {
+        this.mapRenderInformation = mapRenderInformation;
     }
 
     @Override
-    public Map share() {
-        return this.map;
+    public MapRenderInformation share() {
+        return this.mapRenderInformation;
     }
-
-
 }

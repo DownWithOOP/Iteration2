@@ -68,8 +68,7 @@ public class MainViewController extends Controller{
     }
         @FXML
         public void drawOnCanvas() throws  IOException{
-                this.currentMap = this.observer.share();
-                this.areaViewPortController.UpdateRenderInfo(currentMap.returnRenderInformation());
+                this.areaViewPortController.UpdateRenderInfo(this.observer.share());
         }
         @FXML void moveUp(ActionEvent actionEvent) throws  IOException{
             this.areaViewPortController.changeCameraYPlus(); // TODO hook this up to some keyboard input

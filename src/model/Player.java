@@ -68,7 +68,7 @@ public class Player implements MapSubject{
     @Override
     public void notifyObservers() {
         for(MapObserver mapObserver : observers){
-            mapObserver.update(this.playerMap);
+            mapObserver.update(playerMap.returnRenderInformation());
         }
     }
 }

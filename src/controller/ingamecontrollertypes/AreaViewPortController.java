@@ -29,15 +29,15 @@ public class AreaViewPortController{
     private int gridSizeY;
     private boolean alteranteColumn;
 
-    Image image = new Image("resources/images/grass1.png");
-    Image image2 = new Image("resources/images/water1.png");
-    Image image3 = new Image("resources/images/dirt1.png");
-    Image image4 = new Image("resources/images/mountain1.png");
-    Image image5 = new Image("resources/images/select.png");
+    Image image = new Image("resources/images/smallgrass1.png");
+    Image image2 = new Image("resources/images/smallwater1.png");
+    Image image3 = new Image("resources/images/smalldirt1.png");
+   // Image image4 = new Image("resources/images/smallgrass1.png"); TODO for mountain
+    Image image5 = new Image("resources/images/smallselect.png");
 
     public AreaViewPortController(VBox vbox, Canvas canvas){
-        this.cameraX = -400; // default camera shift/starting position
-        this.cameraY = 400; // default camera shift/starting position
+        this.cameraX = 100; // default camera shift/starting position
+        this.cameraY = 600; // default camera shift/starting position
         this.vBox = vbox;
         this.canvas = canvas;
         this.cameraSpeed = 101;
