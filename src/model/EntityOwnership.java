@@ -326,6 +326,17 @@ public class EntityOwnership {
         }
     }
 
+    public UnitRenderInformation returnUnitRenderInformation() {
+        UnitRenderInformation renderInfo = new UnitRenderInformation();
+        for (List<Entity> list : unitList) {
+            for (Entity entity : list) {
+                renderInfo.addUnit( (Unit) entity);
+            }
+        }
+
+        return renderInfo;
+    }
+
     //TODO change this method so that it doesn't return units in order to render them
     public List<Unit> getUnit(){
         List<Unit> renderList= new ArrayList<>();
@@ -338,6 +349,17 @@ public class EntityOwnership {
             }
         }
         return renderList;
+    }
+
+    public StructureRenderInformation returnStructureRenderInformation() {
+        StructureRenderInformation renderInfo = new StructureRenderInformation();
+        for (List<Entity> list : structureList) {
+            for (Entity entity : list) {
+                renderInfo.addStructure( (Structure) entity);
+            }
+        }
+
+        return renderInfo;
     }
 
     //TODO change this method so that it doesn't return structures in order to render them
