@@ -129,7 +129,7 @@ public class AreaViewPortController{
         drawSomething(); // rerender entire map
 
     }
-    public void selectNE(){ // TODO check edge cases
+    public void selectNE(){
         this.selectX++; // update value
         if(this.alteranteColumn){  // column #1
             this.selectY++;
@@ -146,7 +146,7 @@ public class AreaViewPortController{
         }
         drawSomething(); // rerender entire map
     }
-    public void selectSE(){ // TODO check edge cases
+    public void selectSE(){
         this.selectX++; // update value
         if(this.alteranteColumn){
             if(selectX+1 > gridSizeX){ // out of bounds, don't alternate, stay in same place
@@ -166,14 +166,7 @@ public class AreaViewPortController{
         drawSomething();
     }
 
-    public int returnXCoordinate(){
-        return this.selectX;
-    }
-    public int returnYCoordinate(){
-        return this.selectY;
-    }
-
-    public void selectSW(){ // TODO check edge cases
+    public void selectSW(){
         this.selectX--; // update value
         if(this.alteranteColumn){
             if(this.selectX < 0){
@@ -192,7 +185,7 @@ public class AreaViewPortController{
         }
          drawSomething();
     }
-    public void selectNW(){ // TODO check edge cases
+    public void selectNW(){
         this.selectX--; // update value
         if(this.alteranteColumn){
                 this.selectY++;
@@ -213,6 +206,16 @@ public class AreaViewPortController{
         drawSomething();
     }
 
+    /**
+     * Currently these 2 methods are for debugging to see if moving around the map works correctly
+     */
+
+    public int returnXCoordinate(){
+        return this.selectX;
+    }
+    public int returnYCoordinate(){
+        return this.selectY;
+    }
 
     /** actually draws and renders the map that is currently stored in teh mapRenderInformation
      *
