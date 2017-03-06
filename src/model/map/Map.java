@@ -130,7 +130,46 @@ public class Map {
     }
 
     public HashMap<Location, Tile> getAdjacentTiles(Location location){
-        return null;
+
+        HashMap<Location, Tile> adjTiles = new HashMap<>();
+
+        //top tile
+        Location top = new Location((int) location.getX(), (int) location.getY() + 1);
+
+        if(tiles.get(top) != null)
+            adjTiles.put(top, tiles.get(top));
+
+        //bottom tile
+        Location bottom = new Location((int) location.getX(), (int) location.getY() - 1);
+
+        if(tiles.get(bottom) != null)
+            adjTiles.put(bottom, tiles.get(bottom));
+
+        //ne tile
+        Location ne = new Location((int) location.getX() + 1, (int) location.getY() + 1);
+
+        if(tiles.get(ne) != null)
+            adjTiles.put(ne, tiles.get(ne));
+
+        //nw tile
+        Location nw = new Location((int) location.getX() - 1, (int) location.getY() + 1);
+
+        if(tiles.get(nw) != null)
+            adjTiles.put(nw, tiles.get(nw));
+
+        //se tile
+        Location se = new Location((int) location.getX() + 1, (int) location.getY());
+
+        if(tiles.get(se) != null)
+            adjTiles.put(se, tiles.get(se));
+
+        //sw tile
+        Location sw = new Location((int) location.getX() - 1, (int) location.getY());
+
+        if(tiles.get(sw) != null)
+            adjTiles.put(sw, tiles.get(sw));
+
+        return adjTiles;
     }
 
     public Tile getTile(Location location){
@@ -141,6 +180,7 @@ public class Map {
 
     public static void main(String[] args){
         Map map = new Map();
+        HashMap<Location, Tile> adj = map.getAdjacentTiles(new Location(6, 6));
         System.out.println(map.getTile(new Location(0, 1)));
     }
 
