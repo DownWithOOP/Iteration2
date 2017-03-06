@@ -1,6 +1,6 @@
 package controller;
 
-import controller.Observers.MainViewObserver;
+import controller.Observers.MapObserver;
 import controller.ingamecontrollertypes.ControllerType;
 import controller.ingamecontrollertypes.MainViewController;
 import javafx.fxml.FXMLLoader;
@@ -25,14 +25,14 @@ public class ControllerManager {
     // it will be done here
     private SwitchControllerRelay switchControllerRelay;
     private ControllerDispatch controllerDispatch;
-    private MainViewObserver mainViewObserver;
+    private MapObserver mapObserver;
 
-    public ControllerManager(ControllerDispatch controllerDispatch, Stage primaryStage, MainViewObserver mainViewObserver) throws IOException {
+    public ControllerManager(ControllerDispatch controllerDispatch, Stage primaryStage, MapObserver mapObserver) throws IOException {
 
         // primary stage that is essentially the window
         this.primaryStage = primaryStage;
         this.activeController = this.controllerMap.get(ControllerType.welcomeViewController);
-        this.mainViewObserver = mainViewObserver;
+        this.mapObserver = mapObserver;
 
         // used for communication between the inputReconginzers and the controllerManager when a controller needs to be switched
         switchControllerRelay = new SwitchControllerRelay(this);
@@ -58,7 +58,7 @@ public class ControllerManager {
         inputController.takeInSwitchControllerRelay(switchControllerRelay);
         inputController.enableKeyboardInput();
         inputController.setDispatch(controllerDispatch);
-        inputController.takeInObserver(mainViewObserver);
+        inputController.takeInObserver(mapObserver);
         MainViewController temp =  (MainViewController)inputController; // Sketchy but we have to downCast to the MainView Controller type
         temp.drawOnCanvas(); // at this point everything is guaranteed to have loaded in and we can display the map
         primaryStage.show();

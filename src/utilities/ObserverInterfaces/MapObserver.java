@@ -1,4 +1,4 @@
-package model;
+package utilities.ObserverInterfaces;
 
 
 import model.map.tile.MapRenderInformation;

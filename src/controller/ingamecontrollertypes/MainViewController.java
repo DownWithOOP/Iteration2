@@ -1,26 +1,21 @@
 package controller.ingamecontrollertypes;
 
 import controller.Controller;
-import controller.Observers.MainViewObserver;
 import controller.SwitchControllerRelay;
 import controller.commands.CommandType;
 import controller.inputhandler.MVCInputHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import model.MapObserver;
 import model.map.Map;
-import utilities.Observer;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Observable;
 import java.util.ResourceBundle;
 
 

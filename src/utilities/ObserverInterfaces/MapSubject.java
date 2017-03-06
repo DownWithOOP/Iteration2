@@ -1,4 +1,4 @@
-package model;
+package utilities.ObserverInterfaces;
 
 /**
  * Created by Konrad on 3/3/2017.
@@ -7,5 +7,5 @@ package model;
 public interface MapSubject {
     void register(MapObserver o);
     void unregister(MapObserver o);
-    void notifyObservers();
+    void notifyMapObservers();
 }

@@ -1,6 +1,6 @@
 package controller;
 
-import model.MapObserver;
+import utilities.ObserverInterfaces.MapObserver;
 
 /**
  * Created by Konrad on 3/3/2017.

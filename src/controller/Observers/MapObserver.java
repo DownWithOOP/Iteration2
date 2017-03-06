@@ -8,7 +8,7 @@ import model.map.tile.MapRenderInformation;
 /**
  * Created by Konrad on 3/3/2017.
  */
-public class MainViewObserver  extends AbstractObserver {
+public class MapObserver extends AbstractObserver {
 
     private MapRenderInformation mapRenderInformation;
 
