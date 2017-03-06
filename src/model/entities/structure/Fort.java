@@ -29,7 +29,7 @@ public class Fort extends Structure {
 
     @Override
     protected IdType getIdType() {
-        return IdType.fort;
+        return IdType.FORT;
     }
 
     @Override

@@ -58,7 +58,7 @@ public class Army extends Entity implements Fighter {
     //TODO: change this method
     @Override
     protected IdType getIdType() {
-        return IdType.army;
+        return IdType.ARMY;
     }
 
     @Override

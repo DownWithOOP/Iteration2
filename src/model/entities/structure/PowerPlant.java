@@ -1,6 +1,5 @@
 package model.entities.structure;
 
-import model.entities.EntityId;
 import model.entities.Stats.Stats;
 import model.entities.Stats.StructureStats;
 import utilities.id.CustomID;
@@ -21,7 +20,7 @@ public class PowerPlant extends Structure {
 
     @Override
     protected IdType getIdType() {
-        return IdType.powerPlant;
+        return IdType.POWER_PLANT;
     }
 
     @Override

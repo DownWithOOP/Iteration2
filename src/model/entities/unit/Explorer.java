@@ -1,6 +1,5 @@
 package model.entities.unit;
 
-import model.entities.EntityId;
 import model.entities.Stats.Stats;
 import model.entities.Stats.UnitStats;
 import utilities.id.CustomID;
@@ -22,7 +21,7 @@ public class Explorer extends Unit{
 
     @Override
     protected IdType getIdType() {
-        return IdType.explorer;
+        return IdType.EXPLORER;
     }
 
     @Override

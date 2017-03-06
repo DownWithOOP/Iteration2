@@ -25,7 +25,7 @@ public class Player implements MapSubject, UnitSubject, StructureSubject {
     public Player(Map map, MapObserver observer, UnitObserver unitObserver, StructureObserver structureObserver){
 
         //TODO add an id for player in the constructor
-        customID=new CustomID(IdType.player,"newPlayer");
+        customID=new CustomID(IdType.PLAYER,"newPlayer");
         entities = new EntityOwnership(customID); //TODO should entity ownership know Player?
         currentSelection = new Selection(entities.getCurrentInstance()); //TODO rename method
         this.playerMap = map; // TODO for the moment global map is shared, later each player will have own map

@@ -1,6 +1,5 @@
 package model.entities.structure;
 
-import model.entities.EntityId;
 import model.entities.Stats.Stats;
 import model.entities.Stats.StructureStats;
 import utilities.id.CustomID;
@@ -22,7 +21,7 @@ public class Farm extends Structure {
 
     @Override
     protected IdType getIdType() {
-        return IdType.farm;
+        return IdType.FARM;
     }
 
     @Override

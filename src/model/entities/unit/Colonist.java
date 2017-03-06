@@ -21,7 +21,7 @@ public class Colonist extends Unit{
 
     @Override
     protected IdType getIdType() {
-        return IdType.colonist;
+        return IdType.COLONIST;
     }
 
     @Override

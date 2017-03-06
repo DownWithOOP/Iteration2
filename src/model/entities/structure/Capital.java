@@ -31,7 +31,7 @@ public class Capital extends Structure {
 
     @Override
     protected IdType getIdType() {
-        return IdType.capital;
+        return IdType.CAPITAL;
     }
 
     @Override

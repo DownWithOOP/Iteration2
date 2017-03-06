@@ -21,7 +21,7 @@ public class Worker extends Unit {
 
     @Override
     protected IdType getIdType() {
-        return IdType.worker;
+        return IdType.WORKER;
     }
 
     //todo:this should not have attacking, defensive damage, range, only fighters have these

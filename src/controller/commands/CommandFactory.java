@@ -108,7 +108,7 @@ public class CommandFactory {
     }
 
     public static void main(String[] args) {
-        CustomID customID = new CustomID(IdType.player, "5");
+        CustomID customID = new CustomID(IdType.PLAYER, "5");
 
         Melee melee = new Melee(customID, "6");
         Colonist colonist = new Colonist(customID, "6");

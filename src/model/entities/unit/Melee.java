@@ -21,7 +21,7 @@ public class Melee extends Unit{
 
     @Override
     protected IdType getIdType() {
-        return IdType.melee;
+        return IdType.MELEE;
     }
 
     @Override
@@ -36,7 +36,7 @@ public class Melee extends Unit{
 
     @Override
     public void joinArmy(int armyNumber) {
-        System.out.println("joined army"+ armyNumber);
+        System.out.println("joined army " + armyNumber);
     }
 
     @Override
