@@ -14,8 +14,8 @@ public class ObservationTower extends Structure {
      * @param playerId
      * @param id
      */
-    public ObservationTower(CustomID playerId, String id) {
-        super(playerId, id);
+    public ObservationTower(CustomID playerId, String id, int locationX, int locationY) {
+        super(playerId, id, locationX, locationY);
     }
 
     @Override

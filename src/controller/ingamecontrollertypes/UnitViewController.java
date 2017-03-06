@@ -4,11 +4,18 @@ import controller.Controller;
 import controller.SwitchControllerRelay;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.RenderInformation.UnitRenderInformation;
+import model.RenderInformation.UnitRenderObject;
 import utilities.ObserverInterfaces.UnitObserver;
+import java.util.ArrayList;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,6 +28,8 @@ public class UnitViewController extends Controller
 {
     @FXML
     private Pane ap;
+    @FXML
+    private ScrollPane pane;
     private SwitchControllerRelay switchControllerRelay;
     private UnitObserver unitObserver; // this observer gets all the information from the model that we need for rendering/displaying
     @Override
@@ -53,7 +62,16 @@ public class UnitViewController extends Controller
 
     @Override
     protected void render() {
-
+        UnitRenderInformation unitRenderInformation = unitObserver.share();
+        ArrayList<UnitRenderObject> data = unitRenderInformation.returnRenderInformation();
+        VBox vb = new VBox();
+        for(int i=0; i<data.size(); i++){
+            UnitRenderObject renderObject = data.get(i);
+            Label label = new Label();
+            label.setText("Type: " +renderObject.getIdType()+ "             locationX: " +renderObject.getLocationX()+ "            locationY: "  +renderObject.getLocationY());
+            vb.getChildren().add(label);
+        }
+        pane.setContent(vb);
     }
 
     public void setObservers(UnitObserver unitObserver){

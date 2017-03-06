@@ -12,8 +12,9 @@ public abstract class Structure extends Entity {
     /**
      * @param playerId
      */
-    public Structure(CustomID playerId, String id) {
-        super(playerId, id);
+
+    public Structure(CustomID playerId, String id, int locationX, int locationY) {
+        super(playerId, id, locationX, locationY);
         //TODO: addAllCommands to be placed here after all the structure actions are defined
     }
 }

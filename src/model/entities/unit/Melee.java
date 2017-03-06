@@ -15,8 +15,8 @@ public class Melee extends Unit{
      * @param playerId
      * @param id
      */
-    public Melee(CustomID playerId, String id) {
-        super(playerId, id);
+    public Melee(CustomID playerId, String id, int locationX, int locationY) {
+        super(playerId, id, locationX, locationY);
     }
 
     @Override

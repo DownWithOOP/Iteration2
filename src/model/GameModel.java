@@ -19,8 +19,20 @@ public class GameModel {
         playersList = new Player[numberOfPlayers];
         // we create the master map
         this.masterMap = initializeMap();
+        // right now just for 2 players, we give them the starting locations of their units
+        // current map is 24 wide(x), and 12 high (y)
+        // first player will start at  (6,4)
+        // second player will start at (17,7)
+
         for (int i = 0; i < numberOfPlayers; i++) {
-            Player temp = new Player(masterMap,observer, unitObserver, structureObserver); // TODO, give players unique maps
+            Player temp;
+            if(i ==0){ // player 1
+                temp = new Player(masterMap,observer, unitObserver, structureObserver, 6,4); // TODO, give players unique maps
+            } else if( i== 1){
+                temp = new Player(masterMap,observer, unitObserver, structureObserver, 17,7); // TODO, give players unique maps
+            } else {
+                temp = new Player(masterMap,observer, unitObserver, structureObserver, 0,0); // TODO give players unique maps
+            }
             playersList[i] = temp;
         }
         // when game starts, player 1 is starting

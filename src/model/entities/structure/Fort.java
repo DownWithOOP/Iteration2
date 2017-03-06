@@ -14,15 +14,15 @@ import utilities.id.IdType;
 public class Fort extends Structure {
     private UnitFactory unitFactory;
 
-    public Fort(CustomID playerId, String id) {
-        super(playerId, id);
+    public Fort(CustomID playerId, String id, int locationX, int locationY) {
+        super(playerId, id, locationX, locationY);
         unitFactory = new UnitFactory();
     }
 
     // Fort creates soldiers (Melee and Unit)
     public Unit createUnit(EntityType entityType, CustomID customID, String id) {
         if (entityType.equals(EntityType.MELEE) || entityType.equals(entityType.RANGED)) {
-            return unitFactory.getEntity(entityType, customID, id);
+            return unitFactory.getEntity(entityType, customID, id,(int)(super.getLocation().getX()),(int)(super.getLocation().getY()));
         }
         return null;
     }

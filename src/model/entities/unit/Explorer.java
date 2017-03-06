@@ -15,8 +15,8 @@ public class Explorer extends Unit{
      * @param playerId
      * @param id
      */
-    public Explorer(CustomID playerId, String id) {
-        super(playerId, id);
+    public Explorer(CustomID playerId, String id, int locationX, int locationY) {
+        super(playerId, id, locationX, locationY);
     }
 
     @Override

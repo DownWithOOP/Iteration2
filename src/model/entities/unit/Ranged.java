@@ -10,8 +10,8 @@ import utilities.id.IdType;
  */
 public class Ranged extends Unit {
 
-    public Ranged(CustomID playerId, String id) {
-        super(playerId, id);
+    public Ranged(CustomID playerId, String id, int locationX, int locationY) {
+        super(playerId, id, locationX, locationY);
     }
     @Override
     protected IdType getIdType() {

@@ -78,14 +78,9 @@ public class MainViewController extends Controller{
 
     @Override
     protected void render() {
-        this.areaViewPortController.UpdateRenderInfo(this.mapObserver.share()); // displays the map
+        this.areaViewPortController.UpdateRenderInfo(this.mapObserver.share(), this.unitObserver.share(), this.structureObserver.share()); // displays the map
     }
 
-    @FXML
-        public void drawOnCanvas() throws  IOException{
-               // this.areaViewPortController.UpdateRenderInfo(this.mapObserver.share());
-
-        }
         @FXML void moveUp(ActionEvent actionEvent) throws  IOException{
             this.areaViewPortController.changeCameraYPlus(); // TODO hook this up to some keyboard input
         }

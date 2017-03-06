@@ -15,8 +15,8 @@ public class Farm extends Structure {
      * @param playerId
      * @param id
      */
-    public Farm(CustomID playerId, String id) {
-        super(playerId, id);
+    public Farm(CustomID playerId, String id, int locationX, int locationY) {
+        super(playerId, id, locationX, locationY);
     }
 
     @Override

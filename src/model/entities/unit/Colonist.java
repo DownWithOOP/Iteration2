@@ -14,8 +14,8 @@ import utilities.id.IdType;
 public class Colonist extends Unit{
     private StructureFactory capitalFactory;
 
-    public Colonist(CustomID playerId, String id) {
-        super(playerId, id);
+    public Colonist(CustomID playerId, String id, int locationX, int locationY) {
+        super(playerId, id, locationX, locationY);
         this.capitalFactory = new StructureFactory();
     }
 
@@ -41,7 +41,7 @@ public class Colonist extends Unit{
     }
 
     public Structure buildCapital(CustomID customId, String id) {
-        return capitalFactory.getStructure(EntityType.CAPITAL, customId, id);
+        return capitalFactory.getStructure(EntityType.CAPITAL, customId, id,(int)(super.getLocation().getX()),(int)(super.getLocation().getY()));
     }
 
     @Override
