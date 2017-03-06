@@ -326,41 +326,31 @@ public class EntityOwnership {
         }
     }
 
-    public UnitRenderInformation returnUnitRenderInformation() {
-        UnitRenderInformation renderInfo = new UnitRenderInformation();
-        for (List<Entity> list : unitList) {
-            for (Entity entity : list) {
-                renderInfo.addUnit( (Unit) entity);
-            }
-        }
+    //TODO implement methods elsewhere so this compiles
+    //public UnitRenderInformation returnUnitRenderInformation() {
+        //UnitRenderInformation renderInfo = new UnitRenderInformation();
+        //for (List<Entity> list : unitList) {
+            //for (Entity entity : list) {
+                //Unit unit = (Unit) entity;
+                //renderInfo.addUnit( unit, unit.getLocation(), unit.getEntityType());
+            //}
+        //}
+//
+        //return renderInfo;
+    //}
 
-        return renderInfo;
-    }
-
-    //TODO change this method so that it doesn't return units in order to render them
-    public List<Unit> getUnit(){
-        List<Unit> renderList= new ArrayList<>();
-        for (List<Entity> list:
-                unitList) {
-            for (Entity ent:
-                    list) {
-                Unit temp=(Unit)ent;
-                renderList.add(temp);
-            }
-        }
-        return renderList;
-    }
-
-    public StructureRenderInformation returnStructureRenderInformation() {
-        StructureRenderInformation renderInfo = new StructureRenderInformation();
-        for (List<Entity> list : structureList) {
-            for (Entity entity : list) {
-                renderInfo.addStructure( (Structure) entity);
-            }
-        }
-
-        return renderInfo;
-    }
+    //TODO implement methods elsewhere so this compiles
+    //public StructureRenderInformation returnStructureRenderInformation() {
+        //StructureRenderInformation renderInfo = new StructureRenderInformation();
+        //for (List<Entity> list : structureList) {
+            //for (Entity entity : list) {
+                //Structure structure = (Structure) entity;
+                //renderInfo.addStructure( structure, structure.getLocation(), structure.getEntityType());
+            //}
+        //}
+//
+        //return renderInfo;
+    //}
 
     //TODO change this method so that it doesn't return structures in order to render them
     public List<Structure> getStructure(){

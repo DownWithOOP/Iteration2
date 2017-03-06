@@ -57,6 +57,15 @@ public class Player implements MapSubject{
         System.out.println("command cycle not hooked up yet :(");
     }
 
+    //TODO implement methods elsewhere so this compiles
+    //public UnitRenderInformation returnUnitRenderInformation() {
+        //return entities.returnUnitRenderInformation();
+    //}
+//
+    //public StructureRenderInformation returnStructurRenderInformation() {
+        //return entities.returnStructureRenderInformation();
+    //}
+
     @Override
     public void register(MapObserver o) {
         observers.add(o);
