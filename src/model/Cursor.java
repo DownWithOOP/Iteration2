@@ -1,18 +1,26 @@
 package model;
 
 import controller.availablecommands.AvailableCommands;
+import controller.availablecommands.Commandable;
 import controller.commands.Command;
 import controller.commands.CommandType;
 import controller.commands.Direction;
 import model.common.Location;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * Created by jordi on 2/28/2017.
  */
-public class Cursor {
+public class Cursor extends Commandable{
     protected Location location;
+
+    static ArrayList<CommandType> cursorCommand = new ArrayList<>();
+    static {
+        cursorCommand.add(CommandType.MOVE);
+    }
+
 
     public Cursor(Location location) {
         this.location = location;

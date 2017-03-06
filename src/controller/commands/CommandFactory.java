@@ -1,5 +1,6 @@
 package controller.commands;
 
+import controller.availablecommands.Commandable;
 import controller.commands.entitycommand.armycommand.DisbandCommand;
 import controller.commands.entitycommand.entitycommand.CancelQueueCommand;
 import controller.commands.entitycommand.entitycommand.DecommissionCommand;
@@ -27,62 +28,45 @@ import java.util.HashMap;
 public class CommandFactory {
 
     static final private HashMap<CommandType, SimpleCommandWrapper> simpleCommandResult = new HashMap<>();
-    static final private HashMap<CommandType, ActionableCommandWrapper> actionableCommandResult = new HashMap<>();
     static final private HashMap<CommandType, ActionableCommandWrapperEntity> actionableCommandEntity = new HashMap<>();
 
     static {
-        simpleCommandResult.put(CommandType.DECOMISSION, (entity) -> (new DecommissionCommand(entity)));
-        simpleCommandResult.put(CommandType.CANCEL_QUEUE, (entity) -> (new CancelQueueCommand(entity)));
-        simpleCommandResult.put(CommandType.POWER_UP, (entity) -> (new PowerUpCommand(entity)));
-        simpleCommandResult.put(CommandType.POWER_DOWN, (entity) -> (new PowerDownCommand(entity)));
+        simpleCommandResult.put(CommandType.DECOMISSION, (commandable) -> (new DecommissionCommand((Entity) commandable)));
+        simpleCommandResult.put(CommandType.CANCEL_QUEUE, (commandable) -> (new CancelQueueCommand((Entity)commandable)));
+        simpleCommandResult.put(CommandType.POWER_UP, (commandable) -> (new PowerUpCommand((Entity)commandable)));
+        simpleCommandResult.put(CommandType.POWER_DOWN, (commandable) -> (new PowerDownCommand((Entity)commandable)));
 
-        simpleCommandResult.put(CommandType.DISBAND,(entity) -> (new DisbandCommand((Army) entity)));
-        simpleCommandResult.put(CommandType.ABANDON_ARMY, (entity) -> (new AbandonArmy((Unit) entity)));
+        simpleCommandResult.put(CommandType.DISBAND,(commandable) -> (new DisbandCommand((Army) commandable)));
+        simpleCommandResult.put(CommandType.ABANDON_ARMY, (commandable) -> (new AbandonArmy((Unit) commandable)));
 
 
         //cursor
-        actionableCommandResult.put(CommandType.MOVE, (cursor, direction) -> (new MoveCommand(cursor, direction)));
+        actionableCommandEntity.put(CommandType.MOVE, (commandable, modifier) -> (new MoveCommand((Cursor) commandable, modifier.direction)));
         // TODO add W,A,S,D move_map_Camera stuff
 
         //army
-        actionableCommandEntity.put(CommandType.ATTACK, (entity, modifier) -> (new AttackCommand((Army) entity, modifier.direction)));
-        actionableCommandEntity.put(CommandType.DEFEND, (entity, modifier) -> (new DefendCommand((Army) entity, modifier.direction)));
-        actionableCommandEntity.put(CommandType.JOIN_ARMY, (entity, modifier) -> (new JoinArmyCommand((Unit) entity, modifier.number)));
-        actionableCommandEntity.put(CommandType.ADVANCE_TO_RALLY_POINT, (entity, modifier) -> (new AdvanceToRallyPointCommand((Unit) entity, modifier.number)));
+        actionableCommandEntity.put(CommandType.ATTACK, (commandable, modifier) -> (new AttackCommand((Army) commandable, modifier.direction)));
+        actionableCommandEntity.put(CommandType.DEFEND, (commandable, modifier) -> (new DefendCommand((Army) commandable, modifier.direction)));
+        actionableCommandEntity.put(CommandType.JOIN_ARMY, (commandable, modifier) -> (new JoinArmyCommand((Unit) commandable, modifier.number)));
+        actionableCommandEntity.put(CommandType.ADVANCE_TO_RALLY_POINT, (commandable, modifier) -> (new AdvanceToRallyPointCommand((Unit) commandable, modifier.number)));
 
     }
 
     /**
      * Command that can be executed without any modifier
      * @param commandType
-     * @param entity
+     * @param commandable
      * @return
      */
-    public Command createSimpleCommand(CommandType commandType, Entity entity) {
+    public Command createSimpleCommand(CommandType commandType, Commandable commandable) {
 
         try {
             if (simpleCommandResult.containsKey(commandType)) {
-                return simpleCommandResult.get(commandType).createCommand(entity);
+                return simpleCommandResult.get(commandType).createCommand(commandable);
             }
         } catch (Exception e) {
             System.out.println("check for the class type and the action to be performed");
             e.printStackTrace();
-        }
-
-        return null;
-    }
-
-    /**
-     * For cursors the game cursor or the rallyPoint
-     * @param commandType
-     * @param cursor
-     * @param direction
-     * @return
-     */
-    public Command createActionableCommand(CommandType commandType, Cursor cursor, Direction direction) {
-
-        if (actionableCommandResult.containsKey(commandType)) {
-            return actionableCommandResult.get(commandType).createCommand(cursor, direction);
         }
 
         return null;
@@ -93,15 +77,15 @@ public class CommandFactory {
      * attack, one could attack north, south, east, west
      * joinArmy one could join a different army with a different number
      * @param commandType
-     * @param entity
+     * @param commandable
      * @param modifier
      * @return
      */
-    public Command createActionableCommand(CommandType commandType, Entity entity, Modifier modifier) {
+    public Command createActionableCommand(CommandType commandType, Commandable commandable, Modifier modifier) {
 
         try {
             if (actionableCommandEntity.containsKey(commandType)) {
-                return actionableCommandEntity.get(commandType).createCommand(entity, modifier);
+                return actionableCommandEntity.get(commandType).createCommand(commandable, modifier);
             }
         } catch (Exception e) {
             System.out.println("check for the class type and the action to be performed");
@@ -112,15 +96,15 @@ public class CommandFactory {
     }
 
     private interface SimpleCommandWrapper {
-        Command createCommand(Entity entity);
+        Command createCommand(Commandable commandable);
     }
 
     private interface ActionableCommandWrapper {
-        Command createCommand(Cursor cursor, Direction direction);
+        Command createCommand(Commandable commandable, Direction direction);
     }
 
     private interface ActionableCommandWrapperEntity {
-        Command createCommand(Entity entity, Modifier modifier);
+        Command createCommand(Commandable commandable, Modifier modifier);
     }
 
     public static void main(String[] args) {
@@ -164,13 +148,16 @@ public class CommandFactory {
         command = commandFactory.createActionableCommand(CommandType.DEFEND, army, modifier);
         command.execute();
 
-        command = commandFactory.createActionableCommand(CommandType.MOVE, rallyPoint, Direction.WEST);
+        modifier.setModifier(Direction.NORTH);
+        command = commandFactory.createActionableCommand(CommandType.MOVE, rallyPoint, modifier);
         command.execute();
 
-        command = commandFactory.createActionableCommand(CommandType.MOVE, cursor, Direction.WEST);
+        modifier.setModifier(Direction.WEST);
+        command = commandFactory.createActionableCommand(CommandType.MOVE, cursor, modifier);
         command.execute();
 
-        command = commandFactory.createActionableCommand(CommandType.MOVE, cursor, Direction.EAST);
+        modifier.setModifier(Direction.EAST);
+        command = commandFactory.createActionableCommand(CommandType.MOVE, cursor, modifier);
         command.execute();
 
 
