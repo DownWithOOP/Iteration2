@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.map.Map;
 import utilities.ObserverInterfaces.MapObserver;
+import utilities.ObserverInterfaces.StatusObserver;
 import utilities.ObserverInterfaces.StructureObserver;
 import utilities.ObserverInterfaces.UnitObserver;
 import view.AreaViewport;
@@ -22,6 +23,7 @@ import view.StatusViewport;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 
@@ -40,7 +42,13 @@ public class MainViewController extends Controller{
     @FXML
     VBox vbox;
     @FXML
-    VBox cycleVbox;
+    Label modeLabel;
+    @FXML
+    Label typeLabel;
+    @FXML
+    Label instanceLabel;
+    @FXML
+    Label commandLabel;
     @FXML
     Label coordinateInfo;
     private Map currentMap;
@@ -49,15 +57,18 @@ public class MainViewController extends Controller{
     private MapObserver mapObserver;
     private UnitObserver unitObserver;
     private StructureObserver structureObserver;
+    private StatusObserver statusObserver;
+    private java.util.Map<String, Label> cycleLabels = new HashMap<>();
 
     public MainViewController(){
         super();
 
     }
-    public void setObservers(MapObserver mapObserver, UnitObserver unitObserver, StructureObserver structureObserver){
+    public void setObservers(MapObserver mapObserver, UnitObserver unitObserver, StructureObserver structureObserver, StatusObserver statusObserver){
         this.mapObserver = mapObserver;
         this.unitObserver = unitObserver;
         this.structureObserver = structureObserver;
+        this.statusObserver = statusObserver;
     }
 
     private SwitchControllerRelay switchControllerRelay;
@@ -72,9 +83,9 @@ public class MainViewController extends Controller{
                 event -> {
                     CommandType receivedCommand;
                     MVCInputHandler mvcInputHandler = new MVCInputHandler();
-                    receivedCommand =mvcInputHandler.interpretInput(event);
-                    System.out.println(receivedCommand.toString());
-                    if (receivedCommand !=null) {
+                    receivedCommand = mvcInputHandler.interpretInput(event);
+                    if (receivedCommand != null) {
+                        System.out.println(receivedCommand.toString());
                         controllerDispatch.handleCommand(receivedCommand);
                     }
                 }
@@ -84,7 +95,7 @@ public class MainViewController extends Controller{
     @Override
     protected void render() {
         this.areaViewport.UpdateRenderInfo(this.mapObserver.share(), this.unitObserver.share(), this.structureObserver.share()); // displays the map
-        this.statusViewport.updateRenderInfo();
+        this.statusViewport.updateRenderInfo(this.statusObserver.share());
     }
 
         @FXML void moveUp(ActionEvent actionEvent) throws  IOException{
@@ -178,8 +189,15 @@ public class MainViewController extends Controller{
 
         @Override
         public void initialize(URL location, ResourceBundle resources) { // initialized the component correctly
+
+            //TODO don't use hard coded strings
+            cycleLabels.put("mode", modeLabel);
+            cycleLabels.put("type", typeLabel);
+            cycleLabels.put("instance", instanceLabel);
+            cycleLabels.put("command", commandLabel);
+
             this.areaViewport = new AreaViewport(vbox, canvas);
-            this.statusViewport = new StatusViewport(cycleVbox);
+            this.statusViewport = new StatusViewport(cycleLabels);
         }
 
 

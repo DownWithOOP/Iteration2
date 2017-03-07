@@ -2,6 +2,7 @@ package model;
 
 import model.map.Map;
 import utilities.ObserverInterfaces.MapObserver;
+import utilities.ObserverInterfaces.StatusObserver;
 import utilities.ObserverInterfaces.StructureObserver;
 import utilities.ObserverInterfaces.UnitObserver;
 
@@ -14,7 +15,7 @@ public class GameModel {
     private int activePlayerIndex; // this is the player whose current turn it is
     private Map masterMap; // the map that will have the global map, each player will have their own map as well
 
-    public GameModel(int numberOfPlayers, MapObserver observer, UnitObserver unitObserver, StructureObserver structureObserver) {
+    public GameModel(int numberOfPlayers, MapObserver observer, UnitObserver unitObserver, StructureObserver structureObserver, StatusObserver statusObserver) {
 
         playersList = new Player[numberOfPlayers];
         // we create the master map
@@ -27,11 +28,11 @@ public class GameModel {
         for (int i = 0; i < numberOfPlayers; i++) {
             Player temp;
             if(i ==0){ // player 1
-                temp = new Player(masterMap,observer, unitObserver, structureObserver, 6,4); // TODO, give players unique maps
+                temp = new Player(masterMap,observer, unitObserver, structureObserver, statusObserver, 6,4); // TODO, give players unique maps
             } else if( i== 1){
-                temp = new Player(masterMap,observer, unitObserver, structureObserver, 17,7); // TODO, give players unique maps
+                temp = new Player(masterMap,observer, unitObserver, structureObserver, statusObserver, 17,7); // TODO, give players unique maps
             } else {
-                temp = new Player(masterMap,observer, unitObserver, structureObserver, 0,0); // TODO give players unique maps
+                temp = new Player(masterMap,observer, unitObserver, structureObserver, statusObserver, 0,0); // TODO give players unique maps
             }
             playersList[i] = temp;
         }

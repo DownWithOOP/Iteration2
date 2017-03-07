@@ -4,11 +4,9 @@ package model;
 //import model.common.Location;
 import controller.availablecommands.Commandable;
 import controller.commands.CycleDirection;
-import model.RenderInformation.StructureRenderInformation;
-import model.RenderInformation.StructureRenderObject;
-import model.RenderInformation.UnitRenderInformation;
-import model.RenderInformation.UnitRenderObject;
+import model.RenderInformation.*;
 import model.entities.Entity;
+import model.entities.EntityType;
 import model.entities.Stats.UnitStats;
 import model.entities.structure.Capital;
 import model.entities.structure.Structure;
@@ -37,7 +35,8 @@ public class EntityOwnership {
     List<List<Entity>> structureList;         //base=0
     List<List<Entity>> currentModeList;
     List<RallyPoint> rallyPointList;
-    Mode modeHolders[] = Mode.values();
+
+    Mode modes[] = Mode.values();
 
     int typeRestriction = 10;
     int unitCap = 25;
@@ -65,7 +64,7 @@ public class EntityOwnership {
         initializeLists();
         initializeUnits(startingX, startingY);
         initializeStructures();
-        changeMode(modeHolders[cycleModeIndex]);
+        changeMode(modes[cycleModeIndex]);
         this.playerId=playerId;
     }
 
@@ -77,9 +76,9 @@ public class EntityOwnership {
 
     private void initializeUnits(int startingX, int startingY) {
         //TODO change the id number
-        addUnit(IdType.EXPLORER, new Explorer(playerId,"idnumber", startingX, startingY));
-        addUnit(IdType.EXPLORER, new Explorer(playerId,"idnumber", startingX, startingY));
-        addUnit(IdType.COLONIST, new Colonist(playerId,"idnumber", startingX, startingY));
+        addUnit(IdType.EXPLORER, new Explorer(playerId,"0", startingX, startingY));
+        addUnit(IdType.EXPLORER, new Explorer(playerId,"1", startingX, startingY));
+        addUnit(IdType.COLONIST, new Colonist(playerId,"0", startingX, startingY));
     }
 
     private void initializeLists() {
@@ -89,7 +88,6 @@ public class EntityOwnership {
         for (int i = 0; i < structureTypeNumber; i++) {
             structureList.add(new ArrayList<>());
         }
-
     }
 
     public boolean addEntity(Entity entity) {
@@ -245,12 +243,12 @@ public class EntityOwnership {
 
     public Entity cycleMode(CycleDirection direction){
         if (direction == CycleDirection.INCREMENT){
-            cycleModeIndex=next(modeHolders.length,cycleModeIndex);
+            cycleModeIndex=next(modes.length,cycleModeIndex);
         }
         if (direction == CycleDirection.DECREMENT){
-            cycleModeIndex=previous(modeHolders.length,cycleModeIndex);
+            cycleModeIndex=previous(modes.length,cycleModeIndex);
         }
-        return changeMode(modeHolders[cycleModeIndex]);
+        return changeMode(modes[cycleModeIndex]);
     }
 
     private Entity changeMode(Mode currentMode) {
@@ -356,6 +354,16 @@ public class EntityOwnership {
         return renderInfo;
     }
 
+    public StatusRenderInformation returnStatusRenderInformation() {
+        StatusRenderInformation renderInfo = new StatusRenderInformation();
+        renderInfo.updateModeString(getCurrentMode());
+        renderInfo.updateTypeString(getCurrentType());
+        renderInfo.updateInstanceString(getCurrentInstance());
+        renderInfo.updateCommandString("command from e.o.");
+
+        return renderInfo;
+    }
+
     //TODO change this method so that it doesn't return structures in order to render them
     public List<Structure> getStructure(){
         List<Structure> renderList= new ArrayList<>();
@@ -398,7 +406,7 @@ public class EntityOwnership {
     }
 
     //TODO get rid of this; only for debugging purposes
-    public List<Entity> getCurrentType() {
+    public String getCurrentType() {
         System.out.println("GETTING CURRENT TYPE");
         if (currentModeList == null) {
             System.out.println("No current mode list available");
@@ -413,7 +421,13 @@ public class EntityOwnership {
             return null;
         }
 
-        return currentModeList.get(cycleTypeIndex);
+        Commandable currentCommandable = getCurrentInstance();
+        try {
+            return ( (Entity) currentCommandable).getEntityType().toString();
+        }
+        catch (ClassCastException e) {
+            return null;
+        }
     }
 
     //TODO get army
@@ -421,9 +435,9 @@ public class EntityOwnership {
         //return armyList;
     //}
 
-    //TODO get rid of this; only for debugging purposes
+    //TODO get rid of this; only for debugging purposes...actually maybe not b/c view
     public Mode getCurrentMode() {
-        return modeHolders[cycleModeIndex];
+        return modes[cycleModeIndex];
     }
 
 
