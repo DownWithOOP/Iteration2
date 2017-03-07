@@ -36,7 +36,9 @@ public class MapXMLParser {
                 Element element = (Element) node;
                 HashMap<String, String> temp = new HashMap<>();
                 temp.put("Terrain", element.getElementsByTagName("Terrain").item(0).getTextContent());
-                temp.put("Resource", element.getElementsByTagName("Resource").item(0).getTextContent());
+                temp.put("Energy", element.getElementsByTagName("Energy").item(0).getTextContent());
+                temp.put("Ore", element.getElementsByTagName("Ore").item(0).getTextContent());
+                temp.put("Food", element.getElementsByTagName("Food").item(0).getTextContent());
                 temp.put("Decal", element.getElementsByTagName("Decal").item(0).getTextContent());
                 temp.put("Item", element.getElementsByTagName("Item").item(0).getTextContent());
                 temp.put("AreaEffect", element.getElementsByTagName("AreaEffect").item(0).getTextContent());

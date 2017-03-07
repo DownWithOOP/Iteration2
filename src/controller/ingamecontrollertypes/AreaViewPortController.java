@@ -12,6 +12,7 @@ import utilities.id.IdType;
 import view.utilities.Assets;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Konrad on 3/1/2017.
@@ -251,7 +252,7 @@ public class AreaViewPortController{
         for(int i=0; i<mapRenderInformation.getY()   ; i++){
             for(int j=0; j<mapRenderInformation.getX(); j++){
                 TerrainType current = renderObjects[j][i].getTerrainType();
-                ResourceType resource = renderObjects[j][i].getResourceType();
+                List<ResourceType> resource = renderObjects[j][i].getResourceTypes();
                 if(j%2 == 0){
                     if(current.equals(TerrainType.GRASS)){
                       //  System.out.print(" GRASS ");

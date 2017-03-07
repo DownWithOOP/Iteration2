@@ -2,7 +2,7 @@
     <!-- row 1, (x,0)-->
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -10,7 +10,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -18,7 +18,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -26,7 +26,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource>CATFOOD</Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -34,7 +34,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -42,7 +42,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -50,7 +50,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -58,7 +58,7 @@
 
     <Tile>
         <Terrain>WATER</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -66,7 +66,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect>HEAL_DAMAGE</AreaEffect>
@@ -74,7 +74,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -82,7 +82,7 @@
 
     <Tile>
         <Terrain>WATER</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -90,7 +90,7 @@
 
     <Tile>
         <Terrain>WATER</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -98,7 +98,7 @@
 <!-- row 2 (x,1)-->
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -106,7 +106,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -114,7 +114,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -122,7 +122,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -130,7 +130,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -138,7 +138,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -146,7 +146,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -154,7 +154,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -162,7 +162,7 @@
 
     <Tile>
         <Terrain>WATER</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -170,7 +170,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -178,7 +178,7 @@
 
     <Tile>
         <Terrain>WATER</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -186,7 +186,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource>CATFOOD</Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -194,7 +194,7 @@
 <!-- row 3 -->
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -202,7 +202,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -210,7 +210,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -218,7 +218,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -226,7 +226,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource>CATFOOD</Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -234,7 +234,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -242,7 +242,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -250,7 +250,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -258,7 +258,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -266,7 +266,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -274,7 +274,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -282,7 +282,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -290,7 +290,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -298,7 +298,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -306,7 +306,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -314,7 +314,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource>CATFOOD</Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -322,7 +322,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -330,7 +330,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -338,7 +338,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -346,7 +346,7 @@
 
     <Tile>
         <Terrain>WATER</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -354,7 +354,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource>RESEARCH</Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect>HEAL_DAMAGE</AreaEffect>
@@ -362,7 +362,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -370,7 +370,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -378,7 +378,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -386,7 +386,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -394,7 +394,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -402,7 +402,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -410,7 +410,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -418,7 +418,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -426,7 +426,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -434,7 +434,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -442,7 +442,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource>RESEARCH</Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -450,7 +450,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -458,7 +458,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -466,7 +466,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource>CATFOOD</Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -474,7 +474,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -482,7 +482,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -490,7 +490,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -498,7 +498,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -506,7 +506,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -514,7 +514,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -522,7 +522,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -530,7 +530,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -538,7 +538,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -546,7 +546,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -554,7 +554,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -562,7 +562,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -570,7 +570,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -578,7 +578,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -586,7 +586,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -594,7 +594,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -602,7 +602,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -610,7 +610,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -618,7 +618,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource>CRYSTAL</Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -626,7 +626,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -634,7 +634,7 @@
 
     <Tile>
         <Terrain>WATER</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -642,7 +642,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect>HEAL_DAMAGE</AreaEffect>
@@ -650,7 +650,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -658,7 +658,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -666,7 +666,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource>RESEARCH</Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -674,7 +674,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -682,7 +682,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -690,7 +690,7 @@
 
     <Tile>
         <Terrain>WATER</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -698,7 +698,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -706,7 +706,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -714,7 +714,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -722,7 +722,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -730,7 +730,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -738,7 +738,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -746,7 +746,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -754,7 +754,7 @@
 
     <Tile>
         <Terrain>WATER</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -762,7 +762,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -770,7 +770,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -778,7 +778,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -786,7 +786,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -794,7 +794,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -802,7 +802,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -810,7 +810,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -818,7 +818,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -826,7 +826,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -834,7 +834,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -842,7 +842,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -850,7 +850,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -858,7 +858,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -866,7 +866,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -874,7 +874,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -882,7 +882,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -890,7 +890,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -898,7 +898,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -906,7 +906,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource>CATFOOD</Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -914,7 +914,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource>CRYSTAL</Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -922,7 +922,7 @@
 
     <Tile>
         <Terrain>WATER</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -930,7 +930,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect>HEAL_DAMAGE</AreaEffect>
@@ -938,7 +938,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -946,7 +946,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -954,7 +954,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -962,7 +962,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -970,7 +970,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -978,7 +978,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -986,7 +986,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -994,7 +994,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1002,7 +1002,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource>RESEARCH</Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1010,7 +1010,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1018,7 +1018,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1026,7 +1026,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1034,7 +1034,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1042,7 +1042,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1050,7 +1050,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1058,7 +1058,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1066,7 +1066,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1074,7 +1074,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1082,7 +1082,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1090,7 +1090,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1098,7 +1098,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1106,7 +1106,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1114,7 +1114,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1122,7 +1122,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1130,7 +1130,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1138,7 +1138,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1146,7 +1146,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1155,7 +1155,7 @@
     <!-- row 1, (x,0)-->
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1163,7 +1163,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource>CATFOOD</Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1171,7 +1171,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1179,7 +1179,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource>CATFOOD</Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1187,7 +1187,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1195,7 +1195,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1203,7 +1203,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1211,7 +1211,7 @@
 
     <Tile>
         <Terrain>WATER</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1219,7 +1219,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect>HEAL_DAMAGE</AreaEffect>
@@ -1227,7 +1227,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1235,7 +1235,7 @@
 
     <Tile>
         <Terrain>WATER</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1243,7 +1243,7 @@
 
     <Tile>
         <Terrain>WATER</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1251,7 +1251,7 @@
     <!-- row 2 (x,1)-->
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1259,7 +1259,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1267,7 +1267,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1275,7 +1275,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1283,7 +1283,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1291,7 +1291,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1299,7 +1299,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1307,7 +1307,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1315,7 +1315,7 @@
 
     <Tile>
         <Terrain>WATER</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1323,7 +1323,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource>RESEARCH</Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1331,7 +1331,7 @@
 
     <Tile>
         <Terrain>WATER</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1339,7 +1339,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1347,7 +1347,7 @@
     <!-- row 3 -->
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1355,7 +1355,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1363,7 +1363,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1371,7 +1371,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1379,7 +1379,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1387,7 +1387,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1395,7 +1395,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1403,7 +1403,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1411,7 +1411,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1419,7 +1419,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1427,7 +1427,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1435,7 +1435,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1443,7 +1443,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1451,7 +1451,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource>CATFOOD</Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1459,7 +1459,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource>CRYSTAL</Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1467,7 +1467,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1475,7 +1475,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1483,7 +1483,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1491,7 +1491,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1499,7 +1499,7 @@
 
     <Tile>
         <Terrain>WATER</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1507,7 +1507,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect>HEAL_DAMAGE</AreaEffect>
@@ -1515,7 +1515,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1523,7 +1523,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1531,7 +1531,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1539,7 +1539,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1547,7 +1547,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource>CRYSTAL</Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1555,7 +1555,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1563,7 +1563,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1571,7 +1571,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1579,7 +1579,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1587,7 +1587,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1595,7 +1595,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1603,7 +1603,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1611,7 +1611,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1619,7 +1619,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1627,7 +1627,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1635,7 +1635,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1643,7 +1643,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1651,7 +1651,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1659,7 +1659,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1667,7 +1667,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1675,7 +1675,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1683,7 +1683,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1691,7 +1691,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1699,7 +1699,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1707,7 +1707,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1715,7 +1715,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1723,7 +1723,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1731,7 +1731,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1739,7 +1739,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource>CATFOOD</Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1747,7 +1747,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1755,7 +1755,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource>CATFOOD</Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1763,7 +1763,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1771,7 +1771,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1779,7 +1779,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1787,7 +1787,7 @@
 
     <Tile>
         <Terrain>WATER</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1795,7 +1795,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource>CRYSTAL</Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect>HEAL_DAMAGE</AreaEffect>
@@ -1803,7 +1803,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1811,7 +1811,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1819,7 +1819,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1827,7 +1827,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1835,7 +1835,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1843,7 +1843,7 @@
 
     <Tile>
         <Terrain>WATER</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1851,7 +1851,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1859,7 +1859,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1867,7 +1867,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1875,7 +1875,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1883,7 +1883,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource>CATFOOD</Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1891,7 +1891,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1899,7 +1899,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1907,7 +1907,7 @@
 
     <Tile>
         <Terrain>WATER</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1915,7 +1915,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1923,7 +1923,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1931,7 +1931,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1939,7 +1939,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1947,7 +1947,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1955,7 +1955,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1963,7 +1963,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1971,7 +1971,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1979,7 +1979,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1987,7 +1987,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -1995,7 +1995,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource>CATFOOD</Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2003,7 +2003,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2011,7 +2011,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2019,7 +2019,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2027,7 +2027,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2035,7 +2035,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2043,7 +2043,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource>CATFOOD</Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2051,7 +2051,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2059,7 +2059,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2067,7 +2067,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2075,7 +2075,7 @@
 
     <Tile>
         <Terrain>WATER</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2083,7 +2083,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource>CRYSTAL</Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect>HEAL_DAMAGE</AreaEffect>
@@ -2091,7 +2091,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2099,7 +2099,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2107,7 +2107,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2115,7 +2115,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2123,7 +2123,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2131,7 +2131,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource>RESEARCH</Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2139,7 +2139,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2147,7 +2147,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2155,7 +2155,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2163,7 +2163,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2171,7 +2171,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2179,7 +2179,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2187,7 +2187,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2195,7 +2195,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2203,7 +2203,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2211,7 +2211,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2219,7 +2219,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2227,7 +2227,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2235,7 +2235,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2243,7 +2243,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2251,7 +2251,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2259,7 +2259,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2267,7 +2267,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2275,7 +2275,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2283,7 +2283,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2291,7 +2291,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -2299,7 +2299,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
