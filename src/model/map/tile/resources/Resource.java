@@ -8,9 +8,9 @@ public class Resource {
     private ResourceType resourceType;
     private int level;
 
-    public Resource(ResourceType resourceType){
+    public Resource(ResourceType resourceType, int level){
        this.resourceType = resourceType;
-       this.level = 100;
+       this.level = level;
     }
 
     public ResourceType getResourceType(){
