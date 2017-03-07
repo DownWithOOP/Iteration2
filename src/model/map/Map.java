@@ -115,7 +115,7 @@ public class Map {
             );
 
             System.out.println("x: " + x+ " y: " +y);
-            Location location = new Location(y, x);
+            Location location = new Location(x, y);
             //Point2D location = new Point2D(x, y);
 
             if( y!=0 && y % (width - 1) == 0){
