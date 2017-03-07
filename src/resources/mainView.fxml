@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -15,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="726.0" prefWidth="1221.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ingamecontrollertypes.MainViewController">
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="726.0" prefWidth="1221.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ingamecontrollertypes.MainViewController">
     <children>
         <MenuBar fx:id="mainMenuBar" prefHeight="29.0" prefWidth="1222.0">
             <menus>
@@ -54,31 +60,51 @@
             <Canvas fx:id="canvas" height="574.0" width="1218.0" />
                 <HBox prefHeight="165.0" prefWidth="1218.0">
                     <children>
-                        <VBox alignment="TOP_CENTER" prefHeight="150.0" prefWidth="324.0" style="-fx-border-color: black;">
+                        <VBox fx:id="cycleVbox" alignment="TOP_CENTER" prefHeight="150.0" prefWidth="324.0" style="-fx-border-color: black;">
                             <children>
                                 <Label alignment="CENTER" prefHeight="28.0" prefWidth="75.0" text="Mode:">
                                     <font>
-                                        <Font name="System Bold" size="13.0" />
+                                        <Font name="System Bold" size="12.0" />
                                     </font>
+                                </Label>
+                                <Label alignment="CENTER" layoutX="120.0" layoutY="11.0" prefHeight="28.0" prefWidth="75.0" text="No selection">
+                                   <font>
+                                      <Font name="System Bold" size="8.0" />
+                                   </font>
                                 </Label>
                                 <Label alignment="CENTER" layoutX="11.0" layoutY="11.0" prefHeight="28.0" prefWidth="75.0" text="Type:">
                                     <font>
-                                        <Font name="System Bold" size="13.0" />
+                                        <Font name="System Bold" size="12.0" />
                                     </font>
+                                </Label>
+                                <Label alignment="CENTER" layoutX="120.0" layoutY="92.0" prefHeight="28.0" prefWidth="75.0" text="No selection">
+                                   <font>
+                                      <Font name="System Bold" size="8.0" />
+                                   </font>
                                 </Label>
                                 <Label alignment="CENTER" layoutX="11.0" layoutY="39.0" prefHeight="28.0" prefWidth="75.0" text="Instance:">
                                     <font>
-                                        <Font name="System Bold" size="13.0" />
+                                        <Font name="System Bold" size="12.0" />
                                     </font>
                                 </Label>
-                                <Label alignment="CENTER" layoutX="11.0" layoutY="67.0" prefHeight="28.0" prefWidth="75.0" text="Command:">
+                                <Label alignment="CENTER" layoutX="11.0" layoutY="67.0" prefHeight="28.0" prefWidth="75.0" text="No selection">
                                     <font>
-                                        <Font name="System Bold" size="13.0" />
+                                        <Font name="System Bold" size="8.0" />
                                     </font>
+                                </Label>
+                                <Label alignment="CENTER" layoutX="120.0" layoutY="59.0" prefHeight="28.0" prefWidth="75.0" text="Type:">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label alignment="CENTER" layoutX="120.0" layoutY="125.0" prefHeight="28.0" prefWidth="75.0" text="No selection">
+                                   <font>
+                                      <Font name="System Bold" size="8.0" />
+                                   </font>
                                 </Label>
                             </children>
                         </VBox>
-                        <VBox alignment="TOP_CENTER" prefHeight="125.0" prefWidth="521.0" style="-fx-border-color: black;">
+                        <VBox fx:id="entityStatusVbox" alignment="TOP_CENTER" prefHeight="125.0" prefWidth="521.0" style="-fx-border-color: black;">
                             <children>
                                 <Label alignment="CENTER" prefHeight="28.0" prefWidth="186.0" text="Selected Entity:">
                                     <font>
@@ -175,4 +201,3 @@
         </VBox>
     </children>
 </FlowPane>
-

@@ -18,6 +18,7 @@ import utilities.ObserverInterfaces.MapObserver;
 import utilities.ObserverInterfaces.StructureObserver;
 import utilities.ObserverInterfaces.UnitObserver;
 import view.AreaViewport;
+import view.StatusViewport;
 
 import java.io.IOException;
 import java.net.URL;
@@ -39,9 +40,12 @@ public class MainViewController extends Controller{
     @FXML
     VBox vbox;
     @FXML
+    VBox cycleVbox;
+    @FXML
     Label coordinateInfo;
     private Map currentMap;
     private AreaViewport areaViewport;
+    private StatusViewport statusViewport;
     private MapObserver mapObserver;
     private UnitObserver unitObserver;
     private StructureObserver structureObserver;
@@ -80,6 +84,7 @@ public class MainViewController extends Controller{
     @Override
     protected void render() {
         this.areaViewport.UpdateRenderInfo(this.mapObserver.share(), this.unitObserver.share(), this.structureObserver.share()); // displays the map
+        this.statusViewport.updateRenderInfo();
     }
 
         @FXML void moveUp(ActionEvent actionEvent) throws  IOException{
@@ -174,6 +179,7 @@ public class MainViewController extends Controller{
         @Override
         public void initialize(URL location, ResourceBundle resources) { // initialized the component correctly
             this.areaViewport = new AreaViewport(vbox, canvas);
+            this.statusViewport = new StatusViewport(cycleVbox);
         }
 
 
