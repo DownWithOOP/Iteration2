@@ -29,7 +29,7 @@
                         </MenuItem>
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Player 1">
+                <Menu id="currentPlayerMenu" mnemonicParsing="false" text="Player">
                     <items>
                         <MenuItem fx:id="endTurnMenuItem" mnemonicParsing="false" onAction="#handleEndTurn" text="End Turn" />
                     </items>
@@ -50,35 +50,60 @@
         </MenuBar>
         <VBox fx:id="vbox" prefHeight="699.0" prefWidth="1218.0">
             <children>
+            <Label fx:id="currentPlayerLabel" alignment="CENTER" prefHeight="17.0" prefWidth="204.0" text="Current Player: Player 1">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
 
             <Canvas fx:id="canvas" height="574.0" width="1218.0" />
                 <HBox prefHeight="165.0" prefWidth="1218.0">
                     <children>
-                        <VBox alignment="TOP_CENTER" prefHeight="150.0" prefWidth="324.0" style="-fx-border-color: black;">
+                        <VBox fx:id="cycleVbox" alignment="TOP_CENTER" prefHeight="150.0" prefWidth="324.0" style="-fx-border-color: black;">
                             <children>
                                 <Label alignment="CENTER" prefHeight="28.0" prefWidth="75.0" text="Mode:">
                                     <font>
-                                        <Font name="System Bold" size="13.0" />
+                                        <Font name="System Bold" size="12.0" />
                                     </font>
+                                </Label>
+                                <Label fx:id="modeLabel" alignment="CENTER" layoutX="120.0" layoutY="11.0" prefHeight="28.0" prefWidth="75.0" text="No selection">
+                                   <font>
+                                      <Font name="System Bold" size="8.0" />
+                                   </font>
                                 </Label>
                                 <Label alignment="CENTER" layoutX="11.0" layoutY="11.0" prefHeight="28.0" prefWidth="75.0" text="Type:">
                                     <font>
-                                        <Font name="System Bold" size="13.0" />
+                                        <Font name="System Bold" size="12.0" />
                                     </font>
                                 </Label>
+                        <Label fx:id="typeLabel" alignment="CENTER" layoutX="120.0" layoutY="92.0" prefHeight="28.0" prefWidth="75.0" text="No selection">
+                           <font>
+                              <Font name="System Bold" size="8.0" />
+                           </font>
+                        </Label>
                                 <Label alignment="CENTER" layoutX="11.0" layoutY="39.0" prefHeight="28.0" prefWidth="75.0" text="Instance:">
                                     <font>
-                                        <Font name="System Bold" size="13.0" />
+                                        <Font name="System Bold" size="12.0" />
                                     </font>
                                 </Label>
-                                <Label alignment="CENTER" layoutX="11.0" layoutY="67.0" prefHeight="28.0" prefWidth="75.0" text="Command:">
+                                <Label fx:id="instanceLabel" alignment="CENTER" layoutX="11.0" layoutY="67.0" prefHeight="28.0" prefWidth="75.0" text="No selection">
                                     <font>
-                                        <Font name="System Bold" size="13.0" />
+                                        <Font name="System Bold" size="8.0" />
                                     </font>
                                 </Label>
+                        <Label alignment="CENTER" layoutX="120.0" layoutY="59.0" prefHeight="28.0" prefWidth="75.0" text="Command:">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="commandLabel" alignment="CENTER" layoutX="120.0" layoutY="125.0" prefHeight="28.0" prefWidth="75.0" text="No selection">
+                           <font>
+                              <Font name="System Bold" size="8.0" />
+                           </font>
+                        </Label>
                             </children>
                         </VBox>
-                        <VBox alignment="TOP_CENTER" prefHeight="125.0" prefWidth="521.0" style="-fx-border-color: black;">
+                        <VBox fx:id="entityStatusVbox" alignment="TOP_CENTER" prefHeight="125.0" prefWidth="521.0" style="-fx-border-color: black;">
                             <children>
                                 <Label alignment="CENTER" prefHeight="28.0" prefWidth="186.0" text="Selected Entity:">
                                     <font>
@@ -175,4 +200,3 @@
         </VBox>
     </children>
 </FlowPane>
-

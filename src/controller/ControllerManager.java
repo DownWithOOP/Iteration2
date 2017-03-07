@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import utilities.ObserverInterfaces.StatusObserver;
 import utilities.ObserverInterfaces.StructureObserver;
 import utilities.ObserverInterfaces.UnitObserver;
 
@@ -32,9 +33,11 @@ public class ControllerManager {
     private MapObserver mapObserver;
     private UnitObserver unitObserver;
     private StructureObserver structureObserver;
+    private StatusObserver statusObserver;
     private GameLoop timer;
 
-    public ControllerManager(ControllerDispatch controllerDispatch, Stage primaryStage, MapObserver mapObserver, UnitObserver unitObserver, StructureObserver structureObserver) throws IOException {
+    public ControllerManager(ControllerDispatch controllerDispatch, Stage primaryStage, MapObserver mapObserver, UnitObserver unitObserver,
+                             StructureObserver structureObserver, StatusObserver statusObserver) throws IOException {
 
         // primary stage that is essentially the window
         this.primaryStage = primaryStage;
@@ -42,6 +45,7 @@ public class ControllerManager {
         this.mapObserver = mapObserver;
         this.unitObserver = unitObserver;
         this.structureObserver = structureObserver;
+        this.statusObserver = statusObserver;
 
         // used for communication between the inputReconginzers and the controllerManager when a controller needs to be switched
         switchControllerRelay = new SwitchControllerRelay(this);
@@ -73,7 +77,7 @@ public class ControllerManager {
         inputController.enableKeyboardInput();
         inputController.setDispatch(controllerDispatch);
         MainViewController temp =  (MainViewController)inputController; // Sketchy but we have to downCast to the MainView Controller type
-        temp.setObservers(mapObserver,unitObserver,structureObserver);
+        temp.setObservers(mapObserver,unitObserver,structureObserver, statusObserver);
         this.activeController = temp;
         if(timer == null){
             // start of game, don't call yet

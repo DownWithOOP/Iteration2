@@ -25,4 +25,9 @@ public class CustomID {
     public boolean equals(CustomID customID) {
         return (type == customID.getIdType() && id.equals(customID.getId()));
     }
+
+    @Override
+    public String toString() {
+        return type.name() + id;
+    }
 }

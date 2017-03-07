@@ -107,4 +107,7 @@ public abstract class Entity extends Commandable {
     public CustomID getPlayerId(){
         return playerId;
     }
+
+    @Override
+    public String toString() { return entityId.toString();}
 }

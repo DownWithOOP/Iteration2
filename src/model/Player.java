@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Created by Konrad on 2/17/2017.
  */
-public class Player implements MapSubject, UnitSubject, StructureSubject {
+public class Player implements MapSubject, UnitSubject, StructureSubject, StatusSubject {
 
 
     private EntityOwnership entities;
@@ -21,8 +21,9 @@ public class Player implements MapSubject, UnitSubject, StructureSubject {
     private ArrayList<MapObserver> mapObservers = new ArrayList<MapObserver>(); // will contain observers that get notified of changes
     private ArrayList<UnitObserver> unitObservers = new ArrayList<UnitObserver>(); // will contain observers that get notified of changes
     private ArrayList<StructureObserver> structureObservers = new ArrayList<StructureObserver>(); // will contain observers that get notified of changes
+    private ArrayList<StatusObserver> statusObservers = new ArrayList<>(); // will contain observers that get notified of changes
 
-    public Player(Map map, MapObserver observer, UnitObserver unitObserver, StructureObserver structureObserver, int startingX, int startingY){
+    public Player(Map map, MapObserver observer, UnitObserver unitObserver, StructureObserver structureObserver, StatusObserver statusObserver, int startingX, int startingY){
 
         //TODO add an id for player in the constructor
         customID=new CustomID(IdType.PLAYER,"newPlayer");
@@ -32,6 +33,7 @@ public class Player implements MapSubject, UnitSubject, StructureSubject {
         this.registerMapObserver(observer);
         this.registerUnitObserver(unitObserver);
         this.registerStructureObserver(structureObserver);
+        this.registerStatusObserver(statusObserver);
     }
     public void endTurn(){
         System.out.println(this.toString() + " is ending their turn");
@@ -42,45 +44,58 @@ public class Player implements MapSubject, UnitSubject, StructureSubject {
         this.notifyMapObservers(); // at the start of the game we want to give the player map to render
         this.notifyStructureObservers(); // we also want to update everyone with all our structure information
         this.notifyUnitObservers(); // and lets not forget the units
+        this.notifyStatusObservers(); // yay status viewport
     }
 
     public void cycleMode(CycleDirection direction){
         currentSelection.updateSelectedCommandable(entities.cycleMode(direction));
+        this.notifyStatusObservers(); // yay status viewport
         System.out.println("current mode " + entities.getCurrentMode());
     }
 
     public void cycleType(CycleDirection direction){
         currentSelection.updateSelectedCommandable(entities.cycleType(direction));
+        this.notifyStatusObservers(); // yay status viewport
         System.out.println("current type " + entities.getCurrentType());
     }
 
     public void cycleInstance(CycleDirection direction){
         currentSelection.updateSelectedCommandable(entities.cycleInstance(direction));
+        this.notifyStatusObservers(); // yay status viewport
         System.out.println("current instance " + entities.getCurrentInstance());
     }
 
     public void cycleCommand(CycleDirection direction){
         //TODO cycle through actions
+        //this.notifyStatusObservers(); // yay status viewport
         System.out.println("command cycle not hooked up yet :(");
     }
 
 
     @Override
-    public void registerMapObserver(MapObserver o) {
-
-        mapObservers.add(o);
-    }
-    @Override
-    public void unregister(MapObserver o) {mapObservers.remove(o);}
+    public void registerMapObserver(MapObserver o) { mapObservers.add(o); }
     @Override
     public void registerUnitObserver(UnitObserver o) {unitObservers.add(o);}
     @Override
-    public void unregister(UnitObserver o) {unitObservers.remove(o);}
-    @Override
     public void registerStructureObserver(StructureObserver o) {structureObservers.add(o);}
+    @Override
+    public void registerStatusObserver(StatusObserver o) { statusObservers.add(o); }
 
     @Override
-    public void unregister(StructureObserver o) { structureObservers.add(o);}
+    public void unregister(MapObserver o) {mapObservers.remove(o);}
+    @Override
+    public void unregister(UnitObserver o) {unitObservers.remove(o);}
+    @Override
+    public void unregister(StructureObserver o) { structureObservers.remove(o);}
+    @Override
+    public void unregister(StatusObserver o) { statusObservers.remove(o);}
+
+    @Override
+    public void notifyMapObservers() { // IMPORTANT!! CALL THIS WHENEVER THE MAP IS UPDATED SO THE VIEW REFRESHES
+        for(MapObserver mapObserver : mapObservers){
+            mapObserver.update(playerMap.returnRenderInformation());
+        }
+    }
     @Override
     public void notifyUnitObservers() { // IMPORTANT!! CALL THIS WHENEVER ANY ENTITIES/UNITS ARE UPDATED SO THE VIEW REFRESHES
         for(UnitObserver unitObserver : unitObservers){
@@ -94,13 +109,14 @@ public class Player implements MapSubject, UnitSubject, StructureSubject {
         }
     }
     @Override
-    public void notifyMapObservers() { // IMPORTANT!! CALL THIS WHENEVER THE MAP IS UPDATED SO THE VIEW REFRESHES
-        for(MapObserver mapObserver : mapObservers){
-            mapObserver.update(playerMap.returnRenderInformation());
+    public void notifyStatusObservers() { // IMPORTANT!! CALL THIS WHENEVER ENTITY OWNERSHIP IS UPDATED SO THE VIEW REFRESHES
+        for(StatusObserver statusObserver : statusObservers){
+            statusObserver.update(entities.returnStatusRenderInformation());
         }
     }
 
-    public CustomID getCustomID() {
-        return customID;
-    }
+    public CustomID getCustomID() { return customID; }
+
+
+
 }
