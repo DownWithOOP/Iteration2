@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyEvent;
@@ -36,7 +37,7 @@ public class MainViewController extends Controller{
     @FXML
     MenuBar mainMenuBar;
     @FXML
-    MenuItem endTurnMenuItem;
+    Label currentPlayerLabel;
     @FXML
     Canvas canvas;
     @FXML
@@ -158,7 +159,7 @@ public class MainViewController extends Controller{
     
         public void handleEndTurn(ActionEvent actionEvent) {
             controllerDispatch.handleCommand(CommandType.END_TURN);
-            endTurnMenuItem.setText("Player " + controllerDispatch.getActivePlayerNumber());
+            currentPlayerLabel.setText("Current Player: Player " + controllerDispatch.getActivePlayerNumber());
         }
 
         public void returnToMainMenu() throws IOException {
