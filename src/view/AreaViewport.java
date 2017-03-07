@@ -1,4 +1,4 @@
-package controller.ingamecontrollertypes;
+package view;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * Created by Konrad on 3/1/2017.
  */
 // this will be control the canvas area that is used to display the areaViewport
-public class AreaViewPortController{
+public class AreaViewport {
 
     private double cameraX;
     private double cameraY;
@@ -46,7 +46,7 @@ public class AreaViewPortController{
     Image colonist = Assets.getInstance().COLONIST;
     Image explorer = Assets.getInstance().EXPLORER;
 
-    public AreaViewPortController(VBox vbox, Canvas canvas){
+    public AreaViewport(VBox vbox, Canvas canvas){
         this.cameraX = -300; // default camera shift/starting position
         this.cameraY = 600; // default camera shift/starting position
         this.vBox = vbox;
