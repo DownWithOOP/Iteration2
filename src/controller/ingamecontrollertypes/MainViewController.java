@@ -17,6 +17,7 @@ import model.map.Map;
 import utilities.ObserverInterfaces.MapObserver;
 import utilities.ObserverInterfaces.StructureObserver;
 import utilities.ObserverInterfaces.UnitObserver;
+import view.AreaViewport;
 
 import java.io.IOException;
 import java.net.URL;
@@ -40,7 +41,7 @@ public class MainViewController extends Controller{
     @FXML
     Label coordinateInfo;
     private Map currentMap;
-    private AreaViewPortController areaViewPortController;
+    private AreaViewport areaViewport;
     private MapObserver mapObserver;
     private UnitObserver unitObserver;
     private StructureObserver structureObserver;
@@ -78,53 +79,53 @@ public class MainViewController extends Controller{
 
     @Override
     protected void render() {
-        this.areaViewPortController.UpdateRenderInfo(this.mapObserver.share(), this.unitObserver.share(), this.structureObserver.share()); // displays the map
+        this.areaViewport.UpdateRenderInfo(this.mapObserver.share(), this.unitObserver.share(), this.structureObserver.share()); // displays the map
     }
 
         @FXML void moveUp(ActionEvent actionEvent) throws  IOException{
-            this.areaViewPortController.changeCameraYPlus(); // TODO hook this up to some keyboard input
+            this.areaViewport.changeCameraYPlus(); // TODO hook this up to some keyboard input
         }
         @FXML void moveDown(ActionEvent actionEvent) throws  IOException{
-            this.areaViewPortController.changeCameraYMinus(); // TODO hook this up to some keyboard input
+            this.areaViewport.changeCameraYMinus(); // TODO hook this up to some keyboard input
         }
         @FXML void moveLeft(ActionEvent actionEvent) throws  IOException{
-            this.areaViewPortController.changeCameraXPlus(); // TODO hook this up to some keyboard input
+            this.areaViewport.changeCameraXPlus(); // TODO hook this up to some keyboard input
         }
         @FXML void moveRight(ActionEvent actionEvent) throws  IOException{
-            this.areaViewPortController.changeCameraXMinus(); // TODO hook this up to some keyboard input
+            this.areaViewport.changeCameraXMinus(); // TODO hook this up to some keyboard input
         }
         @FXML void cameraFaster(ActionEvent actionEvent) throws  IOException{
-            this.areaViewPortController.fasterCamera();  // TODO hook this up to some keyboard input
+            this.areaViewport.fasterCamera();  // TODO hook this up to some keyboard input
         }
         @FXML void cameraSlower(ActionEvent actionEvent) throws  IOException{
-            this.areaViewPortController.slowerCamer();  // TODO hook this up to some keyboard input
+            this.areaViewport.slowerCamer();  // TODO hook this up to some keyboard input
         }
         @FXML void selectNorth() throws IOException{
-            this.areaViewPortController.selectNorth(); // TODO hook this up to some keyboard input
+            this.areaViewport.selectNorth(); // TODO hook this up to some keyboard input
             updateCoordinatesForDebugging();
         }
         @FXML void selectSouth() throws IOException{
-            this.areaViewPortController.selectSouth(); // TODO hook this up to some keyboard input
+            this.areaViewport.selectSouth(); // TODO hook this up to some keyboard input
             updateCoordinatesForDebugging();
         }
         @FXML void selectNE() throws IOException{
-            this.areaViewPortController.selectNE(); // TODO hook this up to some keyboard input
+            this.areaViewport.selectNE(); // TODO hook this up to some keyboard input
             updateCoordinatesForDebugging();
         }
         @FXML void selectSE() throws IOException{
-            this.areaViewPortController.selectSE(); // TODO hook this up to some keyboard input
+            this.areaViewport.selectSE(); // TODO hook this up to some keyboard input
             updateCoordinatesForDebugging();
         }
         @FXML void selectSW() throws IOException{
-            this.areaViewPortController.selectSW(); // TODO hook this up to some keyboard input
+            this.areaViewport.selectSW(); // TODO hook this up to some keyboard input
             updateCoordinatesForDebugging();
         }
         @FXML void selectNW() throws IOException{
-            this.areaViewPortController.selectNW();  // TODO hook this up to some keyboard input
+            this.areaViewport.selectNW();  // TODO hook this up to some keyboard input
             updateCoordinatesForDebugging();
         }
         private void updateCoordinatesForDebugging(){ // for debugging, once game is working we can get rid of this
-            this.coordinateInfo.setText(areaViewPortController.returnXCoordinate() + " " + areaViewPortController.returnYCoordinate());
+            this.coordinateInfo.setText(areaViewport.returnXCoordinate() + " " + areaViewport.returnYCoordinate());
         }
 
         @FXML
@@ -172,7 +173,7 @@ public class MainViewController extends Controller{
 
         @Override
         public void initialize(URL location, ResourceBundle resources) { // initialized the component correctly
-            this.areaViewPortController = new AreaViewPortController(vbox, canvas);
+            this.areaViewport = new AreaViewport(vbox, canvas);
         }
 
 
