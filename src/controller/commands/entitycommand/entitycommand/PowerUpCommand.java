@@ -1,5 +1,6 @@
 package controller.commands.entitycommand.entitycommand;
 
+import controller.commands.entitycommand.AbstractCommand;
 import model.entities.Entity;
 
 /**
@@ -7,11 +8,15 @@ import model.entities.Entity;
  */
 public class PowerUpCommand extends EntityCommand {
     public PowerUpCommand(Entity entity) {
-        super(entity);
+        super(entity, 1);
     }
 
     @Override
-    public void execute() {
-        entity.powerUp();
+    public boolean execute() {
+        if(super.execute()) {
+            entity.powerUp();
+            return true;
+        }
+        return false;
     }
 }

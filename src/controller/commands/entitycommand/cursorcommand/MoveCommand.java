@@ -18,7 +18,9 @@ public class MoveCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public boolean execute() {
         cursor.move(direction);
+        return true;
     }
+
 }

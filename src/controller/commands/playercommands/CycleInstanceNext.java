@@ -16,8 +16,9 @@ public class CycleInstanceNext implements Command {
     }
 
     @Override
-    public void execute() {
+    public boolean execute() {
         playerToActOn.cycleInstance(CycleDirection.INCREMENT);
+        return true;
     }
 
 }

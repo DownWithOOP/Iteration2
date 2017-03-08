@@ -16,7 +16,8 @@ public class CycleModeNext implements Command{
     }
 
     @Override
-    public void execute() {
+    public boolean execute() {
         playerToActOn.cycleMode(CycleDirection.INCREMENT);
+        return true;
     }
 }

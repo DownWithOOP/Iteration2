@@ -1,17 +1,17 @@
 package controller.commands.entitycommand.entitycommand;
 
-import controller.commands.Command;
+import controller.commands.entitycommand.AbstractCommand;
 import model.entities.Entity;
 
 /**
- * Created by jordi on 3/1/2017.
+ * Created by cduica on 3/8/17.
  */
-public abstract class EntityCommand implements Command {
+public abstract class EntityCommand extends AbstractCommand {
     protected Entity entity;
 
-    public EntityCommand(Entity entity){
-        this.entity=entity;
+    public EntityCommand(Entity entity, int numTurns){
+        super(numTurns);
+        this.entity = entity;
     }
-
 
 }
