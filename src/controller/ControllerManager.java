@@ -62,6 +62,7 @@ public class ControllerManager {
     }
 
     public void switchControllers(Controller newActiveController) {
+        controllerDispatch.updateActiveController(newActiveController); // need up-to-date controller to pass commands to
         timer.updateController(newActiveController); // will can render() in new active Controller
     }
 
@@ -81,6 +82,8 @@ public class ControllerManager {
         this.activeController = temp;
         if(timer == null){
             // start of game, don't call yet
+            // at start of game, controller dispatch needs to know initial controller to talk to - JS
+            controllerDispatch.updateActiveController(temp);
         } else {
             switchControllers(temp);
         }

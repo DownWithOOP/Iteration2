@@ -108,132 +108,152 @@ public class MainViewController extends Controller{
         this.statusViewport.updateRenderInfo(this.statusObserver.share());
     }
 
-        @FXML void moveUp(ActionEvent actionEvent) throws  IOException{
+    //Move methods for moving with keyboard - JS
+    @Override
+    public void moveLeft() {
+        areaViewport.changeCameraXPlus();
+    }
+    @Override
+    public void moveUp() {
+        areaViewport.changeCameraYPlus();
+    }
+
+    @Override
+    public void moveRight() {
+        areaViewport.changeCameraXMinus();
+    }
+
+    @Override
+    public void moveDown() {
+        areaViewport.changeCameraYMinus();
+    }
+
+    //Move methods called by buttons on view - JS
+    @FXML void moveUp(ActionEvent actionEvent) throws  IOException{
             this.areaViewport.changeCameraYPlus(); // TODO hook this up to some keyboard input
-        }
-        @FXML void moveDown(ActionEvent actionEvent) throws  IOException{
-            this.areaViewport.changeCameraYMinus(); // TODO hook this up to some keyboard input
-        }
-        @FXML void moveLeft(ActionEvent actionEvent) throws  IOException{
-            this.areaViewport.changeCameraXPlus(); // TODO hook this up to some keyboard input
-        }
-        @FXML void moveRight(ActionEvent actionEvent) throws  IOException{
-            this.areaViewport.changeCameraXMinus(); // TODO hook this up to some keyboard input
-        }
-        @FXML void cameraFaster(ActionEvent actionEvent) throws  IOException{
-            this.areaViewport.fasterCamera();  // TODO hook this up to some keyboard input
-        }
-        @FXML void cameraSlower(ActionEvent actionEvent) throws  IOException{
-            this.areaViewport.slowerCamer();  // TODO hook this up to some keyboard input
-        }
-        @FXML void selectNorth() throws IOException{
-            this.areaViewport.selectNorth(); // TODO hook this up to some keyboard input
-            updateCoordinatesForDebugging();
-        }
-        @FXML void selectSouth() throws IOException{
-            this.areaViewport.selectSouth(); // TODO hook this up to some keyboard input
-            updateCoordinatesForDebugging();
-        }
-        @FXML void selectNE() throws IOException{
-            this.areaViewport.selectNE(); // TODO hook this up to some keyboard input
-            updateCoordinatesForDebugging();
-        }
-        @FXML void selectSE() throws IOException{
-            this.areaViewport.selectSE(); // TODO hook this up to some keyboard input
-            updateCoordinatesForDebugging();
-        }
-        @FXML void selectSW() throws IOException{
-            this.areaViewport.selectSW(); // TODO hook this up to some keyboard input
-            updateCoordinatesForDebugging();
-        }
-        @FXML void selectNW() throws IOException{
-            this.areaViewport.selectNW();  // TODO hook this up to some keyboard input
-            updateCoordinatesForDebugging();
-        }
-        private void updateCoordinatesForDebugging(){ // for debugging, once game is working we can get rid of this
-            this.coordinateInfo.setText(areaViewport.returnXCoordinate() + " " + areaViewport.returnYCoordinate());
-        }
+    }
+    @FXML void moveDown(ActionEvent actionEvent) throws  IOException{
+        this.areaViewport.changeCameraYMinus(); // TODO hook this up to some keyboard input
+    }
+    @FXML void moveLeft(ActionEvent actionEvent) throws  IOException{
+        this.areaViewport.changeCameraXPlus(); // TODO hook this up to some keyboard input
+    }
+    @FXML void moveRight(ActionEvent actionEvent) throws  IOException{
+        this.areaViewport.changeCameraXMinus(); // TODO hook this up to some keyboard input
+    }
+    @FXML void cameraFaster(ActionEvent actionEvent) throws  IOException{
+        this.areaViewport.fasterCamera();  // TODO hook this up to some keyboard input
+    }
+    @FXML void cameraSlower(ActionEvent actionEvent) throws  IOException{
+        this.areaViewport.slowerCamer();  // TODO hook this up to some keyboard input
+    }
+    @FXML void selectNorth() throws IOException{
+        this.areaViewport.selectNorth(); // TODO hook this up to some keyboard input
+        updateCoordinatesForDebugging();
+    }
+    @FXML void selectSouth() throws IOException{
+        this.areaViewport.selectSouth(); // TODO hook this up to some keyboard input
+        updateCoordinatesForDebugging();
+    }
+    @FXML void selectNE() throws IOException{
+        this.areaViewport.selectNE(); // TODO hook this up to some keyboard input
+        updateCoordinatesForDebugging();
+    }
+    @FXML void selectSE() throws IOException{
+        this.areaViewport.selectSE(); // TODO hook this up to some keyboard input
+        updateCoordinatesForDebugging();
+    }
+    @FXML void selectSW() throws IOException{
+        this.areaViewport.selectSW(); // TODO hook this up to some keyboard input
+        updateCoordinatesForDebugging();
+    }
+    @FXML void selectNW() throws IOException{
+        this.areaViewport.selectNW();  // TODO hook this up to some keyboard input
+        updateCoordinatesForDebugging();
+    }
+    private void updateCoordinatesForDebugging(){ // for debugging, once game is working we can get rid of this
+        this.coordinateInfo.setText(areaViewport.returnXCoordinate() + " " + areaViewport.returnYCoordinate());
+    }
 
-        @FXML
-        public void handleChangeToStructureView(ActionEvent actionEvent) throws  IOException{
-            this.switchControllerRelay.changeToStructure();}
-        public void handleChangeToUnitView(ActionEvent actionEvent) throws  IOException{
-            this.switchControllerRelay.changeToUnit();}
-        public void handleChangeToTechTreeView(ActionEvent actionEvent) throws  IOException{
-            this.switchControllerRelay.changeToTechTree();}
-        @FXML
-        public void handleReturnToMainMenu(ActionEvent actionEvent) throws IOException {
-            // returnToMainMenu();
-        }
-    
-        public void handleEndTurn(ActionEvent actionEvent) {
-            controllerDispatch.handleCommand(CommandType.END_TURN);
-            currentPlayerLabel.setText("Current Player: Player " + controllerDispatch.getActivePlayerNumber());
-        }
+    @FXML
+    public void handleChangeToStructureView(ActionEvent actionEvent) throws  IOException{
+        this.switchControllerRelay.changeToStructure();}
+    public void handleChangeToUnitView(ActionEvent actionEvent) throws  IOException{
+        this.switchControllerRelay.changeToUnit();}
+    public void handleChangeToTechTreeView(ActionEvent actionEvent) throws  IOException{
+        this.switchControllerRelay.changeToTechTree();}
+    @FXML
+    public void handleReturnToMainMenu(ActionEvent actionEvent) throws IOException {
+        // returnToMainMenu();
+    }
 
-        public void returnToMainMenu() throws IOException {
-            // TODO: properly end all game logic in Game class when returning to main menu
-            this.switchControllerRelay.changeToMain();
-        }
+    public void handleEndTurn(ActionEvent actionEvent) {
+        controllerDispatch.handleCommand(CommandType.END_TURN);
+        currentPlayerLabel.setText("Current Player: Player " + controllerDispatch.getActivePlayerNumber());
+    }
 
-        public void overlayToggle() {
-            if(this.areaViewport.resourceOverlaySwitch()){ // overlay is on so we want to display "turn off overlay"
-                this.resourceOverlay.setText("turn off");
-            } else { this.resourceOverlay.setText("turn on"); }
-        }
+    public void returnToMainMenu() throws IOException {
+        // TODO: properly end all game logic in Game class when returning to main menu
+        this.switchControllerRelay.changeToMain();
+    }
 
-        public void foodOverlay(){
-            if(this.areaViewport.foodOverlaySwitch()){
-                this.foodOverlay.setText("disable food");
-            } else { this.foodOverlay.setText("enable food"); }
-        }
+    public void overlayToggle() {
+        if(this.areaViewport.resourceOverlaySwitch()){ // overlay is on so we want to display "turn off overlay"
+            this.resourceOverlay.setText("turn off");
+        } else { this.resourceOverlay.setText("turn on"); }
+    }
 
-        public void oreOverlay(){
-            if(this.areaViewport.oreOverlaySwitch()){
-                this.oreOverlay.setText("disable ore");
-            } else { this.oreOverlay.setText("enable ore"); }
-        }
+    public void foodOverlay(){
+        if(this.areaViewport.foodOverlaySwitch()){
+            this.foodOverlay.setText("disable food");
+        } else { this.foodOverlay.setText("enable food"); }
+    }
 
-        public void energyOverlay(){
-            if(this.areaViewport.energyOverlaySwitch()){
-                this.energyOverlay.setText("disable energy");
-            } else { this.energyOverlay.setText("enable energy"); }
-        }
+    public void oreOverlay(){
+        if(this.areaViewport.oreOverlaySwitch()){
+            this.oreOverlay.setText("disable ore");
+        } else { this.oreOverlay.setText("enable ore"); }
+    }
 
-        //quit the entire game application
-        @FXML
-        public void handleQuitGame(ActionEvent event) {
-            quitGame();
-        }
+    public void energyOverlay(){
+        if(this.areaViewport.energyOverlaySwitch()){
+            this.energyOverlay.setText("disable energy");
+        } else { this.energyOverlay.setText("enable energy"); }
+    }
 
-        public void quitGame() {
-            getStage().close();
-        }
+    //quit the entire game application
+    @FXML
+    public void handleQuitGame(ActionEvent event) {
+                                                quitGame();
+                                                           }
 
-        @FXML
-        public void keyListener(KeyEvent event) throws IOException {
-            //TODO: add key menu shortcuts and command control recognition
-        }
+    public void quitGame() {
+                         getStage().close();
+                                            }
 
-        @FXML
-        private Stage getStage() {
-            Stage stage = (Stage) mainMenuBar.getScene().getWindow();
-            return stage;
-        }
+    @FXML
+    public void keyListener(KeyEvent event) throws IOException {
+        //TODO: add key menu shortcuts and command control recognition
+    }
 
-        @Override
-        public void initialize(URL location, ResourceBundle resources) { // initialized the component correctly
+    @FXML
+    private Stage getStage() {
+        Stage stage = (Stage) mainMenuBar.getScene().getWindow();
+        return stage;
+    }
 
-            //TODO don't use hard coded strings
-            cycleLabels.put("mode", modeLabel);
-            cycleLabels.put("type", typeLabel);
-            cycleLabels.put("instance", instanceLabel);
-            cycleLabels.put("command", commandLabel);
+    @Override
+    public void initialize(URL location, ResourceBundle resources) { // initialized the component correctly
 
-            this.areaViewport = new AreaViewport(vbox, canvas);
-            this.statusViewport = new StatusViewport(cycleLabels);
-        }
+        //TODO don't use hard coded strings
+        cycleLabels.put("mode", modeLabel);
+        cycleLabels.put("type", typeLabel);
+        cycleLabels.put("instance", instanceLabel);
+        cycleLabels.put("command", commandLabel);
 
+        this.areaViewport = new AreaViewport(vbox, canvas);
+        this.statusViewport = new StatusViewport(cycleLabels);
+    }
 
 }
 

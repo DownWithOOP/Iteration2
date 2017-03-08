@@ -143,6 +143,26 @@ public class UnitViewController extends Controller
         }
     }
 
+    @Override
+    public void moveLeft() {
+        System.out.println("Cannot move left in UnitView");
+    }
+
+    @Override
+    public void moveUp() {
+        System.out.println("Cannot move up in UnitView");
+    }
+
+    @Override
+    public void moveRight() {
+        System.out.println("Cannot move right in UnitView");
+    }
+
+    @Override
+    public void moveDown() {
+        System.out.println("Cannot move down in UnitView");
+    }
+
     public void setObservers(UnitObserver unitObserver){
         this.unitObserver = unitObserver;
     }
