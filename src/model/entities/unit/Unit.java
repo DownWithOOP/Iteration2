@@ -13,6 +13,7 @@ import java.util.ArrayList;
  * Created by jordi on 2/24/2017.
  */
 public abstract class Unit extends Entity {
+    private ArrayList<Location> currentPath;
 
     static ArrayList<CommandType> unitCommand= new ArrayList<>();
     static {
@@ -33,8 +34,20 @@ public abstract class Unit extends Entity {
     public abstract void abandonArmy();
     public abstract void joinArmy(int armyNumber);
 
-    public void moveUnit(){
+    public void moveUnit(int newX, int newY) {
+        double oldX = getLocation().getX();
+        double oldY = getLocation().getY();
+        int distance = (int)(Math.sqrt(Math.pow(newX-oldX,2) + Math.pow(newY-oldY,2)));
 
+        // check if distance is in the range of the unit's movement's stat
+        if (distance <= getUnitMovement()) {
+            //TODO: Modify Pathfinder class for hex tiles
+            //setCurrentPath();
+            for (Location location : getCurrentPath()) {
+                //TODO: Implement move command to add locations to command queue
+                this.addToQueue();
+            }
+        }
     }
 
     public void advanceToRallyPoint(int number){
@@ -53,4 +66,11 @@ public abstract class Unit extends Entity {
         return ((UnitStats)entityStats).clone();
     }
 
+    public ArrayList<Location> getCurrentPath() {
+        return currentPath;
+    }
+
+    public void setCurrentPath(ArrayList<Location> currentPath) {
+        this.currentPath = currentPath;
+    }
 }
