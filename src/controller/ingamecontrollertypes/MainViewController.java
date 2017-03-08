@@ -52,6 +52,15 @@ public class MainViewController extends Controller{
     Label commandLabel;
     @FXML
     Label coordinateInfo;
+    @FXML
+    MenuItem resourceOverlay;
+    @FXML
+    MenuItem foodOverlay;
+    @FXML
+    MenuItem oreOverlay;
+    @FXML
+    MenuItem energyOverlay;
+
     private Map currentMap;
     private AreaViewport areaViewport;
     private StatusViewport statusViewport;
@@ -165,6 +174,30 @@ public class MainViewController extends Controller{
         public void returnToMainMenu() throws IOException {
             // TODO: properly end all game logic in Game class when returning to main menu
             this.switchControllerRelay.changeToMain();
+        }
+
+        public void overlayToggle() {
+            if(this.areaViewport.resourceOverlaySwitch()){ // overlay is on so we want to display "turn off overlay"
+                this.resourceOverlay.setText("turn off");
+            } else { this.resourceOverlay.setText("turn on"); }
+        }
+
+        public void foodOverlay(){
+            if(this.areaViewport.foodOverlaySwitch()){
+                this.foodOverlay.setText("disable food");
+            } else { this.foodOverlay.setText("enable food"); }
+        }
+
+        public void oreOverlay(){
+            if(this.areaViewport.oreOverlaySwitch()){
+                this.oreOverlay.setText("disable ore");
+            } else { this.oreOverlay.setText("enable ore"); }
+        }
+
+        public void energyOverlay(){
+            if(this.areaViewport.energyOverlaySwitch()){
+                this.energyOverlay.setText("disable energy");
+            } else { this.energyOverlay.setText("enable energy"); }
         }
 
         //quit the entire game application

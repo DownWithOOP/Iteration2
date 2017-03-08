@@ -17,7 +17,7 @@ public class MapRenderInformation {
         this.renderInfo = new MapRenderObject[mapX][mapY];
     }
     public void addTileToRenderObject(Tile tile, int x, int y){
-        MapRenderObject renderObject = new MapRenderObject(tile.getTerrain().getTerrainType(),tile.getResourceTypes());
+        MapRenderObject renderObject = new MapRenderObject(tile.getTerrain().getTerrainType(),tile.getResources());
         renderInfo[x][y] = renderObject;
     }
     public MapRenderObject[][] getRenderObjectMap(){

@@ -1,6 +1,6 @@
 package model.RenderInformation;
 
-import model.map.tile.resources.ResourceType;
+import model.map.tile.resources.Resource;
 import model.map.tile.terrain.TerrainType;
 
 import java.util.List;
@@ -10,16 +10,16 @@ import java.util.List;
  */
 public class MapRenderObject {
     private TerrainType terrainType;
-    private List<ResourceType> resourceTypes;
+    private List<Resource> resources;
 
-    public MapRenderObject(TerrainType terrainType, List<ResourceType> resourceTypes){
+    public MapRenderObject(TerrainType terrainType, List<Resource> resources){
         this.terrainType = terrainType;
-        this.resourceTypes = resourceTypes;
+        this.resources = resources;
     }
     public TerrainType getTerrainType(){
         return this.terrainType;
     }
-    public List<ResourceType> getResourceTypes(){
-        return this.resourceTypes;
+    public List<Resource> getResources(){
+        return this.resources;
     }
 }

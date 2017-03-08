@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="726.0" prefWidth="1221.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ingamecontrollertypes.MainViewController">
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="741.0" prefWidth="1221.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ingamecontrollertypes.MainViewController">
     <children>
         <MenuBar fx:id="mainMenuBar" prefHeight="29.0" prefWidth="1222.0">
             <menus>
@@ -45,6 +45,14 @@
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#handleChangeToTechTreeView" text="Technology Tree" />
                </items></Menu>
+            <Menu mnemonicParsing="false" text="Resource Overlay">
+               <items>
+                  <MenuItem fx:id="resourceOverlay" mnemonicParsing="false" onAction="#overlayToggle" text="turn on" />
+                  <MenuItem fx:id="foodOverlay" mnemonicParsing="false" onAction="#foodOverlay" text="disable food" />
+                  <MenuItem fx:id="energyOverlay" mnemonicParsing="false" onAction="#energyOverlay" text="disable energy" />
+                  <MenuItem fx:id="oreOverlay" mnemonicParsing="false" onAction="#oreOverlay" text="disable ore" />
+               </items>
+            </Menu>
 
             </menus>
         </MenuBar>

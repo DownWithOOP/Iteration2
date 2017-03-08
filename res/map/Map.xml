@@ -1,5 +1,5 @@
 <Map height="12" width="24">
-    <!-- row 1, (x,0)-->
+    <!-- column 0 -->
     <Tile>
         <Terrain>DIRT</Terrain>
         <Energy>100</Energy> <Ore>30</Ore> <Food>50</Food>
@@ -95,7 +95,7 @@
         <Item></Item>
         <AreaEffect></AreaEffect>
     </Tile>
-<!-- row 2 (x,1)-->
+<!-- column #2-->
     <Tile>
         <Terrain>GRASS</Terrain>
         <Energy></Energy> <Ore></Ore> <Food></Food>
@@ -865,7 +865,7 @@
     </Tile>
 
     <Tile>
-        <Terrain>DIRT</Terrain>
+        <Terrain>WATER</Terrain>
         <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
@@ -873,7 +873,7 @@
     </Tile>
 
     <Tile>
-        <Terrain>DIRT</Terrain>
+        <Terrain>WATER</Terrain>
         <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
@@ -961,7 +961,15 @@
     </Tile>
 
     <Tile>
-        <Terrain>GRASS</Terrain>
+        <Terrain>WATER</Terrain>
+        <Energy></Energy> <Ore></Ore> <Food></Food>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>WATER</Terrain>
         <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>
@@ -970,14 +978,6 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Energy></Energy> <Ore></Ore> <Food></Food>
-        <Decal></Decal>
-        <Item></Item>
-        <AreaEffect></AreaEffect>
-    </Tile>
-
-    <Tile>
-        <Terrain>DIRT</Terrain>
         <Energy></Energy> <Ore></Ore> <Food></Food>
         <Decal></Decal>
         <Item></Item>

@@ -6,11 +6,13 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import model.RenderInformation.*;
+import model.map.tile.resources.Resource;
 import model.map.tile.resources.ResourceType;
 import model.map.tile.terrain.TerrainType;
 import utilities.id.IdType;
 import view.utilities.Assets;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +37,10 @@ public class AreaViewport {
     private int gridSizeX;
     private int gridSizeY;
     private boolean alteranteColumn;
+    private boolean overlayOn = false;
+    private boolean displayFood = true;
+    private boolean displayOre = true;
+    private boolean displayEnergy = true;
 
     Image grass = Assets.getInstance().GRASS;
     Image water = Assets.getInstance().WATER;
@@ -110,9 +116,13 @@ public class AreaViewport {
         this.structureRenderInformation = renderStructure;
         this.gridSizeX = mapRenderInformation.getX();
         this.gridSizeY = mapRenderInformation.getY();
-            this.YBound = ((double) this.mapRenderInformation.getY()) * grass.getHeight()*0.75 + grass.getHeight()*2;
-            this.XBound = ((double) this.mapRenderInformation.getX()) * grass.getWidth()*0.75 + grass.getWidth() - this.canvas.getWidth();
-       this.drawSomething();
+        this.YBound = ((double) this.mapRenderInformation.getY()) * grass.getHeight()*0.75 + grass.getHeight()*2;
+        this.XBound = ((double) this.mapRenderInformation.getX()) * grass.getWidth()*0.75 + grass.getWidth() - this.canvas.getWidth();
+       if(overlayOn){
+           // starts to lag with overlay so we turn off refreshing
+       } else {
+           this.drawSomething();
+       }
 
     }
 
@@ -221,6 +231,27 @@ public class AreaViewport {
         drawSomething();
     }
 
+    public boolean resourceOverlaySwitch(){
+        overlayOn = !overlayOn; // toggle boolean
+        if(overlayOn){ drawSomething(); }
+        return this.overlayOn;
+    }
+    public boolean foodOverlaySwitch(){
+        displayFood = !displayFood; // toggle boolean
+        if(overlayOn){ drawSomething(); }
+        return this.displayFood;
+    }
+    public boolean energyOverlaySwitch(){
+        displayEnergy = !displayEnergy; // toggle boolean
+        if(overlayOn){ drawSomething(); }
+        return this.displayEnergy;
+    }
+    public boolean oreOverlaySwitch(){
+        displayOre = !displayOre; // toggle boolean
+        if(overlayOn){ drawSomething(); }
+        return this.displayOre;
+    }
+
     /**
      * Currently these 2 methods are for debugging to see if moving around the map works correctly
      */
@@ -246,13 +277,13 @@ public class AreaViewport {
         gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
         gc.setFill(Color.BLACK);
         gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
+        gc.setFill(Color.WHITE);
 
 
         // draws new terrain objects
         for(int i=0; i<mapRenderInformation.getY()   ; i++){
             for(int j=0; j<mapRenderInformation.getX(); j++){
                 TerrainType current = renderObjects[j][i].getTerrainType();
-                List<ResourceType> resource = renderObjects[j][i].getResourceTypes();
                 if(j%2 == 0){
                     if(current.equals(TerrainType.GRASS)){
                       //  System.out.print(" GRASS ");
@@ -264,18 +295,6 @@ public class AreaViewport {
                       //  System.out.print(" WATER ");
                         gc.drawImage(water,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
                     }
-
-                     /* Turning OFF resource rendering since we are going to have to change it completly
-                    if(resource.equals(ResourceType.CATFOOD)){
-                        gc.drawImage(catFood,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
-                    } else if(resource.equals(ResourceType.CRYSTAL)){
-                        gc.drawImage(crystal,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
-                    } else if(resource.equals(ResourceType.RESEARCH)){
-                        gc.drawImage(research,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
-                    } else if(resource.equals(ResourceType.EMPTY)){
-                        // nothing extra to render
-                    }
-                    */
                 }
                 else {
                     if(current.equals(TerrainType.GRASS)){
@@ -288,18 +307,6 @@ public class AreaViewport {
                         //System.out.print(" WATER ");
                         gc.drawImage(water,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
                     }
-
-                    /* Turning OFF resource rendering since we are going to have to change it completly
-                    if(resource.equals(ResourceType.CATFOOD)){
-                        gc.drawImage(catFood,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
-                    } else if(resource.equals(ResourceType.CRYSTAL)){
-                        gc.drawImage(crystal,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
-                    } else if(resource.equals(ResourceType.RESEARCH)){
-                        gc.drawImage(research,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
-                    } else if(resource.equals(ResourceType.EMPTY)){
-                        // nothing extra to render
-                    }
-                    */
                 }
             }
         }
@@ -322,11 +329,54 @@ public class AreaViewport {
                     gc.drawImage(colonist,0.75*width*x+ cameraX,height*1*-y+ cameraY+height);
                 }
             }
-
-
-
         }
 
-        drawSelection();
+        // here we get to drawing the overlay if the user has it on
+        if(overlayOn){
+            for(int i=0; i<mapRenderInformation.getY()   ; i++) {
+                for (int j = 0; j < mapRenderInformation.getX(); j++) {
+                    List<Resource> resources = renderObjects[j][i].getResources();
+                    // energy, ore, food in that order
+                    int food = 0;
+                    int energy = 0;
+                    int ore = 0;
+                    if (resources.size() == 0) {
+                        // nothing, all set to 0
+                    } else {
+                        energy = resources.get(0).getLevel();
+                        ore = resources.get(1).getLevel();
+                        food = resources.get(2).getLevel();
+                    }
+                        if(displayFood){
+                            if(j%2 == 0) {
+                                gc.strokeText("FOOD: "+food, 0.75 * width * j + cameraX+25, height * 1 * -i + cameraY + width * 0.45-25+ height);
+                            }
+                            else {
+                                gc.strokeText("FOOD: "+food, 0.75*width*j+ cameraX+25,height*1*-i+ cameraY  +(2*height)-25);
+                            }
+                        }
+                        if(displayOre){
+                            if(j%2 == 0) {
+                                gc.strokeText("ORE: "+ore, 0.75 * width * j + cameraX+25, height * 1 * -i + cameraY + width * 0.45-55+height);
+                            }
+                            else {
+                                gc.strokeText("ORE: "+ore, 0.75*width*j+ cameraX+25,height*1*-i+ cameraY  +(2*height)-55);
+                            }
+                        }
+                        if(displayEnergy){
+                            if(j%2 == 0) {
+                                gc.strokeText("ENERGY: "+energy, 0.75 * width * j + cameraX+20, height * 1 * -i + cameraY + width * 0.45-40+height);
+                            }
+                            else {
+                                gc.strokeText("ENERGY: "+energy, 0.75*width*j+ cameraX+20,height*1*-i+ cameraY  +(2*height)-40);
+                            }
+                        }
+                    }
+                }
+        }
+
+
+
+        drawSelection(); // this draws the tile selection image
     }
 }
