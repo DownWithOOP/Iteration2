@@ -1,8 +1,11 @@
 package view;
 
+import javafx.scene.*;
+import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import model.RenderInformation.*;
@@ -41,6 +44,8 @@ public class AreaViewport {
     private boolean displayFood = true;
     private boolean displayOre = true;
     private boolean displayEnergy = true;
+    private int fastCameraSpeed;
+    private int slowCameraSpeed;
 
     Image grass = Assets.getInstance().GRASS;
     Image water = Assets.getInstance().WATER;
@@ -58,27 +63,60 @@ public class AreaViewport {
         this.cameraY = 600; // default camera shift/starting position
         this.vBox = vbox;
         this.canvas = canvas;
-        this.cameraSpeed = 101;
+        this.slowCameraSpeed = 5;
+        this.fastCameraSpeed = 31;
+
+        this.cameraSpeed = 21;
         this.selectX = 6; // starting X of selected tile
         this.selectY = 6; // starting Y of selected tile
         this.alteranteColumn = true;
+        this.canvas.addEventFilter(MouseEvent.MOUSE_MOVED,
+                event -> {
+                    if(event.getSceneX() > 1000){ // move to the right fast
+                        this.cameraSpeed = fastCameraSpeed;
+                        changeCameraXMinus();
+                    } else if(event.getSceneX() > 850){ // move to the right slow
+                        this.cameraSpeed = slowCameraSpeed;
+                        changeCameraXMinus();
+                    }
+                    else if(event.getSceneX() < 200){ // move to the left fast
+                        this.cameraSpeed = fastCameraSpeed;
+                        changeCameraXPlus();
+                    } else if(event.getSceneX() < 350){ // move to the left slow
+                        this.cameraSpeed = slowCameraSpeed;
+                        changeCameraXPlus();
+                    }
+                    if(event.getSceneY() < 100){ // move up fast
+                        this.cameraSpeed = fastCameraSpeed;
+                        changeCameraYPlus();
+                    } else if (event.getSceneY() < 200){ // move up slow
+                        this.cameraSpeed = slowCameraSpeed;
+                        changeCameraYPlus();
+                    }
+                    else if(event.getSceneY() > 500){ // move down fast
+                        this.cameraSpeed = fastCameraSpeed;
+                        changeCameraYMinus();
+                    } else if(event.getSceneY() > 400){ // move down slow
+                        this.cameraSpeed = slowCameraSpeed;
+                        changeCameraYMinus();
+                    }
+                    this.drawSomething(); // refresh screen
+                }
+        );
 
     }
     /** Camera Navigation Controls **/
-
     public void changeCameraXPlus(){
         this.cameraX += cameraSpeed;
         if(this.cameraX > grass.getWidth()*0.75){
             this.cameraX = grass.getWidth()*0.75; // keep in bounds
         }
-        this.drawSomething();
     }
     public void changeCameraYPlus(){
         this.cameraY += cameraSpeed;
         if(this.cameraY > this.YBound){
             this.cameraY = this.YBound; // keep in bounds;
         }
-        this.drawSomething();
     }
     public void changeCameraXMinus(){
         if(this.cameraX - cameraSpeed < (this.XBound*-1)){
@@ -86,7 +124,6 @@ public class AreaViewport {
         } else {
             this.cameraX -= cameraSpeed;
         }
-        this.drawSomething();
     }
     public void changeCameraYMinus(){
 
@@ -95,8 +132,6 @@ public class AreaViewport {
         } else {
             this.cameraY -= cameraSpeed;
         }
-        System.out.println(this.cameraX + " " +this.cameraY + " ");
-        this.drawSomething();
     }
 
     /** camera speed, controls how much canvas is moved by each time
@@ -123,7 +158,6 @@ public class AreaViewport {
        } else {
            this.drawSomething();
        }
-
     }
 
     public void drawSelection(){
@@ -332,8 +366,8 @@ public class AreaViewport {
         }
 
         // here we get to drawing the overlay if the user has it on
-        if(overlayOn){
-            for(int i=0; i<mapRenderInformation.getY()   ; i++) {
+        if(overlayOn) {
+            for (int i = 0; i < mapRenderInformation.getY(); i++) {
                 for (int j = 0; j < mapRenderInformation.getX(); j++) {
                     List<Resource> resources = renderObjects[j][i].getResources();
                     // energy, ore, food in that order
@@ -342,40 +376,48 @@ public class AreaViewport {
                     int ore = 0;
                     if (resources.size() == 0) {
                         // nothing, all set to 0
+                        StringBuilder builder = new StringBuilder();
+                        if (displayFood) {
+                            builder.append("F: 0 " +"\n");
+                        }
+                        if (displayOre) {
+                            builder.append("O: " + 0+ "\n");
+                        }
+                        if (displayEnergy) {
+                            builder.append("E: " + 0 + "\n");
+                        }
+                        String resourceDisplay = builder.toString();
+                        if (j % 2 == 0) {
+                            gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + width * 0.45 - 60 + height);
+                        } else {
+                            gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + (2 * height) - 60);
+                        }
                     } else {
                         energy = resources.get(0).getLevel();
                         ore = resources.get(1).getLevel();
                         food = resources.get(2).getLevel();
-                    }
-                        if(displayFood){
-                            if(j%2 == 0) {
-                                gc.strokeText("FOOD: "+food, 0.75 * width * j + cameraX+25, height * 1 * -i + cameraY + width * 0.45-25+ height);
-                            }
-                            else {
-                                gc.strokeText("FOOD: "+food, 0.75*width*j+ cameraX+25,height*1*-i+ cameraY  +(2*height)-25);
-                            }
+                        StringBuilder builder = new StringBuilder();
+                        if (displayFood) {
+                            builder.append("F: " + food + "\n");
                         }
-                        if(displayOre){
-                            if(j%2 == 0) {
-                                gc.strokeText("ORE: "+ore, 0.75 * width * j + cameraX+25, height * 1 * -i + cameraY + width * 0.45-55+height);
-                            }
-                            else {
-                                gc.strokeText("ORE: "+ore, 0.75*width*j+ cameraX+25,height*1*-i+ cameraY  +(2*height)-55);
-                            }
+                        if (displayOre) {
+                            builder.append("O: " + ore + "\n");
                         }
-                        if(displayEnergy){
-                            if(j%2 == 0) {
-                                gc.strokeText("ENERGY: "+energy, 0.75 * width * j + cameraX+20, height * 1 * -i + cameraY + width * 0.45-40+height);
-                            }
-                            else {
-                                gc.strokeText("ENERGY: "+energy, 0.75*width*j+ cameraX+20,height*1*-i+ cameraY  +(2*height)-40);
-                            }
+                        if (displayEnergy) {
+                            builder.append("E: " + energy + "\n");
+                        }
+                        String resourceDisplay = builder.toString();
+
+                        if (j % 2 == 0) {
+                            gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + width * 0.45 - 60 + height);
+                        } else {
+                            gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + (2 * height) - 60);
                         }
                     }
                 }
+            }
+
         }
-
-
 
         drawSelection(); // this draws the tile selection image
     }
