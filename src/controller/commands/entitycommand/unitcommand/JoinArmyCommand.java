@@ -6,7 +6,8 @@ import model.entities.unit.Unit;
  * Created by jordi on 3/1/2017.
  */
 public class JoinArmyCommand extends UnitCommand{
-    int number;
+
+    private int number;
 
     public JoinArmyCommand(Unit unit, int number) {
         super(unit, 1);

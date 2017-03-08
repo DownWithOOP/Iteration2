@@ -7,6 +7,7 @@ import model.entities.Entity;
  * Created by cduica on 3/8/17.
  */
 public abstract class EntityCommand extends AbstractCommand {
+
     protected Entity entity;
 
     public EntityCommand(Entity entity, int numTurns){

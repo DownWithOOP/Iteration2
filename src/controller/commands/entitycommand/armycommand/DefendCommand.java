@@ -9,7 +9,7 @@ import model.entities.unit.Army;
  */
 public class DefendCommand extends ArmyCommand{
 
-    Direction direction;
+    private Direction direction;
 
     public DefendCommand(Army army, Direction direction){
         super(army, 1);

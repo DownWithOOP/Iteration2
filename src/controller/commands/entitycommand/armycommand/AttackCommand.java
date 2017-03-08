@@ -8,7 +8,8 @@ import model.entities.unit.Army;
  * Created by jordi on 2/28/2017.
  */
 public class AttackCommand extends ArmyCommand {
-    Direction direction;
+
+    private Direction direction;
 
     public AttackCommand(Army army, Direction direction){
         super(army, 1);

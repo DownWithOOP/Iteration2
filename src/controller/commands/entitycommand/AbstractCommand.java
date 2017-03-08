@@ -8,7 +8,7 @@ import model.entities.Entity;
  */
 public abstract class AbstractCommand implements Command {
 
-    int numTurns;
+    private int numTurns;
 
     public AbstractCommand(int numTurns) {
         this.numTurns = numTurns;
