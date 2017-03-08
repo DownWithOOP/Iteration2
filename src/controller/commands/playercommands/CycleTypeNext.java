@@ -16,7 +16,8 @@ public class CycleTypeNext implements Command {
     }
 
     @Override
-    public void execute() {
+    public boolean execute() {
         playerToActOn.cycleType(CycleDirection.DECREMENT);
+        return true;
     }
 }

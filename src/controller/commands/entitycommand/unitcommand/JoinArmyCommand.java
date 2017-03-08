@@ -9,12 +9,16 @@ public class JoinArmyCommand extends UnitCommand{
     int number;
 
     public JoinArmyCommand(Unit unit, int number) {
-        super(unit);
+        super(unit, 1);
         this.number=number;
     }
 
     @Override
-    public void execute() {
-        unit.joinArmy(number);
+    public boolean execute() {
+        if(super.execute()) {
+            unit.joinArmy(number);
+            return true;
+        }
+        return false;
     }
 }

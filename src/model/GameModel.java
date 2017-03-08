@@ -48,10 +48,11 @@ public class GameModel {
         return map;
     }
 
-    public void endTurn() {
+    public boolean endTurn() {
         playersList[activePlayerIndex].endTurn();
         activePlayerIndex = nextPlayerIndex(activePlayerIndex);
         playersList[activePlayerIndex].startTurn();
+        return true;
     }
 
     private int nextPlayerIndex(int index) {

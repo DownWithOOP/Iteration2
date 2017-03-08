@@ -16,7 +16,8 @@ public class CycleModePrev implements Command {
     }
 
     @Override
-    public void execute() {
+    public boolean execute() {
         playerToActOn.cycleMode(CycleDirection.DECREMENT);
+        return true;
     }
 }

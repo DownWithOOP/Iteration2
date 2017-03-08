@@ -9,7 +9,7 @@ import controller.commands.entitycommand.armycommand.DefendCommand;
 import controller.commands.entitycommand.cursorcommand.MoveCommand;
 import controller.commands.entitycommand.entitycommand.PowerDownCommand;
 import controller.commands.entitycommand.entitycommand.PowerUpCommand;
-import controller.commands.entitycommand.unitcommand.AbandonArmy;
+import controller.commands.entitycommand.unitcommand.AbandonArmyCommand;
 import controller.commands.entitycommand.unitcommand.AdvanceToRallyPointCommand;
 import controller.commands.entitycommand.unitcommand.JoinArmyCommand;
 import model.Cursor;
@@ -37,7 +37,7 @@ public class CommandFactory {
         simpleCommandResult.put(CommandType.POWER_DOWN, (commandable) -> (new PowerDownCommand((Entity)commandable)));
 
         simpleCommandResult.put(CommandType.DISBAND,(commandable) -> (new DisbandCommand((Army) commandable)));
-        simpleCommandResult.put(CommandType.ABANDON_ARMY, (commandable) -> (new AbandonArmy((Unit) commandable)));
+        simpleCommandResult.put(CommandType.ABANDON_ARMY, (commandable) -> (new AbandonArmyCommand((Unit) commandable)));
 
 
         //cursor

@@ -16,7 +16,8 @@ public class CycleTypePrev implements Command {
     }
 
     @Override
-    public void execute() {
+    public boolean execute() {
         playerToActOn.cycleType(CycleDirection.INCREMENT);
+        return true;
     }
 }

@@ -7,5 +7,5 @@ import java.util.function.Consumer;
  */
 public interface Command {
 
-    void execute();
+    boolean execute();
 }

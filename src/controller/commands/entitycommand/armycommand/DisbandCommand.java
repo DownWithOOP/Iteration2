@@ -8,11 +8,15 @@ import model.entities.unit.Army;
 public class DisbandCommand extends ArmyCommand{
 
     public DisbandCommand(Army army) {
-        super(army);
+        super(army, 1);
     }
 
     @Override
-    public void execute() {
-        army.disband();
+    public boolean execute() {
+        if(super.execute()) {
+            army.disband();
+            return true;
+        }
+        return false;
     }
 }

@@ -3,8 +3,12 @@ package model.entities;
 import controller.availablecommands.Commandable;
 import controller.commands.Command;
 import controller.commands.CommandType;
+import controller.commands.entitycommand.entitycommand.PowerUpCommand;
+import controller.commands.entitycommand.unitcommand.AbandonArmyCommand;
 import model.common.Location;
 import model.entities.Stats.Stats;
+import model.entities.unit.Melee;
+import model.entities.unit.Unit;
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
@@ -18,7 +22,8 @@ import java.util.Queue;
 public abstract class Entity extends Commandable {
     protected EntityId entityId;
     protected CustomID playerId;
-    Queue<Command> commandQueue = new ArrayDeque<>();
+    private Queue<Command> commandQueue = new ArrayDeque<>();
+    private Command currentCommand;
     private boolean isPoweredDown;
     private Location location;
     protected Stats entityStats;
@@ -65,12 +70,26 @@ public abstract class Entity extends Commandable {
 
     public abstract void decommission();
 
-    public void addToQueue() {
-
+    public void addToQueue(Command command) {
+        commandQueue.add(command);
     }
 
     public void cancelQueue() {
 
+    }
+
+    public void executeQueue(){
+        if(currentCommand == null){
+            if(!commandQueue.isEmpty()){
+                System.out.println("Not yet kiddo");
+                currentCommand = commandQueue.poll();
+            }
+        }
+
+        if(currentCommand.execute()){
+            System.out.println("Command got executed");
+            currentCommand = commandQueue.poll();
+        }
     }
 
     public void powerUp() {
@@ -110,4 +129,18 @@ public abstract class Entity extends Commandable {
 
     @Override
     public String toString() { return entityId.toString();}
+
+    public static void main(String[] args){
+        Entity e = new Melee(new CustomID(IdType.MELEE, "id"), "id1", 0, 0);
+        Command command = new PowerUpCommand(e);
+        e.addToQueue(command);
+        Unit unit = new Melee(new CustomID(IdType.MELEE, "id"), "id1", 0, 0);
+        Command command2 = new AbandonArmyCommand(unit);
+        e.addToQueue(command2);
+
+        e.executeQueue();
+        e.executeQueue();
+        e.executeQueue();
+        e.executeQueue();
+    }
 }
