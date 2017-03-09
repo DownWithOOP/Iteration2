@@ -18,8 +18,10 @@ public class Resource {
     }
 
     //consumes some resource
-    public void consumeResource(double percent){
-
+    public int consumeResource(double percent){
+        int amount = (int) (level*percent);
+        level = level - amount;
+        return amount;
     }
 
     public int getLevel() {

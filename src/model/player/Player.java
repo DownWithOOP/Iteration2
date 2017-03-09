@@ -16,6 +16,7 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
 
 
     private EntityOwnership entities;
+    private ResourceOwnership resources;
     private Selection currentSelection;
     private CustomID customID;
     private Map playerMap; // this map will contain the map that the specific player can see
@@ -29,6 +30,7 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
         //TODO add an id for player in the constructor
         customID=new CustomID(IdType.PLAYER,"newPlayer");
         entities = new EntityOwnership(customID, startingX, startingY); //TODO should entity ownership know Player?
+        resources = new ResourceOwnership(customID);
         currentSelection = new Selection(entities.getCurrentInstance()); //TODO rename method
         this.playerMap = map; // TODO for the moment global map is shared, later each player will have own map
         this.registerMapObserver(observer);
