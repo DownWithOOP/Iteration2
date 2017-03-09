@@ -19,7 +19,7 @@ import java.util.HashMap;
  * Created by jordi on 2/24/2017.
  */
 //TODO: Tailor some of these methods for when a worker unit joins an army
-public class Army extends FighterUnit implements Fighter {
+public class Army extends Entity implements Fighter {
 
     HashMap<EntityId, Unit> reinforcements = new HashMap<>();
     HashMap<EntityId, Unit> battleGroup = new HashMap<>();

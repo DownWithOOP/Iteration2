@@ -3,6 +3,7 @@ package model;
 //import controller.commands.ActionModifiers;
 //import model.common.Location;
 import controller.availablecommands.Commandable;
+import controller.commands.CommandType;
 import controller.commands.CycleDirection;
 import model.RenderInformation.*;
 import model.entities.Entity;
@@ -52,6 +53,7 @@ public class EntityOwnership {
 
     private int cycleTypeIndex = 0;
     private int cycleInstanceIndex = 0;
+    private int cycleCommandIndex = 0;
     private int selectedArmyIndex = 0;
     private int cycleModeIndex = 1; //start in UNIT mode
     private CustomID playerId;
@@ -236,7 +238,18 @@ public class EntityOwnership {
         }
         return null;
     }
-
+    public CommandType cycleCommand(CycleDirection direction) {
+        if (currentModeList == null || currentModeList.get(cycleTypeIndex).size()==0) {
+            return null;
+        }
+        if (direction == CycleDirection.INCREMENT) {
+            cycleCommandIndex = next(currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex).getEntityCommands().size(), cycleCommandIndex);
+        }
+        if (direction == CycleDirection.DECREMENT) {
+            cycleCommandIndex = previous(currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex).getEntityCommands().size(), cycleCommandIndex);
+        }
+        return currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex).getEntityCommand(cycleCommandIndex);
+    }
 
     public Entity cycleInstance(CycleDirection direction) {
 
@@ -383,7 +396,7 @@ public class EntityOwnership {
         renderInfo.updateModeString(getCurrentMode());
         renderInfo.updateTypeString(getCurrentType());
         renderInfo.updateInstanceString(getCurrentInstance());
-        renderInfo.updateCommandString("command from e.o.");
+        renderInfo.updateCommandString(getCurrentCommand().toString());
 
         return renderInfo;
     }
@@ -400,6 +413,26 @@ public class EntityOwnership {
             }
         }
         return renderList;
+    }
+
+    public CommandType getCurrentCommand() {
+        if (currentModeList == null) {
+            System.out.println("No current mode list available");
+            return null;
+        }
+        else if (currentModeList.get(cycleTypeIndex) == null) {
+            System.out.println("No current type list available");
+            return null;
+        }
+        else if (currentModeList.get(cycleTypeIndex).isEmpty()) {
+            System.out.println("Type list is empty");
+            return null;
+        }
+        else if (currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex) == null) {
+            System.out.println("Instance list is empty");
+            return null;
+        }
+        return currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex).getEntityCommand(cycleCommandIndex);
     }
 
     /**

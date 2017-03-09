@@ -1,5 +1,6 @@
 package model.entities.unit;
 
+import controller.commands.CommandType;
 import model.entities.EntityType;
 import model.entities.Stats.FighterUnitStats;
 import model.entities.StructureFactory;
@@ -15,8 +16,13 @@ import utilities.id.IdType;
 public class Colonist extends FighterUnit {
     private StructureFactory capitalFactory;
 
+//    static {
+//        entityCommand.add(CommandType.BUILD_CAPITAL);
+//    }
+
     public Colonist(CustomID playerId, String id, int locationX, int locationY) {
         super(playerId, id, locationX, locationY);
+        entityCommand.add(CommandType.BUILD_CAPITAL);
         this.capitalFactory = new StructureFactory();
     }
 

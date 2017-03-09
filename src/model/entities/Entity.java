@@ -26,14 +26,14 @@ public abstract class Entity extends Commandable {
     private Location location;
     protected Stats entityStats;
 
-    static ArrayList<CommandType> entityCommand = new ArrayList<>();
+    protected ArrayList<CommandType> entityCommand = new ArrayList<>();
 
-    static {
-        entityCommand.add(CommandType.CANCEL_QUEUE);
-        entityCommand.add(CommandType.DECOMISSION);
-        entityCommand.add(CommandType.POWER_DOWN);
-        entityCommand.add(CommandType.POWER_UP);
-    }
+//    static {
+//        entityCommand.add(CommandType.CANCEL_QUEUE);
+//        entityCommand.add(CommandType.DECOMISSION);
+//        entityCommand.add(CommandType.POWER_DOWN);
+//        entityCommand.add(CommandType.POWER_UP);
+//    }
 
     //  TODO:TAKE IN THE MOCK UP MAP, TAKE IN THE PLAYER ID
 
@@ -46,6 +46,10 @@ public abstract class Entity extends Commandable {
         this.playerId = playerId;
         this.isPoweredDown = false;
         location = new Location(locationX,locationY); // starting location of entity
+        entityCommand.add(CommandType.CANCEL_QUEUE);
+        entityCommand.add(CommandType.DECOMISSION);
+        entityCommand.add(CommandType.POWER_DOWN);
+        entityCommand.add(CommandType.POWER_UP);
         addAllCommands(entityCommand);
 
     }
@@ -128,6 +132,15 @@ public abstract class Entity extends Commandable {
     }
     public CustomID getPlayerId(){
         return playerId;
+    }
+
+    // Retrieve the currently selected command the specific entity type can perform
+    public CommandType getEntityCommand(int cycleCommandIndex) {
+        return entityCommand.get(cycleCommandIndex);
+    }
+
+    public ArrayList<CommandType> getEntityCommands() {
+        return entityCommand;
     }
 
     @Override

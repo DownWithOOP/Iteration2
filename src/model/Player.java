@@ -64,8 +64,9 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
 
     public void cycleCommand(CycleDirection direction){
         //TODO cycle through actions
-        //this.notifyStatusObservers(); // yay status viewport
-        System.out.println("command cycle not hooked up yet :(");
+        currentSelection.updateSelectedCommand(entities.cycleCommand(direction));
+        this.notifyStatusObservers(); // yay status viewport
+        //System.out.println("command cycle not hooked up yet :(");
     }
 
 
