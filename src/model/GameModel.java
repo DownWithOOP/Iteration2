@@ -28,11 +28,11 @@ public class GameModel {
         for (int i = 0; i < numberOfPlayers; i++) {
             Player temp;
             if(i ==0){ // player 1
-                temp = new Player(masterMap,observer, unitObserver, structureObserver, statusObserver, 6,4); // TODO, give players unique maps
+                temp = new Player(1,masterMap,observer, unitObserver, structureObserver, statusObserver, 6,4); // TODO, give players unique maps
             } else if( i== 1){
-                temp = new Player(masterMap,observer, unitObserver, structureObserver, statusObserver, 17,7); // TODO, give players unique maps
+                temp = new Player(2,masterMap,observer, unitObserver, structureObserver, statusObserver, 17,7); // TODO, give players unique maps
             } else {
-                temp = new Player(masterMap,observer, unitObserver, structureObserver, statusObserver, 0,0); // TODO give players unique maps
+                temp = new Player(i+1,masterMap,observer, unitObserver, structureObserver, statusObserver, 0,0); // TODO give players unique maps
             }
             playersList[i] = temp;
         }

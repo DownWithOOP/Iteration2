@@ -1,6 +1,6 @@
 package controller;
 
-import controller.Observers.MapObserver;
+import controller.Observers.MapDisplayObserver;
 import controller.ingamecontrollertypes.ControllerType;
 import controller.ingamecontrollertypes.MainViewController;
 import controller.ingamecontrollertypes.StructureViewController;
@@ -30,19 +30,19 @@ public class ControllerManager {
     // it will be done here
     private SwitchControllerRelay switchControllerRelay;
     private ControllerDispatch controllerDispatch;
-    private MapObserver mapObserver;
+    private MapDisplayObserver mapDisplayObserver;
     private UnitObserver unitObserver;
     private StructureObserver structureObserver;
     private StatusObserver statusObserver;
     private GameLoop timer;
 
-    public ControllerManager(ControllerDispatch controllerDispatch, Stage primaryStage, MapObserver mapObserver, UnitObserver unitObserver,
+    public ControllerManager(ControllerDispatch controllerDispatch, Stage primaryStage, MapDisplayObserver mapDisplayObserver, UnitObserver unitObserver,
                              StructureObserver structureObserver, StatusObserver statusObserver) throws IOException {
 
         // primary stage that is essentially the window
         this.primaryStage = primaryStage;
         this.activeController = this.controllerMap.get(ControllerType.welcomeViewController);
-        this.mapObserver = mapObserver;
+        this.mapDisplayObserver = mapDisplayObserver;
         this.unitObserver = unitObserver;
         this.structureObserver = structureObserver;
         this.statusObserver = statusObserver;
@@ -78,7 +78,7 @@ public class ControllerManager {
         inputController.enableKeyboardInput();
         inputController.setDispatch(controllerDispatch);
         MainViewController temp =  (MainViewController)inputController; // Sketchy but we have to downCast to the MainView Controller type
-        temp.setObservers(mapObserver,unitObserver,structureObserver, statusObserver);
+        temp.setObservers(mapDisplayObserver,unitObserver,structureObserver, statusObserver);
         this.activeController = temp;
         if(timer == null){
             // start of game, don't call yet

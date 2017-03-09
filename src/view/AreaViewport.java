@@ -46,6 +46,7 @@ public class AreaViewport {
     private boolean displayEnergy = true;
     private int fastCameraSpeed;
     private int slowCameraSpeed;
+    private int[][] mask;
 
     Image grass = Assets.getInstance().GRASS;
     Image water = Assets.getInstance().WATER;
@@ -145,8 +146,9 @@ public class AreaViewport {
             this.cameraSpeed = 1;
         }
     }
-    public void UpdateRenderInfo(MapRenderInformation renderMap, UnitRenderInformation renderUnit, StructureRenderInformation renderStructure){
+    public void UpdateRenderInfo(MapRenderInformation renderMap, UnitRenderInformation renderUnit, StructureRenderInformation renderStructure, int[][] mask){
         this.mapRenderInformation = renderMap;
+        this.mask = mask;
         this.unitRenderInformation = renderUnit;
         this.structureRenderInformation = renderStructure;
         this.gridSizeX = mapRenderInformation.getX();
@@ -317,29 +319,32 @@ public class AreaViewport {
         // draws new terrain objects
         for(int i=0; i<mapRenderInformation.getY()   ; i++){
             for(int j=0; j<mapRenderInformation.getX(); j++){
-                TerrainType current = renderObjects[j][i].getTerrainType();
-                if(j%2 == 0){
-                    if(current.equals(TerrainType.GRASS)){
-                      //  System.out.print(" GRASS ");
-                        gc.drawImage(grass,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
-                    } else if(current.equals(TerrainType.DIRT)){
-                     //   System.out.print(" DIRT ");
-                        gc.drawImage(dirt,0.75*width*j+ cameraX,height*1*-i+ cameraY+ width*0.45);
-                    } else if(current.equals(TerrainType.WATER)){
-                      //  System.out.print(" WATER ");
-                        gc.drawImage(water,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+
+                if(mask[j][i] == 2){ // if a 2 then all visible so we render it
+                    TerrainType current = renderObjects[j][i].getTerrainType();
+                    if(j%2 == 0){
+                        if(current.equals(TerrainType.GRASS)){
+                            //  System.out.print(" GRASS ");
+                            gc.drawImage(grass,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                        } else if(current.equals(TerrainType.DIRT)){
+                            //   System.out.print(" DIRT ");
+                            gc.drawImage(dirt,0.75*width*j+ cameraX,height*1*-i+ cameraY+ width*0.45);
+                        } else if(current.equals(TerrainType.WATER)){
+                            //  System.out.print(" WATER ");
+                            gc.drawImage(water,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                        }
                     }
-                }
-                else {
-                    if(current.equals(TerrainType.GRASS)){
-                       // System.out.print(" GRASS ");
-                        gc.drawImage(grass,0.75*width*j+ cameraX,height*1*-i+ cameraY  +height);
-                    } else if(current.equals(TerrainType.DIRT)){
-                       // System.out.print(" DIRT ");
-                        gc.drawImage(dirt,0.75*width*j+ cameraX,height*1*-i+ cameraY +height);
-                    } else if(current.equals(TerrainType.WATER)){
-                        //System.out.print(" WATER ");
-                        gc.drawImage(water,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                    else {
+                        if(current.equals(TerrainType.GRASS)){
+                            // System.out.print(" GRASS ");
+                            gc.drawImage(grass,0.75*width*j+ cameraX,height*1*-i+ cameraY  +height);
+                        } else if(current.equals(TerrainType.DIRT)){
+                            // System.out.print(" DIRT ");
+                            gc.drawImage(dirt,0.75*width*j+ cameraX,height*1*-i+ cameraY +height);
+                        } else if(current.equals(TerrainType.WATER)){
+                            //System.out.print(" WATER ");
+                            gc.drawImage(water,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                        }
                     }
                 }
             }
@@ -369,49 +374,52 @@ public class AreaViewport {
         if(overlayOn) {
             for (int i = 0; i < mapRenderInformation.getY(); i++) {
                 for (int j = 0; j < mapRenderInformation.getX(); j++) {
-                    List<Resource> resources = renderObjects[j][i].getResources();
-                    // energy, ore, food in that order
-                    int food = 0;
-                    int energy = 0;
-                    int ore = 0;
-                    if (resources.size() == 0) {
-                        // nothing, all set to 0
-                        StringBuilder builder = new StringBuilder();
-                        if (displayFood) {
-                            builder.append("F: 0 " +"\n");
-                        }
-                        if (displayOre) {
-                            builder.append("O: " + 0+ "\n");
-                        }
-                        if (displayEnergy) {
-                            builder.append("E: " + 0 + "\n");
-                        }
-                        String resourceDisplay = builder.toString();
-                        if (j % 2 == 0) {
-                            gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + width * 0.45 - 60 + height);
-                        } else {
-                            gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + (2 * height) - 60);
-                        }
-                    } else {
-                        energy = resources.get(0).getLevel();
-                        ore = resources.get(1).getLevel();
-                        food = resources.get(2).getLevel();
-                        StringBuilder builder = new StringBuilder();
-                        if (displayFood) {
-                            builder.append("F: " + food + "\n");
-                        }
-                        if (displayOre) {
-                            builder.append("O: " + ore + "\n");
-                        }
-                        if (displayEnergy) {
-                            builder.append("E: " + energy + "\n");
-                        }
-                        String resourceDisplay = builder.toString();
 
-                        if (j % 2 == 0) {
-                            gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + width * 0.45 - 60 + height);
+                    if(mask[j][i] == 2) { // if a 2 then all visible so we render it
+                        List<Resource> resources = renderObjects[j][i].getResources();
+                        // energy, ore, food in that order
+                        int food = 0;
+                        int energy = 0;
+                        int ore = 0;
+                        if (resources.size() == 0) {
+                            // nothing, all set to 0
+                            StringBuilder builder = new StringBuilder();
+                            if (displayFood) {
+                                builder.append("F: 0 " + "\n");
+                            }
+                            if (displayOre) {
+                                builder.append("O: " + 0 + "\n");
+                            }
+                            if (displayEnergy) {
+                                builder.append("E: " + 0 + "\n");
+                            }
+                            String resourceDisplay = builder.toString();
+                            if (j % 2 == 0) {
+                                gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + width * 0.45 - 60 + height);
+                            } else {
+                                gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + (2 * height) - 60);
+                            }
                         } else {
-                            gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + (2 * height) - 60);
+                            energy = resources.get(0).getLevel();
+                            ore = resources.get(1).getLevel();
+                            food = resources.get(2).getLevel();
+                            StringBuilder builder = new StringBuilder();
+                            if (displayFood) {
+                                builder.append("F: " + food + "\n");
+                            }
+                            if (displayOre) {
+                                builder.append("O: " + ore + "\n");
+                            }
+                            if (displayEnergy) {
+                                builder.append("E: " + energy + "\n");
+                            }
+                            String resourceDisplay = builder.toString();
+
+                            if (j % 2 == 0) {
+                                gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + width * 0.45 - 60 + height);
+                            } else {
+                                gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + (2 * height) - 60);
+                            }
                         }
                     }
                 }

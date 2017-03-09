@@ -3,7 +3,7 @@ package model;
 import controller.ControllerDispatch;
 import controller.ControllerManager;
 import controller.Observers.ControllerStatusObserver;
-import controller.Observers.MapObserver;
+import controller.Observers.MapDisplayObserver;
 import javafx.stage.Stage;
 import utilities.ObserverInterfaces.StatusObserver;
 import utilities.ObserverInterfaces.StructureObserver;
@@ -18,7 +18,7 @@ public class Game {
 
     private ControllerManager controllerManager;
     private ControllerDispatch controllerDispatch;
-    private MapObserver mapObserver;
+    private MapDisplayObserver mapDisplayObserver;
     private UnitObserver unitObserver;
     private StructureObserver structureObserver;
     private StatusObserver statusObserver;
@@ -26,12 +26,14 @@ public class Game {
     public Game(Stage primaryStage) throws IOException {
 
         //TODO:change hardcoded player number
-        this.mapObserver = new MapObserver();
+        int numberOfPlayers = 2;
+
+        this.mapDisplayObserver = new MapDisplayObserver(numberOfPlayers);
         this.unitObserver = new controller.Observers.UnitObserver();
         this.structureObserver = new controller.Observers.StructureObserver();
         this.statusObserver = new ControllerStatusObserver();
-        this.controllerDispatch = new ControllerDispatch(2, mapObserver, unitObserver, structureObserver, statusObserver);
-        this.controllerManager = new ControllerManager(this.controllerDispatch, primaryStage, mapObserver, unitObserver, structureObserver, statusObserver);
+        this.controllerDispatch = new ControllerDispatch(numberOfPlayers, mapDisplayObserver, unitObserver, structureObserver, statusObserver);
+        this.controllerManager = new ControllerManager(this.controllerDispatch, primaryStage, mapDisplayObserver, unitObserver, structureObserver, statusObserver);
 
     }
 
