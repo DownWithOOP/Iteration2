@@ -168,8 +168,19 @@ public class EntityOwnership {
     public Entity cycleType(CycleDirection direction) {
         cycleInstanceIndex = 0;
         Entity temp = null;
+        //TODO need both?
         if (currentModeList == null) {
             System.out.println("Cycle type cannot do anything b/c currentModeList is null");
+            return null;
+        }
+        if (currentModeList.isEmpty()) {
+            System.out.println("Cycle type cannot do anything b/c currentModeList is empty");
+            return null;
+        }
+        //TODO improve the cycling algorithm so we don't have to do this
+        //We can now assume that we will cycle types, so check that there are types to cycle through
+        if (!checkForInstancesInType()) {
+            System.out.println("There are no instances of any type for the current mode");
             return null;
         }
         if (direction == CycleDirection.INCREMENT) {
@@ -179,6 +190,19 @@ public class EntityOwnership {
             temp=decrementType();
         }
         return temp;
+    }
+
+    //TODO improve itrs so this isn't necessary
+    //Returns false if the type has no instances on the board currently
+    //Returns true otherwise
+    private boolean checkForInstancesInType() {
+        boolean doInstancesExist = false;
+        for (int i = 0; i < currentModeList.size(); i++) {
+            if (!currentModeList.get(i).isEmpty()) {
+                doInstancesExist = true;
+            }
+        }
+        return doInstancesExist;
     }
 
     private Entity incrementType() {
@@ -196,6 +220,7 @@ public class EntityOwnership {
         }
         return null;
     }
+
     private Entity decrementType() {
         int i = cycleTypeIndex - 1;
         int listSize = currentModeList.size();
@@ -252,7 +277,6 @@ public class EntityOwnership {
     }
 
     private Entity changeMode(Mode currentMode) {
-        System.out.println("CHANGING mode to " + currentMode);
         resetIndices();
         switch (currentMode) {
             case ARMY:
@@ -382,7 +406,6 @@ public class EntityOwnership {
      * @return current instance
      */
     public Commandable getCurrentInstance(){
-        System.out.println("GETTING CURRENT INSTANCE");
         if (currentModeList == null) {
             System.out.println("No current mode list available");
             return null;
@@ -396,18 +419,11 @@ public class EntityOwnership {
             return null;
         }
 
-        System.out.println("GETTING current instance");
-        System.out.println("instance index " + cycleInstanceIndex);
-        System.out.println("type index " + cycleTypeIndex);
-        System.out.println("current mode list " + currentModeList);
-        System.out.println("type list " + currentModeList.get(cycleTypeIndex));
-
         return currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex);
     }
 
     //TODO get rid of this; only for debugging purposes
     public String getCurrentType() {
-        System.out.println("GETTING CURRENT TYPE");
         if (currentModeList == null) {
             System.out.println("No current mode list available");
             return null;

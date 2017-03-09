@@ -50,19 +50,16 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
     public void cycleMode(CycleDirection direction){
         currentSelection.updateSelectedCommandable(entities.cycleMode(direction));
         this.notifyStatusObservers(); // yay status viewport
-        System.out.println("current mode " + entities.getCurrentMode());
     }
 
     public void cycleType(CycleDirection direction){
         currentSelection.updateSelectedCommandable(entities.cycleType(direction));
         this.notifyStatusObservers(); // yay status viewport
-        System.out.println("current type " + entities.getCurrentType());
     }
 
     public void cycleInstance(CycleDirection direction){
         currentSelection.updateSelectedCommandable(entities.cycleInstance(direction));
         this.notifyStatusObservers(); // yay status viewport
-        System.out.println("current instance " + entities.getCurrentInstance());
     }
 
     public void cycleCommand(CycleDirection direction){
@@ -111,6 +108,7 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
     @Override
     public void notifyStatusObservers() { // IMPORTANT!! CALL THIS WHENEVER ENTITY OWNERSHIP IS UPDATED SO THE VIEW REFRESHES
         for(StatusObserver statusObserver : statusObservers){
+            //TODO maybe get status render info from current selection instead of entities. This would remove the double calls to functions in EntityOwnership
             statusObserver.update(entities.returnStatusRenderInformation());
         }
     }
