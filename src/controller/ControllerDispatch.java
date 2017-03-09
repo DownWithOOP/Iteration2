@@ -1,6 +1,6 @@
 package controller;
 
-import controller.Observers.MapObserver;
+import controller.Observers.MapDisplayObserver;
 import controller.availablecommands.AvailableCommands;
 import controller.commands.Command;
 import controller.commands.CommandType;
@@ -24,9 +24,9 @@ public class ControllerDispatch {
     private GameModel gameModel;
     private HashMap<CommandType, Command> commandHashMap = new HashMap<>();
 
-    public ControllerDispatch(int playerNumber, MapObserver mapObserver, UnitObserver unitObserver, StructureObserver structureObserver, StatusObserver statusObserver) {
+    public ControllerDispatch(int playerNumber, MapDisplayObserver mapDisplayObserver, UnitObserver unitObserver, StructureObserver structureObserver, StatusObserver statusObserver) {
         availableCommands = new AvailableCommands();
-        gameModel = new GameModel(playerNumber, mapObserver, unitObserver, structureObserver, statusObserver);
+        gameModel = new GameModel(playerNumber, mapDisplayObserver, unitObserver, structureObserver, statusObserver);
         setGameModelMap();
     }
 

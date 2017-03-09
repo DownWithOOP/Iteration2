@@ -104,7 +104,7 @@ public class MainViewController extends Controller{
 
     @Override
     protected void render() {
-        this.areaViewport.UpdateRenderInfo(this.mapObserver.share(), this.unitObserver.share(), this.structureObserver.share()); // displays the map
+        this.areaViewport.UpdateRenderInfo(this.mapObserver.share(), this.unitObserver.share(), this.structureObserver.share(), this.mapObserver.getPlayerXFogOfWarMap(controllerDispatch.getActivePlayerNumber())); // displays the map
         this.statusViewport.updateRenderInfo(this.statusObserver.share());
     }
 
@@ -117,36 +117,16 @@ public class MainViewController extends Controller{
     public void moveUp() {
         areaViewport.changeCameraYPlus();
     }
-
     @Override
     public void moveRight() {
         areaViewport.changeCameraXMinus();
     }
-
     @Override
     public void moveDown() {
         areaViewport.changeCameraYMinus();
     }
 
-    //Move methods called by buttons on view - JS
-    @FXML void moveUp(ActionEvent actionEvent) throws  IOException{
-            this.areaViewport.changeCameraYPlus(); // TODO hook this up to some keyboard input
-    }
-    @FXML void moveDown(ActionEvent actionEvent) throws  IOException{
-        this.areaViewport.changeCameraYMinus(); // TODO hook this up to some keyboard input
-    }
-    @FXML void moveLeft(ActionEvent actionEvent) throws  IOException{
-        this.areaViewport.changeCameraXPlus(); // TODO hook this up to some keyboard input
-    }
-    @FXML void moveRight(ActionEvent actionEvent) throws  IOException{
-        this.areaViewport.changeCameraXMinus(); // TODO hook this up to some keyboard input
-    }
-    @FXML void cameraFaster(ActionEvent actionEvent) throws  IOException{
-        this.areaViewport.fasterCamera();  // TODO hook this up to some keyboard input
-    }
-    @FXML void cameraSlower(ActionEvent actionEvent) throws  IOException{
-        this.areaViewport.slowerCamer();  // TODO hook this up to some keyboard input
-    }
+
     @FXML void selectNorth() throws IOException{
         this.areaViewport.selectNorth(); // TODO hook this up to some keyboard input
         updateCoordinatesForDebugging();
