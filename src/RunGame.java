@@ -33,11 +33,12 @@ public class RunGame extends  Application{
         // we load the 2 videos here, along with the CSS sheet and the welcome View, this must be done because of annoying static issues
         Media videoFile = new Media(getClass().getResource("resources/Videos/Activision.mp4").toExternalForm());
         Media videoFile2 = new Media(getClass().getResource("resources/Videos/Nvidia.mp4").toExternalForm());
+        Media themeSong = new Media(getClass().getResource("media/SpaceCatsTheme.mp3").toExternalForm());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/WelcomeView.fxml"));
         String cssSheet = this.getClass().getResource("resources/style.css").toExternalForm();
 
         // call method to play the intro videos and transition to welcomeView
-        IntroVideo.firstVideo(primaryStage, videoFile, videoFile2, loader, cssSheet);
+        IntroVideo.firstVideo(primaryStage, videoFile, videoFile2, themeSong, loader, cssSheet);
     }
     // Starting point of the game
     public static void main(String args[]){

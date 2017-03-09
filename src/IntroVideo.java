@@ -26,7 +26,7 @@ public class IntroVideo {
     public IntroVideo(){}
 
 
-    public static void firstVideo(Stage primaryStage, Media videoFile, Media videoFile2, FXMLLoader welcomeLoader, String cssSheet){
+    public static void firstVideo(Stage primaryStage, Media videoFile, Media videoFile2, Media themeSong, FXMLLoader welcomeLoader, String cssSheet){
 
         mediaplayer = new MediaPlayer(videoFile);
         mediaplayer.setVolume(0.1);
@@ -64,14 +64,14 @@ public class IntroVideo {
                                               public void handle(KeyEvent ke) {
                                                   if (ke.getCode() == KeyCode.SPACE) {
                                                         mediaplayer.stop();
-                                                      loadWelcome(primaryStage, welcomeLoader, cssSheet);
+                                                      loadWelcome(primaryStage, welcomeLoader, cssSheet, themeSong);
                                                   }
                                               }
                                           });
                     mediaplayer.setOnEndOfMedia(new Runnable() {
                         public void run()
                         {
-                            loadWelcome(primaryStage, welcomeLoader, cssSheet);
+                            loadWelcome(primaryStage, welcomeLoader, cssSheet, themeSong);
                         }});
                     primaryStage.setScene(scene);
                     primaryStage.setFullScreenExitHint("");
@@ -98,14 +98,14 @@ public class IntroVideo {
                     public void handle(KeyEvent ke) {
                         if (ke.getCode() == KeyCode.SPACE) {
                             mediaplayer.stop();
-                            loadWelcome(primaryStage, welcomeLoader, cssSheet);
+                            loadWelcome(primaryStage, welcomeLoader, cssSheet, themeSong);
                         }
                     }
                 });
                 mediaplayer.setOnEndOfMedia(new Runnable() {
                     public void run()
                     {
-                        loadWelcome(primaryStage, welcomeLoader, cssSheet);
+                        loadWelcome(primaryStage, welcomeLoader, cssSheet, themeSong);
                     }});
                 primaryStage.setScene(scene);
                 primaryStage.setFullScreenExitHint("");
@@ -120,7 +120,7 @@ public class IntroVideo {
     }
 
     // called when we want to transition to the welcomeViewController
-    public static void loadWelcome(Stage primaryStage, FXMLLoader welcomeLoader, String cssSheet){
+    public static void loadWelcome(Stage primaryStage, FXMLLoader welcomeLoader, String cssSheet, Media themeSong){
         if(WelcomeViewLoaded == false){
             WelcomeViewLoaded = true;
 
@@ -144,6 +144,10 @@ public class IntroVideo {
                     e.printStackTrace();
                 }
             });
+            MediaPlayer mp = new MediaPlayer(themeSong);
+            mp.play();
+            mp.setVolume(0.5);
+            mp.setCycleCount(MediaPlayer.INDEFINITE);
             primaryStage.show();
 
         }
