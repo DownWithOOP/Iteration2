@@ -22,10 +22,11 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
     private ArrayList<UnitObserver> unitObservers = new ArrayList<UnitObserver>(); // will contain observers that get notified of changes
     private ArrayList<StructureObserver> structureObservers = new ArrayList<StructureObserver>(); // will contain observers that get notified of changes
     private ArrayList<StatusObserver> statusObservers = new ArrayList<>(); // will contain observers that get notified of changes
+    private int playerNumber; // players should know what # they are
 
-    public Player(Map map, MapObserver observer, UnitObserver unitObserver, StructureObserver structureObserver, StatusObserver statusObserver, int startingX, int startingY){
+    public Player(int playerNumber, Map map, MapObserver observer, UnitObserver unitObserver, StructureObserver structureObserver, StatusObserver statusObserver, int startingX, int startingY){
 
-        //TODO add an id for player in the constructor
+        this.playerNumber = playerNumber;
         customID=new CustomID(IdType.PLAYER,"newPlayer");
         entities = new EntityOwnership(customID, startingX, startingY); //TODO should entity ownership know Player?
         currentSelection = new Selection(entities.getCurrentInstance()); //TODO rename method
@@ -91,7 +92,8 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
     @Override
     public void notifyMapObservers() { // IMPORTANT!! CALL THIS WHENEVER THE MAP IS UPDATED SO THE VIEW REFRESHES
         for(MapObserver mapObserver : mapObservers){
-            mapObserver.update(playerMap.returnRenderInformation());
+            // needs all the renderInformation to calculate fogOfWar
+            mapObserver.update(this.playerNumber, playerMap.returnRenderInformation(), entities.returnUnitRenderInformation(), entities.returnStructureRenderInformation());
         }
     }
     @Override
