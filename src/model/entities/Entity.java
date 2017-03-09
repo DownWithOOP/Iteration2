@@ -30,7 +30,7 @@ public abstract class Entity extends Commandable {
 
 //    static {
 //        entityCommand.add(CommandType.CANCEL_QUEUE);
-//        entityCommand.add(CommandType.DECOMISSION);
+//        entityCommand.add(CommandType.DECOMMISSION);
 //        entityCommand.add(CommandType.POWER_DOWN);
 //        entityCommand.add(CommandType.POWER_UP);
 //    }
@@ -47,7 +47,7 @@ public abstract class Entity extends Commandable {
         this.isPoweredDown = false;
         location = new Location(locationX,locationY); // starting location of entity
         entityCommand.add(CommandType.CANCEL_QUEUE);
-        entityCommand.add(CommandType.DECOMISSION);
+        entityCommand.add(CommandType.DECOMMISSION);
         entityCommand.add(CommandType.POWER_DOWN);
         entityCommand.add(CommandType.POWER_UP);
         addAllCommands(entityCommand);

@@ -31,7 +31,7 @@ public class CommandFactory {
     static final private HashMap<CommandType, ActionableCommandWrapperEntity> actionableCommandEntity = new HashMap<>();
 
     static {
-        simpleCommandResult.put(CommandType.DECOMISSION, (commandable) -> (new DecommissionCommand((Entity) commandable)));
+        simpleCommandResult.put(CommandType.DECOMMISSION, (commandable) -> (new DecommissionCommand((Entity) commandable)));
         simpleCommandResult.put(CommandType.CANCEL_QUEUE, (commandable) -> (new CancelQueueCommand((Entity)commandable)));
         simpleCommandResult.put(CommandType.POWER_UP, (commandable) -> (new PowerUpCommand((Entity)commandable)));
         simpleCommandResult.put(CommandType.POWER_DOWN, (commandable) -> (new PowerDownCommand((Entity)commandable)));
@@ -119,7 +119,7 @@ public class CommandFactory {
         Command command;
         CommandFactory commandFactory = new CommandFactory();
 
-        command = commandFactory.createSimpleCommand(CommandType.DECOMISSION, melee);
+        command = commandFactory.createSimpleCommand(CommandType.DECOMMISSION, melee);
         command.execute();
 
         command = commandFactory.createSimpleCommand(CommandType.ABANDON_ARMY, colonist);

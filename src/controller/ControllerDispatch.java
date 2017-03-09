@@ -4,11 +4,9 @@ import controller.Observers.MapObserver;
 import controller.availablecommands.AvailableCommands;
 import controller.commands.Command;
 import controller.commands.CommandType;
-import controller.commands.controllercommands.MoveDown;
-import controller.commands.controllercommands.MoveLeft;
-import controller.commands.controllercommands.MoveRight;
-import controller.commands.controllercommands.MoveUp;
+import controller.commands.controllercommands.*;
 import controller.commands.playercommands.*;
+import controller.ingamecontrollertypes.MainViewController;
 import model.GameModel;
 import utilities.ObserverInterfaces.StatusObserver;
 import utilities.ObserverInterfaces.StructureObserver;
@@ -52,10 +50,30 @@ public class ControllerDispatch {
     }
 
     public void updateActiveController(Controller newActiveController) {
-        commandHashMap.put(CommandType.MOVE_CAMERA_UP, new MoveUp(newActiveController));
-        commandHashMap.put(CommandType.MOVE_CAMERA_RIGHT, new MoveRight(newActiveController));
-        commandHashMap.put(CommandType.MOVE_CAMERA_DOWN, new MoveDown(newActiveController));
-        commandHashMap.put(CommandType.MOVE_CAMERA_LEFT, new MoveLeft(newActiveController));
+        commandHashMap.put(CommandType.MOVE_CAMERA_UP, new MoveCameraUp(newActiveController));
+        commandHashMap.put(CommandType.MOVE_CAMERA_RIGHT, new MoveCameraRight(newActiveController));
+        commandHashMap.put(CommandType.MOVE_CAMERA_DOWN, new MoveCameraDown(newActiveController));
+        commandHashMap.put(CommandType.MOVE_CAMERA_LEFT, new MoveCameraLeft(newActiveController));
+
+        //Put in cursor commands if we have a main view controller
+        //Otherwise, remove cursor commands from map (if they exist) so cursor doesn't move when not on main menu
+        try {
+            MainViewController newActiveMainViewController = (MainViewController) newActiveController;
+
+            commandHashMap.put(CommandType.MOVE_CURSOR_NORTH_EAST, new MoveCursorNE(newActiveMainViewController));
+            commandHashMap.put(CommandType.MOVE_CURSOR_NORTH, new MoveCursorNorth(newActiveMainViewController));
+            commandHashMap.put(CommandType.MOVE_CURSOR_NORTH_WEST, new MoveCursorNW(newActiveMainViewController));
+            commandHashMap.put(CommandType.MOVE_CURSOR_SOUTH_EAST, new MoveCursorSE(newActiveMainViewController));
+            commandHashMap.put(CommandType.MOVE_CURSOR_SOUTH, new MoveCursorSouth(newActiveMainViewController));
+            commandHashMap.put(CommandType.MOVE_CURSOR_SOUTH_WEST, new MoveCursorSW(newActiveMainViewController));
+        } catch (ClassCastException e) {
+            commandHashMap.remove(CommandType.MOVE_CURSOR_NORTH_EAST);
+            commandHashMap.remove(CommandType.MOVE_CURSOR_NORTH);
+            commandHashMap.remove(CommandType.MOVE_CURSOR_NORTH_WEST);
+            commandHashMap.remove(CommandType.MOVE_CURSOR_SOUTH_EAST);
+            commandHashMap.remove(CommandType.MOVE_CURSOR_SOUTH);
+            commandHashMap.remove(CommandType.MOVE_CURSOR_SOUTH_WEST);
+        }
     }
 
     public int getActivePlayerNumber() {

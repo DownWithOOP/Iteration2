@@ -255,5 +255,25 @@ public class MainViewController extends Controller{
         this.statusViewport = new StatusViewport(cycleLabels);
     }
 
+    //Functions to move cursor via numpad input
+    public void moveCursorSW(){
+        areaViewport.selectSW();
+    }
+    public void moveCursorSouth(){
+        areaViewport.selectSouth();
+    }
+    public void moveCursorSE(){
+        areaViewport.selectSE();
+    }
+    public void moveCursorNW(){
+        areaViewport.selectNW();
+    }
+    public void moveCursorNorth(){
+        areaViewport.selectNorth();
+    }
+    public void moveCursorNE(){
+        areaViewport.selectNE();
+    }
+
 }
 
