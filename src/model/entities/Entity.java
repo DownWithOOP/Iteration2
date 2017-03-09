@@ -12,9 +12,7 @@ import model.entities.unit.Unit;
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Created by jordi on 2/24/2017.
@@ -49,6 +47,7 @@ public abstract class Entity extends Commandable {
         this.isPoweredDown = false;
         location = new Location(locationX,locationY); // starting location of entity
         addAllCommands(entityCommand);
+
     }
 
     private void setId(CustomID playerId, String id) {
@@ -59,6 +58,10 @@ public abstract class Entity extends Commandable {
     protected abstract IdType getIdType();
 
     protected abstract Stats setEntityStats();
+
+    public Stats getStats() {
+        return this.entityStats;
+    }
 
     public IdType getEntityType() {
         return this.entityId.getIdType();

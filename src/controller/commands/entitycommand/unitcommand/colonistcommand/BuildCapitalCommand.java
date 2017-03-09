@@ -11,13 +11,17 @@ public class BuildCapitalCommand extends ColonistCommand {
     private String id;
 
     public BuildCapitalCommand(Colonist colonist, CustomID customId, String id) {
-        super(colonist);
+        super(colonist, 5);
         this.customID = customId;
         this.id = id;
     }
 
     @Override
-    public void execute() {
-        getColonist().buildCapital(customID, id);
+    public boolean execute() {
+        if(super.execute()) {
+            getColonist().buildCapital(customID, id);
+            return true;
+        }
+        return false;
     }
 }

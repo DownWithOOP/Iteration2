@@ -1,32 +1,23 @@
-package model.entities.unit;
+package model.entities.structure;
 
-import model.entities.Stats.FighterUnitStats;
 import model.entities.Stats.Stats;
+import model.entities.Stats.StructureStats;
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
 /**
- * Created by jordi on 2/24/2017.
+ * Created by LesliesLaptop on 3/8/17.
  */
-public class FighterUnit extends Unit {
+public class StaffedStructure extends Structure {
+
     /**
      * @param playerId
      * @param id
      * @param locationX
      * @param locationY
      */
-    public FighterUnit(CustomID playerId, String id, int locationX, int locationY) {
+    public StaffedStructure(CustomID playerId, String id, int locationX, int locationY) {
         super(playerId, id, locationX, locationY);
-    }
-
-    @Override
-    public void abandonArmy() {
-
-    }
-
-    @Override
-    public void joinArmy(int armyNumber) {
-
     }
 
     @Override
@@ -36,7 +27,7 @@ public class FighterUnit extends Unit {
 
     @Override
     protected Stats setEntityStats() {
-        return new FighterUnitStats(0,0,0,0,0,0,0,0);
+        return new StructureStats(0,0,0,0,0);
     }
 
     @Override

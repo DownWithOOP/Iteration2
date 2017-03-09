@@ -1,21 +1,22 @@
 package model.entities.unit;
 
 import model.entities.Stats.FighterUnitStats;
+import model.entities.Stats.PassiveUnitStats;
 import model.entities.Stats.Stats;
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
 /**
- * Created by jordi on 2/24/2017.
+ * Created by LesliesLaptop on 3/8/17.
  */
-public class FighterUnit extends Unit {
+public class PassiveUnit extends Unit {
     /**
      * @param playerId
      * @param id
      * @param locationX
      * @param locationY
      */
-    public FighterUnit(CustomID playerId, String id, int locationX, int locationY) {
+    public PassiveUnit(CustomID playerId, String id, int locationX, int locationY) {
         super(playerId, id, locationX, locationY);
     }
 

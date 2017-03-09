@@ -1,6 +1,7 @@
 package model.entities.unit;
 
 import model.entities.EntityType;
+import model.entities.Stats.FighterUnitStats;
 import model.entities.StructureFactory;
 import model.entities.structure.Structure;
 import model.entities.Stats.Stats;
@@ -11,7 +12,7 @@ import utilities.id.IdType;
 /**
  * Created by jordi on 2/24/2017.
  */
-public class Colonist extends Unit{
+public class Colonist extends FighterUnit {
     private StructureFactory capitalFactory;
 
     public Colonist(CustomID playerId, String id, int locationX, int locationY) {
@@ -26,7 +27,7 @@ public class Colonist extends Unit{
 
     @Override
     protected Stats setEntityStats() {
-        return new UnitStats(0,0,0,0,0,0,0,0);
+        return new FighterUnitStats(0,0,0,0,0,0,0,0);
     }
 
 

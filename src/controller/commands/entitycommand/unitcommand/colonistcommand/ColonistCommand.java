@@ -9,8 +9,8 @@ import model.entities.unit.Colonist;
 public abstract class ColonistCommand extends UnitCommand {
     private Colonist colonist;
 
-    public ColonistCommand(Colonist colonist) {
-        super(colonist);
+    public ColonistCommand(Colonist colonist, int numTurns) {
+        super(colonist, numTurns);
     }
 
     public Colonist getColonist() {
