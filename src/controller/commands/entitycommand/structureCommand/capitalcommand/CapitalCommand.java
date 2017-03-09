@@ -9,8 +9,8 @@ import model.entities.structure.Capital;
 public abstract class CapitalCommand extends StructureCommand {
     private Capital capital;
 
-    public CapitalCommand(Capital capital) {
-        super(capital);
+    public CapitalCommand(Capital capital, int numTurns) {
+        super(capital, numTurns);
     }
 
     public Capital getCapital() {

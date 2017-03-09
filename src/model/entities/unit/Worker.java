@@ -1,5 +1,6 @@
 package model.entities.unit;
 
+import model.entities.Stats.FighterUnitStats;
 import utilities.id.CustomID;
 import model.entities.EntityType;
 import model.entities.StructureFactory;
@@ -11,7 +12,7 @@ import utilities.id.IdType;
 /**
  * Created by jordi on 2/24/2017.
  */
-public class Worker extends Unit {
+public class Worker extends PassiveUnit {
     private StructureFactory structureFactory;
 
     public Worker(CustomID playerId, String id, int startingX, int startingY) {
@@ -27,7 +28,7 @@ public class Worker extends Unit {
     //todo:this should not have attacking, defensive damage, range, only fighters have these
     @Override
     protected Stats setEntityStats() {
-        return new UnitStats(0,0,0,0,0,0,0,0);
+        return new FighterUnitStats(0,0,0,0,0,0,0,0);
     }
 
     // Worker can build all structures except capital

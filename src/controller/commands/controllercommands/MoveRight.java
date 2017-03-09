@@ -16,7 +16,8 @@ public class MoveRight implements Command {
     }
 
     @Override
-    public void execute() {
+    public boolean execute() {
         controllerToActOn.moveRight();
+        return true;
     }
 }

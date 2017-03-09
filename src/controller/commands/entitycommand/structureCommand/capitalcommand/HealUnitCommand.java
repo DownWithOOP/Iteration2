@@ -10,12 +10,16 @@ public class HealUnitCommand extends CapitalCommand {
     private Unit unitToHeal;
 
     public HealUnitCommand(Capital capital, Unit unitToHeal) {
-        super(capital);
+        super(capital, 1);
         this.unitToHeal = unitToHeal;
     }
 
     @Override
-    public void execute() {
-        getCapital().healUnit(unitToHeal);
+    public boolean execute() {
+        if(super.execute()) {
+            getCapital().healUnit(unitToHeal);
+            return true;
+        }
+        return false;
     }
 }

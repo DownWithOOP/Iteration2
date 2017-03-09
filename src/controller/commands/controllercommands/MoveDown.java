@@ -15,7 +15,8 @@ public class MoveDown implements Command{
     }
 
     @Override
-    public void execute() {
+    public boolean execute() {
         controllerToActOn.moveDown();
+        return true;
     }
 }

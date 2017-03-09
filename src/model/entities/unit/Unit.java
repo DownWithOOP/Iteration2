@@ -45,7 +45,7 @@ public abstract class Unit extends Entity {
             //setCurrentPath();
             for (Location location : getCurrentPath()) {
                 //TODO: Implement move command to add locations to command queue
-                this.addToQueue();
+                //this.addToQueue();
             }
         }
     }

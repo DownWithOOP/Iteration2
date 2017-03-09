@@ -1,14 +1,14 @@
 package model.entities.unit;
 
+import model.entities.Stats.FighterUnitStats;
 import model.entities.Stats.Stats;
-import model.entities.Stats.UnitStats;
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
 /**
  * Created by jordi on 2/24/2017.
  */
-public class Ranged extends Unit {
+public class Ranged extends Soldier {
 
     public Ranged(CustomID playerId, String id, int locationX, int locationY) {
         super(playerId, id, locationX, locationY);
@@ -20,7 +20,7 @@ public class Ranged extends Unit {
 
     @Override
     protected Stats setEntityStats() {
-        return new UnitStats(0,0,0,0,0,0,0,0);
+        return new FighterUnitStats(0,0,0,0,0,0,0,0);
     }
 
     @Override

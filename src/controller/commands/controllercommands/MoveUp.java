@@ -15,7 +15,8 @@ public class MoveUp implements Command {
     }
 
     @Override
-    public void execute() {
+    public boolean execute() {
         controllerToActOn.moveUp();
+        return true;
     }
 }
