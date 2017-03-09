@@ -1,5 +1,6 @@
 package model.entities.unit;
 
+import controller.commands.CommandType;
 import model.entities.Stats.FighterUnitStats;
 import utilities.id.CustomID;
 import model.entities.EntityType;
@@ -15,8 +16,13 @@ import utilities.id.IdType;
 public class Worker extends PassiveUnit {
     private StructureFactory structureFactory;
 
+//    static {
+//        entityCommand.add(CommandType.BUILD_STRUCTURE);
+//    }
+
     public Worker(CustomID playerId, String id, int startingX, int startingY) {
         super(playerId, id, startingX, startingY);
+        entityCommand.add(CommandType.BUILD_STRUCTURE);
         this.structureFactory = new StructureFactory();
     }
 

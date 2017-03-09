@@ -15,19 +15,24 @@ import java.util.ArrayList;
 public abstract class Unit extends Entity {
     private ArrayList<Location> currentPath;
 
-    static ArrayList<CommandType> unitCommand= new ArrayList<>();
-    static {
-        unitCommand.add(CommandType.ABANDON_ARMY);
-        unitCommand.add(CommandType.ADVANCE_TO_RALLY_POINT);
-        unitCommand.add(CommandType.JOIN_ARMY);
-    }
+    //static ArrayList<CommandType> unitCommand= new ArrayList<>();
+//    static {
+//        entityCommand.add(CommandType.ABANDON_ARMY);
+//        entityCommand.add(CommandType.ADVANCE_TO_RALLY_POINT);
+//        entityCommand.add(CommandType.JOIN_ARMY);
+//        entityCommand.add(CommandType.MOVE);
+//    }
 
     /**
      * @param playerId
      */
     public Unit(CustomID playerId,String id, int locationX, int locationY) {
         super(playerId, id, locationX, locationY);
-        addAllCommands(unitCommand);
+        entityCommand.add(CommandType.ABANDON_ARMY);
+        entityCommand.add(CommandType.ADVANCE_TO_RALLY_POINT);
+        entityCommand.add(CommandType.JOIN_ARMY);
+        entityCommand.add(CommandType.MOVE);
+        addAllCommands(entityCommand);
     }
 
 

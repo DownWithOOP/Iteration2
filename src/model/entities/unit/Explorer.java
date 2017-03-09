@@ -1,5 +1,6 @@
 package model.entities.unit;
 
+import controller.commands.CommandType;
 import model.entities.Fighter;
 import model.entities.Stats.FighterUnitStats;
 import model.entities.Stats.Stats;
@@ -12,6 +13,9 @@ import utilities.id.IdType;
  */
 public class Explorer extends FighterUnit {
 
+//    static {
+//        entityCommand.add(CommandType.PROSPECT);
+//    }
 
     /**
      * @param playerId
@@ -19,6 +23,7 @@ public class Explorer extends FighterUnit {
      */
     public Explorer(CustomID playerId, String id, int locationX, int locationY) {
         super(playerId, id, locationX, locationY);
+        entityCommand.add(CommandType.PROSPECT);
     }
 
     @Override
