@@ -1,7 +1,5 @@
 package utilities.id;
 
-import model.Player;
-
 /**
  * Created by jordi on 2/24/2017.
  */

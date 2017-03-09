@@ -1,6 +1,7 @@
 package model;
 
 import model.map.Map;
+import model.player.Player;
 import utilities.ObserverInterfaces.MapObserver;
 import utilities.ObserverInterfaces.StatusObserver;
 import utilities.ObserverInterfaces.StructureObserver;

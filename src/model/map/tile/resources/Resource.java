@@ -17,18 +17,9 @@ public class Resource {
         return resourceType;
     }
 
-    // Lowers resource level and returns amount of resource mined
-    public int mineResource() {
-        int mined = (int)Math.random()*100;
-        if (level - mined > 0) {
-            level -= mined;
-            return mined;
-        }
-        else {
-            int temp = level;
-            level = 0;
-            return temp;
-        }
+    //consumes some resource
+    public void consumeResource(double percent){
+
     }
 
     public int getLevel() {

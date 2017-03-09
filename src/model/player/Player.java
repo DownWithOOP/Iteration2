@@ -1,6 +1,7 @@
-package model;
+package model.player;
 
 import controller.commands.CycleDirection;
+import model.Selection;
 import utilities.ObserverInterfaces.*;
 import model.map.Map;
 import utilities.id.CustomID;
