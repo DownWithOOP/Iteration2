@@ -26,6 +26,9 @@ public class Explorer extends FighterUnit {
         entityCommand.add(CommandType.PROSPECT);
     }
 
+    public void prospect() {
+
+    }
     @Override
     protected IdType getIdType() {
         return IdType.EXPLORER;

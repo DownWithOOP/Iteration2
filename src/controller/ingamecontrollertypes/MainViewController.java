@@ -95,8 +95,14 @@ public class MainViewController extends Controller{
                     MVCInputHandler mvcInputHandler = new MVCInputHandler();
                     receivedCommand = mvcInputHandler.interpretInput(event);
                     if (receivedCommand != null) {
-                        System.out.println(receivedCommand.toString());
-                        controllerDispatch.handleCommand(receivedCommand);
+                        if (receivedCommand == CommandType.ACTIVATE_COMMAND) { // if a command is selected
+                            System.out.println(receivedCommand.toString());
+                            controllerDispatch.handleCommandActivation();
+                        }
+                        else {
+                            System.out.println(receivedCommand.toString());
+                            controllerDispatch.handleCommand(receivedCommand);
+                        }
                     }
                 }
         );

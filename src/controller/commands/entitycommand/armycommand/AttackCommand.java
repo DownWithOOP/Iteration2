@@ -16,10 +16,14 @@ public class AttackCommand extends ArmyCommand {
         this.direction=direction;
     }
 
+    public Direction getDirection() {
+        return direction;
+    }
+
     @Override
     public boolean execute() {
         if(super.execute()) {
-            army.attack(direction);
+            getArmy().attack(getDirection());
             return true;
         }
         return false;

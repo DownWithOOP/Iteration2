@@ -14,4 +14,8 @@ public abstract class StructureCommand extends AbstractCommand {
         super(numTurns);
         this.structure = structure;
     }
+
+    public Structure getStructure() {
+        return structure;
+    }
 }

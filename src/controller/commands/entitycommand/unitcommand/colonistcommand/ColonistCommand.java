@@ -11,6 +11,7 @@ public abstract class ColonistCommand extends UnitCommand {
 
     public ColonistCommand(Colonist colonist, int numTurns) {
         super(colonist, numTurns);
+        this.colonist = colonist;
     }
 
     public Colonist getColonist() {
