@@ -104,7 +104,7 @@ public class MainViewController extends Controller{
 
     @Override
     protected void render() {
-        this.areaViewport.UpdateRenderInfo(this.mapObserver.share(), this.unitObserver.share(), this.structureObserver.share(), this.mapObserver.getPlayerXFogOfWarMap(controllerDispatch.getActivePlayerNumber())); // displays the map
+        this.areaViewport.UpdateRenderInfo(this.mapObserver.share(), this.unitObserver.share(), this.structureObserver.share(), this.mapObserver.getPlayerXRenderMap(controllerDispatch.getActivePlayerNumber())); // displays the map
         this.statusViewport.updateRenderInfo(this.statusObserver.share());
     }
 
