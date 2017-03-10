@@ -1,6 +1,7 @@
 package model.RenderInformation;
 
 import controller.availablecommands.Commandable;
+import controller.commands.CommandType;
 import model.Mode;
 
 /**
@@ -46,8 +47,13 @@ public class StatusRenderInformation {
         }
     }
 
-    public void updateCommandString(String newCommandString) {
-        commandString = newCommandString;
+    public void updateCommandString(CommandType newCommandType) {
+        if (newCommandType != null) {
+            commandString = newCommandType.toString();
+        }
+        else {
+            commandString = "No Command Available";
+        }
     }
 
     public String getModeString() {

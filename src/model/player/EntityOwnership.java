@@ -397,7 +397,7 @@ public class EntityOwnership {
         renderInfo.updateModeString(getCurrentMode());
         renderInfo.updateTypeString(getCurrentType());
         renderInfo.updateInstanceString(getCurrentInstance());
-        renderInfo.updateCommandString(getCurrentCommand().toString());
+        renderInfo.updateCommandString(getCurrentCommand());
 
         return renderInfo;
     }
