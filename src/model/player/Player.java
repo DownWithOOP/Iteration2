@@ -1,8 +1,9 @@
-package model;
+package model.player;
 
 import controller.availablecommands.Commandable;
 import controller.commands.CommandType;
 import controller.commands.CycleDirection;
+import model.Selection;
 import utilities.ObserverInterfaces.*;
 import model.map.Map;
 import utilities.id.CustomID;
@@ -17,6 +18,7 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
 
 
     private EntityOwnership entities;
+    private ResourceOwnership resources;
     private Selection currentSelection;
     private CustomID customID;
     private Map playerMap; // this map will contain the map that the specific player can see
@@ -31,6 +33,7 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
         this.playerNumber = playerNumber;
         customID=new CustomID(IdType.PLAYER,"newPlayer");
         entities = new EntityOwnership(customID, startingX, startingY); //TODO should entity ownership know Player?
+        resources = new ResourceOwnership(customID);
         currentSelection = new Selection(entities.getCurrentInstance()); //TODO rename method
         this.playerMap = map; // TODO for the moment global map is shared, later each player will have own map
         this.registerMapObserver(observer);
@@ -44,9 +47,10 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
     }
     public void startTurn(){
         System.out.println(this.toString() + " is starting their turn");
-        this.notifyMapObservers(); // at the start of the game we want to give the player map to render
+
         this.notifyStructureObservers(); // we also want to update everyone with all our structure information
         this.notifyUnitObservers(); // and lets not forget the units
+        this.notifyMapObservers(); // at the start of the game we want to give the player map to render
         this.notifyStatusObservers(); // yay status viewport
         entities.executeCommands(); //execute all commands in each entity's queue
     }
@@ -104,6 +108,7 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
     public void notifyMapObservers() { // IMPORTANT!! CALL THIS WHENEVER THE MAP IS UPDATED SO THE VIEW REFRESHES
         for(MapObserver mapObserver : mapObservers){
             // needs all the renderInformation to calculate fogOfWar
+            System.out.println("player map: " +playerMap);
             mapObserver.update(this.playerNumber, playerMap.returnRenderInformation(), entities.returnUnitRenderInformation(), entities.returnStructureRenderInformation());
         }
     }

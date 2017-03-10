@@ -50,6 +50,9 @@ public class Assets {
     public Image SELECT;
     public Image DARKNESS;
 
+    public Image MINIMAPBORDER;
+    public Image SMALLPURPLE;
+
     public boolean init(){
 
         try {
@@ -81,6 +84,8 @@ public class Assets {
             //misc
             SELECT = new Image("images/misc/select.png");
             DARKNESS = new Image("images/misc/darkness.png");
+            MINIMAPBORDER = new Image("images/misc/minMap.png");
+            SMALLPURPLE = new Image("images/misc/smallPurple.png");
 
         } catch (Exception e){
             e.printStackTrace();

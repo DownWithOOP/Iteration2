@@ -1,13 +1,14 @@
-package model;
+package model.player;
 
 //import controller.commands.ActionModifiers;
 //import model.common.Location;
 import controller.availablecommands.Commandable;
 import controller.commands.CommandType;
 import controller.commands.CycleDirection;
+import model.Mode;
+import model.RallyPoint;
 import model.RenderInformation.*;
 import model.entities.Entity;
-import model.entities.EntityType;
 import model.entities.Stats.UnitStats;
 import model.entities.structure.Capital;
 import model.entities.structure.Structure;
@@ -67,7 +68,7 @@ public class EntityOwnership {
         initializeUnits(startingX, startingY);
         initializeStructures();
         changeMode(modes[cycleModeIndex]);
-        this.playerId=playerId;
+        this.playerId = playerId;
     }
 
     private void initializeStructures() {
