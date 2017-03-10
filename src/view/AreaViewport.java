@@ -9,9 +9,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import model.RenderInformation.*;
+import model.entities.EntityType;
 import model.map.tile.resources.Resource;
 import model.map.tile.resources.ResourceType;
 import model.map.tile.terrain.TerrainType;
+import org.omg.CORBA.IDLType;
 import utilities.id.IdType;
 import view.utilities.Assets;
 
@@ -33,8 +35,6 @@ public class AreaViewport {
     private MapRenderInformation mapRenderInformation;
     private UnitRenderInformation unitRenderInformation;
     private StructureRenderInformation structureRenderInformation;
-    private double XBound;
-    private double YBound;
     private int selectX;
     private int selectY;
     private int gridSizeX;
@@ -46,7 +46,7 @@ public class AreaViewport {
     private boolean displayEnergy = true;
     private int fastCameraSpeed;
     private int slowCameraSpeed;
-    private int[][] mask;
+    private TileRenderObject[][] renderData;
 
     Image grass = Assets.getInstance().GRASS;
     Image water = Assets.getInstance().WATER;
@@ -60,8 +60,8 @@ public class AreaViewport {
     Image explorer = Assets.getInstance().EXPLORER;
 
     public AreaViewport(VBox vbox, Canvas canvas){
-        this.cameraX = -300; // default camera shift/starting position
-        this.cameraY = 600; // default camera shift/starting position
+        this.cameraX = -200; // default camera shift/starting position
+        this.cameraY = 500; // default camera shift/starting position
         this.vBox = vbox;
         this.canvas = canvas;
         this.slowCameraSpeed = 5;
@@ -73,93 +73,67 @@ public class AreaViewport {
         this.alteranteColumn = true;
         this.canvas.addEventFilter(MouseEvent.MOUSE_MOVED,
                 event -> {
-                    if(event.getSceneX() > 1000){ // move to the right fast
-                        this.cameraSpeed = fastCameraSpeed;
-                        changeCameraXMinus();
-                    } else if(event.getSceneX() > 850){ // move to the right slow
+                    if(event.getSceneX() > 850){ // move to the right slow
                         this.cameraSpeed = slowCameraSpeed;
                         changeCameraXMinus();
                     }
-                    else if(event.getSceneX() < 200){ // move to the left fast
-                        this.cameraSpeed = fastCameraSpeed;
-                        changeCameraXPlus();
-                    } else if(event.getSceneX() < 350){ // move to the left slow
+                    if(event.getSceneX() < 350){ // move to the left slow
                         this.cameraSpeed = slowCameraSpeed;
                         changeCameraXPlus();
                     }
-                    if(event.getSceneY() < 100){ // move up fast
-                        this.cameraSpeed = fastCameraSpeed;
-                        changeCameraYPlus();
-                    } else if (event.getSceneY() < 200){ // move up slow
+                    if (event.getSceneY() < 200){ // move up slow
                         this.cameraSpeed = slowCameraSpeed;
                         changeCameraYPlus();
                     }
-                    else if(event.getSceneY() > 500){ // move down fast
-                        this.cameraSpeed = fastCameraSpeed;
-                        changeCameraYMinus();
-                    } else if(event.getSceneY() > 400){ // move down slow
+                    if(event.getSceneY() > 400){ // move down slow
                         this.cameraSpeed = slowCameraSpeed;
                         changeCameraYMinus();
                     }
-                    this.drawSomething(); // refresh screen
+                    this.updateCanvas(); // refresh screen
                 }
         );
 
     }
     /** Camera Navigation Controls **/
     public void changeCameraXPlus(){
-        this.cameraX += cameraSpeed;
-        if(this.cameraX > grass.getWidth()*0.75){
-            this.cameraX = grass.getWidth()*0.75; // keep in bounds
+        if((cameraX+cameraSpeed) > 25){
+            this.cameraX = 25;
+        } else {
+            this.cameraX += cameraSpeed;
         }
     }
     public void changeCameraYPlus(){
-        this.cameraY += cameraSpeed;
-        if(this.cameraY > this.YBound){
-            this.cameraY = this.YBound; // keep in bounds;
+        if(cameraY + cameraSpeed > 960){
+            this.cameraY = 960;
+        } else {
+            this.cameraY += cameraSpeed;
         }
     }
     public void changeCameraXMinus(){
-        if(this.cameraX - cameraSpeed < (this.XBound*-1)){
-            this.cameraX = this.XBound * -1;
+        if(cameraX-cameraSpeed < -600){
+            this.cameraX = -600;
         } else {
             this.cameraX -= cameraSpeed;
         }
     }
     public void changeCameraYMinus(){
-
-        if(this.cameraY - cameraSpeed <  348){ // hardcoded lower bound, not the best but does the job, must changed if different map size
-            this.cameraY = 348;
+        if(cameraY -cameraSpeed < 370){
+            this.cameraY = 370;
         } else {
             this.cameraY -= cameraSpeed;
         }
     }
 
-    /** camera speed, controls how much canvas is moved by each time
-     */
-    public void fasterCamera(){
-        this.cameraSpeed += 10;
-    }
-    public void slowerCamer(){
-        this.cameraSpeed -=10;
-        if(this.cameraSpeed <0){
-            this.cameraSpeed = 1;
-        }
-    }
-    public void UpdateRenderInfo(MapRenderInformation renderMap, UnitRenderInformation renderUnit, StructureRenderInformation renderStructure, int[][] mask){
+    public void UpdateRenderInfo(MapRenderInformation renderMap, UnitRenderInformation renderUnit, StructureRenderInformation renderStructure, TileRenderObject[][] renderData){
         this.mapRenderInformation = renderMap;
-        this.mask = mask;
+        this.renderData = renderData;
         this.unitRenderInformation = renderUnit;
         this.structureRenderInformation = renderStructure;
-        this.gridSizeX = mapRenderInformation.getX();
-        this.gridSizeY = mapRenderInformation.getY();
-        this.YBound = ((double) this.mapRenderInformation.getY()) * grass.getHeight()*0.75 + grass.getHeight()*2;
-        this.XBound = ((double) this.mapRenderInformation.getX()) * grass.getWidth()*0.75 + grass.getWidth() - this.canvas.getWidth();
-       if(overlayOn){
-           // starts to lag with overlay so we turn off refreshing
-       } else {
-           this.drawSomething();
-       }
+
+        this.gridSizeX = renderData.length;
+        this.gridSizeY = renderData[0].length;
+        updateCanvas();
+
     }
 
     public void drawSelection(){
@@ -180,14 +154,14 @@ public class AreaViewport {
         if(this.selectY >= gridSizeY){
             this.selectY = gridSizeY-1;
         }
-        drawSomething(); // rerender entire map
+        updateCanvas();
     }
     public void selectSouth(){
         this.selectY--; // update value
         if(this.selectY < 0){
             this.selectY = 0;
         }
-        drawSomething(); // rerender entire map
+        updateCanvas(); // rerender entire map
 
     }
     public void selectNE(){
@@ -205,7 +179,7 @@ public class AreaViewport {
                 this.selectX--; // restore to original position if out of bounds and don't rotate
             } else {  this.alteranteColumn = true; }
         }
-        drawSomething(); // rerender entire map
+        updateCanvas(); // rerender entire map
     }
     public void selectSE(){
         this.selectX++; // update value
@@ -224,7 +198,7 @@ public class AreaViewport {
                 this.alteranteColumn = true;
             }
         }
-        drawSomething();
+        updateCanvas();
     }
 
     public void selectSW(){
@@ -244,7 +218,7 @@ public class AreaViewport {
                 this.alteranteColumn = true;
             }
         }
-         drawSomething();
+         updateCanvas();
     }
     public void selectNW(){
         this.selectX--; // update value
@@ -264,27 +238,27 @@ public class AreaViewport {
                 this.alteranteColumn = true; // coordinate is good
             }
         }
-        drawSomething();
+        updateCanvas();
     }
 
     public boolean resourceOverlaySwitch(){
         overlayOn = !overlayOn; // toggle boolean
-        if(overlayOn){ drawSomething(); }
+        if(overlayOn){ updateCanvas(); }
         return this.overlayOn;
     }
     public boolean foodOverlaySwitch(){
         displayFood = !displayFood; // toggle boolean
-        if(overlayOn){ drawSomething(); }
+        if(overlayOn){ updateCanvas(); }
         return this.displayFood;
     }
     public boolean energyOverlaySwitch(){
         displayEnergy = !displayEnergy; // toggle boolean
-        if(overlayOn){ drawSomething(); }
+        if(overlayOn){ updateCanvas(); }
         return this.displayEnergy;
     }
     public boolean oreOverlaySwitch(){
         displayOre = !displayOre; // toggle boolean
-        if(overlayOn){ drawSomething(); }
+        if(overlayOn){ updateCanvas(); }
         return this.displayOre;
     }
 
@@ -302,11 +276,11 @@ public class AreaViewport {
     /** actually draws and renders the map that is currently stored in teh mapRenderInformation
      *
      */
-    public void drawSomething(){
-        MapRenderObject[][] renderObjects = this.mapRenderInformation.getRenderObjectMap();
+    public void updateCanvas(){
 
-        double width = grass.getWidth();
-        double height = grass.getHeight();
+
+        int sizeX = renderData.length;
+        int sizeY = renderData[0].length;
 
         GraphicsContext gc = canvas.getGraphicsContext2D(); // Clears whatever is currently on the canvas
         gc.setFill(Color.TRANSPARENT);
@@ -315,118 +289,109 @@ public class AreaViewport {
         gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
         gc.setFill(Color.WHITE);
 
+        double width = grass.getWidth();
+        double height = grass.getHeight();
 
-        // draws new terrain objects
-        for(int i=0; i<mapRenderInformation.getY()   ; i++){
-            for(int j=0; j<mapRenderInformation.getX(); j++){
+        for(int i=0; i<sizeY; i++){
+            for(int j=0; j<sizeX; j++){
+                TileRenderObject render =renderData[j][i];
 
-                if(mask[j][i] == 2){ // if a 2 then all visible so we render it
-                    TerrainType current = renderObjects[j][i].getTerrainType();
-                    if(j%2 == 0){
-                        if(current.equals(TerrainType.GRASS)){
-                            //  System.out.print(" GRASS ");
-                            gc.drawImage(grass,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
-                        } else if(current.equals(TerrainType.DIRT)){
-                            //   System.out.print(" DIRT ");
-                            gc.drawImage(dirt,0.75*width*j+ cameraX,height*1*-i+ cameraY+ width*0.45);
-                        } else if(current.equals(TerrainType.WATER)){
-                            //  System.out.print(" WATER ");
-                            gc.drawImage(water,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                // we check if it is worth rendering it in the first place by checking it if is within bounds TODO
+                    if(render.getVisibilityLevel() == 0){
+                        // not visible, don't do anything
+
+                    } else if(render.getVisibilityLevel() == 1){
+                        // 1, we'll handle this later
+                        // TODO greyed out area
+
+
+
+
+                    } else{
+                        // must be 2, fully visible display everything that is there
+                        TerrainType type = render.getTerrainType();
+
+
+                        StringBuilder builder = new StringBuilder();
+                        if (displayFood) {
+                            builder.append("F: " + render.getFoodAmount() +"\n");
+                        }
+                        if (displayOre) {
+                            builder.append("O: " + render.getOreAmount() + "\n");
+                        }
+                        if (displayEnergy) {
+                            builder.append("E: " + render.getEnergyAmount() + "\n");
+                        }
+                        String resourceDisplay = builder.toString();
+
+                        if(render.getLocationX() % 2 == 0){ // first type of column
+                                        if(type.equals(TerrainType.GRASS)){
+                                            gc.drawImage(grass,
+                                                    0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                        }
+                                        else if(type.equals(TerrainType.DIRT)){
+                                            gc.drawImage(dirt,
+                                                        0.75*width*j+ cameraX,height*1*-i+ cameraY+ width*0.45);
+                                        }
+                                        else if(type.equals(TerrainType.WATER)){
+                                            gc.drawImage(water,
+                                                        0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                        }
+
+                                        // now we draw any friendly structures and units
+                                        ArrayList<IdType> entities = render.getUserEntities();
+                                        for(IdType id : entities){
+                                            if(id.equals(IdType.COLONIST)){ // draw colonist
+                                                gc.drawImage(colonist,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                            }
+                                            if(id.equals(IdType.EXPLORER)){
+                                                gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                            }
+                                        }
+                                        // now draw resource values if the overlay is on
+                                        if(resourceDisplay.equals("") || !overlayOn){
+                                            // don't display anything
+                                        } else {
+                                            gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + width * 0.45 - 60 + height);
+                                        }
+                        }
+                        else { // second column type
+                                        if(type.equals(TerrainType.GRASS)){
+                                            gc.drawImage(grass,
+                                                    0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                        }
+                                        else if(type.equals(TerrainType.DIRT)){
+                                            gc.drawImage(dirt,
+                                                    0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                        }
+                                        else if(type.equals(TerrainType.WATER)){
+                                            gc.drawImage(water,
+                                                    0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                        }
+                                        // draw friendly units and structures
+                                        ArrayList<IdType> entities = render.getUserEntities();
+                                        for(IdType id : entities){
+                                            if(id.equals(IdType.COLONIST)){ // draw colonist
+                                                gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                            }
+                                            if(id.equals(IdType.EXPLORER)){
+                                                gc.drawImage(colonist,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                            }
+                                        }
+
+                                        // now draw resource values if the overlay is on
+                                        if(resourceDisplay.equals("") || !overlayOn){
+                                            // don't display anything
+                                        } else {
+                                            gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + (2 * height) - 60);
+                                        }
+
                         }
                     }
-                    else {
-                        if(current.equals(TerrainType.GRASS)){
-                            // System.out.print(" GRASS ");
-                            gc.drawImage(grass,0.75*width*j+ cameraX,height*1*-i+ cameraY  +height);
-                        } else if(current.equals(TerrainType.DIRT)){
-                            // System.out.print(" DIRT ");
-                            gc.drawImage(dirt,0.75*width*j+ cameraX,height*1*-i+ cameraY +height);
-                        } else if(current.equals(TerrainType.WATER)){
-                            //System.out.print(" WATER ");
-                            gc.drawImage(water,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
-                        }
-                    }
-                }
-            }
-        }
-        // after the map is rendered, we want to draw any units
-        ArrayList<UnitRenderObject> unitData = unitRenderInformation.returnRenderInformation();
-        for(int i=0; i<unitData.size(); i++ ){
-            int x = unitData.get(i).getLocationX();
-            int y = unitData.get(i).getLocationY();
-            if(x%2 == 0){
-                if(unitData.get(i).getIdType().equals(IdType.EXPLORER)){
-                    gc.drawImage(explorer,0.75*width*x+ cameraX,height*1*-y+ cameraY + width*0.45);
-                } else if (unitData.get(i).getIdType().equals(IdType.COLONIST)){
-                    gc.drawImage(colonist,0.75*width*x+ cameraX,height*1*-y+ cameraY + width*0.45);
-                }
-
-            } else {
-                if(unitData.get(i).getIdType().equals(IdType.EXPLORER)){
-                    gc.drawImage(explorer,0.75*width*x+ cameraX,height*1*-y+ cameraY+height);
-                }else if (unitData.get(i).getIdType().equals(IdType.COLONIST)){
-                    gc.drawImage(colonist,0.75*width*x+ cameraX,height*1*-y+ cameraY+height);
-                }
             }
         }
 
-        // here we get to drawing the overlay if the user has it on
-        if(overlayOn) {
-            for (int i = 0; i < mapRenderInformation.getY(); i++) {
-                for (int j = 0; j < mapRenderInformation.getX(); j++) {
 
-                    if(mask[j][i] == 2) { // if a 2 then all visible so we render it
-                        List<Resource> resources = renderObjects[j][i].getResources();
-                        // energy, ore, food in that order
-                        int food = 0;
-                        int energy = 0;
-                        int ore = 0;
-                        if (resources.size() == 0) {
-                            // nothing, all set to 0
-                            StringBuilder builder = new StringBuilder();
-                            if (displayFood) {
-                                builder.append("F: 0 " + "\n");
-                            }
-                            if (displayOre) {
-                                builder.append("O: " + 0 + "\n");
-                            }
-                            if (displayEnergy) {
-                                builder.append("E: " + 0 + "\n");
-                            }
-                            String resourceDisplay = builder.toString();
-                            if (j % 2 == 0) {
-                                gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + width * 0.45 - 60 + height);
-                            } else {
-                                gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + (2 * height) - 60);
-                            }
-                        } else {
-                            energy = resources.get(0).getLevel();
-                            ore = resources.get(1).getLevel();
-                            food = resources.get(2).getLevel();
-                            StringBuilder builder = new StringBuilder();
-                            if (displayFood) {
-                                builder.append("F: " + food + "\n");
-                            }
-                            if (displayOre) {
-                                builder.append("O: " + ore + "\n");
-                            }
-                            if (displayEnergy) {
-                                builder.append("E: " + energy + "\n");
-                            }
-                            String resourceDisplay = builder.toString();
-
-                            if (j % 2 == 0) {
-                                gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + width * 0.45 - 60 + height);
-                            } else {
-                                gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + (2 * height) - 60);
-                            }
-                        }
-                    }
-                }
-            }
-
-        }
-
-        drawSelection(); // this draws the tile selection image
+       drawSelection();
     }
 }

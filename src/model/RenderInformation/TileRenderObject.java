@@ -50,14 +50,35 @@ public class TileRenderObject {
     public void addEnemyEntity(IdType entity){
         this.enemyEntities.add(entity);
     }
+    public ArrayList<IdType> getUserEntities(){
+        return this.userEntities;
+    }
     public int getVisibilityLevel(){
         return this.visibilityLevel;
+    }
+    public TerrainType getTerrainType(){
+        return this.terrainType;
     }
     public void setVisibilityTwo(){
         this.visibilityLevel = 2;
     }
     public void setVisibilityToOne(){
         this.visibilityLevel = 1;
+    }
+    public int getLocationX(){
+        return this.locationX;
+    }
+    public int getLocationY(){
+        return this.locationY;
+    }
+    public int getFoodAmount(){
+        return this.foodAmount;
+    }
+    public int getOreAmount(){
+        return this.oreAmount;
+    }
+    public int getEnergyAmount(){
+        return this.energyAmount;
     }
 
 }
