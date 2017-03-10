@@ -14,7 +14,7 @@ public class PowerDownCommand extends EntityCommand {
     @Override
     public boolean execute() {
         if(super.execute()) {
-            entity.powerDown();
+            getEntity().powerDown();
             return true;
         }
         return false;

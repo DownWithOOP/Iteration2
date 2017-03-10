@@ -14,7 +14,7 @@ public class DecommissionCommand extends EntityCommand {
 
     @Override
     public boolean execute() {
-        entity.decommission();
+        getEntity().decommission();
         return true;
     }
 }

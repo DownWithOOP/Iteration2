@@ -17,10 +17,10 @@ public abstract class AbstractCommand implements Command {
     @Override
     public boolean execute() {
 
-        if(numTurns == 0){
+        if(--numTurns == 0){
             return true;
         }
-        numTurns--;
+        //numTurns--;
         return false;
     }
 

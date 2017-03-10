@@ -1,5 +1,7 @@
 package model.player;
 
+import controller.availablecommands.Commandable;
+import controller.commands.CommandType;
 import controller.commands.CycleDirection;
 import model.Selection;
 import utilities.ObserverInterfaces.*;
@@ -45,10 +47,12 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
     }
     public void startTurn(){
         System.out.println(this.toString() + " is starting their turn");
-        this.notifyMapObservers(); // at the start of the game we want to give the player map to render
+
         this.notifyStructureObservers(); // we also want to update everyone with all our structure information
         this.notifyUnitObservers(); // and lets not forget the units
+        this.notifyMapObservers(); // at the start of the game we want to give the player map to render
         this.notifyStatusObservers(); // yay status viewport
+        entities.executeCommands(); //execute all commands in each entity's queue
     }
 
     public void cycleMode(CycleDirection direction){
@@ -71,6 +75,14 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
         currentSelection.updateSelectedCommand(entities.cycleCommand(direction));
         this.notifyStatusObservers(); // yay status viewport
         //System.out.println("command cycle not hooked up yet :(");
+    }
+
+    public Commandable getCurrentInstance() {
+        return entities.getCurrentInstance();
+    }
+
+    public CommandType getCurrentCommandType() {
+        return entities.getCurrentCommand();
     }
 
 
@@ -96,6 +108,7 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
     public void notifyMapObservers() { // IMPORTANT!! CALL THIS WHENEVER THE MAP IS UPDATED SO THE VIEW REFRESHES
         for(MapObserver mapObserver : mapObservers){
             // needs all the renderInformation to calculate fogOfWar
+            System.out.println("player map: " +playerMap);
             mapObserver.update(this.playerNumber, playerMap.returnRenderInformation(), entities.returnUnitRenderInformation(), entities.returnStructureRenderInformation());
         }
     }

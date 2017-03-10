@@ -11,6 +11,7 @@ public abstract class CapitalCommand extends StructureCommand {
 
     public CapitalCommand(Capital capital, int numTurns) {
         super(capital, numTurns);
+        this.capital = capital;
     }
 
     public Capital getCapital() {

@@ -47,6 +47,8 @@ public class MVCInputHandler {
         handleCommand.put(KeyCode.NUMPAD1 + "", CommandType.MOVE_CURSOR_SOUTH_WEST);
         handleCommand.put(KeyCode.NUMPAD2 + "", CommandType.MOVE_CURSOR_SOUTH);
         handleCommand.put(KeyCode.NUMPAD3 + "", CommandType.MOVE_CURSOR_SOUTH_EAST);
+        handleCommand.put(KeyCode.ENTER + "", CommandType.ACTIVATE_COMMAND);
+
         handleCommand.put(KeyCode.NUMPAD5 + "", CommandType.SELECT);
         handleCommand.put(KeyCode.NUMPAD7 + "", CommandType.MOVE_CURSOR_NORTH_WEST);
         handleCommand.put(KeyCode.NUMPAD8 + "", CommandType.MOVE_CURSOR_NORTH);

@@ -15,4 +15,7 @@ public abstract class EntityCommand extends AbstractCommand {
         this.entity = entity;
     }
 
+    public Entity getEntity() {
+        return entity;
+    }
 }

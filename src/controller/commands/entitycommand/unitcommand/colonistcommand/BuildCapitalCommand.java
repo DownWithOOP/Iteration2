@@ -16,6 +16,14 @@ public class BuildCapitalCommand extends ColonistCommand {
         this.id = id;
     }
 
+    public CustomID getCustomID() {
+        return customID;
+    }
+
+    public String getId() {
+        return id;
+    }
+
     @Override
     public boolean execute() {
         if(super.execute()) {

@@ -87,15 +87,17 @@ public abstract class Entity extends Commandable {
 
     public void executeQueue(){
         if(currentCommand == null){
+            //System.out.println("hell0");
             if(!commandQueue.isEmpty()){
                 System.out.println("Not yet kiddo");
                 currentCommand = commandQueue.poll();
             }
         }
-
-        if(currentCommand.execute()){
-            System.out.println("Command got executed");
-            currentCommand = commandQueue.poll();
+        if (currentCommand != null) {
+            if(currentCommand.execute()){
+                System.out.println("Command got executed");
+                currentCommand = commandQueue.poll();
+            }
         }
     }
 
@@ -148,11 +150,11 @@ public abstract class Entity extends Commandable {
 
     public static void main(String[] args){
         Entity e = new Melee(new CustomID(IdType.MELEE, "id"), "id1", 0, 0);
-        Command command = new PowerUpCommand(e);
-        e.addToQueue(command);
+        //Command command = new PowerUpCommand(e);
+        //e.addToQueue(command);
         Unit unit = new Melee(new CustomID(IdType.MELEE, "id"), "id1", 0, 0);
-        Command command2 = new AbandonArmyCommand(unit);
-        e.addToQueue(command2);
+        //Command command2 = new AbandonArmyCommand(unit);
+        //e.addToQueue(command2);
 
         e.executeQueue();
         e.executeQueue();

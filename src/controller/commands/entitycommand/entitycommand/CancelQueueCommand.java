@@ -13,7 +13,7 @@ public class CancelQueueCommand extends EntityCommand {
 
     @Override
     public boolean execute() {
-        entity.cancelQueue();
+        getEntity().cancelQueue();
         return true;
     }
 }
