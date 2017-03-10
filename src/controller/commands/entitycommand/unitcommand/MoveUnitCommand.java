@@ -15,10 +15,18 @@ public class MoveUnitCommand extends UnitCommand {
         this.newY = newY;
     }
 
+    public int getNewX() {
+        return newX;
+    }
+
+    public int getNewY() {
+        return newY;
+    }
+
     @Override
     public boolean execute() {
         if(super.execute()) {
-            unit.moveUnit(newX, newY);
+            getUnit().moveUnit(getNewX(), getNewY());
             return true;
         }
         return false;

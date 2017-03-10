@@ -480,6 +480,19 @@ public class EntityOwnership {
         }
     }
 
+    public void executeCommands() {
+        for (int i = 0; i < unitList.size(); i++) {
+            for (int j = 0; j < unitList.get(i).size(); j++) {
+                unitList.get(i).get(j).executeQueue();
+            }
+        }
+        for (int i = 0; i < structureList.size(); i++) {
+            for (int j = 0; j < structureList.get(i).size(); j++) {
+                structureList.get(i).get(j).executeQueue();
+            }
+        }
+    }
+
     //TODO get army
     //public List<Army> getArmy(){
         //return armyList;

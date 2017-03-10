@@ -1,5 +1,7 @@
 package model.player;
 
+import controller.availablecommands.Commandable;
+import controller.commands.CommandType;
 import controller.commands.CycleDirection;
 import model.Selection;
 import utilities.ObserverInterfaces.*;
@@ -50,6 +52,7 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
         this.notifyUnitObservers(); // and lets not forget the units
         this.notifyMapObservers(); // at the start of the game we want to give the player map to render
         this.notifyStatusObservers(); // yay status viewport
+        entities.executeCommands(); //execute all commands in each entity's queue
     }
 
     public void cycleMode(CycleDirection direction){
@@ -72,6 +75,14 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
         currentSelection.updateSelectedCommand(entities.cycleCommand(direction));
         this.notifyStatusObservers(); // yay status viewport
         //System.out.println("command cycle not hooked up yet :(");
+    }
+
+    public Commandable getCurrentInstance() {
+        return entities.getCurrentInstance();
+    }
+
+    public CommandType getCurrentCommandType() {
+        return entities.getCurrentCommand();
     }
 
 

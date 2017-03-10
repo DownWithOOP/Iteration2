@@ -46,6 +46,8 @@ public class MVCInputHandler {
         handleCommand.put(KeyCode.LEFT + "", CommandType.CYCLE_INSTANCE_PREV);
         handleCommand.put(KeyCode.RIGHT + "", CommandType.CYCLE_INSTANCE_NEXT);
 
+        handleCommand.put(KeyCode.ENTER + "", CommandType.ACTIVATE_COMMAND);
+
         handleCommand.put(KeyCode.NUMPAD1 + "", CommandType.SOUTH_WEST);
         handleCommand.put(KeyCode.NUMPAD2 + "", CommandType.SOUTH);
         handleCommand.put(KeyCode.NUMPAD3 + "", CommandType.SOUTH_EAST);

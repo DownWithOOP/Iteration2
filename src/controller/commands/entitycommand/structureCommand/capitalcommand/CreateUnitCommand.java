@@ -19,10 +19,22 @@ public class CreateUnitCommand extends CapitalCommand {
         this.id = id;
     }
 
+    public EntityType getEntityToCreate() {
+        return entityToCreate;
+    }
+
+    public CustomID getCustomId() {
+        return customId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
     @Override
     public boolean execute() {
         if(super.execute()) {
-            getCapital().createUnit(entityToCreate, customId, id);
+            getCapital().createUnit(getEntityToCreate(), getCustomId(), getId());
             return true;
         }
         return false;

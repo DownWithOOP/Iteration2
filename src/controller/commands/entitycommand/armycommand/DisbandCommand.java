@@ -14,7 +14,7 @@ public class DisbandCommand extends ArmyCommand{
     @Override
     public boolean execute() {
         if(super.execute()) {
-            army.disband();
+            getArmy().disband();
             return true;
         }
         return false;

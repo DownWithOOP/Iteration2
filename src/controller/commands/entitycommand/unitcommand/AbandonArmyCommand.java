@@ -14,7 +14,7 @@ public class AbandonArmyCommand extends UnitCommand{
     @Override
     public boolean execute() {
         if(super.execute()) {
-            unit.abandonArmy();
+            getUnit().abandonArmy();
             return true;
         }
         return false;

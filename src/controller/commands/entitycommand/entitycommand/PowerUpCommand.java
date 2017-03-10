@@ -14,7 +14,7 @@ public class PowerUpCommand extends EntityCommand {
     @Override
     public boolean execute() {
         if(super.execute()) {
-            entity.powerUp();
+            getEntity().powerUp();
             return true;
         }
         return false;

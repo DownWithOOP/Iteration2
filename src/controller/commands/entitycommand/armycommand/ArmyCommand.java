@@ -15,4 +15,7 @@ public abstract class ArmyCommand extends AbstractCommand {
         this.army=army;
     }
 
+    public Army getArmy() {
+        return army;
+    }
 }

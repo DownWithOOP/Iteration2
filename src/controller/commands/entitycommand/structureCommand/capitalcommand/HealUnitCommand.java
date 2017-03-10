@@ -14,10 +14,14 @@ public class HealUnitCommand extends CapitalCommand {
         this.unitToHeal = unitToHeal;
     }
 
+    public Unit getUnitToHeal() {
+        return unitToHeal;
+    }
+
     @Override
     public boolean execute() {
         if(super.execute()) {
-            getCapital().healUnit(unitToHeal);
+            getCapital().healUnit(getUnitToHeal());
             return true;
         }
         return false;
