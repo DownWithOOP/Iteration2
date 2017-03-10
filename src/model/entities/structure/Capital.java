@@ -15,8 +15,8 @@ public class Capital extends Structure {
     private UnitFactory unitFactory;
     private StructureStats capitalStats;
 
-    public Capital(CustomID playerId, String id) {
-        super(playerId, id);
+    public Capital(CustomID playerId, String id, int locationX, int locationY) {
+        super(playerId, id, locationX, locationY);
         this.unitFactory = new UnitFactory();
         this.capitalStats = new StructureStats(10,100,3,2,2);
     }
@@ -24,14 +24,14 @@ public class Capital extends Structure {
     // Capital produces explorers and workers
     public Unit createUnit(EntityType entityType, CustomID customID, String id) {
         if (entityType.equals(EntityType.EXPLORER) || entityType.equals(EntityType.WORKER)) {
-            return unitFactory.getEntity(entityType, customID, id);
+            return unitFactory.getEntity(entityType, customID, id, (int)(super.getLocation().getX()),(int) (super.getLocation().getY()));
         }
         return null;
     }
 
     @Override
     protected IdType getIdType() {
-        return IdType.capital;
+        return IdType.CAPITAL;
     }
 
     @Override

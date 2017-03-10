@@ -8,7 +8,7 @@ import controller.commands.Command;
  */
 public class Selection {
 
-    //TODO initialize command as well once EntityOwnership is set up to cycle actions
+    //TODO initialize activeCommand as well once EntityOwnership is set up to cycle actions
     public Selection(Commandable initialCommandable){
         selectedCommandable = initialCommandable;
     }

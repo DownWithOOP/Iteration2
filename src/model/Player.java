@@ -22,11 +22,11 @@ public class Player implements MapSubject, UnitSubject, StructureSubject {
     private ArrayList<UnitObserver> unitObservers = new ArrayList<UnitObserver>(); // will contain observers that get notified of changes
     private ArrayList<StructureObserver> structureObservers = new ArrayList<StructureObserver>(); // will contain observers that get notified of changes
 
-    public Player(Map map, MapObserver observer, UnitObserver unitObserver, StructureObserver structureObserver){
+    public Player(Map map, MapObserver observer, UnitObserver unitObserver, StructureObserver structureObserver, int startingX, int startingY){
 
         //TODO add an id for player in the constructor
-        customID=new CustomID(IdType.player,"newPlayer");
-        entities = new EntityOwnership(customID); //TODO should entity ownership know Player?
+        customID=new CustomID(IdType.PLAYER,"newPlayer");
+        entities = new EntityOwnership(customID, startingX, startingY); //TODO should entity ownership know Player?
         currentSelection = new Selection(entities.getCurrentInstance()); //TODO rename method
         this.playerMap = map; // TODO for the moment global map is shared, later each player will have own map
         this.registerMapObserver(observer);
@@ -40,6 +40,8 @@ public class Player implements MapSubject, UnitSubject, StructureSubject {
     public void startTurn(){
         System.out.println(this.toString() + " is starting their turn");
         this.notifyMapObservers(); // at the start of the game we want to give the player map to render
+        this.notifyStructureObservers(); // we also want to update everyone with all our structure information
+        this.notifyUnitObservers(); // and lets not forget the units
     }
 
     public void cycleMode(CycleDirection direction){
@@ -59,17 +61,9 @@ public class Player implements MapSubject, UnitSubject, StructureSubject {
 
     public void cycleCommand(CycleDirection direction){
         //TODO cycle through actions
-        System.out.println("command cycle not hooked up yet :(");
+        System.out.println("activeCommand cycle not hooked up yet :(");
     }
 
-    //TODO implement methods elsewhere so this compiles
-    //public UnitRenderInformation returnUnitRenderInformation() {
-        //return entities.returnUnitRenderInformation();
-    //}
-//
-    //public StructureRenderInformation returnStructurRenderInformation() {
-        //return entities.returnStructureRenderInformation();
-    //}
 
     @Override
     public void registerMapObserver(MapObserver o) {
@@ -88,19 +82,19 @@ public class Player implements MapSubject, UnitSubject, StructureSubject {
     @Override
     public void unregister(StructureObserver o) { structureObservers.add(o);}
     @Override
-    public void notifyUnitObservers() {
+    public void notifyUnitObservers() { // IMPORTANT!! CALL THIS WHENEVER ANY ENTITIES/UNITS ARE UPDATED SO THE VIEW REFRESHES
         for(UnitObserver unitObserver : unitObservers){
             unitObserver.update(entities.returnUnitRenderInformation());
         }
     }
     @Override
-    public void notifyStructureObservers() {
+    public void notifyStructureObservers() { // IMPORTANT!! CALL THIS WHENEVER ANY ENTITIES/STRUCTURES ARE UPDATED SO THE VIEW REFRESHES
         for(StructureObserver structureObserver : structureObservers){
             structureObserver.update(entities.returnStructureRenderInformation());
         }
     }
     @Override
-    public void notifyMapObservers() {
+    public void notifyMapObservers() { // IMPORTANT!! CALL THIS WHENEVER THE MAP IS UPDATED SO THE VIEW REFRESHES
         for(MapObserver mapObserver : mapObservers){
             mapObserver.update(playerMap.returnRenderInformation());
         }

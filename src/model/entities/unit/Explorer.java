@@ -1,6 +1,5 @@
 package model.entities.unit;
 
-import model.entities.EntityId;
 import model.entities.Stats.Stats;
 import model.entities.Stats.UnitStats;
 import utilities.id.CustomID;
@@ -16,13 +15,13 @@ public class Explorer extends Unit{
      * @param playerId
      * @param id
      */
-    public Explorer(CustomID playerId, String id) {
-        super(playerId, id);
+    public Explorer(CustomID playerId, String id, int locationX, int locationY) {
+        super(playerId, id, locationX, locationY);
     }
 
     @Override
     protected IdType getIdType() {
-        return IdType.explorer;
+        return IdType.EXPLORER;
     }
 
     @Override

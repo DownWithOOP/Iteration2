@@ -20,6 +20,7 @@ public abstract class Entity extends Commandable {
     protected CustomID playerId;
     Queue<Command> commandQueue = new ArrayDeque<>();
     private boolean isPoweredDown;
+    private Location location;
     protected Stats entityStats;
 
     static ArrayList<CommandType> entityCommand = new ArrayList<>();
@@ -36,11 +37,12 @@ public abstract class Entity extends Commandable {
     /**
      * @param playerId
      */
-    public Entity(CustomID playerId, String id) {
+    public Entity(CustomID playerId, String id, int locationX, int locationY) {
         setId(playerId, id);
         entityStats = setEntityStats();
         this.playerId = playerId;
         this.isPoweredDown = false;
+        location = new Location(locationX,locationY); // starting location of entity
         addAllCommands(entityCommand);
     }
 
@@ -58,8 +60,7 @@ public abstract class Entity extends Commandable {
     }
 
     public Location getLocation() {
-        //TODO: FINISH THIS METHOD
-        return null;
+        return location;
     }
 
     public abstract void decommission();

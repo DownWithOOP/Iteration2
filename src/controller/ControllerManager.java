@@ -3,6 +3,8 @@ package controller;
 import controller.Observers.MapObserver;
 import controller.ingamecontrollertypes.ControllerType;
 import controller.ingamecontrollertypes.MainViewController;
+import controller.ingamecontrollertypes.StructureViewController;
+import controller.ingamecontrollertypes.UnitViewController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -91,6 +93,8 @@ public class ControllerManager {
         inputController.takeInSwitchControllerRelay(switchControllerRelay);
         inputController.enableKeyboardInput();
         inputController.setDispatch(controllerDispatch);
+        StructureViewController temp = (StructureViewController) inputController;
+        temp.setObservers(structureObserver);
         switchControllers(inputController);
         primaryStage.show();
     }
@@ -106,6 +110,8 @@ public class ControllerManager {
         inputController.takeInSwitchControllerRelay(switchControllerRelay);
         inputController.enableKeyboardInput();
         inputController.setDispatch(controllerDispatch);
+        UnitViewController temp = (UnitViewController) inputController;
+        temp.setObservers(unitObserver);
         switchControllers(inputController);
         primaryStage.show();
     }
@@ -119,7 +125,6 @@ public class ControllerManager {
         inputController.takeInSwitchControllerRelay(switchControllerRelay);
         inputController.enableKeyboardInput();
         inputController.setDispatch(controllerDispatch);
-        this.activeController = null; // TODO change later once render() is implemented properly
         switchControllers(inputController);
         primaryStage.show();
     }

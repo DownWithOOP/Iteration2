@@ -14,14 +14,14 @@ import utilities.id.IdType;
 public class Worker extends Unit {
     private StructureFactory structureFactory;
 
-    public Worker(CustomID playerId, String id) {
-        super(playerId, id);
+    public Worker(CustomID playerId, String id, int startingX, int startingY) {
+        super(playerId, id, startingX, startingY);
         this.structureFactory = new StructureFactory();
     }
 
     @Override
     protected IdType getIdType() {
-        return IdType.worker;
+        return IdType.WORKER;
     }
 
     //todo:this should not have attacking, defensive damage, range, only fighters have these
@@ -33,7 +33,7 @@ public class Worker extends Unit {
     // Worker can build all structures except capital
     public Structure buildStructure(EntityType entityType, CustomID customID, String id) {
         if (!entityType.equals(EntityType.CAPITAL)) {
-            return structureFactory.getStructure(entityType, customID, id);
+            return structureFactory.getStructure(entityType, customID, id, (int)(super.getLocation().getX()),(int)(super.getLocation().getY()));
         }
         return null;
     }

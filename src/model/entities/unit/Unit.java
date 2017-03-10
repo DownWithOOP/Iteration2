@@ -24,8 +24,8 @@ public abstract class Unit extends Entity {
     /**
      * @param playerId
      */
-    public Unit(CustomID playerId,String id) {
-        super(playerId, id);
+    public Unit(CustomID playerId,String id, int locationX, int locationY) {
+        super(playerId, id, locationX, locationY);
         addAllCommands(unitCommand);
     }
 

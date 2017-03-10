@@ -1,4 +1,4 @@
-<Map height="12" width="12">
+<Map height="12" width="24">
     <!-- row 1, (x,0)-->
     <Tile>
         <Terrain>DIRT</Terrain>
@@ -10,7 +10,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource>CATFOOD</Resource>
+        <Resource></Resource>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -50,7 +50,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource>CRYSTAL</Resource>
+        <Resource></Resource>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -186,7 +186,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Resource>CATFOOD</Resource>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -226,7 +226,7 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
+        <Resource>CATFOOD</Resource>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -282,6 +282,174 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource>CATFOOD</Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>WATER</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource>RESEARCH</Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect>HEAL_DAMAGE</AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource>RESEARCH</Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
         <Resource></Resource>
         <Decal></Decal>
         <Item></Item>
@@ -313,8 +481,88 @@
     </Tile>
 
     <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource>CATFOOD</Resource>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -331,6 +579,334 @@
     <Tile>
         <Terrain>DIRT</Terrain>
         <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource>CRYSTAL</Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>WATER</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect>HEAL_DAMAGE</AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource>RESEARCH</Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>WATER</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>WATER</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource>CATFOOD</Resource>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -426,7 +1002,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Resource>RESEARCH</Resource>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -576,6 +1152,7 @@
         <AreaEffect></AreaEffect>
     </Tile>
 
+    <!-- row 1, (x,0)-->
     <Tile>
         <Terrain>DIRT</Terrain>
         <Resource></Resource>
@@ -626,7 +1203,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource>CRYSTAL</Resource>
+        <Resource></Resource>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>
@@ -643,6 +1220,582 @@
     <Tile>
         <Terrain>GRASS</Terrain>
         <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect>HEAL_DAMAGE</AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>WATER</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>WATER</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+    <!-- row 2 (x,1)-->
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>WATER</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource>RESEARCH</Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>WATER</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+    <!-- row 3 -->
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource>CATFOOD</Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource>CRYSTAL</Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>WATER</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect>HEAL_DAMAGE</AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource>CRYSTAL</Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource>CATFOOD</Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource>CATFOOD</Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>WATER</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource>CRYSTAL</Resource>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect>HEAL_DAMAGE</AreaEffect>
@@ -729,7 +1882,15 @@
     </Tile>
 
     <Tile>
-        <Terrain>DIRT</Terrain>
+        <Terrain>GRASS</Terrain>
+        <Resource>CATFOOD</Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
         <Resource></Resource>
         <Decal></Decal>
         <Item></Item>
@@ -737,15 +1898,7 @@
     </Tile>
 
     <Tile>
-        <Terrain>DIRT</Terrain>
-        <Resource></Resource>
-        <Decal></Decal>
-        <Item></Item>
-        <AreaEffect></AreaEffect>
-    </Tile>
-
-    <Tile>
-        <Terrain>DIRT</Terrain>
+        <Terrain>GRASS</Terrain>
         <Resource></Resource>
         <Decal></Decal>
         <Item></Item>
@@ -842,54 +1995,6 @@
 
     <Tile>
         <Terrain>GRASS</Terrain>
-        <Resource></Resource>
-        <Decal></Decal>
-        <Item></Item>
-        <AreaEffect></AreaEffect>
-    </Tile>
-
-    <Tile>
-        <Terrain>GRASS</Terrain>
-        <Resource></Resource>
-        <Decal></Decal>
-        <Item></Item>
-        <AreaEffect></AreaEffect>
-    </Tile>
-
-    <Tile>
-        <Terrain>GRASS</Terrain>
-        <Resource></Resource>
-        <Decal></Decal>
-        <Item></Item>
-        <AreaEffect></AreaEffect>
-    </Tile>
-
-    <Tile>
-        <Terrain>DIRT</Terrain>
-        <Resource></Resource>
-        <Decal></Decal>
-        <Item></Item>
-        <AreaEffect></AreaEffect>
-    </Tile>
-
-    <Tile>
-        <Terrain>DIRT</Terrain>
-        <Resource>CATFOOD</Resource>
-        <Decal></Decal>
-        <Item></Item>
-        <AreaEffect></AreaEffect>
-    </Tile>
-
-    <Tile>
-        <Terrain>DIRT</Terrain>
-        <Resource></Resource>
-        <Decal></Decal>
-        <Item></Item>
-        <AreaEffect></AreaEffect>
-    </Tile>
-
-    <Tile>
-        <Terrain>GRASS</Terrain>
         <Resource>CATFOOD</Resource>
         <Decal></Decal>
         <Item></Item>
@@ -905,6 +2010,14 @@
     </Tile>
 
     <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
         <Terrain>DIRT</Terrain>
         <Resource></Resource>
         <Decal></Decal>
@@ -914,23 +2027,63 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource>CATFOOD</Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>DIRT</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>WATER</Terrain>
+        <Resource></Resource>
+        <Decal></Decal>
+        <Item></Item>
+        <AreaEffect></AreaEffect>
+    </Tile>
+
+    <Tile>
+        <Terrain>GRASS</Terrain>
         <Resource>CRYSTAL</Resource>
-        <Decal></Decal>
-        <Item></Item>
-        <AreaEffect></AreaEffect>
-    </Tile>
-
-    <Tile>
-        <Terrain>WATER</Terrain>
-        <Resource></Resource>
-        <Decal></Decal>
-        <Item></Item>
-        <AreaEffect></AreaEffect>
-    </Tile>
-
-    <Tile>
-        <Terrain>GRASS</Terrain>
-        <Resource></Resource>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect>HEAL_DAMAGE</AreaEffect>
@@ -978,7 +2131,7 @@
 
     <Tile>
         <Terrain>DIRT</Terrain>
-        <Resource></Resource>
+        <Resource>RESEARCH</Resource>
         <Decal></Decal>
         <Item></Item>
         <AreaEffect></AreaEffect>

@@ -9,7 +9,7 @@ import model.RenderInformation.StructureRenderObject;
 import model.RenderInformation.UnitRenderInformation;
 import model.RenderInformation.UnitRenderObject;
 import model.entities.Entity;
-import model.entities.EntityType;
+import model.entities.Stats.UnitStats;
 import model.entities.structure.Capital;
 import model.entities.structure.Structure;
 import model.entities.unit.Colonist;
@@ -57,28 +57,29 @@ public class EntityOwnership {
     private int cycleModeIndex = 1; //start in UNIT mode
     private CustomID playerId;
 
-    EntityOwnership(CustomID playerId) {
+    EntityOwnership(CustomID playerId, int startingX, int startingY ) {
         unitList = new ArrayList<>(5);
         //armyList = new ArrayList<>(10);
         structureList = new ArrayList<>(1);
         rallyPointList= new ArrayList<>(20);
         initializeLists();
-        initializeUnits();
+        initializeUnits(startingX, startingY);
         initializeStructures();
         changeMode(modeHolders[cycleModeIndex]);
         this.playerId=playerId;
     }
 
     private void initializeStructures() {
-        //TODO change the id number
-        addStructure(IdType.capital, new Capital(playerId,"idnumber"));
+        //TODO change the id number,
+        // TODO strucuture should be intialized by colonist later
+        //addStructure(IdType.CAPITAL, new Capital(playerId,"idnumber"));
     }
 
-    private void initializeUnits() {
+    private void initializeUnits(int startingX, int startingY) {
         //TODO change the id number
-        addUnit(IdType.explorer, new Explorer(playerId,"idnumber"));
-        addUnit(IdType.explorer, new Explorer(playerId,"idnumber"));
-        addUnit(IdType.colonist, new Colonist(playerId,"idnumber"));
+        addUnit(IdType.EXPLORER, new Explorer(playerId,"idnumber", startingX, startingY));
+        addUnit(IdType.EXPLORER, new Explorer(playerId,"idnumber", startingX, startingY));
+        addUnit(IdType.COLONIST, new Colonist(playerId,"idnumber", startingX, startingY));
     }
 
     private void initializeLists() {
@@ -107,7 +108,7 @@ public class EntityOwnership {
     public boolean addStructure(IdType entityType, Entity entity) {
         boolean result = false;
         switch (entityType) {
-            case capital:
+            case CAPITAL:
                 result = addToIndex(structureList, 0, entity);
                 break;
         }
@@ -132,16 +133,16 @@ public class EntityOwnership {
         if (totalSize < unitCap) {
 
             switch (entityType) {
-                case colonist:
+                case COLONIST:
                     returnValue = addToIndex(unitList, colonistIndex, entity);
                     break;
-                case explorer:
+                case EXPLORER:
                     returnValue = addToIndex(unitList, explorerIndex, entity);
                     break;
-                case melee:
+                case MELEE:
                     returnValue = addToIndex(unitList, meleeIndex, entity);
                     break;
-                case ranged:
+                case RANGED:
                     returnValue = addToIndex(unitList, rangedIndex, entity);
                     break;
             }
@@ -312,38 +313,37 @@ public class EntityOwnership {
                 //armyList.remove(entity);
                 //rallyPointList.remove(((Army)entity).getRallyPoint());
                 //break;
-            case capital:
+            case CAPITAL:
                 structureList.get(0).remove(entity);
                 break;
-            case ranged:
+            case RANGED:
                 unitList.get(rangedIndex).remove(entity);
                 break;
-            case colonist:
+            case COLONIST:
                 unitList.get(colonistIndex).remove(entity);
                 break;
-            case explorer:
+            case EXPLORER:
                 unitList.get(explorerIndex).remove(entity);
                 break;
-            case melee:
+            case MELEE:
                 unitList.get(meleeIndex).remove(entity);
                 break;
         }
     }
 
-    //TODO implement methods elsewhere so this compiles
     public UnitRenderInformation returnUnitRenderInformation() {
         UnitRenderInformation renderInfo = new UnitRenderInformation();
         for (List<Entity> list : unitList) {
             for (Entity entity : list) {
                 Unit unit = (Unit) entity;
-                UnitRenderObject temp = new UnitRenderObject(unit.getEntityType(), (int)(unit.getLocation().getX()), (int)(unit.getLocation().getY()));
+                UnitStats unitStats = unit.getUnitStats().clone(); // deep clone so as not to mess anything up
+                UnitRenderObject temp = new UnitRenderObject(unit.getEntityType(), (int)(unit.getLocation().getX()), (int)(unit.getLocation().getY()), unitStats);
                 renderInfo.addUnit(temp);
             }
         }
         return renderInfo;
     }
 
-    //TODO implement methods elsewhere so this compiles
     public StructureRenderInformation returnStructureRenderInformation() {
         StructureRenderInformation renderInfo = new StructureRenderInformation();
         for (List<Entity> list : structureList) {
@@ -428,16 +428,16 @@ public class EntityOwnership {
 
 
     public static void main(String[] args) {
-        EntityOwnership entityOwnership = new EntityOwnership(new CustomID(IdType.player,"hello"));
+        EntityOwnership entityOwnership = new EntityOwnership(new CustomID(IdType.PLAYER,"hello"), 5, 5);
         //Army army = new Army(new Player("hello", new Map()), new Location(1, 2));
         //Army army1 = new Army(new Player("world", new Map()), new Location(3, 2));
-        Melee melee = new Melee(new CustomID(IdType.player,"hello"),"5");
-        Melee melee1 = new Melee(new CustomID(IdType.player,"hello"),"5");
-        Melee melee2 = new Melee(new CustomID(IdType.player,"hello"),"5");
-        Melee melee3 = new Melee(new CustomID(IdType.player,"hello"),"5");
-        Melee melee4 = new Melee(new CustomID(IdType.player,"hello"),"5");
-        Explorer explorer1 = new Explorer(new CustomID(IdType.player,"hello"),"5");
-        Capital base = new Capital(new CustomID(IdType.player,"hello"),"5");
+        Melee melee = new Melee(new CustomID(IdType.PLAYER,"hello"),"5",1,1);
+        Melee melee1 = new Melee(new CustomID(IdType.PLAYER,"hello"),"5",1,2);
+        Melee melee2 = new Melee(new CustomID(IdType.PLAYER,"hello"),"5",1,3);
+        Melee melee3 = new Melee(new CustomID(IdType.PLAYER,"hello"),"5",2,2);
+        Melee melee4 = new Melee(new CustomID(IdType.PLAYER,"hello"),"5",0,0);
+        Explorer explorer1 = new Explorer(new CustomID(IdType.PLAYER,"hello"),"5",0,1);
+        Capital base = new Capital(new CustomID(IdType.PLAYER,"hello"),"5", 2,2);
 
         boolean check = false;
         check = entityOwnership.addEntity(explorer1);

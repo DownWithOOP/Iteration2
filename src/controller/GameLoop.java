@@ -28,8 +28,8 @@ public class GameLoop {
         this.activeController.render();
     }
 
-    public void updateController(Controller newactiveController){
-        this.activeController = newactiveController;
+    public void updateController(Controller newActiveController){
+        this.activeController = newActiveController;
     }
 
     public void start() {

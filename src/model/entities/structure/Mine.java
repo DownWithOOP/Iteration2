@@ -1,6 +1,5 @@
 package model.entities.structure;
 
-import model.entities.EntityId;
 import model.entities.Stats.Stats;
 import model.entities.Stats.StructureStats;
 import utilities.id.CustomID;
@@ -16,13 +15,13 @@ public class Mine extends Structure {
      * @param playerId
      * @param id
      */
-    public Mine(CustomID playerId, String id) {
-        super(playerId, id);
+    public Mine(CustomID playerId, String id, int locationX, int locationY) {
+        super(playerId, id, locationX, locationY);
     }
 
     @Override
     protected IdType getIdType() {
-        return IdType.mine;
+        return IdType.MINE;
     }
 
     @Override

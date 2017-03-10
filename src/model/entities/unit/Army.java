@@ -33,8 +33,8 @@ public class Army extends Entity implements Fighter {
 
     }
 
-    public Army(CustomID playerId, String id) {
-        super(playerId, id);
+    public Army(CustomID playerId, String id, int locationX, int locationY) {
+        super(playerId, id, locationX, locationY);
         addAllCommands(armyCommand);
     }
 
@@ -58,7 +58,7 @@ public class Army extends Entity implements Fighter {
     //TODO: change this method
     @Override
     protected IdType getIdType() {
-        return IdType.army;
+        return IdType.ARMY;
     }
 
     @Override

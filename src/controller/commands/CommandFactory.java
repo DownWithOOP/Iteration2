@@ -40,6 +40,7 @@ public class CommandFactory {
         simpleCommandResult.put(CommandType.ABANDON_ARMY, (commandable) -> (new AbandonArmy((Unit) commandable)));
 
 
+
         //cursor
         actionableCommandEntity.put(CommandType.MOVE, (commandable, modifier) -> (new MoveCommand((Cursor) commandable, modifier.direction)));
         // TODO add W,A,S,D move_map_Camera stuff
@@ -108,11 +109,11 @@ public class CommandFactory {
     }
 
     public static void main(String[] args) {
-        CustomID customID = new CustomID(IdType.player, "5");
+        CustomID customID = new CustomID(IdType.PLAYER, "5");
 
-        Melee melee = new Melee(customID, "6");
-        Colonist colonist = new Colonist(customID, "6");
-        Army army = new Army(customID, "6");
+        Melee melee = new Melee(customID, "6", 0, 0);
+        Colonist colonist = new Colonist(customID, "6", 1,1);
+        Army army = new Army(customID, "6",2,2);
         RallyPoint rallyPoint = new RallyPoint(new Location(5, 6));
         Cursor cursor = new Cursor(new Location(5, 6));
 

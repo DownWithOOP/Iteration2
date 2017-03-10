@@ -1,6 +1,5 @@
 package model.entities.unit;
 
-import model.entities.EntityType;
 import model.entities.Stats.Stats;
 import model.entities.Stats.UnitStats;
 import utilities.id.CustomID;
@@ -11,12 +10,12 @@ import utilities.id.IdType;
  */
 public class Ranged extends Unit {
 
-    public Ranged(CustomID playerId, String id) {
-        super(playerId, id);
+    public Ranged(CustomID playerId, String id, int locationX, int locationY) {
+        super(playerId, id, locationX, locationY);
     }
     @Override
     protected IdType getIdType() {
-        return IdType.melee;
+        return IdType.MELEE;
     }
 
     @Override
@@ -31,7 +30,7 @@ public class Ranged extends Unit {
 
     @Override
     public void joinArmy(int armyNumber) {
-        System.out.println("joined army"+ armyNumber);
+        System.out.println("joined army " + armyNumber);
     }
 
     @Override

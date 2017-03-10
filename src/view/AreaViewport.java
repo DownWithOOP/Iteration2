@@ -1,20 +1,23 @@
-package controller.ingamecontrollertypes;
+package view;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import model.RenderInformation.MapRenderObject;
-import model.RenderInformation.MapRenderInformation;
+import model.RenderInformation.*;
+import model.map.tile.resources.ResourceType;
 import model.map.tile.terrain.TerrainType;
+import utilities.id.IdType;
 import view.utilities.Assets;
+
+import java.util.ArrayList;
 
 /**
  * Created by Konrad on 3/1/2017.
  */
 // this will be control the canvas area that is used to display the areaViewport
-public class AreaViewPortController{
+public class AreaViewport {
 
     private double cameraX;
     private double cameraY;
@@ -22,6 +25,8 @@ public class AreaViewPortController{
     private Canvas canvas;
     private int cameraSpeed;
     private MapRenderInformation mapRenderInformation;
+    private UnitRenderInformation unitRenderInformation;
+    private StructureRenderInformation structureRenderInformation;
     private double XBound;
     private double YBound;
     private int selectX;
@@ -35,9 +40,14 @@ public class AreaViewPortController{
     Image dirt = Assets.getInstance().DIRT;
     Image mountain = Assets.getInstance().CRATER;
     Image select = Assets.getInstance().SELECT;
+    Image catFood = Assets.getInstance().CATFOOD;
+    Image crystal = Assets.getInstance().CRYSTAL;
+    Image research = Assets.getInstance().RESEARCH;
+    Image colonist = Assets.getInstance().COLONIST;
+    Image explorer = Assets.getInstance().EXPLORER;
 
-    public AreaViewPortController(VBox vbox, Canvas canvas){
-        this.cameraX = 100; // default camera shift/starting position
+    public AreaViewport(VBox vbox, Canvas canvas){
+        this.cameraX = -300; // default camera shift/starting position
         this.cameraY = 600; // default camera shift/starting position
         this.vBox = vbox;
         this.canvas = canvas;
@@ -51,8 +61,8 @@ public class AreaViewPortController{
 
     public void changeCameraXPlus(){
         this.cameraX += cameraSpeed;
-        if(this.cameraX > 0){
-            this.cameraX = 0; // keep in bounds
+        if(this.cameraX > grass.getWidth()*0.75){
+            this.cameraX = grass.getWidth()*0.75; // keep in bounds
         }
         this.drawSomething();
     }
@@ -73,11 +83,12 @@ public class AreaViewPortController{
     }
     public void changeCameraYMinus(){
 
-        if(this.cameraY - cameraSpeed < (grass.getHeight()*0.5)){
-            this.cameraY = grass.getHeight()*0.5;
+        if(this.cameraY - cameraSpeed <  348){ // hardcoded lower bound, not the best but does the job, must changed if different map size
+            this.cameraY = 348;
         } else {
             this.cameraY -= cameraSpeed;
         }
+        System.out.println(this.cameraX + " " +this.cameraY + " ");
         this.drawSomething();
     }
 
@@ -92,12 +103,14 @@ public class AreaViewPortController{
             this.cameraSpeed = 1;
         }
     }
-    public void UpdateRenderInfo(MapRenderInformation renderMap){
+    public void UpdateRenderInfo(MapRenderInformation renderMap, UnitRenderInformation renderUnit, StructureRenderInformation renderStructure){
         this.mapRenderInformation = renderMap;
+        this.unitRenderInformation = renderUnit;
+        this.structureRenderInformation = renderStructure;
         this.gridSizeX = mapRenderInformation.getX();
         this.gridSizeY = mapRenderInformation.getY();
             this.YBound = ((double) this.mapRenderInformation.getY()) * grass.getHeight()*0.75 + grass.getHeight()*2;
-            this.XBound = ((double) this.mapRenderInformation.getX()) * grass.getWidth()*0.7 + grass.getWidth() - this.canvas.getWidth();
+            this.XBound = ((double) this.mapRenderInformation.getX()) * grass.getWidth()*0.75 + grass.getWidth() - this.canvas.getWidth();
        this.drawSomething();
 
     }
@@ -224,20 +237,21 @@ public class AreaViewPortController{
     public void drawSomething(){
         MapRenderObject[][] renderObjects = this.mapRenderInformation.getRenderObjectMap();
 
-
         double width = grass.getWidth();
         double height = grass.getHeight();
 
-        GraphicsContext gc = canvas.getGraphicsContext2D();
+        GraphicsContext gc = canvas.getGraphicsContext2D(); // Clears whatever is currently on the canvas
         gc.setFill(Color.TRANSPARENT);
         gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
         gc.setFill(Color.BLACK);
         gc.fillRect(0,0,canvas.getWidth(),canvas.getHeight());
 
 
+        // draws new terrain objects
         for(int i=0; i<mapRenderInformation.getY()   ; i++){
-            for(int j=0; j<mapRenderInformation.getY(); j++){
-                TerrainType current = renderObjects[i][j].getTerrainType();
+            for(int j=0; j<mapRenderInformation.getX(); j++){
+                TerrainType current = renderObjects[j][i].getTerrainType();
+                ResourceType resource = renderObjects[j][i].getResourceType();
                 if(j%2 == 0){
                     if(current.equals(TerrainType.GRASS)){
                       //  System.out.print(" GRASS ");
@@ -249,6 +263,18 @@ public class AreaViewPortController{
                       //  System.out.print(" WATER ");
                         gc.drawImage(water,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
                     }
+
+                     /* Turning OFF resource rendering since we are going to have to change it completly
+                    if(resource.equals(ResourceType.CATFOOD)){
+                        gc.drawImage(catFood,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                    } else if(resource.equals(ResourceType.CRYSTAL)){
+                        gc.drawImage(crystal,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                    } else if(resource.equals(ResourceType.RESEARCH)){
+                        gc.drawImage(research,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                    } else if(resource.equals(ResourceType.EMPTY)){
+                        // nothing extra to render
+                    }
+                    */
                 }
                 else {
                     if(current.equals(TerrainType.GRASS)){
@@ -261,11 +287,45 @@ public class AreaViewPortController{
                         //System.out.print(" WATER ");
                         gc.drawImage(water,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
                     }
+
+                    /* Turning OFF resource rendering since we are going to have to change it completly
+                    if(resource.equals(ResourceType.CATFOOD)){
+                        gc.drawImage(catFood,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                    } else if(resource.equals(ResourceType.CRYSTAL)){
+                        gc.drawImage(crystal,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                    } else if(resource.equals(ResourceType.RESEARCH)){
+                        gc.drawImage(research,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                    } else if(resource.equals(ResourceType.EMPTY)){
+                        // nothing extra to render
+                    }
+                    */
                 }
             }
-            //System.out.println();
         }
-       // System.out.println("---------------");
+        // after the map is rendered, we want to draw any units
+        ArrayList<UnitRenderObject> unitData = unitRenderInformation.returnRenderInformation();
+        for(int i=0; i<unitData.size(); i++ ){
+            int x = unitData.get(i).getLocationX();
+            int y = unitData.get(i).getLocationY();
+            if(x%2 == 0){
+                if(unitData.get(i).getIdType().equals(IdType.EXPLORER)){
+                    gc.drawImage(explorer,0.75*width*x+ cameraX,height*1*-y+ cameraY + width*0.45);
+                } else if (unitData.get(i).getIdType().equals(IdType.COLONIST)){
+                    gc.drawImage(colonist,0.75*width*x+ cameraX,height*1*-y+ cameraY + width*0.45);
+                }
+
+            } else {
+                if(unitData.get(i).getIdType().equals(IdType.EXPLORER)){
+                    gc.drawImage(explorer,0.75*width*x+ cameraX,height*1*-y+ cameraY+height);
+                }else if (unitData.get(i).getIdType().equals(IdType.COLONIST)){
+                    gc.drawImage(colonist,0.75*width*x+ cameraX,height*1*-y+ cameraY+height);
+                }
+            }
+
+
+
+        }
+
         drawSelection();
     }
 }
