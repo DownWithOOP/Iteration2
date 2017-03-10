@@ -3,6 +3,7 @@ package utilities.ObserverInterfaces;
 
 import model.RenderInformation.MapRenderInformation;
 import model.RenderInformation.StructureRenderInformation;
+import model.RenderInformation.TileRenderObject;
 import model.RenderInformation.UnitRenderInformation;
 
 /**
@@ -11,5 +12,5 @@ import model.RenderInformation.UnitRenderInformation;
 public interface MapObserver {
     void update(int playerNumber, MapRenderInformation mapRenderInformation, UnitRenderInformation unitRenderInformation, StructureRenderInformation structureRenderInformation);
     MapRenderInformation share();
-    int[][] getPlayerXFogOfWarMap(int playerNumber);
+    TileRenderObject[][] getPlayerXRenderMap(int playerNumber);
 }

@@ -1,6 +1,7 @@
 package model;
 
 import model.map.Map;
+import model.player.Player;
 import utilities.ObserverInterfaces.MapObserver;
 import utilities.ObserverInterfaces.StatusObserver;
 import utilities.ObserverInterfaces.StructureObserver;
@@ -21,16 +22,16 @@ public class GameModel {
         // we create the master map
         this.masterMap = initializeMap();
         // right now just for 2 players, we give them the starting locations of their units
-        // current map is 24 wide(x), and 12 high (y)
+        // current map is 36 wide(x), and 16 high (y)
         // first player will start at  (6,4)
-        // second player will start at (17,7)
+        // second player will start at (24,10)
 
         for (int i = 0; i < numberOfPlayers; i++) {
             Player temp;
             if(i ==0){ // player 1
                 temp = new Player(1,masterMap,observer, unitObserver, structureObserver, statusObserver, 6,4); // TODO, give players unique maps
             } else if( i== 1){
-                temp = new Player(2,masterMap,observer, unitObserver, structureObserver, statusObserver, 17,7); // TODO, give players unique maps
+                temp = new Player(2,masterMap,observer, unitObserver, structureObserver, statusObserver, 24,10); // TODO, give players unique maps
             } else {
                 temp = new Player(i+1,masterMap,observer, unitObserver, structureObserver, statusObserver, 0,0); // TODO give players unique maps
             }
@@ -38,7 +39,6 @@ public class GameModel {
         }
         // when game starts, player 1 is starting
         this.activePlayerIndex = 0;
-        System.out.println("-------------------------------------------");
         playersList[activePlayerIndex].startTurn();
     }
 
