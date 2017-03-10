@@ -20,6 +20,7 @@ import utilities.ObserverInterfaces.StatusObserver;
 import utilities.ObserverInterfaces.StructureObserver;
 import utilities.ObserverInterfaces.UnitObserver;
 import view.AreaViewport;
+import view.MiniMap;
 import view.StatusViewport;
 
 import java.io.IOException;
@@ -43,6 +44,8 @@ public class MainViewController extends Controller{
     @FXML
     VBox vbox;
     @FXML
+    Canvas MinMap;
+    @FXML
     Label modeLabel;
     @FXML
     Label typeLabel;
@@ -61,6 +64,7 @@ public class MainViewController extends Controller{
     @FXML
     MenuItem energyOverlay;
 
+
     private Map currentMap;
     private AreaViewport areaViewport;
     private StatusViewport statusViewport;
@@ -69,6 +73,8 @@ public class MainViewController extends Controller{
     private StructureObserver structureObserver;
     private StatusObserver statusObserver;
     private java.util.Map<String, Label> cycleLabels = new HashMap<>();
+    private SwitchControllerRelay switchControllerRelay;
+    private MiniMap miniMap;
 
     public MainViewController(){
         super();
@@ -81,11 +87,9 @@ public class MainViewController extends Controller{
         this.statusObserver = statusObserver;
     }
 
-    private SwitchControllerRelay switchControllerRelay;
-
-        public void takeInSwitchControllerRelay(SwitchControllerRelay switchControllerRelay){
-            this.switchControllerRelay = switchControllerRelay;
-        }
+    public void takeInSwitchControllerRelay(SwitchControllerRelay switchControllerRelay){
+        this.switchControllerRelay = switchControllerRelay;
+    }
 
     @Override
     protected void enableKeyboardInput() {
@@ -230,9 +234,10 @@ public class MainViewController extends Controller{
         cycleLabels.put("type", typeLabel);
         cycleLabels.put("instance", instanceLabel);
         cycleLabels.put("command", commandLabel);
-
-        this.areaViewport = new AreaViewport(vbox, canvas);
+        this.miniMap = new MiniMap(MinMap);
+        this.areaViewport = new AreaViewport(vbox, canvas, miniMap);
         this.statusViewport = new StatusViewport(cycleLabels);
+
     }
 
 }

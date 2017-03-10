@@ -14,6 +14,8 @@ import model.map.tile.resources.Resource;
 import model.map.tile.resources.ResourceType;
 import model.map.tile.terrain.TerrainType;
 import org.omg.CORBA.IDLType;
+import utilities.ObserverInterfaces.MiniMapObserver;
+import utilities.ObserverInterfaces.MiniMapSubject;
 import utilities.id.IdType;
 import view.utilities.Assets;
 
@@ -25,7 +27,7 @@ import java.util.List;
  * Created by Konrad on 3/1/2017.
  */
 // this will be control the canvas area that is used to display the areaViewport
-public class AreaViewport {
+public class AreaViewport implements MiniMapSubject{
 
     private double cameraX;
     private double cameraY;
@@ -47,6 +49,7 @@ public class AreaViewport {
     private int fastCameraSpeed;
     private int slowCameraSpeed;
     private TileRenderObject[][] renderData;
+    private ArrayList<MiniMapObserver> miniMapObservers= new ArrayList<MiniMapObserver>();
 
     Image grass = Assets.getInstance().GRASS;
     Image water = Assets.getInstance().WATER;
@@ -59,15 +62,17 @@ public class AreaViewport {
     Image colonist = Assets.getInstance().COLONIST;
     Image explorer = Assets.getInstance().EXPLORER;
 
-    public AreaViewport(VBox vbox, Canvas canvas){
+    public AreaViewport(VBox vbox, Canvas canvas, MiniMap miniMap){
+
+        registerStatusObserver(miniMap);
         this.cameraX = -200; // default camera shift/starting position
         this.cameraY = 500; // default camera shift/starting position
         this.vBox = vbox;
         this.canvas = canvas;
-        this.slowCameraSpeed = 5;
+        this.slowCameraSpeed = 16;
         this.fastCameraSpeed = 31;
 
-        this.cameraSpeed = 21;
+        this.cameraSpeed = 41;
         this.selectX = 6; // starting X of selected tile
         this.selectY = 6; // starting Y of selected tile
         this.alteranteColumn = true;
@@ -81,11 +86,11 @@ public class AreaViewport {
                         this.cameraSpeed = slowCameraSpeed;
                         changeCameraXPlus();
                     }
-                    if (event.getSceneY() < 200){ // move up slow
+                    if (event.getSceneY() < 100){ // move up slow
                         this.cameraSpeed = slowCameraSpeed;
                         changeCameraYPlus();
                     }
-                    if(event.getSceneY() > 400){ // move down slow
+                    if(event.getSceneY() > 500){ // move down slow
                         this.cameraSpeed = slowCameraSpeed;
                         changeCameraYMinus();
                     }
@@ -103,15 +108,15 @@ public class AreaViewport {
         }
     }
     public void changeCameraYPlus(){
-        if(cameraY + cameraSpeed > 960){
-            this.cameraY = 960;
+        if(cameraY + cameraSpeed > 1330){
+            this.cameraY = 1330;
         } else {
             this.cameraY += cameraSpeed;
         }
     }
     public void changeCameraXMinus(){
-        if(cameraX-cameraSpeed < -600){
-            this.cameraX = -600;
+        if(cameraX-cameraSpeed < -1500){
+            this.cameraX = -1500;
         } else {
             this.cameraX -= cameraSpeed;
         }
@@ -133,6 +138,7 @@ public class AreaViewport {
         this.gridSizeX = renderData.length;
         this.gridSizeY = renderData[0].length;
         updateCanvas();
+        notifyObservers(); // update mini map
 
     }
 
@@ -305,8 +311,6 @@ public class AreaViewport {
                         // TODO greyed out area
 
 
-
-
                     } else{
                         // must be 2, fully visible display everything that is there
                         TerrainType type = render.getTerrainType();
@@ -393,5 +397,22 @@ public class AreaViewport {
 
 
        drawSelection();
+    }
+
+    @Override
+    public void registerStatusObserver(MiniMapObserver o) {
+            miniMapObservers.add(o);
+    }
+
+    @Override
+    public void unregister(MiniMapObserver o) {
+            miniMapObservers.remove(o);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for(MiniMapObserver observer : miniMapObservers){
+            observer.update((int)(cameraX),(int)(cameraY),0,0,renderData);
+        }
     }
 }

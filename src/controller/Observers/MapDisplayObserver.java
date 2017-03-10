@@ -16,6 +16,7 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
     private int mapSizeX;
     private int mapSizeY;
     private boolean initialized = false;
+    private boolean allVisible = false; // FOR DEBUGGING ONLY, TURN ON IF NEED BE TO SEE EVERYTHING
 
     public MapDisplayObserver(int numberOfPlayers){
         this.numberOfPlayers = numberOfPlayers;
@@ -61,8 +62,13 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
                 if(check.getVisibilityLevel() == 2){
                     check.setVisibilityToOne();
                 }
+                if(allVisible){ // sets everything to visible
+                    check.setVisibilityTwo();
+                }
             }
         }
+
+
 
         // now we go through each of the units
         ArrayList<UnitRenderObject> playerUnitData = unitRenderInformation.returnRenderInformation();
@@ -91,6 +97,22 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
             }
         }
             // structures can wait for later
+
+        if(allVisible){
+            for(int i=0; i<mapSizeX; i++){
+                for(int j=0; j<mapSizeY; j++){
+                    userData[i][j].setTerrainType(mapInfo[i][j].getTerrainType());
+                    userData[i][j].setVisibilityTwo();
+                    if(mapInfo[i][j].getResources().size() != 3){
+                        // all set to 0
+                    } else {
+                        userData[i][j].setFoodAmount(mapInfo[i][j].getResources().get(2).getLevel());
+                        userData[i][j].setEnergyAmount(mapInfo[i][j].getResources().get(0).getLevel());
+                        userData[i][j].setOreAmount(mapInfo[i][j].getResources().get(1).getLevel());
+                    }
+                }
+            }
+        }
 
     }
 
