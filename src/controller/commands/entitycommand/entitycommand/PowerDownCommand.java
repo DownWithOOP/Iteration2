@@ -8,7 +8,7 @@ import model.entities.Entity;
  */
 public class PowerDownCommand extends EntityCommand {
     public PowerDownCommand(Entity entity) {
-        super(entity, 2);
+        super(entity, 1);
     }
 
     @Override
