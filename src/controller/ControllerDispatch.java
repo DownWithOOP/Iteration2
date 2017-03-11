@@ -49,7 +49,6 @@ public class ControllerDispatch {
     public void handleCommandActivation() {
         Entity selectedInstance = (Entity) gameModel.getActivePlayer().getCurrentInstance();
         CommandType selectedCommandType = gameModel.getActivePlayer().getCurrentCommandType();
-        System.out.println("controller dispatch says that command is " + selectedCommandType);
         System.out.println("Added to Queue: " + selectedCommandType.toString());
         switch(selectedCommandType) {
             case DISBAND:

@@ -2,7 +2,7 @@ package model.RenderInformation;
 
 import controller.availablecommands.Commandable;
 import controller.commands.CommandType;
-import model.Mode;
+import model.cycling.modes.Mode;
 
 /**
  * Created by Jonathen on 3/6/2017.
