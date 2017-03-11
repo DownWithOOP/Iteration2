@@ -68,6 +68,26 @@ public class StructureViewController extends Controller{
 
     }
 
+    @Override
+    public void moveLeft() {
+        System.out.println("Cannot move left in StructureView");
+    }
+
+    @Override
+    public void moveUp() {
+        System.out.println("Cannot move up in StructureView");
+    }
+
+    @Override
+    public void moveRight() {
+        System.out.println("Cannot move right in StructureView");
+    }
+
+    @Override
+    public void moveDown() {
+        System.out.println("Cannot move down in StructureView");
+    }
+
     @FXML
     private Stage getStage() {
         Stage stage = (Stage) ap.getScene().getWindow();

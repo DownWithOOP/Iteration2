@@ -8,27 +8,20 @@ public class Resource {
     private ResourceType resourceType;
     private int level;
 
-    public Resource(ResourceType resourceType){
+    public Resource(ResourceType resourceType, int level){
        this.resourceType = resourceType;
-       this.level = 100;
+       this.level = level;
     }
 
     public ResourceType getResourceType(){
         return resourceType;
     }
 
-    // Lowers resource level and returns amount of resource mined
-    public int mineResource() {
-        int mined = (int)Math.random()*100;
-        if (level - mined > 0) {
-            level -= mined;
-            return mined;
-        }
-        else {
-            int temp = level;
-            level = 0;
-            return temp;
-        }
+    //consumes some resource
+    public int consumeResource(double percent){
+        int amount = (int) (level*percent);
+        level = level - amount;
+        return amount;
     }
 
     public int getLevel() {

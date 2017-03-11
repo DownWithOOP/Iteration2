@@ -123,14 +123,17 @@ public class UnitViewController extends Controller
                     ((Label) (vb.getChildren().get(selectedUnit))).setTextFill(Color.BLUE);
 
                     // update the stats textArea with information pertaining to the selected unit
-                    this.stats.setText("\t\t\tUnit Number: " + i +
-                            "\n Health:  " + unitStats.getHealth() +
-                            "\n DefensiveDamage: " + unitStats.getDefensiveDamage() +
-                            "\n Movement: " + unitStats.getMovement() +
-                            "\n Range: " + unitStats.getRange() +
-                            "\n Armor: " + unitStats.getArmor() +
-                            "\n Offesnisve Damage: " + unitStats.getOffensiveDamage() +
-                            "\n Upkeep: " + unitStats.getUpkeep());
+
+//                    this.stats.setText("\t\t\tUnit Number: " + i +
+//                            "\n Health:  " + unitStats.getHealth() +
+//                            "\n DefensiveDamage: " + unitStats.getDefensiveDamage() +
+//                            "\n Movement: " + unitStats.getMovement() +
+//                            "\n Range: " + unitStats.getRange() +
+//                            "\n Armor: " + unitStats.getArmor() +
+//                            "\n Offesnisve Damage: " + unitStats.getOffensiveDamage() +
+//                            "\n Upkeep: " + unitStats.getUpkeep());
+                    this.stats.setText("\t\t\tUnit Number: " + i + unitStats.getStatsString());
+
 
                     // update unit information with info regardin the particular unit
                     this.mission.setText("\t\tUnit Number: " + i +
@@ -141,6 +144,27 @@ public class UnitViewController extends Controller
             pane.setContent(vb);
             this.hashcode = data.hashCode();
         }
+    }
+
+
+    @Override
+    public void moveLeft() {
+        System.out.println("Cannot move left in UnitView");
+    }
+
+    @Override
+    public void moveUp() {
+        System.out.println("Cannot move up in UnitView");
+    }
+
+    @Override
+    public void moveRight() {
+        System.out.println("Cannot move right in UnitView");
+    }
+
+    @Override
+    public void moveDown() {
+        System.out.println("Cannot move down in UnitView");
     }
 
     public void setObservers(UnitObserver unitObserver){

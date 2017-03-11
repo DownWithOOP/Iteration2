@@ -7,16 +7,24 @@ import model.entities.unit.Unit;
  * Created by jordi on 3/1/2017.
  */
 public class AdvanceToRallyPointCommand extends UnitCommand{
-    int number;
+
+    private int number;
 
     public AdvanceToRallyPointCommand(Unit unit, int number) {
-        super(unit);
+        super(unit, 1);
         this.number=number;
     }
 
+    public int getNumber() {
+        return number;
+    }
 
     @Override
-    public void execute() {
-        unit.advanceToRallyPoint(number);
+    public boolean execute() {
+        if(super.execute()) {
+            getUnit().advanceToRallyPoint(getNumber());
+            return true;
+        }
+        return false;
     }
 }

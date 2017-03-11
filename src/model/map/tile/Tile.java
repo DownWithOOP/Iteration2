@@ -3,11 +3,16 @@ package model.map.tile;
 import model.map.tile.areaeffects.AreaEffect;
 import model.map.tile.item.Item;
 import model.map.tile.resources.Resource;
+import model.map.tile.resources.ResourceType;
 import model.map.tile.terrain.Terrain;
 import model.map.tile.terrain.TerrainType;
 import utilities.Observer;
 import utilities.Subject;
 import utilities.id.CustomID;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by cduica on 2/21/17.
@@ -21,15 +26,16 @@ public class Tile implements Subject {
     private Terrain terrain;
     private AreaEffect areaEffect;
     private CustomID entityID;
-    private Resource resource;
+    private List<Resource> resources;
     private Item item;
 
-    public Tile(Terrain terrain, AreaEffect areaEffect, Resource resource, Item item) {
+    public Tile(Terrain terrain, AreaEffect areaEffect, List<Resource> resources, Item item) {
         this.terrain = terrain;
         this.areaEffect = areaEffect;
-        this.resource = resource;
+        this.resources = resources;
         this.item = item;
         this.isVisible = false;
+        this.isPassable = terrain.isPassable();
     }
 
     /**
@@ -75,8 +81,18 @@ public class Tile implements Subject {
         return entityID;
     }
 
-    public Resource getResource() {
-        return resource;
+    public List<Resource> getResources() {
+        return resources;
+    }
+
+    public List<ResourceType> getResourceTypes() {
+        List<ResourceType> resourceTypes = new ArrayList<>();
+
+        for(int i = 0; i < resources.size(); i++){
+            resourceTypes.add(resources.get(i).getResourceType());
+        }
+
+        return resourceTypes;
     }
 
     public Item getItem() {

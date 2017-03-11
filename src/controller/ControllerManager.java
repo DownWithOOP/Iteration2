@@ -1,6 +1,6 @@
 package controller;
 
-import controller.Observers.MapObserver;
+import controller.Observers.MapDisplayObserver;
 import controller.ingamecontrollertypes.ControllerType;
 import controller.ingamecontrollertypes.MainViewController;
 import controller.ingamecontrollertypes.StructureViewController;
@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import utilities.ObserverInterfaces.StatusObserver;
 import utilities.ObserverInterfaces.StructureObserver;
 import utilities.ObserverInterfaces.UnitObserver;
 
@@ -29,19 +30,22 @@ public class ControllerManager {
     // it will be done here
     private SwitchControllerRelay switchControllerRelay;
     private ControllerDispatch controllerDispatch;
-    private MapObserver mapObserver;
+    private MapDisplayObserver mapDisplayObserver;
     private UnitObserver unitObserver;
     private StructureObserver structureObserver;
+    private StatusObserver statusObserver;
     private GameLoop timer;
 
-    public ControllerManager(ControllerDispatch controllerDispatch, Stage primaryStage, MapObserver mapObserver, UnitObserver unitObserver, StructureObserver structureObserver) throws IOException {
+    public ControllerManager(ControllerDispatch controllerDispatch, Stage primaryStage, MapDisplayObserver mapDisplayObserver, UnitObserver unitObserver,
+                             StructureObserver structureObserver, StatusObserver statusObserver) throws IOException {
 
         // primary stage that is essentially the window
         this.primaryStage = primaryStage;
         this.activeController = this.controllerMap.get(ControllerType.welcomeViewController);
-        this.mapObserver = mapObserver;
+        this.mapDisplayObserver = mapDisplayObserver;
         this.unitObserver = unitObserver;
         this.structureObserver = structureObserver;
+        this.statusObserver = statusObserver;
 
         // used for communication between the inputReconginzers and the controllerManager when a controller needs to be switched
         switchControllerRelay = new SwitchControllerRelay(this);
@@ -58,6 +62,7 @@ public class ControllerManager {
     }
 
     public void switchControllers(Controller newActiveController) {
+        controllerDispatch.updateActiveController(newActiveController); // need up-to-date controller to pass commands to
         timer.updateController(newActiveController); // will can render() in new active Controller
     }
 
@@ -73,10 +78,12 @@ public class ControllerManager {
         inputController.enableKeyboardInput();
         inputController.setDispatch(controllerDispatch);
         MainViewController temp =  (MainViewController)inputController; // Sketchy but we have to downCast to the MainView Controller type
-        temp.setObservers(mapObserver,unitObserver,structureObserver);
+        temp.setObservers(mapDisplayObserver,unitObserver,structureObserver, statusObserver);
         this.activeController = temp;
         if(timer == null){
             // start of game, don't call yet
+            // at start of game, controller dispatch needs to know initial controller to talk to - JS
+            controllerDispatch.updateActiveController(temp);
         } else {
             switchControllers(temp);
         }

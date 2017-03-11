@@ -1,6 +1,7 @@
 package model.entities.structure;
 
 import model.entities.EntityType;
+import model.entities.Stats.StaffedStructureStats;
 import model.entities.Stats.Stats;
 import model.entities.Stats.StructureStats;
 import model.entities.UnitFactory;
@@ -11,7 +12,7 @@ import utilities.id.IdType;
 /**
  * Created by jordi on 2/24/2017.
  */
-public class Capital extends Structure {
+public class Capital extends StaffedStructure {
     private UnitFactory unitFactory;
     private StructureStats capitalStats;
 
@@ -36,7 +37,7 @@ public class Capital extends Structure {
 
     @Override
     protected Stats setEntityStats() {
-        return new StructureStats(0,0,0,0,0);
+        return new StaffedStructureStats(0,0,0,0,0,0);
     }
 
 

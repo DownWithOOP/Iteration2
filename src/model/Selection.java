@@ -2,6 +2,7 @@ package model;
 
 import controller.availablecommands.Commandable;
 import controller.commands.Command;
+import controller.commands.CommandType;
 
 /**
  * Created by Jonathen on 2/25/2017.
@@ -14,7 +15,11 @@ public class Selection {
     }
 
     Commandable selectedCommandable;
-    Command selectedCommand;
+    CommandType selectedCommand;
+
+    public void updateSelectedCommand(CommandType newCommand) {
+        selectedCommand = newCommand;
+    }
 
     public void updateSelectedCommandable(Commandable newCommandable){
         selectedCommandable = newCommandable;

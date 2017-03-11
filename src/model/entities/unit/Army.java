@@ -6,6 +6,7 @@ import model.RallyPoint;
 import model.entities.Entity;
 import model.entities.EntityId;
 import model.entities.Fighter;
+import model.entities.Stats.FighterUnitStats;
 import model.entities.Stats.Stats;
 import model.entities.Stats.UnitStats;
 import utilities.id.CustomID;
@@ -17,6 +18,7 @@ import java.util.HashMap;
 /**
  * Created by jordi on 2/24/2017.
  */
+//TODO: Tailor some of these methods for when a worker unit joins an army
 public class Army extends Entity implements Fighter {
 
     HashMap<EntityId, Unit> reinforcements = new HashMap<>();
@@ -63,7 +65,7 @@ public class Army extends Entity implements Fighter {
 
     @Override
     protected Stats setEntityStats() {
-        return new UnitStats(0, 0, 0, 0, 0, 0, 0, 0);
+        return new FighterUnitStats(0, 0, 0, 0, 0, 0, 0, 0);
     }
 
     public void disband() {
@@ -81,7 +83,7 @@ public class Army extends Entity implements Fighter {
 
     public void registerUnit(Unit unit) {
         EntityId unitId = unit.getEntityId();
-        UnitStats unitStats = unit.getUnitStats();
+        FighterUnitStats unitStats = (FighterUnitStats) unit.getUnitStats();
         int attack = unitStats.getOffensiveDamage();
 
         int defense = unitStats.getDefensiveDamage();
@@ -103,7 +105,7 @@ public class Army extends Entity implements Fighter {
 
     public void removeUnit(Unit unit) {
         EntityId unitId = unit.getEntityId();
-        UnitStats unitStats = unit.getUnitStats();
+        FighterUnitStats unitStats = (FighterUnitStats) unit.getUnitStats();
 
         int attack = unitStats.getOffensiveDamage() * (-1);
 
@@ -141,21 +143,21 @@ public class Army extends Entity implements Fighter {
     }
 
     private void setBattleGroupAttackPower(int offensiveDmg) {
-        int currentAttackPower = ((UnitStats) entityStats).getOffensiveDamage();
+        int currentAttackPower = ((FighterUnitStats) entityStats).getOffensiveDamage();
         currentAttackPower += offensiveDmg;
-        ((UnitStats) entityStats).setOffensiveDamage(currentAttackPower);
+        ((FighterUnitStats) entityStats).setOffensiveDamage(currentAttackPower);
     }
 
     private void setBattleGroupDefensePower(int defensiveDmg) {
-        int currentDefensivePower = ((UnitStats) entityStats).getDefensiveDamage();
+        int currentDefensivePower = ((FighterUnitStats) entityStats).getDefensiveDamage();
         currentDefensivePower += defensiveDmg;
-        ((UnitStats) entityStats).setDefensiveDamage(currentDefensivePower);
+        ((FighterUnitStats) entityStats).setDefensiveDamage(currentDefensivePower);
     }
 
     private void setBattleGroupHealth(int health) {
-        int currentHealth = entityStats.getHealth();
-        currentHealth += health;
-        entityStats.setHealth(currentHealth);
+       // int currentHealth = entityStats.getHealth();
+       // currentHealth += health;
+       // entityStats.setHealth(currentHealth);
     }
 
     private void setBattleGroupMovementSpeed() {

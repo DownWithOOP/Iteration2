@@ -1,5 +1,6 @@
 package model.map;
 
+import jdk.management.resource.ResourceContext;
 import model.common.Location;
 import model.RenderInformation.MapRenderInformation;
 import model.map.tile.Tile;
@@ -16,6 +17,7 @@ import utilities.Observer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by cduica on 2/21/17.
@@ -66,7 +68,11 @@ public class Map {
         width = Integer.parseInt(mapXMLParser.getMapAttribute("width"));
 
         ArrayList<HashMap<String, String>> tileList = mapXMLParser.parseDocument();
+        constructTiles(tileList, height, width);
 
+    }
+
+    public void constructTiles(ArrayList<HashMap<String, String>> tileList, int width, int height){
         AreaEffectFactory areaEffectFactory = new AreaEffectFactory();
 
         int x = 0;
@@ -76,34 +82,42 @@ public class Map {
         for(int i = 0; i < tileList.size(); i++){
 
             HashMap<String , String > map = tileList.get(i);
-            ResourceType resourceType = ResourceType.EMPTY;
-            DecalType decalType = DecalType.EMPTY;
-            TerrainType terrainType = TerrainType.EMPTY;
-            AreaEffectType areaEffectType = AreaEffectType.EMPTY;
+            List<Resource> resources = new ArrayList<>();
 
-            if (!map.get("Resource").equals("")) {
-                resourceType = ResourceType.valueOf(map.get("Resource"));
+            int energyLevel = 0;
+            int oreLevel = 0;
+            int foodLevel = 0;
+
+            if (!map.get("Energy").equals("")) {
+                energyLevel = Integer.parseInt(map.get("Energy"));
+                resources.add(new Resource(ResourceType.ENERGY, energyLevel));
             }
-            if (!map.get("Terrain").equals("")) {
-                terrainType = TerrainType.valueOf(map.get("Terrain"));
+            if (!map.get("Ore").equals("")) {
+                oreLevel = Integer.parseInt(map.get("Ore"));
+                resources.add(new Resource(ResourceType.ORE, oreLevel));
             }
-            if (!map.get("Decal").equals("")) {
-                decalType = DecalType.valueOf(map.get("Decal"));
+            if (!map.get("Food").equals("")) {
+                foodLevel = Integer.parseInt(map.get("Food"));
+                resources.add(new Resource(ResourceType.FOOD, foodLevel));
             }
-            if (!map.get("AreaEffect").equals("")){
-                areaEffectType = AreaEffectType.valueOf(map.get("AreaEffect"));
-            }
+
+            TerrainType terrainType = !map.get("Terrain").equals("") ? TerrainType.valueOf(map.get("Terrain")) : TerrainType.EMPTY;
+            DecalType decalType = !map.get("Decal").equals("") ? DecalType.valueOf(map.get("Decal")) : DecalType.EMPTY;
+            AreaEffectType areaEffectType = !map.get("AreaEffect").equals("") ? AreaEffectType.valueOf(map.get("AreaEffect")) : AreaEffectType.EMPTY;
+
             AreaEffect areaEffect = areaEffectFactory.createAreaEffect(areaEffectType);
 
             Tile tile = new Tile(
                     new Terrain(terrainType, decalType),
                     areaEffect,
-                    new Resource(resourceType),
+                    resources,
                     null
             );
 
             System.out.println("x: " + x+ " y: " +y);
-            Location location = new Location(y, x);
+
+            Location location = new Location(x, y);
+
             //Point2D location = new Point2D(x, y);
 
             if( y!=0 && y % (width - 1) == 0){

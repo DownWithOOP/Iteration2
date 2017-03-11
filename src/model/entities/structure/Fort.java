@@ -1,6 +1,7 @@
 package model.entities.structure;
 
 import model.entities.EntityType;
+import model.entities.Stats.FortStats;
 import model.entities.UnitFactory;
 import model.entities.unit.Unit;
 import model.entities.Stats.Stats;
@@ -11,7 +12,7 @@ import utilities.id.IdType;
 /**
  * Created by jordi on 2/24/2017.
  */
-public class Fort extends Structure {
+public class Fort extends StaffedStructure {
     private UnitFactory unitFactory;
 
     public Fort(CustomID playerId, String id, int locationX, int locationY) {
@@ -34,7 +35,7 @@ public class Fort extends Structure {
 
     @Override
     protected Stats setEntityStats() {
-        return new StructureStats(0,0,0,0,0);
+        return new FortStats(0,0,0,0,0,0,0,0);
     }
 
     @Override

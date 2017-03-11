@@ -9,7 +9,7 @@ import controller.commands.entitycommand.armycommand.DefendCommand;
 import controller.commands.entitycommand.cursorcommand.MoveCommand;
 import controller.commands.entitycommand.entitycommand.PowerDownCommand;
 import controller.commands.entitycommand.entitycommand.PowerUpCommand;
-import controller.commands.entitycommand.unitcommand.AbandonArmy;
+import controller.commands.entitycommand.unitcommand.AbandonArmyCommand;
 import controller.commands.entitycommand.unitcommand.AdvanceToRallyPointCommand;
 import controller.commands.entitycommand.unitcommand.JoinArmyCommand;
 import model.Cursor;
@@ -32,13 +32,17 @@ public class CommandFactory {
     static final private HashMap<CommandType, ActionableCommandWrapperEntity> actionableCommandNumber = new HashMap<>();
 
     static {
-        simpleCommandResult.put(CommandType.DECOMISSION, (commandable) -> (new DecommissionCommand((Entity) commandable)));
+
+        simpleCommandResult.put(CommandType.DECOMMISSION, (commandable) -> (new DecommissionCommand((Entity) commandable)));
         simpleCommandResult.put(CommandType.CANCEL_QUEUE, (commandable) -> (new CancelQueueCommand((Entity) commandable)));
         simpleCommandResult.put(CommandType.POWER_UP, (commandable) -> (new PowerUpCommand((Entity) commandable)));
         simpleCommandResult.put(CommandType.POWER_DOWN, (commandable) -> (new PowerDownCommand((Entity) commandable)));
 
         simpleCommandResult.put(CommandType.DISBAND, (commandable) -> (new DisbandCommand((Army) commandable)));
-        simpleCommandResult.put(CommandType.ABANDON_ARMY, (commandable) -> (new AbandonArmy((Unit) commandable)));
+        simpleCommandResult.put(CommandType.ABANDON_ARMY, (commandable) -> (new AbandonArmyCommand((Unit) commandable)));
+
+
+
 
 
         //cursor
@@ -123,15 +127,17 @@ public class CommandFactory {
         CustomID customID = new CustomID(IdType.PLAYER, "5");
 
         Melee melee = new Melee(customID, "6", 0, 0);
+
         Colonist colonist = new Colonist(customID, "6", 1, 1);
         Army army = new Army(customID, "6", 2, 2);
+
         RallyPoint rallyPoint = new RallyPoint(new Location(5, 6));
         Cursor cursor = new Cursor(new Location(5, 6));
 
         Command command;
         CommandFactory commandFactory = new CommandFactory();
 
-        command = commandFactory.createSimpleCommand(CommandType.DECOMISSION, melee);
+        command = commandFactory.createSimpleCommand(CommandType.DECOMMISSION, melee);
         command.execute();
 
         command = commandFactory.createSimpleCommand(CommandType.ABANDON_ARMY, colonist);

@@ -38,6 +38,26 @@ public class TechTreeController extends Controller {
 
     }
 
+    @Override
+    public void moveLeft() {
+        System.out.println("Cannot move left in TechnologyView");
+    }
+
+    @Override
+    public void moveUp() {
+        System.out.println("Cannot move up in TechnologyView");
+    }
+
+    @Override
+    public void moveRight() {
+        System.out.println("Cannot move right in TechnologyView");
+    }
+
+    @Override
+    public void moveDown() {
+        System.out.println("Cannot move down in TechnologyView");
+    }
+
     @FXML
     private Stage getStage() {
         Stage stage = (Stage) ap.getScene().getWindow();

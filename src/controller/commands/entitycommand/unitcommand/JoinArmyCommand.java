@@ -6,15 +6,24 @@ import model.entities.unit.Unit;
  * Created by jordi on 3/1/2017.
  */
 public class JoinArmyCommand extends UnitCommand{
-    int number;
+
+    private int number;
 
     public JoinArmyCommand(Unit unit, int number) {
-        super(unit);
+        super(unit, 1);
         this.number=number;
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     @Override
-    public void execute() {
-        unit.joinArmy(number);
+    public boolean execute() {
+        if(super.execute()) {
+            getUnit().joinArmy(getNumber());
+            return true;
+        }
+        return false;
     }
 }

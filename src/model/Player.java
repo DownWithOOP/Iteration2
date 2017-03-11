@@ -1,6 +1,7 @@
 package model;
 
 import controller.commands.CycleDirection;
+import model.player.EntityOwnership;
 import utilities.ObserverInterfaces.*;
 import model.map.Map;
 import utilities.id.CustomID;
@@ -96,7 +97,8 @@ public class Player implements MapSubject, UnitSubject, StructureSubject {
     @Override
     public void notifyMapObservers() { // IMPORTANT!! CALL THIS WHENEVER THE MAP IS UPDATED SO THE VIEW REFRESHES
         for(MapObserver mapObserver : mapObservers){
-            mapObserver.update(playerMap.returnRenderInformation());
+            //TODO: uncomment this- it was not working on master so i had to comment it
+//            mapObserver.update(playerMap.returnRenderInformation());
         }
     }
 

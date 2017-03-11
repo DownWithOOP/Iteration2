@@ -140,7 +140,7 @@ public class ActiveState {
         ActiveState.constructModifier(5);
         ActiveState.relayCommand(CommandType.JOIN_ARMY);
 
-        activeCommandType=CommandType.DECOMISSION;
+        activeCommandType=CommandType.DECOMMISSION;
         ActiveState.relayCommand(CommandType.SELECT);
 
         activeState.update(ranged);

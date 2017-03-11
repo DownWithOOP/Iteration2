@@ -9,15 +9,23 @@ import model.entities.unit.Army;
  */
 public class DefendCommand extends ArmyCommand{
 
-    Direction direction;
+    private Direction direction;
 
     public DefendCommand(Army army, Direction direction){
-        super(army);
+        super(army, 1);
         this.direction = direction;
     }
 
+    public Direction getDirection() {
+        return direction;
+    }
+
     @Override
-    public void execute() {
-        army.attack(direction);
+    public boolean execute() {
+        if(super.execute()) {
+            getArmy().attack(getDirection());
+            return true;
+        }
+        return false;
     }
 }

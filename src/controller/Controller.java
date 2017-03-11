@@ -20,6 +20,7 @@ public abstract class Controller implements Initializable {
     }
 
 
+
     /**
      * different controllers require different implementations
      * different procedures need to be resumed for each controller
@@ -34,4 +35,9 @@ public abstract class Controller implements Initializable {
 
     protected abstract void render();
 
+    //Methods for input of A, W, D, S, respectively
+    public abstract void moveLeft();
+    public abstract void moveUp();
+    public abstract void moveRight();
+    public abstract void moveDown();
 }

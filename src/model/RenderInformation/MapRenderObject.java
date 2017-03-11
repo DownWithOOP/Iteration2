@@ -1,23 +1,25 @@
 package model.RenderInformation;
 
-import model.map.tile.resources.ResourceType;
+import model.map.tile.resources.Resource;
 import model.map.tile.terrain.TerrainType;
+
+import java.util.List;
 
 /**
  * Created by Konrad on 3/3/2017.
  */
 public class MapRenderObject {
     private TerrainType terrainType;
-    private ResourceType resourceType;
+    private List<Resource> resources;
 
-    public MapRenderObject(TerrainType terrainType, ResourceType resourceType){
+    public MapRenderObject(TerrainType terrainType, List<Resource> resources){
         this.terrainType = terrainType;
-        this.resourceType = resourceType;
+        this.resources = resources;
     }
     public TerrainType getTerrainType(){
         return this.terrainType;
     }
-    public ResourceType getResourceType(){
-        return this.resourceType;
+    public List<Resource> getResources(){
+        return this.resources;
     }
 }
