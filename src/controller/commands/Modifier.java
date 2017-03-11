@@ -14,4 +14,9 @@ public class Modifier {
     public Modifier(int number){
         this.number=number;
     }
+
+    public boolean hasNonEmptyDirection(){
+
+        return direction!=null;
+    }
 }
