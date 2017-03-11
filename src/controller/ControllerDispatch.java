@@ -49,6 +49,7 @@ public class ControllerDispatch {
     public void handleCommandActivation() {
         Entity selectedInstance = (Entity) gameModel.getActivePlayer().getCurrentInstance();
         CommandType selectedCommandType = gameModel.getActivePlayer().getCurrentCommandType();
+        System.out.println("controller dispatch says that command is " + selectedCommandType);
         System.out.println("Added to Queue: " + selectedCommandType.toString());
         switch(selectedCommandType) {
             case DISBAND:
@@ -80,7 +81,11 @@ public class ControllerDispatch {
 
     //TODO: ASK  IF THIS WILL WORK WHEN THE PLAYERS ARE CHANGED
     private void setGameModelMap() {
-        commandHashMap.put(CommandType.END_TURN, () -> gameModel.endTurn() );
+        commandHashMap.put(CommandType.END_TURN, () -> {
+                                                            gameModel.endTurn();
+                                                            setGameModelMap();
+                                                            return true;
+                                                        });
         commandHashMap.put(CommandType.CYCLE_MODE_NEXT, new CycleModeNext(gameModel.getActivePlayer()));
         commandHashMap.put(CommandType.CYCLE_MODE_PREV, new CycleModePrev(gameModel.getActivePlayer()));
         commandHashMap.put(CommandType.CYCLE_TYPE_NEXT, new CycleTypeNext(gameModel.getActivePlayer()));

@@ -69,6 +69,8 @@ public class EntityOwnership {
         initializeStructures();
         changeMode(modes[cycleModeIndex]);
         this.playerId = playerId;
+
+        System.out.println("End of E.O. constructor; cycle type index is: " + cycleTypeIndex);
     }
 
     private void initializeStructures() {
@@ -398,6 +400,7 @@ public class EntityOwnership {
         renderInfo.updateTypeString(getCurrentType());
         renderInfo.updateInstanceString(getCurrentInstance());
         renderInfo.updateCommandString(getCurrentCommand());
+        System.out.println("return status info says that command is " + getCurrentCommand());
 
         return renderInfo;
     }
@@ -433,6 +436,10 @@ public class EntityOwnership {
             System.out.println("Instance list is empty");
             return null;
         }
+        System.out.println("cycle type index in getCommand " + cycleTypeIndex);
+        System.out.println("cycle instance index in getCommand " + cycleInstanceIndex);
+        System.out.println("cycle command index in getCommand " + cycleCommandIndex);
+        System.out.println("get current command says " + currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex).getEntityCommand(cycleCommandIndex));
         return currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex).getEntityCommand(cycleCommandIndex);
     }
 
