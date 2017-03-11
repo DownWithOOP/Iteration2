@@ -491,6 +491,7 @@ public class EntityOwnership {
         for (int i = 0; i < unitList.size(); i++) {
             for (int j = 0; j < unitList.get(i).size(); j++) {
                 unitList.get(i).get(j).executeQueue();
+                //TODO: Notify this method if createCapital command (or any create ___ command) is performed
             }
         }
         for (int i = 0; i < structureList.size(); i++) {

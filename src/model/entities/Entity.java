@@ -145,6 +145,10 @@ public abstract class Entity extends Commandable {
         return entityCommand;
     }
 
+    public Command getCurrentCommand() {
+        return currentCommand;
+    }
+
     @Override
     public String toString() { return entityId.toString();}
 
