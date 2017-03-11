@@ -80,6 +80,7 @@ public class ControllerDispatch {
     }
 
     //TODO: ASK  IF THIS WILL WORK WHEN THE PLAYERS ARE CHANGED
+    //^^^ it (should) work now :D - JS
     private void setGameModelMap() {
         commandHashMap.put(CommandType.END_TURN, () -> {
                                                             gameModel.endTurn();
