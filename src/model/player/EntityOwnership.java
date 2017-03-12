@@ -9,6 +9,7 @@ import model.Mode;
 import model.RallyPoint;
 import model.RenderInformation.*;
 import model.entities.Entity;
+import model.entities.EntityId;
 import model.entities.Stats.UnitStats;
 import model.entities.structure.Capital;
 import model.entities.structure.Structure;
@@ -16,10 +17,12 @@ import model.entities.unit.Colonist;
 import model.entities.unit.Explorer;
 import model.entities.unit.Melee;
 import model.entities.unit.Unit;
+import model.map.tile.resources.Resource;
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -37,6 +40,9 @@ public class EntityOwnership {
     List<List<Entity>> structureList;         //base=0
     List<List<Entity>> currentModeList;
     List<RallyPoint> rallyPointList;
+
+    //A list of all entities for lookup purposes
+    HashMap<EntityId, Entity> entities;
 
     Mode modes[] = Mode.values();
 
@@ -64,6 +70,7 @@ public class EntityOwnership {
         //armyList = new ArrayList<>(10);
         structureList = new ArrayList<>(1);
         rallyPointList= new ArrayList<>(20);
+        entities = new HashMap<>();
         initializeLists();
         initializeUnits(startingX, startingY);
         initializeStructures();
@@ -100,9 +107,10 @@ public class EntityOwnership {
         //TODO handle adding army
 
         returnValue = addStructure(entityType, entity);
-        if (returnValue == false) {
+        if (!returnValue) {
             returnValue = addUnit(entityType, entity);
         }
+        entities.put(entity.getEntityId(), entity);
         return returnValue;
     }
 
@@ -151,6 +159,13 @@ public class EntityOwnership {
         return returnValue;
     }
 
+    /**
+     *  This method distributes a resource to a particular entity
+     *  loooll
+     */
+    public void distributeResource(EntityId entityId, Resource resource){
+        entities.get(entityId);
+    }
 
     public static int next(int size, int index) {
 
@@ -365,6 +380,7 @@ public class EntityOwnership {
                 unitList.get(meleeIndex).remove(entity);
                 break;
         }
+        entities.remove(entity.getEntityId());
     }
 
     public UnitRenderInformation returnUnitRenderInformation() {

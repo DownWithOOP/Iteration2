@@ -9,6 +9,7 @@ import model.common.Location;
 import model.entities.Stats.Stats;
 import model.entities.unit.Melee;
 import model.entities.unit.Unit;
+import model.map.tile.resources.Resource;
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
@@ -18,6 +19,7 @@ import java.util.*;
  * Created by jordi on 2/24/2017.
  */
 public abstract class Entity extends Commandable {
+
     protected EntityId entityId;
     protected CustomID playerId;
     private Queue<Command> commandQueue = new ArrayDeque<>();
@@ -118,6 +120,10 @@ public abstract class Entity extends Commandable {
         }
 
     }
+
+    public abstract void receiveResource(Resource resource);
+
+    public abstract void consumeResources();
 
     public boolean isPoweredDown() {
         return isPoweredDown;

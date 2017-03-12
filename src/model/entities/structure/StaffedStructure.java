@@ -2,6 +2,7 @@ package model.entities.structure;
 
 import model.entities.Stats.Stats;
 import model.entities.Stats.StructureStats;
+import model.map.tile.resources.Resource;
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
@@ -9,6 +10,8 @@ import utilities.id.IdType;
  * Created by LesliesLaptop on 3/8/17.
  */
 public class StaffedStructure extends Structure {
+
+    private Resource foodResource;
 
     /**
      * @param playerId

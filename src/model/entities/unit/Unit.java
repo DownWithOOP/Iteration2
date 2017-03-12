@@ -5,6 +5,7 @@ import model.common.Location;
 import model.entities.Entity;
 import model.entities.Stats.Stats;
 import model.entities.Stats.UnitStats;
+import model.map.tile.resources.Resource;
 import utilities.id.CustomID;
 
 import java.util.ArrayList;
@@ -21,7 +22,8 @@ public abstract class Unit extends Entity {
 //        entityCommand.add(CommandType.ADVANCE_TO_RALLY_POINT);
 //        entityCommand.add(CommandType.JOIN_ARMY);
 //        entityCommand.add(CommandType.MOVE);
-//    }
+//
+    Resource foodResource;
 
     /**
      * @param playerId
@@ -35,6 +37,15 @@ public abstract class Unit extends Entity {
         addAllCommands(entityCommand);
     }
 
+    @Override
+    public void receiveResource(Resource resource) {
+        //TODO
+    }
+
+    @Override
+    public void consumeResources() {
+        //TODO
+    }
 
     public abstract void abandonArmy();
     public abstract void joinArmy(int armyNumber);

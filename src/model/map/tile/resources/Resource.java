@@ -24,6 +24,10 @@ public class Resource {
         return amount;
     }
 
+    public void addResource(int level){
+        this.level += level;
+    }
+
     public int getLevel() {
         return level;
     }
