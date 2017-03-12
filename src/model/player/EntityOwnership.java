@@ -8,6 +8,7 @@ import controller.commands.CycleDirection;
 import model.cycling.modes.Mode;
 import model.RallyPoint;
 import model.RenderInformation.*;
+import model.cycling.modes.ModeType;
 import model.entities.Entity;
 import model.entities.Stats.UnitStats;
 import model.entities.structure.Capital;
@@ -38,7 +39,7 @@ public class EntityOwnership {
     List<List<Entity>> currentModeList;
     List<RallyPoint> rallyPointList;
 
-    Mode modes[] = Mode.values();
+    ModeType modes[] = ModeType.values();
 
     int typeRestriction = 10;
     int unitCap = 25;
@@ -291,7 +292,7 @@ public class EntityOwnership {
         return changeMode(modes[cycleModeIndex]);
     }
 
-    private Entity changeMode(Mode currentMode) {
+    private Entity changeMode(ModeType currentMode) {
         resetIndices();
         switch (currentMode) {
             case ARMY:
@@ -501,7 +502,7 @@ public class EntityOwnership {
     //}
 
     //TODO get rid of this; only for debugging purposes...actually maybe not b/c view
-    public Mode getCurrentMode() {
+    public ModeType getCurrentMode() {
         return modes[cycleModeIndex];
     }
 
@@ -529,8 +530,8 @@ public class EntityOwnership {
 
         //TODO actually test army
         //TODO change into assert statements?
-        Entity entity = entityOwnership.changeMode(Mode.ARMY);
-        Entity entity1 = entityOwnership.changeMode(Mode.UNIT);
+        Entity entity = entityOwnership.changeMode(ModeType.ARMY);
+        Entity entity1 = entityOwnership.changeMode(ModeType.UNIT);
         System.out.println("currentmodelist after unit cycle" + entityOwnership.currentModeList);
         Melee entity2 = (Melee) entityOwnership.cycleInstance(CycleDirection.INCREMENT);
         System.out.println("returned entity after instance cycle" + entity2);
@@ -538,13 +539,13 @@ public class EntityOwnership {
         entity2 = (Melee) entityOwnership.cycleInstance(CycleDirection.INCREMENT);
         entity2 = (Melee) entityOwnership.cycleInstance(CycleDirection.INCREMENT);
         entity2 = (Melee) entityOwnership.cycleInstance(CycleDirection.DECREMENT);
-        entity = entityOwnership.changeMode(Mode.ARMY);
+        entity = entityOwnership.changeMode(ModeType.ARMY);
         entity = entityOwnership.cycleInstance(CycleDirection.INCREMENT);
         entity = entityOwnership.cycleInstance(CycleDirection.INCREMENT);
         entity = entityOwnership.cycleInstance(CycleDirection.INCREMENT);
         entity = entityOwnership.cycleInstance(CycleDirection.DECREMENT);
         entity = entityOwnership.cycleInstance(CycleDirection.INCREMENT);
-        entity = entityOwnership.changeMode(Mode.UNIT);
+        entity = entityOwnership.changeMode(ModeType.UNIT);
 
         entity1 = entityOwnership.cycleType(CycleDirection.DECREMENT);
         System.out.println("returned entity after type cycle decrement " + entity1);
@@ -555,7 +556,7 @@ public class EntityOwnership {
 
         entityOwnership.removeEntity(melee);
 
-        Entity enti3 = entityOwnership.changeMode(Mode.STRUCTURE);
+        Entity enti3 = entityOwnership.changeMode(ModeType.STRUCTURE);
 
         //entityOwnership.switchArmy(ActionModifiers.one); TODO test switch army
         System.out.println("check " + check);

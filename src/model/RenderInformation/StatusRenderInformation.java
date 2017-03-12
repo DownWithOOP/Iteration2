@@ -3,6 +3,7 @@ package model.RenderInformation;
 import controller.availablecommands.Commandable;
 import controller.commands.CommandType;
 import model.cycling.modes.Mode;
+import model.cycling.modes.ModeType;
 
 /**
  * Created by Jonathen on 3/6/2017.
@@ -25,7 +26,7 @@ public class StatusRenderInformation {
         commandString = "";
     }
 
-    public void updateModeString(Mode newMode) {
+    public void updateModeString(ModeType newMode) {
         modeString = newMode.toString();
     }
 

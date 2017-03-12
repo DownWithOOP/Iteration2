@@ -2,6 +2,7 @@ package model.cycling.iterators;
 
 import controller.commands.CommandType;
 import model.cycling.modes.*;
+import model.cycling.type.Type;
 import utilities.id.IdType;
 
 import java.util.Iterator;
@@ -32,7 +33,7 @@ public class ModeIterator {
 
     public Mode getCurrentMode() { return currentMode; }
 
-    public IdType getCurrentType() { return currentMode.getCurrentType(); }
+    public Type getCurrentType() { return currentMode.getCurrentType(); }
 
     public CommandType getCurrentCommand() { return currentMode.getCurrentCommand(); }
 

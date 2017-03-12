@@ -2,6 +2,7 @@ package model.cycling.modes;
 
 import controller.commands.CommandType;
 import model.cycling.iterators.TypeIterator;
+import model.cycling.type.Type;
 import utilities.id.IdType;
 
 /**
@@ -13,7 +14,7 @@ public abstract class Mode {
 
     protected Mode(TypeIterator typeItr) { this.typeItr = typeItr; }
 
-    public IdType getCurrentType() { return typeItr.getCurrentType(); }
+    public Type getCurrentType() { return typeItr.getCurrentType(); }
     public CommandType getCurrentCommand() { return typeItr.getCurrentCommand(); }
     @Override
     public abstract String toString();

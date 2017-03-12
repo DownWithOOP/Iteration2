@@ -6,5 +6,6 @@ package utilities.id;
 public enum IdType {
     ARMY, RANGED, COLONIST, EXPLORER, MELEE, WORKER,                                                //units
     CAPITAL, FARM, FORT, MINE, OBSERVATION_TOWER, POWER_PLANT, UNIVERSITY,                      //structures
+    RALLY_POINT,
     PLAYER
 }
