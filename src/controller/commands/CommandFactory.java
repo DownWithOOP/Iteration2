@@ -103,7 +103,7 @@ public class CommandFactory {
         Melee melee = new Melee(customID, "6", 0, 0);
         Colonist colonist = new Colonist(customID, "6", 1, 1);
         Army army = new Army(customID, "6", 2, 2);
-        RallyPoint rallyPoint = new RallyPoint(new Location(5, 6));
+        RallyPoint rallyPoint = new RallyPoint(new Location(5, 6),new Army(new CustomID(IdType.PLAYER,"hello"),"army",5,6));
         Cursor cursor = new Cursor(new Location(5, 6));
 
         Command command;

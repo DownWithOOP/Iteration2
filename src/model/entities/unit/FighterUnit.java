@@ -56,5 +56,5 @@ public class FighterUnit extends Unit {
 
     }
 
-    public FighterUnitStats getFighterUnitStats() { return ((FighterUnitStats)entityStats).clone();
+    public FighterUnitStats getFighterUnitStats() { return ((FighterUnitStats)entityStats).clone();}
 }

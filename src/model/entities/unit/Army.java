@@ -45,6 +45,7 @@ public class Army extends Entity implements Fighter {
     public Army(CustomID playerId, String id, int locationX, int locationY) {
         super(playerId, id, locationX, locationY);
         addAllCommands(armyCommand);
+        rallyPoint=new RallyPoint(getLocation(),this);
     }
 
     @Override

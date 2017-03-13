@@ -6,6 +6,7 @@ import controller.commands.modifiers.Modifier;
 import controller.commands.modifiers.ModifierType;
 import model.common.Location;
 import model.entities.structure.StructureType;
+import model.entities.unit.Army;
 import model.entities.unit.Ranged;
 import model.entities.unit.UnitType;
 import utilities.id.CustomID;
@@ -143,7 +144,7 @@ public class ActiveState {
 
         ActiveState.constructModifier(Direction.EAST);
         Commandable ranged = new Ranged(new CustomID(IdType.RANGED, "ranged"), "ranged", 5, 5);
-        RallyPoint rallyPoint = new RallyPoint(new Location(5, 5));
+        RallyPoint rallyPoint = new RallyPoint(new Location(5, 5), new Army(new CustomID(IdType.PLAYER,"hello"),"army",5,6));
         activeCommandable = rallyPoint;
         activeCommandType = CommandType.MOVE;
         ActiveState.relayCommand(CommandType.MOVE);

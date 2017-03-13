@@ -4,6 +4,7 @@ import controller.availablecommands.Commandable;
 import controller.commands.CommandType;
 import controller.commands.Direction;
 import model.common.Location;
+import model.entities.unit.Army;
 
 import java.lang.reflect.Array;
 import java.util.ArrayDeque;
@@ -15,6 +16,7 @@ import java.util.Queue;
  */
 public class RallyPoint extends Cursor {
     Queue<Location> path= new ArrayDeque<>();
+    Army army;
 
     static ArrayList<CommandType> rallyPointCommand= new ArrayList<>();
     static {
@@ -22,9 +24,10 @@ public class RallyPoint extends Cursor {
     }
 
 
-    public RallyPoint(Location location) {
+    public RallyPoint(Location location,Army army) {
         super(location);
         addAllCommands(rallyPointCommand);
+        this.army=army;
     }
 
     public void move(Direction direction){
@@ -35,7 +38,9 @@ public class RallyPoint extends Cursor {
 
     public void focus(){
         System.out.println("FOCUSED RALLY POINT!!!");
-        //Todo: send the path queue to the army
+        army.updatePathQueue(path);
+        //TODO:check if this will delete the queue on the army side
+        path.clear();
     }
 
 }
