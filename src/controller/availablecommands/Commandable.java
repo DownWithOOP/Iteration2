@@ -17,6 +17,7 @@ public abstract class Commandable {
     }
 
     public boolean containsCommand(CommandType commandType){
+        System.out.println(totalCommands.contains(commandType));
         return totalCommands.contains(commandType);
     }
 

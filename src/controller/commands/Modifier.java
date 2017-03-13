@@ -7,11 +7,16 @@ public class Modifier {
     public Direction direction;
     public int number;
 
-    public void setModifier(Direction direction){
+    public  Modifier(Direction direction){
         this.direction=direction;
     }
 
-    public void setModifier(int number){
+    public Modifier(int number){
         this.number=number;
+    }
+
+    public boolean hasNonEmptyDirection(){
+
+        return direction!=null;
     }
 }

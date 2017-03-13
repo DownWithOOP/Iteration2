@@ -59,7 +59,7 @@ public class EntityOwnership {
     private int cycleModeIndex = 1; //start in UNIT mode
     private CustomID playerId;
 
-    EntityOwnership(CustomID playerId, int startingX, int startingY ) {
+    public EntityOwnership(CustomID playerId, int startingX, int startingY ) {
         unitList = new ArrayList<>(5);
         //armyList = new ArrayList<>(10);
         structureList = new ArrayList<>(1);

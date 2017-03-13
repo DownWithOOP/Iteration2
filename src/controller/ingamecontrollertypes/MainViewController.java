@@ -214,12 +214,12 @@ public class MainViewController extends Controller{
     //quit the entire game application
     @FXML
     public void handleQuitGame(ActionEvent event) {
-                                                quitGame();
-                                                           }
+        quitGame();
+    }
 
     public void quitGame() {
-                         getStage().close();
-                                            }
+        getStage().close();
+    }
 
     @FXML
     public void keyListener(KeyEvent event) throws IOException {
