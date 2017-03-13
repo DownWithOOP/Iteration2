@@ -4,6 +4,7 @@ package model.entities.Stats;
  * Created by LesliesLaptop on 3/8/17.
  */
 public class FighterUnitStats extends UnitStats {
+    private int maxHealth = 100;
 
     public FighterUnitStats(int offensiveDamage, int defensiveDamage,
                             int armor, int health, int range,
@@ -14,6 +15,14 @@ public class FighterUnitStats extends UnitStats {
         this.statsMap.put(StatsType.ARMOR, armor);
         this.statsMap.put(StatsType.HEALTH, health);
         this.statsMap.put(StatsType.RANGE, range);
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
     }
 
     public void setOffensiveDamage(int offensiveDamage) {
