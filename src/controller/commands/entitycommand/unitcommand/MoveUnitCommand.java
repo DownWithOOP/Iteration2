@@ -26,7 +26,7 @@ public class MoveUnitCommand extends UnitCommand {
     @Override
     public boolean execute() {
         if(super.execute()) {
-            getUnit().moveUnit(getNewX(), getNewY());
+            super.getUnit().moveUnit(getNewX(), getNewY());
             return true;
         }
         return false;

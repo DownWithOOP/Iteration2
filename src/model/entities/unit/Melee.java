@@ -27,7 +27,7 @@ public class Melee extends FighterUnit{
 
     @Override
     protected Stats setEntityStats() {
-        return new FighterUnitStats(0,0,0,0,0,0,0,0);
+        return new FighterUnitStats(0,0,0,0,0,5,0,0);
     }
 
     @Override

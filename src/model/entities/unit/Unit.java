@@ -7,6 +7,7 @@ import model.entities.Stats.Stats;
 import model.entities.Stats.UnitStats;
 import utilities.id.CustomID;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.util.ArrayList;
 
 /**
@@ -48,10 +49,13 @@ public abstract class Unit extends Entity {
         if (distance <= getUnitMovement()) {
             //TODO: Modify Pathfinder class for hex tiles
             //setCurrentPath();
-            for (Location location : getCurrentPath()) {
-                //TODO: Implement move command to add locations to command queue
-                //this.addToQueue();
-            }
+//            for (Location location : getCurrentPath()) {
+//                //TODO: Implement move command to add locations to command queue
+//                //this.addToQueue();
+//            }
+            super.setLocation(newX, newY);
+        } else {
+            System.out.println("Movement distance too far");
         }
     }
 
