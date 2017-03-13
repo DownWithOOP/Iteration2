@@ -12,6 +12,7 @@ import controller.commands.entitycommand.unitcommand.*;
 import controller.commands.entitycommand.unitcommand.explorercommand.*;
 import controller.commands.playercommands.*;
 import controller.ingamecontrollertypes.MainViewController;
+import model.ActiveState;
 import model.GameModel;
 import model.entities.Entity;
 import model.entities.unit.Army;
@@ -39,11 +40,13 @@ public class ControllerDispatch {
     }
 
     public void handleCommand(CommandType commandType) {
-        //TODO: add available actions in here
+        //TODO: could add all these commands to command factory and perform them using the following method
         if (commandHashMap.containsKey(commandType)) {
             System.out.println("issuing command: " + commandHashMap.get(commandType).toString());
             commandHashMap.get(commandType).execute();
+            return;
         }
+        ActiveState.relayCommand(commandType);
     }
 
     public void handleCommandActivation() {

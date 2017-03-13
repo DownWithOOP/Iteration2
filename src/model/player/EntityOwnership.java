@@ -245,6 +245,7 @@ public class EntityOwnership {
         if (currentModeList == null || currentModeList.get(cycleTypeIndex).size()==0) {
             return null;
         }
+        //TODO: Instead getEntityCommands() you could use getIterableCommands, why are you assuming that you are only going to iterate through Entities, Rallypoints also have commands
         if (direction == CycleDirection.INCREMENT) {
             cycleCommandIndex = next(currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex).getEntityCommands().size(), cycleCommandIndex);
         }

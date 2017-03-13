@@ -26,14 +26,14 @@ public abstract class Entity extends Commandable {
     private Location location;
     protected Stats entityStats;
 
-    protected ArrayList<CommandType> entityCommand = new ArrayList<>();
+    protected static ArrayList<CommandType> entityCommand = new ArrayList<>();
 
-//    static {
-//        entityCommand.add(CommandType.CANCEL_QUEUE);
-//        entityCommand.add(CommandType.DECOMMISSION);
-//        entityCommand.add(CommandType.POWER_DOWN);
-//        entityCommand.add(CommandType.POWER_UP);
-//    }
+    static {
+        entityCommand.add(CommandType.CANCEL_QUEUE);
+        entityCommand.add(CommandType.DECOMMISSION);
+        entityCommand.add(CommandType.POWER_DOWN);
+        entityCommand.add(CommandType.POWER_UP);
+    }
 
     //  TODO:TAKE IN THE MOCK UP MAP, TAKE IN THE PLAYER ID
 
@@ -46,10 +46,10 @@ public abstract class Entity extends Commandable {
         this.playerId = playerId;
         this.isPoweredDown = false;
         location = new Location(locationX,locationY); // starting location of entity
-        entityCommand.add(CommandType.CANCEL_QUEUE);
-        entityCommand.add(CommandType.DECOMMISSION);
-        entityCommand.add(CommandType.POWER_DOWN);
-        entityCommand.add(CommandType.POWER_UP);
+//        entityCommand.add(CommandType.CANCEL_QUEUE);
+//        entityCommand.add(CommandType.DECOMMISSION);
+//        entityCommand.add(CommandType.POWER_DOWN);
+//        entityCommand.add(CommandType.POWER_UP);
         addAllCommands(entityCommand);
 
     }

@@ -2,8 +2,12 @@ package model;
 
 import controller.availablecommands.Commandable;
 import controller.commands.*;
+import controller.commands.modifiers.Modifier;
+import controller.commands.modifiers.ModifierType;
 import model.common.Location;
+import model.entities.structure.StructureType;
 import model.entities.unit.Ranged;
+import model.entities.unit.UnitType;
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
@@ -44,7 +48,7 @@ public class ActiveState {
     private static void relayActionableCommand(CommandType commandType) {
         Command cursorCommand;
 
-        if (activeCommandType != null && commandType == activeCommandType && checkIfCommandCanBePerformed(activeCommandType)) {
+        if (activeCommandType != null && checkIfCommandCanBePerformed(activeCommandType)) {
             activeCommand = commandFactory.createActionableCommand(activeCommandType, activeCommandable, modifier);
 
             if (activeCommand != null) {
@@ -52,11 +56,15 @@ public class ActiveState {
             }
         }
 
-        if (modifier.hasNonEmptyDirection()) {
-            cursorCommand = commandFactory.createActionableCommand(CommandType.MOVE, cursor, modifier);
+        if (modifier.getModifierType() == ModifierType.DIRECTION) {
 
-            if (cursorCommand != null) {
-                cursorCommand.execute();
+            if (cursor!=null) {
+                cursorCommand = commandFactory.createActionableCommand(CommandType.MOVE, cursor, modifier);
+
+
+                if (cursorCommand != null) {
+                    cursorCommand.execute();
+                }
             }
         }
 
@@ -69,7 +77,7 @@ public class ActiveState {
      */
     private static void relaySimpleCommand(CommandType commandType) {
 
-        if (commandType == CommandType.SELECT && activeCommandType != null) {
+        if (commandType == CommandType.ACTIVATE_COMMAND && activeCommandType != null) {
             if (checkIfCommandCanBePerformed(activeCommandType)) {
                 activeCommand = commandFactory.createSimpleCommand(activeCommandType, activeCommandable);
 
@@ -77,6 +85,11 @@ public class ActiveState {
                     activeCommand.execute();
                 }
             }
+        }
+
+        if (checkCommandAvailability(commandType) && commandType == CommandType.FOCUS) {
+            Command tempCommand = commandFactory.createSimpleCommand(commandType, activeCommandable);
+            tempCommand.execute();
         }
     }
 
@@ -105,13 +118,23 @@ public class ActiveState {
         modifier = new Modifier(number);
     }
 
+    public static void constructModifier(UnitType unitType) {
+        clearModifier();
+        modifier = new Modifier(unitType);
+    }
+
+    public static void constructModifier(StructureType structureType) {
+        clearModifier();
+        modifier = new Modifier(structureType);
+    }
+
     public static void relayCommand(CommandType commandType) {
         if (modifier != null) {
             relayActionableCommand(commandType);
         } else {
             relaySimpleCommand(commandType);
         }
-        modifier = null;
+        clearModifier();
     }
 
     public static void main(String[] args) {
@@ -124,6 +147,7 @@ public class ActiveState {
         activeCommandable = rallyPoint;
         activeCommandType = CommandType.MOVE;
         ActiveState.relayCommand(CommandType.MOVE);
+        ActiveState.relayCommand(CommandType.FOCUS);
 
 
         ActiveState.constructModifier(5);
@@ -136,15 +160,15 @@ public class ActiveState {
         ActiveState.relayCommand(CommandType.MOVE);
 
         activeState.update(ranged);
-        activeCommandType=CommandType.JOIN_ARMY;
+        activeCommandType = CommandType.JOIN_ARMY;
         ActiveState.constructModifier(5);
         ActiveState.relayCommand(CommandType.JOIN_ARMY);
 
-        activeCommandType=CommandType.DECOMMISSION;
-        ActiveState.relayCommand(CommandType.SELECT);
+        activeCommandType = CommandType.DECOMMISSION;
+        ActiveState.relayCommand(CommandType.ACTIVATE_COMMAND);
 
         activeState.update(ranged);
-        activeCommandType=CommandType.JOIN_ARMY;
+        activeCommandType = CommandType.JOIN_ARMY;
         ActiveState.constructModifier(6);
         ActiveState.relayCommand(CommandType.JOIN_ARMY);
 
