@@ -31,6 +31,28 @@ public class FighterUnit extends Unit {
         addAllCommands(fighterUnitCommand);
     }
 
+    public void takeDamage(int offensiveDamage) {
+        int currentHealth = getFighterUnitStats().getHealth();
+        int damageTaken = offensiveDamage - getFighterUnitStats().getArmor();
+        if (currentHealth - damageTaken <= 0) {
+            //TODO: unit is dead - notify entity ownership?
+        }
+        else {
+            getFighterUnitStats().setHealth(currentHealth - damageTaken);
+        }
+    }
+
+
+    public void heal(int offset) {
+        int currentHealth = getFighterUnitStats().getHealth();
+        if(currentHealth + offset > getMaxHealth()) {
+            getFighterUnitStats().setHealth(getMaxHealth());
+        }
+        else {
+            getFighterUnitStats().setHealth(getFighterUnitStats().getHealth() + offset);
+        }
+    }
+
     @Override
     public void abandonArmy() {
 
@@ -54,6 +76,10 @@ public class FighterUnit extends Unit {
     @Override
     public void decommission() {
 
+    }
+
+    public int getMaxHealth() {
+        return getFighterUnitStats().getMaxHealth();
     }
 
     public FighterUnitStats getFighterUnitStats() { return ((FighterUnitStats)entityStats).clone();}
