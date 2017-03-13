@@ -129,6 +129,8 @@ public class AreaViewport implements MiniMapSubject{
         }
     }
 
+
+
     public void UpdateRenderInfo(MapRenderInformation renderMap, UnitRenderInformation renderUnit, StructureRenderInformation renderStructure, TileRenderObject[][] renderData){
         this.mapRenderInformation = renderMap;
         this.renderData = renderData;
