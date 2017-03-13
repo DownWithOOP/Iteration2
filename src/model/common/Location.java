@@ -14,19 +14,19 @@ public class Location extends Point {
     }
 
     public void moveNorth(){
-        super.setLocation(this.getX()+1, this.getY());
-    }
-
-    public void moveSouth(){
-        super.setLocation(this.getX()-1, this.getY());
-    }
-
-    public void moveWest(){
         super.setLocation(this.getX(), this.getY()-1);
     }
 
-    public void moveEast(){
+    public void moveSouth(){
         super.setLocation(this.getX(), this.getY()+1);
+    }
+
+    public void moveWest(){
+        super.setLocation(this.getX()-1, this.getY());
+    }
+
+    public void moveEast(){
+        super.setLocation(this.getX()+1, this.getY());
     }
 
 //    public boolean equals(Location location){
