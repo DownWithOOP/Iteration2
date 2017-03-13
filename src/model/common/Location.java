@@ -29,6 +29,9 @@ public class Location extends Point {
         super.setLocation(this.getX()+1, this.getY());
     }
 
+    public int getXCoord() { return x;}
+    public int getYCoord() { return y;}
+
 //    public boolean equals(Location location){
 //        int xCoord=location.getX();
 //        int yCoord=location.getY();

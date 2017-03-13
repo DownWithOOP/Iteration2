@@ -55,4 +55,6 @@ public class FighterUnit extends Unit {
     public void decommission() {
 
     }
+
+    public FighterUnitStats getFighterUnitStats() { return ((FighterUnitStats)entityStats).clone();
 }
