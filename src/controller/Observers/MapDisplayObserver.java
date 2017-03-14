@@ -1,6 +1,8 @@
 package controller.Observers;
 
 import model.RenderInformation.*;
+import model.entities.EntityId;
+import utilities.id.CustomID;
 
 import java.util.ArrayList;
 
@@ -17,6 +19,11 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
     private int mapSizeY;
     private boolean initialized = false;
     private boolean allVisible = false; // FOR DEBUGGING ONLY, TURN ON IF NEED BE TO SEE EVERYTHING
+
+    private int currPlayerNumber;
+    private MapRenderInformation currMapRenderInformation;
+    private UnitRenderInformation currUnitRenderInformation;
+    private StructureRenderInformation currStructureRenderInformation;
 
     public MapDisplayObserver(int numberOfPlayers){
         this.numberOfPlayers = numberOfPlayers;
@@ -45,6 +52,12 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
 
     @Override
     public void update(int playerNumber, MapRenderInformation mapRenderInformation, UnitRenderInformation unitRenderInformation, StructureRenderInformation structureRenderInformation) {
+
+        this.currPlayerNumber = playerNumber;
+        this.currMapRenderInformation = mapRenderInformation;
+        this.currStructureRenderInformation = structureRenderInformation;
+        this.currUnitRenderInformation = unitRenderInformation;
+
         if(!initialized){
             // this gets called only once since immediatly we don't know the size of the map
             initialize(mapRenderInformation);
@@ -59,6 +72,8 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
         for(int i=0; i<mapSizeX; i++){
             for(int j=0; j<mapSizeY; j++){
                 TileRenderObject check = userData[i][j];
+                //clear units while we're at it
+                check.removeUserEntity();
                 if(check.getVisibilityLevel() == 2){
                     check.setVisibilityToOne();
                 }
@@ -114,6 +129,26 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
             }
         }
 
+    }
+
+    @Override
+    public void updateUnit(EntityId unitId, UnitRenderObject unitRenderObject){
+        //this.currUnitRenderInformation = unitRenderInformation;
+        if(currUnitRenderInformation!=null){
+            currUnitRenderInformation.removeUnit(unitId);
+            currUnitRenderInformation.addUnit(unitRenderObject);
+            update(currPlayerNumber, currMapRenderInformation, currUnitRenderInformation, currStructureRenderInformation);
+        }
+    }
+
+    @Override
+    public void updateStructure(EntityId structureId, StructureRenderObject structureRenderObject){
+        //this.currStructureRenderInformation = structureRenderInformation;
+        if(currStructureRenderInformation!=null){
+            currStructureRenderInformation.removeStructure(structureId);
+            currStructureRenderInformation.addStructure(structureRenderObject);
+            update(currPlayerNumber, currMapRenderInformation, currUnitRenderInformation, currStructureRenderInformation);
+        }
     }
 
     @Override

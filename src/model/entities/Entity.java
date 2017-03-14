@@ -6,6 +6,7 @@ import controller.commands.Command;
 import controller.commands.CommandType;
 import controller.commands.entitycommand.entitycommand.PowerUpCommand;
 import controller.commands.entitycommand.unitcommand.AbandonArmyCommand;
+import controller.commands.entitycommand.unitcommand.MoveUnitCommand;
 import model.common.Location;
 import model.entities.Stats.Stats;
 import model.entities.unit.Melee;
@@ -77,17 +78,26 @@ public abstract class Entity extends Commandable {
         return location;
     }
 
+    protected void setLocation(int x, int y){
+        location.setLocation(x, y);
+    }
+
     public abstract void decommission();
 
 //    public void addToQueue(Command command) {
 //        commandQueue.add(command);
 //    }
-
+//
+//    public void cancelQueue() {
+//        while(!commandQueue.isEmpty()){
+//            commandQueue.poll();
+//        }
+//    }
 //    public void cancelQueue() {
 //
 //    }
 //
-//    public void executeQueue(){
+//    public void executeQueue(){0
 //        if(currentCommand == null){
 //            //System.out.println("hell0");
 //            if(!commandQueue.isEmpty()){

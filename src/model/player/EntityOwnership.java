@@ -16,7 +16,10 @@ import model.entities.EntityId;
 import model.entities.EntityType;
 import model.entities.Stats.UnitStats;
 import model.entities.UnitFactory;
+import model.entities.structure.Capital;
 import model.entities.structure.Structure;
+import utilities.ObserverInterfaces.MapObserver;
+import utilities.ObserverInterfaces.UnitObserver;
 import model.entities.unit.*;
 import utilities.id.CustomID;
 import utilities.id.IdType;
@@ -101,6 +104,15 @@ public class EntityOwnership {
         }
         for (int i = 0; i < structureTypeNumber; i++) {
             structureList.add(new ArrayList<>(typeRestriction));
+        }
+    }
+
+    public void setUnitObservers(UnitObserver unitObserver, MapObserver mapObserver){
+        for(int i = 0; i < unitList.size(); i++){
+            for(int j = 0; j < unitList.get(i).size(); j++){
+                ((Unit) unitList.get(i).get(j)).registerUnitObserver(unitObserver);
+                ((Unit) unitList.get(i).get(j)).registerMapObserver(mapObserver);
+            }
         }
     }
 
@@ -419,7 +431,7 @@ public class EntityOwnership {
         for (List<Entity> list : structureList) {
             for (Entity entity : list) {
                 Structure structure = (Structure) entity;
-                StructureRenderObject temp = new StructureRenderObject( structure.getEntityType(),(int)(structure.getLocation().getX()),(int)(structure.getLocation().getY()));
+                StructureRenderObject temp = new StructureRenderObject( structure.getEntityId(), structure.getEntityType(),(int)(structure.getLocation().getX()),(int)(structure.getLocation().getY()));
                 renderInfo.addStructure(temp);
             }
         }
@@ -558,7 +570,6 @@ public class EntityOwnership {
         }
 
         int damageToApply = damage/(unitsToDamage.size() + structuresToDamage.size());
-
         for (FighterUnit unitTakingDamage : unitsToDamage) {
             unitTakingDamage.takeDamage(damageToApply);
         }

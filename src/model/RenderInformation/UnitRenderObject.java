@@ -2,6 +2,7 @@ package model.RenderInformation;
 
 import model.entities.EntityId;
 import model.entities.Stats.UnitStats;
+import utilities.id.CustomID;
 import utilities.id.IdType;
 
 /**
@@ -12,6 +13,7 @@ public class UnitRenderObject {
     private int locationX; // X location on map Unit is located
     private int locationY; // Y location on map Unit is located
     private IdType idType; // type of unit so we know which assets to render, along with unit ownership
+
     private EntityId id;
     private UnitStats unitStats;
     // TODO later add more info like stats
@@ -25,6 +27,9 @@ public class UnitRenderObject {
     }
     public IdType getIdType(){
         return this.idType;
+    }
+    public EntityId getUnitId(){
+        return this.id;
     }
     public int getLocationX(){
         return this.locationX;

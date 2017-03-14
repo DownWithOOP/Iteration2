@@ -1,5 +1,8 @@
 package model.RenderInformation;
 
+import model.entities.EntityId;
+import utilities.id.CustomID;
+
 import java.util.ArrayList;
 
 /**
@@ -16,6 +19,14 @@ public class UnitRenderInformation {
     }
     public void addUnit(UnitRenderObject unitRenderObject){
         this.unitRenderInformation.add(unitRenderObject);
+    }
+    public boolean removeUnit(EntityId unitId) {
+        for (UnitRenderObject unit : unitRenderInformation) {
+            if (unit.getUnitId() == unitId) {
+                return unitRenderInformation.remove(unit);
+            }
+        }
+        return false;
     }
     public void addArmy(ArmyRenderObject armyRenderObject) {
         this.armyRenderInformation.add(armyRenderObject);
