@@ -5,6 +5,7 @@ import controller.availablecommands.Commandable;
 import controller.commands.CommandType;
 import controller.commands.CycleDirection;
 import model.common.Location;
+import model.entities.unit.Army;
 import utilities.ObserverInterfaces.*;
 import model.map.Map;
 import utilities.id.CustomID;
@@ -135,5 +136,9 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
 
     public void applyDamageToEntitiesOnLocation(Location location, int damage) {
         entities.applyDamageToEntitiesOnLocation(location, damage);
+    }
+
+    public void createArmy() {
+        entities.createArmy();
     }
 }

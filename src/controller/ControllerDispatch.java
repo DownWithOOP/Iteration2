@@ -107,7 +107,7 @@ public class ControllerDispatch {
         commandHashMap.put(CommandType.CYCLE_INSTANCE_PREV, new CycleInstancePrev(gameModel.getActivePlayer()));
         commandHashMap.put(CommandType.CYCLE_COMMAND_NEXT, new CycleCommandNext(gameModel.getActivePlayer()));
         commandHashMap.put(CommandType.CYCLE_COMMAND_PREV, new CycleCommandPrev(gameModel.getActivePlayer()));
-
+        commandHashMap.put(CommandType.CREATE_ARMY, new CreateArmy(gameModel.getActivePlayer()));
     }
 
     public void updateActiveController(Controller newActiveController) {
