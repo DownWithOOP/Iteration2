@@ -12,8 +12,6 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -64,16 +62,6 @@ public class MainViewController extends Controller{
     MenuItem oreOverlay;
     @FXML
     MenuItem energyOverlay;
-    @FXML
-    Label selectStructureLabel;
-    @FXML
-    Label selectStructLocationLabel;
-    @FXML
-    Button buildStructButton;
-    @FXML
-    Button cancelBuildStructButton;
-
-
 
     private Map currentMap;
     private AreaViewport areaViewport;
@@ -83,6 +71,7 @@ public class MainViewController extends Controller{
     private StructureObserver structureObserver;
     private StatusObserver statusObserver;
     private java.util.Map<String, Label> cycleLabels = new HashMap<>();
+    private java.util.Map<String, String> argumentCommands = new HashMap<>();
     private SwitchControllerRelay switchControllerRelay;
     private MiniMap miniMap;
 
@@ -110,9 +99,9 @@ public class MainViewController extends Controller{
                     receivedCommand = mvcInputHandler.interpretInput(event);
                     if (receivedCommand != null) {
                         if (receivedCommand == CommandType.ACTIVATE_COMMAND) { // if a command is selected
-                            if (commandLabel.getText().equals(CommandType.DECOMMISSION.toString())) {
+                            if (argumentCommands.containsKey(commandLabel.getText())) {
                                 try {
-                                    popUpBuildStructure();
+                                    popUpView(commandLabel.getText());
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -131,13 +120,13 @@ public class MainViewController extends Controller{
         );
     }
 
-    public void popUpBuildStructure() throws IOException {
+    public void popUpView(String text) throws IOException {
         Stage stage = new Stage();
         //URL url = new File("/resources/buildStructurePopUp.fxml").toURL();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/buildStructurePopUp.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(argumentCommands.get(text)));
         Parent root = loader.load();
         stage.setScene(new Scene(root));
-        stage.setTitle("Build Structure");
+        stage.setTitle(text);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(commandLabel.getScene().getWindow());
         stage.showAndWait();
@@ -271,6 +260,11 @@ public class MainViewController extends Controller{
         cycleLabels.put("type", typeLabel);
         cycleLabels.put("instance", instanceLabel);
         cycleLabels.put("command", commandLabel);
+
+        argumentCommands.put("BUILD_STRUCTURE", "/resources/buildStructurePopUp.fxml");
+        argumentCommands.put("CREATE_UNIT", "/resources/createUnitPopUp.fxml");
+        argumentCommands.put("HEAL_UNIT", "/resources/healUnitPopUp.fxml");
+
         this.miniMap = new MiniMap(MinMap);
         this.areaViewport = new AreaViewport(vbox, canvas, miniMap);
         this.statusViewport = new StatusViewport(cycleLabels);
