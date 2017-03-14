@@ -115,7 +115,7 @@ public class MVCInputHandler {
         handleNumbers.put(KeyCode.DIGIT6.toString(),6);
         handleNumbers.put(KeyCode.DIGIT7.toString(),7);
         handleNumbers.put(KeyCode.DIGIT8.toString(),8);
-        handleNumbers.put(KeyCode.DIGIT8.toString(),9);
+        handleNumbers.put(KeyCode.DIGIT9.toString(),9);
     }
 
 
