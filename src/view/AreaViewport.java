@@ -144,9 +144,9 @@ public class AreaViewport implements MiniMapSubject{
 //            gc.drawImage(select,0.75*width*selectX+ cameraX,height*1*-selectY+ cameraY + width*0.9);
 //        }
         if(alternateColumn){
-            gc.drawImage(select,0.75*width* ActiveState.getCursor().getX()+ cameraX,height*1*-ActiveState.getCursor().getY()+ cameraY + width*0.45);
+            gc.drawImage(select,0.75*width* ActiveState.getInstance().getCursor().getX()+ cameraX,height*1*-ActiveState.getInstance().getCursor().getY()+ cameraY + width*0.45);
         } else {
-            gc.drawImage(select,0.75*width*ActiveState.getCursor().getX()+ cameraX,height*1*-ActiveState.getCursor().getY()+ cameraY + width*0.9);
+            gc.drawImage(select,0.75*width*ActiveState.getInstance().getCursor().getX()+ cameraX,height*1*-ActiveState.getInstance().getCursor().getY()+ cameraY + width*0.9);
         }
     }
 
@@ -157,7 +157,7 @@ public class AreaViewport implements MiniMapSubject{
 //        if(this.selectY >= gridSizeY){
 //            this.selectY = gridSizeY-1;
 //        }
-        ActiveState.getCursor().moveNorth();
+        ActiveState.getInstance().getCursor().moveNorth();
         updateCanvas();
     }
     public void selectSouth(){
@@ -165,7 +165,7 @@ public class AreaViewport implements MiniMapSubject{
 //        if(this.selectY < 0){
 //            this.selectY = 0;
 //        }
-        ActiveState.getCursor().moveSouth();
+        ActiveState.getInstance().getCursor().moveSouth();
         updateCanvas(); // rerender entire map
 
     }
@@ -184,18 +184,18 @@ public class AreaViewport implements MiniMapSubject{
 //                this.selectX--; // restore to original position if out of bounds and don't rotate
 //            } else {  this.alternateColumn = true; }
 //        }
-        ActiveState.getCursor().moveEast();
+        ActiveState.getInstance().getCursor().moveEast();
         if(this.alternateColumn){
-            ActiveState.getCursor().moveNorth();
-            if(ActiveState.getCursor().getX()+1 > this.gridSizeX || ActiveState.getCursor().getY() + 1 > this.gridSizeY){
-                ActiveState.getCursor().moveWest();
-                ActiveState.getCursor().moveSouth();
+            ActiveState.getInstance().getCursor().moveNorth();
+            if(ActiveState.getInstance().getCursor().getX()+1 > this.gridSizeX || ActiveState.getInstance().getCursor().getY() + 1 > this.gridSizeY){
+                ActiveState.getInstance().getCursor().moveWest();
+                ActiveState.getInstance().getCursor().moveSouth();
             } else{
                 this.alternateColumn = false;
             }
         } else {
-            if(ActiveState.getCursor().getX()+1 > this.gridSizeX){
-                ActiveState.getCursor().moveWest();
+            if(ActiveState.getInstance().getCursor().getX()+1 > this.gridSizeX){
+                ActiveState.getInstance().getCursor().moveWest();
             } else {
                 this.alternateColumn = true;
             }
@@ -219,18 +219,18 @@ public class AreaViewport implements MiniMapSubject{
 //                this.alternateColumn = true;
 //            }
 //        }
-        ActiveState.getCursor().moveEast();
+        ActiveState.getInstance().getCursor().moveEast();
         if(this.alternateColumn){
-            if(ActiveState.getCursor().getX() + 1 > this.gridSizeX){
-                ActiveState.getCursor().moveWest();
+            if(ActiveState.getInstance().getCursor().getX() + 1 > this.gridSizeX){
+                ActiveState.getInstance().getCursor().moveWest();
             } else {
                 this.alternateColumn = false;
             }
         } else {
-            ActiveState.getCursor().moveSouth();
-            if(ActiveState.getCursor().getY() < 0 || ActiveState.getCursor().getX() + 1 > this.gridSizeX){
-                ActiveState.getCursor().moveNorth();
-                ActiveState.getCursor().moveWest();
+            ActiveState.getInstance().getCursor().moveSouth();
+            if(ActiveState.getInstance().getCursor().getY() < 0 || ActiveState.getInstance().getCursor().getX() + 1 > this.gridSizeX){
+                ActiveState.getInstance().getCursor().moveNorth();
+                ActiveState.getInstance().getCursor().moveWest();
             } else {
                 this.alternateColumn = true;
             }
@@ -255,18 +255,18 @@ public class AreaViewport implements MiniMapSubject{
 //                this.alternateColumn = true;
 //            }
 //        }
-        ActiveState.getCursor().moveWest();
+        ActiveState.getInstance().getCursor().moveWest();
         if(this.alternateColumn){
-            if(ActiveState.getCursor().getX() < 0){
-                ActiveState.getCursor().moveEast();
+            if(ActiveState.getInstance().getCursor().getX() < 0){
+                ActiveState.getInstance().getCursor().moveEast();
             } else {
                 this.alternateColumn = false;
             }
         } else {
-            ActiveState.getCursor().moveSouth();
-            if(ActiveState.getCursor().getY() < 0 || ActiveState.getCursor().getX() < 0){
-                ActiveState.getCursor().moveEast();
-                ActiveState.getCursor().moveNorth();
+            ActiveState.getInstance().getCursor().moveSouth();
+            if(ActiveState.getInstance().getCursor().getY() < 0 || ActiveState.getInstance().getCursor().getX() < 0){
+                ActiveState.getInstance().getCursor().moveEast();
+                ActiveState.getInstance().getCursor().moveNorth();
             } else {
                 this.alternateColumn = true;
             }
@@ -291,18 +291,18 @@ public class AreaViewport implements MiniMapSubject{
 //                this.alternateColumn = true; // coordinate is good
 //            }
 //        }
-        ActiveState.getCursor().moveWest();
+        ActiveState.getInstance().getCursor().moveWest();
         if(this.alternateColumn){
-            ActiveState.getCursor().moveNorth();
-            if(ActiveState.getCursor().getY() + 1 > this.gridSizeY || ActiveState.getCursor().getX() < 0){
-                ActiveState.getCursor().moveEast();
-                ActiveState.getCursor().moveSouth();
+            ActiveState.getInstance().getCursor().moveNorth();
+            if(ActiveState.getInstance().getCursor().getY() + 1 > this.gridSizeY || ActiveState.getInstance().getCursor().getX() < 0){
+                ActiveState.getInstance().getCursor().moveEast();
+                ActiveState.getInstance().getCursor().moveSouth();
             } else {
                 this.alternateColumn = false;
             }
         } else {
-            if(ActiveState.getCursor().getX() < 0){
-                ActiveState.getCursor().moveEast();
+            if(ActiveState.getInstance().getCursor().getX() < 0){
+                ActiveState.getInstance().getCursor().moveEast();
             } else {
                 this.alternateColumn = true;
             }
@@ -336,10 +336,10 @@ public class AreaViewport implements MiniMapSubject{
      */
 
     public int returnXCoordinate(){
-        return ActiveState.getCursor().getX();
+        return ActiveState.getInstance().getCursor().getX();
     }
     public int returnYCoordinate(){
-        return ActiveState.getCursor().getY();
+        return ActiveState.getInstance().getCursor().getY();
     }
 
     /** actually draws and renders the map that is currently stored in teh mapRenderInformation

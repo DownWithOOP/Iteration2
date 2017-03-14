@@ -48,13 +48,13 @@ public class MVCInputHandler {
     private void applyModifier(String keyCode){
         if (handleDirection.containsKey(keyCode)) {
             Direction direction=handleDirection.get(keyCode);
-            ActiveState.constructModifier(direction);
+            ActiveState.getInstance().constructModifier(direction);
             return;
         }
 
         if (handleNumbers.containsKey(keyCode)){
             int number=handleNumbers.get(keyCode);
-            ActiveState.constructModifier(number);
+            ActiveState.getInstance().constructModifier(number);
             return;
         }
         return;

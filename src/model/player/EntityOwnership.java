@@ -545,7 +545,7 @@ public class EntityOwnership {
         check = entityOwnership.addEntity(melee4);
         check = entityOwnership.addEntity(base);
 
-        //TODO actually test army
+
         //TODO change into assert statements?
         Entity entity = entityOwnership.changeMode(Mode.ARMY);
         Entity entity1 = entityOwnership.changeMode(Mode.UNIT);

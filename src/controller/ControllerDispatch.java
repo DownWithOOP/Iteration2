@@ -40,7 +40,7 @@ public class ControllerDispatch {
         availableCommands = new AvailableCommands();
         gameModel = new GameModel(playerNumber, mapDisplayObserver, unitObserver, structureObserver, statusObserver);
         //TODO: do we really need to define activeState like this/ does everything need to be static? --consider restructuring
-        activeState = new ActiveState(new Cursor(new Location(4,4)));
+        ActiveState.getInstance().init(new Cursor(new Location(4,4)));
         setGameModelMap();
     }
 
@@ -61,7 +61,7 @@ public class ControllerDispatch {
         activeState.update(selectedCommandType);
         System.out.println("Added to Queue: " + selectedCommandType.toString());
 
-        ActiveState.relayCommand(CommandType.ACTIVATE_COMMAND);
+        ActiveState.getInstance().relayCommand(CommandType.ACTIVATE_COMMAND);
 
         //System.out.println("controller dispatch says that command is " + selectedCommandType);
 //        switch(selectedCommandType) {
