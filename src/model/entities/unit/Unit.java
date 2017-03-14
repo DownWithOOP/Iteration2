@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public abstract class Unit extends Entity {
     private ArrayList<Location> currentPath;
 
-    static ArrayList<CommandType> unitCommand= new ArrayList<>();
+    static ArrayList<CommandType> unitCommand = new ArrayList<>();
     static {
         unitCommand.add(CommandType.ABANDON_ARMY);
         unitCommand.add(CommandType.ADVANCE_TO_RALLY_POINT);

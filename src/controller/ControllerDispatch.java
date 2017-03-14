@@ -17,6 +17,7 @@ import model.Cursor;
 import model.GameModel;
 import model.common.Location;
 import model.entities.Entity;
+import model.entities.EntityId;
 import model.entities.unit.Army;
 import model.entities.unit.Explorer;
 import model.entities.unit.Unit;
@@ -139,5 +140,17 @@ public class ControllerDispatch {
 
     public int getActivePlayerNumber() {
         return gameModel.getActivePlayerIndex() + 1;
+    }
+
+    public void updateActiveStateCommandable(EntityId commandableId) {
+        activeState.update(gameModel.getEntity(commandableId));
+    }
+
+    public void updateActiveStateModifier(int armyNumber) {
+        activeState.constructModifier(armyNumber);
+    }
+
+    public void updateActiveStateCommand(CommandType commandType) {
+        activeState.update(commandType);
     }
 }

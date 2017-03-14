@@ -8,14 +8,20 @@ import java.util.ArrayList;
 public class UnitRenderInformation {
 
     private ArrayList<UnitRenderObject> unitRenderInformation;
+    private ArrayList<ArmyRenderObject> armyRenderInformation;
 
     public UnitRenderInformation(){
         this.unitRenderInformation = new ArrayList<UnitRenderObject>();
+        this.armyRenderInformation = new ArrayList<>();
     }
     public void addUnit(UnitRenderObject unitRenderObject){
         this.unitRenderInformation.add(unitRenderObject);
     }
+    public void addArmy(ArmyRenderObject armyRenderObject) {
+        this.armyRenderInformation.add(armyRenderObject);
+    }
     public ArrayList<UnitRenderObject> returnRenderInformation(){
         return this.unitRenderInformation;
     }
+    public ArrayList<ArmyRenderObject> returnArmyInformation() {return this.armyRenderInformation;}
 }

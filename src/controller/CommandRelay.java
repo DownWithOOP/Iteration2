@@ -3,6 +3,7 @@ package controller;
 import controller.commands.Direction;
 import model.GameModel;
 import model.common.Location;
+import model.entities.unit.FighterUnit;
 
 /**
  * Created by Jonathen on 3/14/2017.
@@ -23,5 +24,9 @@ public class CommandRelay {
 
     public void notifyModelOfUnitUpdate() {
 
+    }
+
+    public void notifyModelOfUnitJoiningArmy(FighterUnit fighterUnit, int armyNumber) {
+        model.addFighterUnitToArmy(fighterUnit, armyNumber);
     }
 }

@@ -32,6 +32,7 @@ public class ActiveState {
     }
 
     public void update(Commandable commandable) {
+        if (commandable == null) { return; }
         activeCommandable = commandable;
     }
 
@@ -53,7 +54,8 @@ public class ActiveState {
         System.out.println("active state relay actionable command, command type " + commandType);
         if (activeCommandType != null && checkIfCommandCanBePerformed(activeCommandType)) {
             activeCommand = commandFactory.createActionableCommand(activeCommandType, activeCommandable, modifier);
-
+            System.out.println("active command null? " + (activeCommand != null));
+            System.out.println("active command constructed");
             if (activeCommand != null) {
                 System.out.println("active state relay actionable command active command executed");
                 activeCommand.execute();

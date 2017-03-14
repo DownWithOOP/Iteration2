@@ -79,6 +79,7 @@ public class CommandFactory {
         Command command = null;
         try {
             command = actionableCommandFactory.createCommand(commandType, commandable, modifier);
+            System.out.println("in command factor command null? " + (command != null));
 
         } catch (Exception e) {
             System.out.println("check for the class type and the action to be performed");
