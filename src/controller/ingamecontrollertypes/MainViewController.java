@@ -6,13 +6,16 @@ import controller.commands.CommandType;
 import controller.inputhandler.MVCInputHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.map.Map;
 import utilities.ObserverInterfaces.MapObserver;
@@ -33,8 +36,6 @@ import java.util.ResourceBundle;
  * Created by Konrad on 2/17/2017.
  */
 public class MainViewController extends Controller{
-
-
     @FXML
     MenuBar mainMenuBar;
     @FXML
@@ -63,6 +64,15 @@ public class MainViewController extends Controller{
     MenuItem oreOverlay;
     @FXML
     MenuItem energyOverlay;
+    @FXML
+    Label selectStructureLabel;
+    @FXML
+    Label selectStructLocationLabel;
+    @FXML
+    Button buildStructButton;
+    @FXML
+    Button cancelBuildStructButton;
+
 
 
     private Map currentMap;
@@ -100,8 +110,17 @@ public class MainViewController extends Controller{
                     receivedCommand = mvcInputHandler.interpretInput(event);
                     if (receivedCommand != null) {
                         if (receivedCommand == CommandType.ACTIVATE_COMMAND) { // if a command is selected
-                            System.out.println(receivedCommand.toString());
-                            controllerDispatch.handleCommandActivation();
+                            if (commandLabel.getText().equals(CommandType.DECOMMISSION.toString())) {
+                                try {
+                                    popUpBuildStructure();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            else {
+                                System.out.println(receivedCommand.toString());
+                                controllerDispatch.handleCommandActivation();
+                            }
                         }
                         else {
                             System.out.println(receivedCommand.toString());
@@ -110,6 +129,18 @@ public class MainViewController extends Controller{
                     }
                 }
         );
+    }
+
+    public void popUpBuildStructure() throws IOException {
+        Stage stage = new Stage();
+        //URL url = new File("/resources/buildStructurePopUp.fxml").toURL();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/buildStructurePopUp.fxml"));
+        Parent root = loader.load();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Build Structure");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(commandLabel.getScene().getWindow());
+        stage.showAndWait();
     }
 
     @Override
@@ -233,7 +264,7 @@ public class MainViewController extends Controller{
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) { // initialized the component correctly
+    @FXML public void initialize(URL location, ResourceBundle resources) { // initialized the component correctly
 
         //TODO don't use hard coded strings
         cycleLabels.put("mode", modeLabel);
