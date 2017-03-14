@@ -6,11 +6,13 @@ import controller.commands.entitycommand.armycommand.DefendCommand;
 import controller.commands.entitycommand.cursorcommand.MoveCommand;
 import controller.commands.entitycommand.unitcommand.AdvanceToRallyPointCommand;
 import controller.commands.entitycommand.unitcommand.JoinArmyCommand;
+import controller.commands.entitycommand.unitcommand.workercommand.BuildStructureCommand;
 import controller.commands.modifiers.Modifier;
 import controller.commands.modifiers.ModifierType;
 import model.Cursor;
 import model.entities.unit.Army;
 import model.entities.unit.Unit;
+import model.entities.unit.Worker;
 
 import java.util.HashMap;
 
@@ -38,7 +40,7 @@ public class ActionableCommandFactory {
         actionableCommandNumber.put(CommandType.JOIN_ARMY, (commandable, modifier) -> (new JoinArmyCommand((Unit) commandable, modifier.number)));
         actionableCommandNumber.put(CommandType.ADVANCE_TO_RALLY_POINT, (commandable, modifier) -> (new AdvanceToRallyPointCommand((Unit) commandable, modifier.number)));
 
-        //actionableCommandStructureType.put(CommandType.CREATE_UNIT)
+        //actionableCommandStructureType.put(CommandType.BUILD_STRUCTURE, (commandable, modifier) -> (new BuildStructureCommand((Worker) commandable, modifier.structureType)));
 
 
         actionableCommandType.put(ModifierType.DIRECTION, (commandType, commandable, modifier) -> (createDirectionableCommand(commandType, commandable, modifier)));

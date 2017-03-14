@@ -1,5 +1,7 @@
 package model.RenderInformation;
 
+import utilities.id.CustomID;
+
 import java.util.ArrayList;
 
 /**
@@ -14,6 +16,14 @@ public class UnitRenderInformation {
     }
     public void addUnit(UnitRenderObject unitRenderObject){
         this.unitRenderInformation.add(unitRenderObject);
+    }
+    public boolean removeUnit(CustomID unitId){
+        for(UnitRenderObject unit : unitRenderInformation){
+            if(unit.getUnitId() == unitId){
+                return unitRenderInformation.remove(unit);
+            }
+        }
+        return false;
     }
     public ArrayList<UnitRenderObject> returnRenderInformation(){
         return this.unitRenderInformation;

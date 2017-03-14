@@ -55,15 +55,20 @@ public class ControllerDispatch {
     }
 
     public void handleCommandActivation() {
-        Commandable selectedInstance = (Commandable) gameModel.getActivePlayer().getCurrentInstance();
+        Commandable selectedInstance = gameModel.getActivePlayer().getCurrentInstance();
         CommandType selectedCommandType = gameModel.getActivePlayer().getCurrentCommandType();
         //activeState.update(selectedInstance);
         //activeState.update(selectedCommandType);
         System.out.println("Added to Queue: " + selectedCommandType.toString());
+
         if (selectedCommandType == CommandType.MOVE) {
             selectedInstance.addToQueue(new MoveUnitCommand((Unit)selectedInstance, 6 ,5));
         }
+//        //ActiveState.relayCommand(CommandType.ACTIVATE_COMMAND);
+
+
         //ActiveState.relayCommand(CommandType.ACTIVATE_COMMAND);
+
 
         //System.out.println("controller dispatch says that command is " + selectedCommandType);
 //        switch(selectedCommandType) {
@@ -92,10 +97,11 @@ public class ControllerDispatch {
 //                System.out.print("Invalid command");
 //                break;
 //        }
+
     }
 
     public void handleBuildStructureCommand(String structureTypeStr) {
-        Commandable selectedInstance = (Commandable) gameModel.getActivePlayer().getCurrentInstance();
+        Commandable selectedInstance = gameModel.getActivePlayer().getCurrentInstance();
         CommandType selectedCommandType = gameModel.getActivePlayer().getCurrentCommandType();
         activeState.update(selectedInstance);
         activeState.update(selectedCommandType);
@@ -106,7 +112,7 @@ public class ControllerDispatch {
     }
 
     public void handleCreateUnitCommand(String unitTypeStr) {
-        Commandable selectedInstance = (Commandable) gameModel.getActivePlayer().getCurrentInstance();
+        Commandable selectedInstance = gameModel.getActivePlayer().getCurrentInstance();
         CommandType selectedCommandType = gameModel.getActivePlayer().getCurrentCommandType();
         activeState.update(selectedInstance);
         activeState.update(selectedCommandType);

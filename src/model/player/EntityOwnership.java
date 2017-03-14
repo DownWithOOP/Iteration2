@@ -16,7 +16,16 @@ import model.entities.EntityType;
 import model.entities.Stats.UnitStats;
 import model.entities.UnitFactory;
 import model.entities.structure.Structure;
+
 import model.entities.unit.*;
+
+import model.entities.unit.Colonist;
+import model.entities.unit.Explorer;
+import model.entities.unit.Melee;
+import model.entities.unit.Unit;
+import utilities.ObserverInterfaces.MapObserver;
+import utilities.ObserverInterfaces.UnitObserver;
+
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
@@ -100,6 +109,15 @@ public class EntityOwnership {
         }
         for (int i = 0; i < structureTypeNumber; i++) {
             structureList.add(new ArrayList<>(typeRestriction));
+        }
+    }
+
+    public void setUnitObservers(UnitObserver unitObserver, MapObserver mapObserver){
+        for(int i = 0; i < unitList.size(); i++){
+            for(int j = 0; j < unitList.get(i).size(); j++){
+                ((Unit) unitList.get(i).get(j)).registerUnitObserver(unitObserver);
+                ((Unit) unitList.get(i).get(j)).registerMapObserver(mapObserver);
+            }
         }
     }
 
@@ -389,7 +407,7 @@ public class EntityOwnership {
             for (Entity entity : list) {
                 Unit unit = (Unit) entity;
                 UnitStats unitStats = unit.getUnitStats().clone(); // deep clone so as not to mess anything up
-                UnitRenderObject temp = new UnitRenderObject(unit.getEntityType(), (int)(unit.getLocation().getX()), (int)(unit.getLocation().getY()), unitStats);
+                UnitRenderObject temp = new UnitRenderObject(unit.getEntityId(), unit.getEntityType(), (int)(unit.getLocation().getX()), (int)(unit.getLocation().getY()), unitStats);
                 renderInfo.addUnit(temp);
             }
         }
@@ -401,7 +419,7 @@ public class EntityOwnership {
         for (List<Entity> list : structureList) {
             for (Entity entity : list) {
                 Structure structure = (Structure) entity;
-                StructureRenderObject temp = new StructureRenderObject( structure.getEntityType(),(int)(structure.getLocation().getX()),(int)(structure.getLocation().getY()));
+                StructureRenderObject temp = new StructureRenderObject( structure.getEntityId(), structure.getEntityType(),(int)(structure.getLocation().getX()),(int)(structure.getLocation().getY()));
                 renderInfo.addStructure(temp);
             }
         }
