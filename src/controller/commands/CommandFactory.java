@@ -3,16 +3,12 @@ package controller.commands;
 import controller.availablecommands.Commandable;
 import controller.commands.commandablecommands.FocusCommand;
 import controller.commands.entitycommand.armycommand.DisbandCommand;
-import controller.commands.entitycommand.entitycommand.CancelQueueCommand;
+import controller.commands.commandablecommands.CancelQueueCommand;
 import controller.commands.entitycommand.entitycommand.DecommissionCommand;
-import controller.commands.entitycommand.armycommand.AttackCommand;
-import controller.commands.entitycommand.armycommand.DefendCommand;
-import controller.commands.entitycommand.cursorcommand.MoveCommand;
 import controller.commands.entitycommand.entitycommand.PowerDownCommand;
 import controller.commands.entitycommand.entitycommand.PowerUpCommand;
 import controller.commands.entitycommand.unitcommand.AbandonArmyCommand;
-import controller.commands.entitycommand.unitcommand.AdvanceToRallyPointCommand;
-import controller.commands.entitycommand.unitcommand.JoinArmyCommand;
+import controller.commands.entitycommand.unitcommand.colonistcommand.BuildCapitalCommand;
 import controller.commands.modifiers.Modifier;
 import model.Cursor;
 import model.RallyPoint;
@@ -34,13 +30,15 @@ public class CommandFactory {
 
     static {
         simpleCommandResult.put(CommandType.DECOMMISSION, (commandable) -> (new DecommissionCommand((Entity) commandable)));
-        simpleCommandResult.put(CommandType.CANCEL_QUEUE, (commandable) -> (new CancelQueueCommand((Entity) commandable)));
+        simpleCommandResult.put(CommandType.CANCEL_QUEUE, (commandable) -> (new CancelQueueCommand((commandable))));
         simpleCommandResult.put(CommandType.POWER_UP, (commandable) -> (new PowerUpCommand((Entity) commandable)));
         simpleCommandResult.put(CommandType.POWER_DOWN, (commandable) -> (new PowerDownCommand((Entity) commandable)));
 
+        simpleCommandResult.put(CommandType.BUILD_CAPITAL, (commandable -> (new BuildCapitalCommand((Colonist) commandable))));
         simpleCommandResult.put(CommandType.DISBAND, (commandable) -> (new DisbandCommand((Army) commandable)));
         simpleCommandResult.put(CommandType.ABANDON_ARMY, (commandable) -> (new AbandonArmyCommand((Unit) commandable)));
         simpleCommandResult.put(CommandType.FOCUS, (commandable) -> (new FocusCommand((RallyPoint) commandable)));
+
 
     }
 

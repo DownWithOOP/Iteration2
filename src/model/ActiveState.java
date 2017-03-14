@@ -77,13 +77,13 @@ public class ActiveState {
      * @param commandType
      */
     private static void relaySimpleCommand(CommandType commandType) {
-
         if (commandType == CommandType.ACTIVATE_COMMAND && activeCommandType != null) {
             if (checkIfCommandCanBePerformed(activeCommandType)) {
                 activeCommand = commandFactory.createSimpleCommand(activeCommandType, activeCommandable);
 
                 if (activeCommand != null) {
-                    activeCommand.execute();
+                    //activeCommand.execute();
+                    activeCommandable.addToQueue(activeCommand);
                 }
             }
         }

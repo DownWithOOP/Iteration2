@@ -11,6 +11,9 @@ import java.util.*;
 public abstract class Commandable {
     private Set<CommandType> totalCommands = new HashSet<>();
     private ArrayList<CommandType> iterableCommands = new ArrayList<>();
+    protected static ArrayList<CommandType> commandableCommand = new ArrayList<>();
+    private Queue<Command> commandQueue = new ArrayDeque<>();
+    private Command currentCommand;
     private int commandIterator = 0;
 
     protected void addAllCommands(ArrayList<CommandType> commandTypes) {
@@ -51,5 +54,46 @@ public abstract class Commandable {
         ArrayList<CommandType> temp= new ArrayList<>();
         temp.addAll(iterableCommands);
         return temp;
+    }
+
+    public CommandType getIterableCommand(int index) {
+        return iterableCommands.get(index);
+    }
+
+    public int getIterableCommandsSize() {
+        return iterableCommands.size();
+    }
+
+    public void addToQueue(Command command) {
+        commandQueue.add(command);
+    }
+
+    //TODO: Get cancelQueue to work properly
+    public void cancelQueue() {
+        while(!commandQueue.isEmpty()) {
+            System.out.println("Cancelling queue");
+            commandQueue.poll();
+        }
+        currentCommand = null;
+    }
+
+    public void executeQueue(){
+        if(currentCommand == null){
+            //System.out.println("hell0");
+            if(!commandQueue.isEmpty()){
+                System.out.println("Not yet kiddo");
+                currentCommand = commandQueue.poll();
+            }
+        }
+        if (currentCommand != null) {
+            if(currentCommand.execute()){
+                System.out.println("Command got executed");
+                currentCommand = commandQueue.poll();
+            }
+        }
+    }
+
+    public Command getCurrentCommand() {
+        return currentCommand;
     }
 }
