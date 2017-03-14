@@ -129,6 +129,8 @@ public class MainViewController extends Controller{
         stage.setTitle(text);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(commandLabel.getScene().getWindow());
+        Controller inputController = loader.getController();
+        inputController.setDispatch(controllerDispatch);
         stage.showAndWait();
     }
 
@@ -261,7 +263,7 @@ public class MainViewController extends Controller{
         cycleLabels.put("instance", instanceLabel);
         cycleLabels.put("command", commandLabel);
 
-        argumentCommands.put("BUILD_STRUCTURE", "/resources/buildStructurePopUp.fxml");
+        argumentCommands.put("DECOMMISSION", "/resources/buildStructurePopUp.fxml");
         argumentCommands.put("CREATE_UNIT", "/resources/createUnitPopUp.fxml");
         argumentCommands.put("HEAL_UNIT", "/resources/healUnitPopUp.fxml");
 

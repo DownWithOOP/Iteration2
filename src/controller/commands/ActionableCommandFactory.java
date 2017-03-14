@@ -38,6 +38,8 @@ public class ActionableCommandFactory {
         actionableCommandNumber.put(CommandType.JOIN_ARMY, (commandable, modifier) -> (new JoinArmyCommand((Unit) commandable, modifier.number)));
         actionableCommandNumber.put(CommandType.ADVANCE_TO_RALLY_POINT, (commandable, modifier) -> (new AdvanceToRallyPointCommand((Unit) commandable, modifier.number)));
 
+        //actionableCommandStructureType.put(CommandType.CREATE_UNIT)
+
 
         actionableCommandType.put(ModifierType.DIRECTION, (commandType, commandable, modifier) -> (createDirectionableCommand(commandType, commandable, modifier)));
         actionableCommandType.put(ModifierType.NUMBER, (commandType, commandable, modifier) -> (createNumberedCommand(commandType, commandable, modifier)));
