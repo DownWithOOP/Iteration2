@@ -12,7 +12,10 @@ import controller.commands.entitycommand.unitcommand.*;
 import controller.commands.entitycommand.unitcommand.explorercommand.*;
 import controller.commands.playercommands.*;
 import controller.ingamecontrollertypes.MainViewController;
+import model.ActiveState;
+import model.Cursor;
 import model.GameModel;
+import model.common.Location;
 import model.entities.Entity;
 import model.entities.unit.Army;
 import model.entities.unit.Explorer;
@@ -31,55 +34,63 @@ public class ControllerDispatch {
     private AvailableCommands availableCommands;
     private GameModel gameModel;
     private HashMap<CommandType, Command> commandHashMap = new HashMap<>();
+    private ActiveState activeState;
 
     public ControllerDispatch(int playerNumber, MapDisplayObserver mapDisplayObserver, UnitObserver unitObserver, StructureObserver structureObserver, StatusObserver statusObserver) {
         availableCommands = new AvailableCommands();
         gameModel = new GameModel(playerNumber, mapDisplayObserver, unitObserver, structureObserver, statusObserver);
+        //TODO: do we really need to define activeState like this/ does everything need to be static? --consider restructuring
+        activeState = new ActiveState(new Cursor(new Location(4,4)));
         setGameModelMap();
     }
 
     public void handleCommand(CommandType commandType) {
-        //TODO: add available actions in here
+        //TODO: could add all these commands to command factory and perform them using the following method
         if (commandHashMap.containsKey(commandType)) {
             System.out.println("issuing command: " + commandHashMap.get(commandType).toString());
             commandHashMap.get(commandType).execute();
+            return;
         }
+        //ActiveState.relayCommand(commandType);
     }
 
     public void handleCommandActivation() {
         Entity selectedInstance = (Entity) gameModel.getActivePlayer().getCurrentInstance();
         CommandType selectedCommandType = gameModel.getActivePlayer().getCurrentCommandType();
-        System.out.println("controller dispatch says that command is " + selectedCommandType);
+        activeState.update(selectedInstance);
+        activeState.update(selectedCommandType);
         System.out.println("Added to Queue: " + selectedCommandType.toString());
-        switch(selectedCommandType) {
-            case DISBAND:
-                selectedInstance.addToQueue(new DisbandCommand((Army)selectedInstance));
-                break;
-            case POWER_UP:
-                selectedInstance.addToQueue(new PowerUpCommand(selectedInstance));
-                break;
-            case POWER_DOWN:
-                selectedInstance.addToQueue(new PowerDownCommand(selectedInstance));
-                break;
-            case CANCEL_QUEUE:
-                selectedInstance.addToQueue(new CancelQueueCommand(selectedInstance));
-                break;
-            case DECOMMISSION:
-                selectedInstance.addToQueue(new DecommissionCommand(selectedInstance));
-                break;
-            case ABANDON_ARMY:
-                selectedInstance.addToQueue(new AbandonArmyCommand((Unit)selectedInstance));
-                break;
-            case PROSPECT:
-                selectedInstance.addToQueue(new ProspectCommand((Explorer) selectedInstance));
-                break;
-            case MOVE:
-                selectedInstance.addToQueue(new MoveUnitCommand((Unit) selectedInstance, (int) selectedInstance.getLocation().getX(), (int) selectedInstance.getLocation().getY() + 1));
-                break;
-            default:
-                System.out.print("Invalid command");
-                break;
-        }
+
+        ActiveState.relayCommand(CommandType.ACTIVATE_COMMAND);
+
+        //System.out.println("controller dispatch says that command is " + selectedCommandType);
+//        switch(selectedCommandType) {
+//            case DISBAND:
+//                selectedInstance.addToQueue(new DisbandCommand((Army)selectedInstance));
+//                break;
+//            case POWER_UP:
+//                selectedInstance.addToQueue(new PowerUpCommand(selectedInstance));
+//                break;
+//            case POWER_DOWN:
+//                selectedInstance.addToQueue(new PowerDownCommand(selectedInstance));
+//                break;
+//            case CANCEL_QUEUE:
+//                selectedInstance.addToQueue(new CancelQueueCommand(selectedInstance));
+//                break;
+//            case DECOMMISSION:
+//                selectedInstance.addToQueue(new DecommissionCommand(selectedInstance));
+//                break;
+//            case ABANDON_ARMY:
+//                selectedInstance.addToQueue(new AbandonArmyCommand((Unit)selectedInstance));
+//                break;
+//            case PROSPECT:
+//                selectedInstance.addToQueue(new ProspectCommand((Explorer) selectedInstance));
+//                break;
+//            default:
+//                System.out.print("Invalid command");
+//                break;
+//        }
+
     }
 
     //TODO: ASK  IF THIS WILL WORK WHEN THE PLAYERS ARE CHANGED

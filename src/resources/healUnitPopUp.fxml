@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="144.0" prefWidth="485.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="144.0" prefWidth="485.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="controller.ingamecontrollertypes.PopUpController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -20,6 +20,6 @@
       <Label fx:id="healUnitLabel" alignment="CENTER" prefHeight="17.0" prefWidth="232.0" text="Which unit do you want to heal?" textAlignment="CENTER" GridPane.halignment="CENTER" />
       <ChoiceBox fx:id="healUnitComboBox" prefHeight="27.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
       <Button fx:id="healUnitButton" alignment="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="196.0" text="Heal Unit" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-      <Button fx:id="cancelHealUnitButton" alignment="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="192.0" text="Cancel" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <Button fx:id="cancelButton" onAction="#closePopUp" alignment="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="192.0" text="Cancel" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
    </children>
 </GridPane>

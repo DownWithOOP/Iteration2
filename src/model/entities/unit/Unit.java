@@ -25,24 +25,24 @@ public abstract class Unit extends Entity implements UnitSubject, MapSubject {
     private UnitObserver unitObserver;
     private MapObserver mapObserver;
 
-    //static ArrayList<CommandType> unitCommand= new ArrayList<>();
-//    static {
-//        entityCommand.add(CommandType.ABANDON_ARMY);
-//        entityCommand.add(CommandType.ADVANCE_TO_RALLY_POINT);
-//        entityCommand.add(CommandType.JOIN_ARMY);
-//        entityCommand.add(CommandType.MOVE);
-//    }
+    static ArrayList<CommandType> unitCommand= new ArrayList<>();
+    static {
+        unitCommand.add(CommandType.ABANDON_ARMY);
+        unitCommand.add(CommandType.ADVANCE_TO_RALLY_POINT);
+        unitCommand.add(CommandType.JOIN_ARMY);
+        unitCommand.add(CommandType.MOVE);
+    }
 
     /**
      * @param playerId
      */
     public Unit(CustomID playerId,String id, int locationX, int locationY) {
         super(playerId, id, locationX, locationY);
-        entityCommand.add(CommandType.ABANDON_ARMY);
-        entityCommand.add(CommandType.ADVANCE_TO_RALLY_POINT);
-        entityCommand.add(CommandType.JOIN_ARMY);
-        entityCommand.add(CommandType.MOVE);
-        addAllCommands(entityCommand);
+//        entityCommand.add(CommandType.ABANDON_ARMY);
+//        entityCommand.add(CommandType.ADVANCE_TO_RALLY_POINT);
+//        entityCommand.add(CommandType.JOIN_ARMY);
+//        entityCommand.add(CommandType.MOVE);
+        addAllCommands(unitCommand);
     }
 
 

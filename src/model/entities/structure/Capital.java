@@ -30,6 +30,11 @@ public class Capital extends StaffedStructure {
         return null;
     }
 
+    public void healUnit(FighterUnit unitToHeal) {
+        int offset = (int)Math.random()*unitToHeal.getMaxHealth();
+        unitToHeal.heal(offset);
+    }
+
     @Override
     protected IdType getIdType() {
         return IdType.CAPITAL;
@@ -41,15 +46,9 @@ public class Capital extends StaffedStructure {
     }
 
 
-    public void healUnit(Unit unitToHeal) {
-//        int currentHealth = unitToHeal.getHealth();
-//        unitToHeal.heal(currentHealth)
-    }
-
     public StructureStats getCapitalStats() {
         return capitalStats;
     }
-
 
 
     @Override

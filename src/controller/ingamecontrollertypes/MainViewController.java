@@ -6,13 +6,14 @@ import controller.commands.CommandType;
 import controller.inputhandler.MVCInputHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.map.Map;
 import utilities.ObserverInterfaces.MapObserver;
@@ -33,8 +34,6 @@ import java.util.ResourceBundle;
  * Created by Konrad on 2/17/2017.
  */
 public class MainViewController extends Controller{
-
-
     @FXML
     MenuBar mainMenuBar;
     @FXML
@@ -64,7 +63,6 @@ public class MainViewController extends Controller{
     @FXML
     MenuItem energyOverlay;
 
-
     private Map currentMap;
     private AreaViewport areaViewport;
     private StatusViewport statusViewport;
@@ -73,6 +71,7 @@ public class MainViewController extends Controller{
     private StructureObserver structureObserver;
     private StatusObserver statusObserver;
     private java.util.Map<String, Label> cycleLabels = new HashMap<>();
+    private java.util.Map<String, String> argumentCommands = new HashMap<>();
     private SwitchControllerRelay switchControllerRelay;
     private MiniMap miniMap;
 
@@ -100,8 +99,17 @@ public class MainViewController extends Controller{
                     receivedCommand = mvcInputHandler.interpretInput(event);
                     if (receivedCommand != null) {
                         if (receivedCommand == CommandType.ACTIVATE_COMMAND) { // if a command is selected
-                            System.out.println(receivedCommand.toString());
-                            controllerDispatch.handleCommandActivation();
+                            if (argumentCommands.containsKey(commandLabel.getText())) {
+                                try {
+                                    popUpView(commandLabel.getText());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            else {
+                                System.out.println(receivedCommand.toString());
+                                controllerDispatch.handleCommandActivation();
+                            }
                         }
                         else {
                             System.out.println(receivedCommand.toString());
@@ -110,6 +118,18 @@ public class MainViewController extends Controller{
                     }
                 }
         );
+    }
+
+    public void popUpView(String text) throws IOException {
+        Stage stage = new Stage();
+        //URL url = new File("/resources/buildStructurePopUp.fxml").toURL();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(argumentCommands.get(text)));
+        Parent root = loader.load();
+        stage.setScene(new Scene(root));
+        stage.setTitle(text);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(commandLabel.getScene().getWindow());
+        stage.showAndWait();
     }
 
     @Override
@@ -214,12 +234,12 @@ public class MainViewController extends Controller{
     //quit the entire game application
     @FXML
     public void handleQuitGame(ActionEvent event) {
-                                                quitGame();
-                                                           }
+        quitGame();
+    }
 
     public void quitGame() {
-                         getStage().close();
-                                            }
+        getStage().close();
+    }
 
     @FXML
     public void keyListener(KeyEvent event) throws IOException {
@@ -233,13 +253,18 @@ public class MainViewController extends Controller{
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) { // initialized the component correctly
+    @FXML public void initialize(URL location, ResourceBundle resources) { // initialized the component correctly
 
         //TODO don't use hard coded strings
         cycleLabels.put("mode", modeLabel);
         cycleLabels.put("type", typeLabel);
         cycleLabels.put("instance", instanceLabel);
         cycleLabels.put("command", commandLabel);
+
+        argumentCommands.put("BUILD_STRUCTURE", "/resources/buildStructurePopUp.fxml");
+        argumentCommands.put("CREATE_UNIT", "/resources/createUnitPopUp.fxml");
+        argumentCommands.put("HEAL_UNIT", "/resources/healUnitPopUp.fxml");
+
         this.miniMap = new MiniMap(MinMap);
         this.areaViewport = new AreaViewport(vbox, canvas, miniMap);
         this.statusViewport = new StatusViewport(cycleLabels);

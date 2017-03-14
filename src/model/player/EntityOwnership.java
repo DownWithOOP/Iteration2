@@ -61,7 +61,7 @@ public class EntityOwnership {
     private int cycleModeIndex = 1; //start in UNIT mode
     private CustomID playerId;
 
-    EntityOwnership(CustomID playerId, int startingX, int startingY ) {
+    public EntityOwnership(CustomID playerId, int startingX, int startingY ) {
         unitList = new ArrayList<>(5);
         //armyList = new ArrayList<>(10);
         structureList = new ArrayList<>(1);
@@ -256,13 +256,14 @@ public class EntityOwnership {
         if (currentModeList == null || currentModeList.get(cycleTypeIndex).size()==0) {
             return null;
         }
+        //TODO: Instead getEntityCommands() you could use getIterableCommands, why are you assuming that you are only going to iterate through Entities, Rallypoints also have commands
         if (direction == CycleDirection.INCREMENT) {
-            cycleCommandIndex = next(currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex).getEntityCommands().size(), cycleCommandIndex);
+            cycleCommandIndex = next(currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex).getIterableCommandsSize(), cycleCommandIndex);
         }
         if (direction == CycleDirection.DECREMENT) {
-            cycleCommandIndex = previous(currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex).getEntityCommands().size(), cycleCommandIndex);
+            cycleCommandIndex = previous(currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex).getIterableCommandsSize(), cycleCommandIndex);
         }
-        return currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex).getEntityCommand(cycleCommandIndex);
+        return currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex).getIterableCommand(cycleCommandIndex);
     }
 
     public Entity cycleInstance(CycleDirection direction) {
@@ -450,8 +451,8 @@ public class EntityOwnership {
         System.out.println("cycle type index in getCommand " + cycleTypeIndex);
         System.out.println("cycle instance index in getCommand " + cycleInstanceIndex);
         System.out.println("cycle command index in getCommand " + cycleCommandIndex);
-        System.out.println("get current command says " + currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex).getEntityCommand(cycleCommandIndex));
-        return currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex).getEntityCommand(cycleCommandIndex);
+        System.out.println("get current command says " + currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex).getIterableCommand(cycleCommandIndex));
+        return currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex).getIterableCommand(cycleCommandIndex);
     }
 
     /**
