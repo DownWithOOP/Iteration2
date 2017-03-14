@@ -26,7 +26,16 @@
       <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="323.0" text="Which unit do you want to create?" textAlignment="CENTER" />
       <Label alignment="CENTER" prefHeight="17.0" prefWidth="307.0" text="Where do you want to position the unit?" textAlignment="CENTER" GridPane.rowIndex="1" />
       <Label alignment="CENTER" prefHeight="77.0" prefWidth="300.0" text="What army will this unit belong to? (Optional)" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="2" />
-      <ComboBox fx:id="unitsComboBox" prefHeight="27.0" prefWidth="212.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+      <ComboBox fx:id="unitsComboBox" prefHeight="27.0" prefWidth="212.0" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+          <items>
+              <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="EXPLORER"/>
+                  <String fx:value="MELEE"/>
+                  <String fx:value="RANGED"/>
+                  <String fx:value="WORKER"/>
+              </FXCollections>
+          </items>
+      </ComboBox>
       <TextField fx:id="unitPositionTextField" maxWidth="-Infinity" prefHeight="27.0" prefWidth="213.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
       <ChoiceBox fx:id="armiesComboBox" prefHeight="27.0" prefWidth="211.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" >
           <items>
@@ -35,7 +44,7 @@
               </FXCollections>
           </items>
       </ChoiceBox>
-      <Button fx:id="createUnitButton" mnemonicParsing="false" prefHeight="27.0" prefWidth="212.0" text="Create Unit" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+      <Button fx:id="createUnitButton" onAction="#handleCreateUnit" mnemonicParsing="false" prefHeight="27.0" prefWidth="212.0" text="Create Unit" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
       <Button fx:id="cancelButton" onAction="#closePopUp" layoutX="54.0" layoutY="347.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="212.0" text="Cancel" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
    </children>
 </GridPane>

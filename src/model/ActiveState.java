@@ -68,7 +68,7 @@ public class ActiveState {
             System.out.println("active command constructed");
             if (activeCommand != null) {
                 System.out.println("active state relay actionable command active command executed");
-                activeCommand.execute();
+                activeCommandable.addToQueue(activeCommand);
             }
         }
 
