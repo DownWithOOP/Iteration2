@@ -35,7 +35,6 @@ public class ControllerDispatch {
     private AvailableCommands availableCommands;
     private GameModel gameModel;
     private HashMap<CommandType, Command> commandHashMap = new HashMap<>();
-    private ActiveState activeState;
 
     public ControllerDispatch(int playerNumber, MapDisplayObserver mapDisplayObserver, UnitObserver unitObserver, StructureObserver structureObserver, StatusObserver statusObserver) {
         availableCommands = new AvailableCommands();
@@ -58,8 +57,8 @@ public class ControllerDispatch {
     public void handleCommandActivation() {
         Commandable selectedInstance = (Commandable) gameModel.getActivePlayer().getCurrentInstance();
         CommandType selectedCommandType = gameModel.getActivePlayer().getCurrentCommandType();
-        activeState.update(selectedInstance);
-        activeState.update(selectedCommandType);
+        ActiveState.getInstance().update(selectedInstance);
+        ActiveState.getInstance().update(selectedCommandType);
         System.out.println("Added to Queue: " + selectedCommandType.toString());
 
         ActiveState.getInstance().relayCommand(CommandType.ACTIVATE_COMMAND);
@@ -178,14 +177,14 @@ public class ControllerDispatch {
     }
 
     public void updateActiveStateCommandable(EntityId commandableId) {
-        activeState.update(gameModel.getEntity(commandableId));
+        ActiveState.getInstance().update(gameModel.getEntity(commandableId));
     }
 
     public void updateActiveStateModifier(int armyNumber) {
-        activeState.constructModifier(armyNumber);
+        ActiveState.getInstance().constructModifier(armyNumber);
     }
 
     public void updateActiveStateCommand(CommandType commandType) {
-        activeState.update(commandType);
+        ActiveState.getInstance().update(commandType);
     }
 }

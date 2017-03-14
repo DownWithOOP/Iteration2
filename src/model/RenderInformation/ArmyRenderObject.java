@@ -1,5 +1,6 @@
 package model.RenderInformation;
 
+import model.common.Location;
 import model.entities.EntityId;
 
 import java.util.ArrayList;
@@ -11,10 +12,15 @@ public class ArmyRenderObject {
 
     ArrayList<UnitRenderObject> battleGroup;
     ArrayList<UnitRenderObject> reinforcements;
+    Location rallyPointLocation;
+    boolean isActive;
+
     private EntityId id;
 
-    public ArmyRenderObject(EntityId armyId) {
+    public ArmyRenderObject(EntityId armyId, Location rallyPointLocation, boolean isActive) {
         id = armyId;
+        this.rallyPointLocation = rallyPointLocation;
+        this.isActive = isActive;
         battleGroup = new ArrayList<>();
         reinforcements = new ArrayList<>();
     }
@@ -39,5 +45,8 @@ public class ArmyRenderObject {
 
     public EntityId getId() {
         return id;
+    }
+    public Location getRallyPointLocation() {
+        return rallyPointLocation;
     }
 }

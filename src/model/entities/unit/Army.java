@@ -46,16 +46,7 @@ public class Army extends Entity implements Fighter {
     public Army(CommandRelay commandRelay, CustomID playerId, String id, int locationX, int locationY) {
         super(commandRelay, playerId, id, locationX, locationY);
         addAllCommands(armyCommand);
-        rallyPoint = new RallyPoint(commandRelay, getLocation(),this);
 
-        //TODO remove. just for testing
-        reinforcements.put(new EntityId(IdType.MELEE, playerId, "?"), new Melee(null, playerId, "?aslkd", 0,0));
-        reinforcements.put(new EntityId(IdType.MELEE, playerId, "?"), new Melee(null, playerId, "?24", 0,0));
-        reinforcements.put(new EntityId(IdType.MELEE, playerId, "?"), new Melee(null, playerId, "?lkj", 0,0));
-        reinforcements.put(new EntityId(IdType.MELEE, playerId, "?"), new Melee(null, playerId, "?fd", 0,0));
-        reinforcements.put(new EntityId(IdType.MELEE, playerId, "?"), new Melee(null, playerId, "a;slk?", 0,0));
-        battleGroup.put(new EntityId(IdType.MELEE, playerId, "?"), new Melee(null, playerId, "?/???", 0,0));
-        battleGroup.put(new EntityId(IdType.MELEE, playerId, "?"), new Melee(null, playerId, "??", 0,0));
     }
 
     @Override
@@ -112,7 +103,15 @@ public class Army extends Entity implements Fighter {
         int health = unitStats.getHealth();
 
         if (this.playerId.equals(unit.getPlayerId())) {
+            //handle the first unit added; that is when rally point is created
+            if (battleGroup.isEmpty() && reinforcements.isEmpty()) {
+                battleGroup.put(unitId, unit);
+                setBattleGroupStats(attack, defense, health, upKeep);
+                rallyPoint = new RallyPoint(commandRelay, unit.getLocation(),this);
+                commandRelay.notifyModelOfRallyPointCreation(rallyPoint, Integer.parseInt(getEntityId().getId()));
+            }
             if (rallyPoint.getLocation().equals(unit.getLocation())) {
+                System.out.println("rally point location is " + rallyPoint.getLocation());
                 battleGroup.put(unitId, unit);
                 setBattleGroupStats(attack, defense, health, upKeep);
             } else {

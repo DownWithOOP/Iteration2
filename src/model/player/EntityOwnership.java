@@ -141,7 +141,9 @@ public class EntityOwnership {
 
     public boolean createArmy() {
         System.out.println("army list size " + armyList.size());
-        armyList.add(new Army(commandRelay, playerId, "?", 0, 0));
+        Army newArmy = new Army(commandRelay, playerId, "1", 0, 0);
+        armyList.add(newArmy);
+        rallyPointList.add(new RallyPoint(commandRelay, new Location(0,0), newArmy));
         System.out.println("army list size after add" + armyList.size());
         return true;
     }
@@ -294,7 +296,6 @@ public class EntityOwnership {
         if (direction == CycleDirection.DECREMENT) {
             cycleInstanceIndex = previous(currentModeList.get(cycleTypeIndex).size(), cycleInstanceIndex);
         }
-        System.out.println("list of current type " + currentModeList.get(cycleTypeIndex));
         return currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex);
     }
 
@@ -329,7 +330,6 @@ public class EntityOwnership {
                 if (!armyList.isEmpty() && armyList.size() - 1 >= selectedArmyIndex) {
                     selectedArmy = armyList.get(selectedArmyIndex);
                     currentModeList = selectedArmy.getSubModeLists();
-                    System.out.println("list of current mode after army mode cycle " + currentModeList);
                     selectedRallyPoint = null;
                 }
                 break;
@@ -342,9 +342,8 @@ public class EntityOwnership {
                 selectedRallyPoint=null;
                 break;
             case RALLY_POINT:
-                //TODO handle rally points
-                //selectedRallyPoint=rallyPointList.get(0);
-                currentModeList=null;
+                selectedRallyPoint = rallyPointList.get(0);
+                currentModeList = null;
                 break;
         }
         return returnEntityOnModeChange();
@@ -409,8 +408,16 @@ public class EntityOwnership {
                 renderInfo.addUnit(temp);
             }
         }
-        for (Army army : armyList) {
-            ArmyRenderObject armyRenderObject = new ArmyRenderObject(army.getEntityId());
+        for (int i = 0; i < armyList.size(); i++) {
+            Army army = armyList.get(i);
+            ArmyRenderObject armyRenderObject;
+            if (selectedArmyIndex == i) {
+                armyRenderObject = new ArmyRenderObject(army.getEntityId(), rallyPointList.get(selectedArmyIndex).getLocation(), true);
+            }
+            else {
+                armyRenderObject = new ArmyRenderObject(army.getEntityId(), rallyPointList.get(selectedArmyIndex).getLocation(), false);
+            }
+
             for (Entity entity : army.getBattleGroup()) {
                 Unit unit = (Unit) entity; //we know that everything in army is a unit
                 UnitStats unitStats = unit.getUnitStats().clone(); // deep clone so as not to mess anything up
@@ -596,5 +603,10 @@ public class EntityOwnership {
     public void addExistingFighterUnitToArmy(FighterUnit fighterUnit, int armyNumber) {
         selectedArmyIndex = armyNumber - 1;
         armyList.get(selectedArmyIndex).registerUnit(fighterUnit);
+    }
+
+    public void addRallyPoint(RallyPoint rallyPoint, int armyNumber) {
+        selectedArmyIndex = armyNumber - 1;
+        rallyPointList.add(selectedArmyIndex, rallyPoint);
     }
 }

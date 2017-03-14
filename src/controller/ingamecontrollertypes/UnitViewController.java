@@ -247,11 +247,11 @@ public class UnitViewController extends Controller
     }
 
     public void handleCreateArmy(ActionEvent actionEvent) {
-        this.controllerDispatch.handleCommand(CommandType.CREATE_ARMY);
         Tab newArmyTab = new Tab();
         newArmyTab.setText("Army " + (armyPane.getTabs().size() + 1));
         newArmyTab.setContent(new HBox());
         armyPane.getTabs().add(newArmyTab);
+        this.controllerDispatch.handleCommand(CommandType.CREATE_ARMY);
     }
 
     @Override

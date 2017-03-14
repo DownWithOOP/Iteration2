@@ -8,6 +8,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import model.ActiveState;
+import model.RallyPoint;
 import model.RenderInformation.*;
 import model.map.tile.terrain.TerrainType;
 import utilities.ObserverInterfaces.MiniMapObserver;
@@ -458,8 +459,20 @@ public class AreaViewport implements MiniMapSubject{
             }
         }
 
+        drawSelection();
+        drawRallyPoints();
+    }
 
-       drawSelection();
+    private void drawRallyPoints() {
+        System.out.println("trying to drawing rally points");
+        System.out.println(unitRenderInformation.returnArmyInformation());
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        double width = grass.getWidth();
+        double height = grass.getHeight();
+        for (ArmyRenderObject armyRenderObject : unitRenderInformation.returnArmyInformation()) {
+            System.out.println("drawing rally points");
+            gc.drawImage(select,0.75*width* armyRenderObject.getRallyPointLocation().getX()+ cameraX,height*1*-armyRenderObject.getRallyPointLocation().getY()+ cameraY + width*0.45);
+        }
     }
 
     @Override

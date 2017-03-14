@@ -4,6 +4,7 @@ import controller.CommandRelay;
 import controller.availablecommands.Commandable;
 import controller.commands.CommandType;
 import controller.commands.CycleDirection;
+import model.RallyPoint;
 import model.common.Location;
 import model.entities.EntityId;
 import model.entities.unit.Army;
@@ -151,6 +152,11 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
 
     public void addFighterUnitToArmy(FighterUnit fighterUnit, int armyNumber) {
         entities.addExistingFighterUnitToArmy(fighterUnit, armyNumber);
+        notifyUnitObservers();
+    }
+
+    public void addRallyPoint(RallyPoint rallyPoint, int armyNumber) {
+        entities.addRallyPoint(rallyPoint, armyNumber);
         notifyUnitObservers();
     }
 }

@@ -22,9 +22,6 @@ public class EntityId extends CustomID {
 
 
     public boolean equals(EntityId entityId) {
-        System.out.println(playerId);
-        System.out.println(entityId.getPlayerId());
-        System.out.println("equals in entity id; player id equality " + playerId.equals(entityId.getPlayerId()));
         return (super.equals(entityId) && playerId.equals(entityId.getPlayerId()));
     }
 }

@@ -97,5 +97,9 @@ public class GameModel {
     public void addFighterUnitToArmy(FighterUnit fighterUnit, int armyNumber) {
         getActivePlayer().addFighterUnitToArmy(fighterUnit, armyNumber);
     }
+
+    public void addRallyPoint(RallyPoint rallyPoint, int armyNumber) {
+        getActivePlayer().addRallyPoint(rallyPoint, armyNumber);
+    }
 }
 

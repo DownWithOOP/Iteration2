@@ -2,6 +2,7 @@ package controller;
 
 import controller.commands.Direction;
 import model.GameModel;
+import model.RallyPoint;
 import model.common.Location;
 import model.entities.unit.FighterUnit;
 
@@ -28,5 +29,9 @@ public class CommandRelay {
 
     public void notifyModelOfUnitJoiningArmy(FighterUnit fighterUnit, int armyNumber) {
         model.addFighterUnitToArmy(fighterUnit, armyNumber);
+    }
+
+    public void notifyModelOfRallyPointCreation(RallyPoint rallyPoint, int armyNumber) {
+        model.addRallyPoint(rallyPoint, armyNumber);
     }
 }
