@@ -214,12 +214,12 @@ public class MainViewController extends Controller{
     //quit the entire game application
     @FXML
     public void handleQuitGame(ActionEvent event) {
-                                                quitGame();
-                                                           }
+        quitGame();
+    }
 
     public void quitGame() {
-                         getStage().close();
-                                            }
+        getStage().close();
+    }
 
     @FXML
     public void keyListener(KeyEvent event) throws IOException {
@@ -244,6 +244,26 @@ public class MainViewController extends Controller{
         this.areaViewport = new AreaViewport(vbox, canvas, miniMap);
         this.statusViewport = new StatusViewport(cycleLabels);
 
+    }
+
+    //Functions to move cursor via numpad input
+    public void moveCursorSW(){
+        areaViewport.selectSW();
+    }
+    public void moveCursorSouth(){
+        areaViewport.selectSouth();
+    }
+    public void moveCursorSE(){
+        areaViewport.selectSE();
+    }
+    public void moveCursorNW(){
+        areaViewport.selectNW();
+    }
+    public void moveCursorNorth(){
+        areaViewport.selectNorth();
+    }
+    public void moveCursorNE(){
+        areaViewport.selectNE();
     }
 
 }

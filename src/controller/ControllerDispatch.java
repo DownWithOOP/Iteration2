@@ -5,27 +5,17 @@ import controller.availablecommands.AvailableCommands;
 import controller.availablecommands.Commandable;
 import controller.commands.Command;
 import controller.commands.CommandType;
-import controller.commands.controllercommands.MoveDown;
-import controller.commands.controllercommands.MoveLeft;
-import controller.commands.controllercommands.MoveRight;
-import controller.commands.controllercommands.MoveUp;
-import controller.commands.entitycommand.armycommand.AttackCommand;
-import controller.commands.entitycommand.armycommand.DefendCommand;
-import controller.commands.entitycommand.armycommand.DisbandCommand;
-import controller.commands.entitycommand.entitycommand.CancelQueueCommand;
-import controller.commands.entitycommand.entitycommand.DecommissionCommand;
-import controller.commands.entitycommand.entitycommand.PowerDownCommand;
-import controller.commands.entitycommand.entitycommand.PowerUpCommand;
-import controller.commands.entitycommand.structureCommand.capitalcommand.CreateUnitCommand;
-import controller.commands.entitycommand.structureCommand.capitalcommand.HealUnitCommand;
-import controller.commands.entitycommand.unitcommand.AbandonArmyCommand;
-import controller.commands.entitycommand.unitcommand.AdvanceToRallyPointCommand;
-import controller.commands.entitycommand.unitcommand.JoinArmyCommand;
-import controller.commands.entitycommand.unitcommand.MoveUnitCommand;
-import controller.commands.entitycommand.unitcommand.colonistcommand.BuildCapitalCommand;
-import controller.commands.entitycommand.unitcommand.explorercommand.ProspectCommand;
+import controller.commands.controllercommands.*;
+import controller.commands.entitycommand.armycommand.*;
+import controller.commands.entitycommand.entitycommand.*;
+import controller.commands.entitycommand.unitcommand.*;
+import controller.commands.entitycommand.unitcommand.explorercommand.*;
 import controller.commands.playercommands.*;
+import controller.ingamecontrollertypes.MainViewController;
+import model.ActiveState;
+import model.Cursor;
 import model.GameModel;
+import model.common.Location;
 import model.entities.Entity;
 import model.entities.unit.Army;
 import model.entities.unit.Explorer;
@@ -44,56 +34,71 @@ public class ControllerDispatch {
     private AvailableCommands availableCommands;
     private GameModel gameModel;
     private HashMap<CommandType, Command> commandHashMap = new HashMap<>();
+    private ActiveState activeState;
 
     public ControllerDispatch(int playerNumber, MapDisplayObserver mapDisplayObserver, UnitObserver unitObserver, StructureObserver structureObserver, StatusObserver statusObserver) {
         availableCommands = new AvailableCommands();
         gameModel = new GameModel(playerNumber, mapDisplayObserver, unitObserver, structureObserver, statusObserver);
+        //TODO: do we really need to define activeState like this/ does everything need to be static? --consider restructuring
+        activeState = new ActiveState(new Cursor(new Location(4,4)));
         setGameModelMap();
     }
 
     public void handleCommand(CommandType commandType) {
-        //TODO: add available actions in here
+        //TODO: could add all these commands to command factory and perform them using the following method
         if (commandHashMap.containsKey(commandType)) {
             System.out.println("issuing command: " + commandHashMap.get(commandType).toString());
             commandHashMap.get(commandType).execute();
+            return;
         }
+        //ActiveState.relayCommand(commandType);
     }
 
     public void handleCommandActivation() {
         Entity selectedInstance = (Entity) gameModel.getActivePlayer().getCurrentInstance();
         CommandType selectedCommandType = gameModel.getActivePlayer().getCurrentCommandType();
+        activeState.update(selectedInstance);
+        activeState.update(selectedCommandType);
         System.out.println("Added to Queue: " + selectedCommandType.toString());
-        switch(selectedCommandType) {
-            case DISBAND:
-                selectedInstance.addToQueue(new DisbandCommand((Army)selectedInstance));
-                break;
-            case POWER_UP:
-                selectedInstance.addToQueue(new PowerUpCommand(selectedInstance));
-                break;
-            case POWER_DOWN:
-                selectedInstance.addToQueue(new PowerDownCommand(selectedInstance));
-                break;
-            case CANCEL_QUEUE:
-                selectedInstance.addToQueue(new CancelQueueCommand(selectedInstance));
-                break;
-            case DECOMISSION:
-                selectedInstance.addToQueue(new DecommissionCommand(selectedInstance));
-                break;
-            case ABANDON_ARMY:
-                selectedInstance.addToQueue(new AbandonArmyCommand((Unit)selectedInstance));
-                break;
-            case PROSPECT:
-                selectedInstance.addToQueue(new ProspectCommand((Explorer) selectedInstance));
-                break;
-            default:
-                System.out.print("Invalid command");
-                break;
-        }
+        ActiveState.relayCommand(CommandType.ACTIVATE_COMMAND);
+
+        //System.out.println("controller dispatch says that command is " + selectedCommandType);
+//        switch(selectedCommandType) {
+//            case DISBAND:
+//                selectedInstance.addToQueue(new DisbandCommand((Army)selectedInstance));
+//                break;
+//            case POWER_UP:
+//                selectedInstance.addToQueue(new PowerUpCommand(selectedInstance));
+//                break;
+//            case POWER_DOWN:
+//                selectedInstance.addToQueue(new PowerDownCommand(selectedInstance));
+//                break;
+//            case CANCEL_QUEUE:
+//                selectedInstance.addToQueue(new CancelQueueCommand(selectedInstance));
+//                break;
+//            case DECOMMISSION:
+//                selectedInstance.addToQueue(new DecommissionCommand(selectedInstance));
+//                break;
+//            case ABANDON_ARMY:
+//                selectedInstance.addToQueue(new AbandonArmyCommand((Unit)selectedInstance));
+//                break;
+//            case PROSPECT:
+//                selectedInstance.addToQueue(new ProspectCommand((Explorer) selectedInstance));
+//                break;
+//            default:
+//                System.out.print("Invalid command");
+//                break;
+//        }
     }
 
     //TODO: ASK  IF THIS WILL WORK WHEN THE PLAYERS ARE CHANGED
+    //^^^ it (should) work now :D - JS
     private void setGameModelMap() {
-        commandHashMap.put(CommandType.END_TURN, () -> gameModel.endTurn() );
+        commandHashMap.put(CommandType.END_TURN, () -> {
+                                                            gameModel.endTurn();
+                                                            setGameModelMap();
+                                                            return true;
+                                                        });
         commandHashMap.put(CommandType.CYCLE_MODE_NEXT, new CycleModeNext(gameModel.getActivePlayer()));
         commandHashMap.put(CommandType.CYCLE_MODE_PREV, new CycleModePrev(gameModel.getActivePlayer()));
         commandHashMap.put(CommandType.CYCLE_TYPE_NEXT, new CycleTypeNext(gameModel.getActivePlayer()));
@@ -106,10 +111,30 @@ public class ControllerDispatch {
     }
 
     public void updateActiveController(Controller newActiveController) {
-        commandHashMap.put(CommandType.MOVE_CAMERA_UP, new MoveUp(newActiveController));
-        commandHashMap.put(CommandType.MOVE_CAMERA_RIGHT, new MoveRight(newActiveController));
-        commandHashMap.put(CommandType.MOVE_CAMERA_DOWN, new MoveDown(newActiveController));
-        commandHashMap.put(CommandType.MOVE_CAMERA_LEFT, new MoveLeft(newActiveController));
+        commandHashMap.put(CommandType.MOVE_CAMERA_UP, new MoveCameraUp(newActiveController));
+        commandHashMap.put(CommandType.MOVE_CAMERA_RIGHT, new MoveCameraRight(newActiveController));
+        commandHashMap.put(CommandType.MOVE_CAMERA_DOWN, new MoveCameraDown(newActiveController));
+        commandHashMap.put(CommandType.MOVE_CAMERA_LEFT, new MoveCameraLeft(newActiveController));
+
+        //Put in cursor commands if we have a main view controller
+        //Otherwise, remove cursor commands from map (if they exist) so cursor doesn't move when not on main menu
+        try {
+            MainViewController newActiveMainViewController = (MainViewController) newActiveController;
+
+            commandHashMap.put(CommandType.MOVE_CURSOR_NORTH_EAST, new MoveCursorNE(newActiveMainViewController));
+            commandHashMap.put(CommandType.MOVE_CURSOR_NORTH, new MoveCursorNorth(newActiveMainViewController));
+            commandHashMap.put(CommandType.MOVE_CURSOR_NORTH_WEST, new MoveCursorNW(newActiveMainViewController));
+            commandHashMap.put(CommandType.MOVE_CURSOR_SOUTH_EAST, new MoveCursorSE(newActiveMainViewController));
+            commandHashMap.put(CommandType.MOVE_CURSOR_SOUTH, new MoveCursorSouth(newActiveMainViewController));
+            commandHashMap.put(CommandType.MOVE_CURSOR_SOUTH_WEST, new MoveCursorSW(newActiveMainViewController));
+        } catch (ClassCastException e) {
+            commandHashMap.remove(CommandType.MOVE_CURSOR_NORTH_EAST);
+            commandHashMap.remove(CommandType.MOVE_CURSOR_NORTH);
+            commandHashMap.remove(CommandType.MOVE_CURSOR_NORTH_WEST);
+            commandHashMap.remove(CommandType.MOVE_CURSOR_SOUTH_EAST);
+            commandHashMap.remove(CommandType.MOVE_CURSOR_SOUTH);
+            commandHashMap.remove(CommandType.MOVE_CURSOR_SOUTH_WEST);
+        }
     }
 
     public int getActivePlayerNumber() {

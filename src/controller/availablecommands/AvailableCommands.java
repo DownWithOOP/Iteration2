@@ -3,7 +3,6 @@ package controller.availablecommands;
 import controller.commands.Command;
 import controller.commands.CommandType;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -43,14 +42,12 @@ public class AvailableCommands {
 //    }
 
     private void setDirections(){
-        direction.add(CommandType.NORTH);
-        direction.add(CommandType.NORTH_EAST);
-        direction.add(CommandType.NORTH_WEST);
-        direction.add(CommandType.WEST);
-        direction.add(CommandType.EAST);
-        direction.add(CommandType.SOUTH);
-        direction.add(CommandType.SOUTH_EAST);
-        direction.add(CommandType.SOUTH_WEST);
+        direction.add(CommandType.MOVE_CURSOR_NORTH);
+        direction.add(CommandType.MOVE_CURSOR_NORTH_EAST);
+        direction.add(CommandType.MOVE_CURSOR_NORTH_WEST);
+        direction.add(CommandType.MOVE_CURSOR_SOUTH);
+        direction.add(CommandType.MOVE_CURSOR_SOUTH_EAST);
+        direction.add(CommandType.MOVE_CURSOR_SOUTH_WEST);
 
     }
 }

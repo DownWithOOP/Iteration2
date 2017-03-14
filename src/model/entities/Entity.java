@@ -20,20 +20,20 @@ import java.util.*;
 public abstract class Entity extends Commandable {
     protected EntityId entityId;
     protected CustomID playerId;
-    private Queue<Command> commandQueue = new ArrayDeque<>();
-    private Command currentCommand;
+    //private Queue<Command> commandQueue = new ArrayDeque<>();
+    //private Command currentCommand;
     private boolean isPoweredDown;
     private Location location;
     protected Stats entityStats;
 
-    protected ArrayList<CommandType> entityCommand = new ArrayList<>();
+    protected static ArrayList<CommandType> entityCommand = new ArrayList<>();
 
-//    static {
-//        entityCommand.add(CommandType.CANCEL_QUEUE);
-//        entityCommand.add(CommandType.DECOMISSION);
-//        entityCommand.add(CommandType.POWER_DOWN);
-//        entityCommand.add(CommandType.POWER_UP);
-//    }
+    static {
+        entityCommand.add(CommandType.CANCEL_QUEUE);
+        entityCommand.add(CommandType.DECOMMISSION);
+        entityCommand.add(CommandType.POWER_DOWN);
+        entityCommand.add(CommandType.POWER_UP);
+    }
 
     //  TODO:TAKE IN THE MOCK UP MAP, TAKE IN THE PLAYER ID
 
@@ -46,10 +46,10 @@ public abstract class Entity extends Commandable {
         this.playerId = playerId;
         this.isPoweredDown = false;
         location = new Location(locationX,locationY); // starting location of entity
-        entityCommand.add(CommandType.CANCEL_QUEUE);
-        entityCommand.add(CommandType.DECOMISSION);
-        entityCommand.add(CommandType.POWER_DOWN);
-        entityCommand.add(CommandType.POWER_UP);
+//        entityCommand.add(CommandType.CANCEL_QUEUE);
+//        entityCommand.add(CommandType.DECOMMISSION);
+//        entityCommand.add(CommandType.POWER_DOWN);
+//        entityCommand.add(CommandType.POWER_UP);
         addAllCommands(entityCommand);
 
     }
@@ -77,29 +77,29 @@ public abstract class Entity extends Commandable {
 
     public abstract void decommission();
 
-    public void addToQueue(Command command) {
-        commandQueue.add(command);
-    }
+//    public void addToQueue(Command command) {
+//        commandQueue.add(command);
+//    }
 
-    public void cancelQueue() {
-
-    }
-
-    public void executeQueue(){
-        if(currentCommand == null){
-            //System.out.println("hell0");
-            if(!commandQueue.isEmpty()){
-                System.out.println("Not yet kiddo");
-                currentCommand = commandQueue.poll();
-            }
-        }
-        if (currentCommand != null) {
-            if(currentCommand.execute()){
-                System.out.println("Command got executed");
-                currentCommand = commandQueue.poll();
-            }
-        }
-    }
+//    public void cancelQueue() {
+//
+//    }
+//
+//    public void executeQueue(){
+//        if(currentCommand == null){
+//            //System.out.println("hell0");
+//            if(!commandQueue.isEmpty()){
+//                System.out.println("Not yet kiddo");
+//                currentCommand = commandQueue.poll();
+//            }
+//        }
+//        if (currentCommand != null) {
+//            if(currentCommand.execute()){
+//                System.out.println("Command got executed");
+//                currentCommand = commandQueue.poll();
+//            }
+//        }
+//    }
 
     public void powerUp() {
         System.out.println("powerUP");
@@ -144,6 +144,10 @@ public abstract class Entity extends Commandable {
     public ArrayList<CommandType> getEntityCommands() {
         return entityCommand;
     }
+
+//    public Command getCurrentCommand() {
+//        return currentCommand;
+//    }
 
     @Override
     public String toString() { return entityId.toString();}

@@ -79,7 +79,6 @@ public class UnitViewController extends Controller
 
     @Override
     protected void render() {
-
         UnitRenderInformation unitRenderInformation = unitObserver.share();
         ArrayList<UnitRenderObject> data = unitRenderInformation.returnRenderInformation();
         int code = data.hashCode(); // compare to see if there is a change to the data, if so we will need to refresh

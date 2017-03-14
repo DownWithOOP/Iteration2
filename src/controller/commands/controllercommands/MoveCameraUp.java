@@ -6,17 +6,17 @@ import controller.commands.Command;
 /**
  * Created by Jonathen on 3/8/2017.
  */
-public class MoveDown implements Command{
+public class MoveCameraUp implements Command {
 
     Controller controllerToActOn;
 
-    public MoveDown(Controller controller) {
+    public MoveCameraUp(Controller controller) {
         controllerToActOn = controller;
     }
 
     @Override
     public boolean execute() {
-        controllerToActOn.moveDown();
+        controllerToActOn.moveUp();
         return true;
     }
 }
