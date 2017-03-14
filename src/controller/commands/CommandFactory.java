@@ -51,8 +51,6 @@ public class CommandFactory {
      */
     public Command createSimpleCommand(CommandType commandType, Commandable commandable) {
 
-        System.out.println("is it a simple command? " + simpleCommandResult.containsKey(commandType));
-
         try {
             if (simpleCommandResult.containsKey(commandType)) {
                 return simpleCommandResult.get(commandType).createCommand(commandable);

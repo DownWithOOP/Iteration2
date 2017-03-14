@@ -2,6 +2,7 @@ package controller.Observers;
 
 import model.RenderInformation.StructureRenderInformation;
 import model.RenderInformation.StructureRenderObject;
+import model.entities.EntityId;
 import model.entities.structure.Structure;
 import utilities.id.CustomID;
 
@@ -18,7 +19,7 @@ public class StructureObserver implements utilities.ObserverInterfaces.Structure
     }
 
     @Override
-    public void updateStructure(CustomID structureId, StructureRenderObject structureRenderObject){
+    public void updateStructure(EntityId structureId, StructureRenderObject structureRenderObject){
         structureRenderInformation.removeStructure(structureId);
         structureRenderInformation.addStructure(structureRenderObject);
     }

@@ -1,8 +1,11 @@
 package model;
 
 import controller.CommandRelay;
+import controller.availablecommands.Commandable;
 import controller.commands.Direction;
 import model.common.Location;
+import model.entities.EntityId;
+import model.entities.unit.FighterUnit;
 import model.map.Map;
 import model.player.Player;
 import utilities.ObserverInterfaces.MapObserver;
@@ -85,6 +88,14 @@ public class GameModel {
             //TODO whaaaaaaaaaaaaaaaaaaaaa?
             //nothing to attack you idiot
         }
+    }
+
+    public Commandable getEntity(EntityId commandableId) {
+        return getActivePlayer().getEntity(commandableId);
+    }
+
+    public void addFighterUnitToArmy(FighterUnit fighterUnit, int armyNumber) {
+        getActivePlayer().addFighterUnitToArmy(fighterUnit, armyNumber);
     }
 }
 

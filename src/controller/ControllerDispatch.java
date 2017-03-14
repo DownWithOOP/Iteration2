@@ -17,6 +17,7 @@ import model.Cursor;
 import model.GameModel;
 import model.common.Location;
 import model.entities.Entity;
+import model.entities.EntityId;
 import model.entities.unit.Army;
 import model.entities.unit.Explorer;
 import model.entities.unit.Unit;
@@ -93,6 +94,39 @@ public class ControllerDispatch {
 
     }
 
+    public void handleCommandActivationFromView() {
+        //View needs to have set the necessary information in active state before calling this
+        ActiveState.getInstance().relayCommand(CommandType.ACTIVATE_COMMAND);
+
+        //System.out.println("controller dispatch says that command is " + selectedCommandType);
+//        switch(selectedCommandType) {
+//            case DISBAND:
+//                selectedInstance.addToQueue(new DisbandCommand((Army)selectedInstance));
+//                break;
+//            case POWER_UP:
+//                selectedInstance.addToQueue(new PowerUpCommand(selectedInstance));
+//                break;
+//            case POWER_DOWN:
+//                selectedInstance.addToQueue(new PowerDownCommand(selectedInstance));
+//                break;
+//            case CANCEL_QUEUE:
+//                selectedInstance.addToQueue(new CancelQueueCommand(selectedInstance));
+//                break;
+//            case DECOMMISSION:
+//                selectedInstance.addToQueue(new DecommissionCommand(selectedInstance));
+//                break;
+//            case ABANDON_ARMY:
+//                selectedInstance.addToQueue(new AbandonArmyCommand((Unit)selectedInstance));
+//                break;
+//            case PROSPECT:
+//                selectedInstance.addToQueue(new ProspectCommand((Explorer) selectedInstance));
+//                break;
+//            default:
+//                System.out.print("Invalid command");
+//                break;
+//        }
+    }
+
     //TODO: ASK  IF THIS WILL WORK WHEN THE PLAYERS ARE CHANGED
     //^^^ it (should) work now :D - JS
     private void setGameModelMap() {
@@ -141,5 +175,17 @@ public class ControllerDispatch {
 
     public int getActivePlayerNumber() {
         return gameModel.getActivePlayerIndex() + 1;
+    }
+
+    public void updateActiveStateCommandable(EntityId commandableId) {
+        activeState.update(gameModel.getEntity(commandableId));
+    }
+
+    public void updateActiveStateModifier(int armyNumber) {
+        activeState.constructModifier(armyNumber);
+    }
+
+    public void updateActiveStateCommand(CommandType commandType) {
+        activeState.update(commandType);
     }
 }

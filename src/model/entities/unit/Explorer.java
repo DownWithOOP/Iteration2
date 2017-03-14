@@ -52,12 +52,6 @@ public class Explorer extends FighterUnit {
     }
 
     @Override
-    public void joinArmy(int armyNumber) {
-
-    }
-
-
-    @Override
     public void decommission() {
 
     }

@@ -12,6 +12,7 @@ import model.RallyPoint;
 import model.RenderInformation.*;
 import model.common.Location;
 import model.entities.Entity;
+import model.entities.EntityId;
 import model.entities.EntityType;
 import model.entities.Stats.UnitStats;
 import model.entities.UnitFactory;
@@ -80,11 +81,11 @@ public class EntityOwnership {
         this.unitFactory = new UnitFactory(commandRelay);
         this.commandRelay = commandRelay;
 
+        this.playerId = playerId;
 
         initializeLists();
         initializeUnits(startingX, startingY);
         changeMode(modes[cycleModeIndex]);
-        this.playerId = playerId;
 
 
         System.out.println("End of E.O. constructor; cycle type index is: " + cycleTypeIndex);
@@ -139,7 +140,10 @@ public class EntityOwnership {
     }
 
     public boolean createArmy() {
-        return armyList.add(new Army(commandRelay, playerId, "?", 0, 0));
+        System.out.println("army list size " + armyList.size());
+        armyList.add(new Army(commandRelay, playerId, "?", 0, 0));
+        System.out.println("army list size after add" + armyList.size());
+        return true;
     }
 
     private boolean addToIndex(List<List<Entity>> entityList, int index, Entity entity) {
@@ -401,9 +405,23 @@ public class EntityOwnership {
             for (Entity entity : list) {
                 Unit unit = (Unit) entity;
                 UnitStats unitStats = unit.getUnitStats().clone(); // deep clone so as not to mess anything up
-                UnitRenderObject temp = new UnitRenderObject(unit.getEntityId(), unit.getEntityType(), (int)(unit.getLocation().getX()), (int)(unit.getLocation().getY()), unitStats);
+                UnitRenderObject temp = new UnitRenderObject(unit.getEntityId(), (int)(unit.getLocation().getX()), (int)(unit.getLocation().getY()), unitStats);
                 renderInfo.addUnit(temp);
             }
+        }
+        for (Army army : armyList) {
+            ArmyRenderObject armyRenderObject = new ArmyRenderObject(army.getEntityId());
+            for (Entity entity : army.getBattleGroup()) {
+                Unit unit = (Unit) entity; //we know that everything in army is a unit
+                UnitStats unitStats = unit.getUnitStats().clone(); // deep clone so as not to mess anything up
+                armyRenderObject.addUnitToBattleGroup(new UnitRenderObject(unit.getEntityId(), (int)(unit.getLocation().getX()), (int)(unit.getLocation().getY()), unitStats));
+            }
+            for (Entity entity : army.getReinforcements()) {
+                Unit unit = (Unit) entity; //we know that everything in army is a unit
+                UnitStats unitStats = unit.getUnitStats().clone(); // deep clone so as not to mess anything up
+                armyRenderObject.addUnitToReinforcements(new UnitRenderObject(unit.getEntityId(), (int)(unit.getLocation().getX()), (int)(unit.getLocation().getY()), unitStats));
+            }
+            renderInfo.addArmy(armyRenderObject);
         }
         return renderInfo;
     }
@@ -561,4 +579,22 @@ public class EntityOwnership {
 
     }
 
+    public Commandable getEntity(EntityId commandableId) {
+        System.out.println("Getting entity based on id");
+         for (List<Entity> list : unitList) {
+             for (Entity entity : list) {
+                 System.out.println(entity.toString());
+                 if (commandableId.equals(entity.getEntityId())) {
+                     return entity;
+                 }
+             }
+         }
+         System.out.println("no entity found based on id");
+         return null;
+    }
+
+    public void addExistingFighterUnitToArmy(FighterUnit fighterUnit, int armyNumber) {
+        selectedArmyIndex = armyNumber - 1;
+        armyList.get(selectedArmyIndex).registerUnit(fighterUnit);
+    }
 }

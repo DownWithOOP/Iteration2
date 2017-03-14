@@ -1,6 +1,7 @@
 package controller.Observers;
 
 import model.RenderInformation.*;
+import model.entities.EntityId;
 import utilities.id.CustomID;
 
 import java.util.ArrayList;
@@ -131,7 +132,7 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
     }
 
     @Override
-    public void updateUnit(CustomID unitId, UnitRenderObject unitRenderObject){
+    public void updateUnit(EntityId unitId, UnitRenderObject unitRenderObject){
         //this.currUnitRenderInformation = unitRenderInformation;
         if(currUnitRenderInformation!=null){
             currUnitRenderInformation.removeUnit(unitId);
@@ -141,7 +142,7 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
     }
 
     @Override
-    public void updateStructure(CustomID structureId, StructureRenderObject structureRenderObject){
+    public void updateStructure(EntityId structureId, StructureRenderObject structureRenderObject){
         //this.currStructureRenderInformation = structureRenderInformation;
         if(currStructureRenderInformation!=null){
             currStructureRenderInformation.removeStructure(structureId);
