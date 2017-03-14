@@ -1,10 +1,16 @@
 package model.entities.unit;
 
 import controller.commands.CommandType;
+import model.RenderInformation.UnitRenderInformation;
+import model.RenderInformation.UnitRenderObject;
 import model.common.Location;
 import model.entities.Entity;
 import model.entities.Stats.Stats;
 import model.entities.Stats.UnitStats;
+import utilities.ObserverInterfaces.MapObserver;
+import utilities.ObserverInterfaces.MapSubject;
+import utilities.ObserverInterfaces.UnitObserver;
+import utilities.ObserverInterfaces.UnitSubject;
 import utilities.id.CustomID;
 
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
@@ -13,8 +19,11 @@ import java.util.ArrayList;
 /**
  * Created by jordi on 2/24/2017.
  */
-public abstract class Unit extends Entity {
+public abstract class Unit extends Entity implements UnitSubject, MapSubject {
     private ArrayList<Location> currentPath;
+
+    private UnitObserver unitObserver;
+    private MapObserver mapObserver;
 
     //static ArrayList<CommandType> unitCommand= new ArrayList<>();
 //    static {
@@ -53,16 +62,57 @@ public abstract class Unit extends Entity {
 //                //TODO: Implement move command to add locations to command queue
 //                //this.addToQueue();
 //            }
+            //Do this to get the current render object
             super.setLocation(newX, newY);
+            notifyUnitObservers();
+            notifyMapObservers();
+
         } else {
             System.out.println("Movement distance too far");
         }
+
+    }
+
+    private UnitRenderObject createRenderObject(){
+        UnitStats unitStats = this.getUnitStats().clone(); // deep clone so as not to mess anything up
+        return new UnitRenderObject(this.getEntityId(), this.getEntityType(), (int)(this.getLocation().getX()), (int)(this.getLocation().getY()), unitStats);
     }
 
     public void advanceToRallyPoint(int number){
 
     }
 
+    @Override
+    public void registerUnitObserver(UnitObserver o) {
+        this.unitObserver = o;
+    }
+
+    @Override
+    public void unregister(UnitObserver o) {
+
+    }
+
+    @Override
+    public void notifyUnitObservers() {
+        unitObserver.updateUnit(getEntityId(), createRenderObject());
+        System.out.println("Observer notified");
+    }
+
+    @Override
+    public void registerMapObserver(MapObserver o) {
+        this.mapObserver = o;
+    }
+
+    @Override
+    public void unregister(MapObserver o) {
+
+    }
+
+    @Override
+    public void notifyMapObservers() {
+        mapObserver.updateUnit(getEntityId(), createRenderObject());
+        System.out.println("map observer notified");
+    }
 
     public int getUnitMovement(){
         return ((UnitStats)entityStats).getMovement();

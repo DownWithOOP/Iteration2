@@ -33,6 +33,7 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
         this.playerNumber = playerNumber;
         customID=new CustomID(IdType.PLAYER,"newPlayer");
         entities = new EntityOwnership(customID, startingX, startingY); //TODO should entity ownership know Player?
+        entities.setUnitObservers(unitObserver, observer);
         resources = new ResourceOwnership(customID);
         currentSelection = new Selection(entities.getCurrentInstance()); //TODO rename method
         this.playerMap = map; // TODO for the moment global map is shared, later each player will have own map

@@ -74,7 +74,7 @@ public class ControllerDispatch {
                 selectedInstance.addToQueue(new ProspectCommand((Explorer) selectedInstance));
                 break;
             case MOVE:
-                selectedInstance.addToQueue(new MoveUnitCommand((Unit) selectedInstance, 6, 5));
+                selectedInstance.addToQueue(new MoveUnitCommand((Unit) selectedInstance, (int) selectedInstance.getLocation().getX(), (int) selectedInstance.getLocation().getY() + 1));
                 break;
             default:
                 System.out.print("Invalid command");

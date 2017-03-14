@@ -47,6 +47,9 @@ public class TileRenderObject {
     public void addUserEntity(IdType entity){
         this.userEntities.add(entity);
     }
+    public void removeUserEntity(){
+        userEntities.clear();
+    }
     public void addEnemyEntity(IdType entity){
         this.enemyEntities.add(entity);
     }
