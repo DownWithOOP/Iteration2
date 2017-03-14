@@ -2,15 +2,14 @@ package controller.ingamecontrollertypes;
 
 import controller.Controller;
 import controller.SwitchControllerRelay;
+import controller.commands.CommandType;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
@@ -43,6 +42,9 @@ public class UnitViewController extends Controller
     private TextArea stats;
     @FXML
     private TextArea mission;
+    @FXML
+    private TabPane armyPane;
+
     private VBox vb;
     private int hashcode;
 
@@ -175,6 +177,13 @@ public class UnitViewController extends Controller
 
     public void handleChangeToMainView(ActionEvent actionEvent) throws IOException {
         this.switchControllerRelay.changeToMain();
+    }
+
+    public void handleCreateArmy(ActionEvent actionEvent) {
+        //this.controllerDispatch.handleCommand(CommandType.CREATE_ARMY);
+        Tab newArmyTab = new Tab();
+        newArmyTab.setText("Army " + (armyPane.getTabs().size() + 1));
+        armyPane.getTabs().add(newArmyTab);
     }
 
     @Override
