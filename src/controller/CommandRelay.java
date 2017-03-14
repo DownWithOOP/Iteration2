@@ -17,8 +17,8 @@ public class CommandRelay {
         this.model = model;
     }
 
-    public void notifyModelOfAttack(Location location, Direction direction, int damage) {
-        //model.applyDamageToEntitiesByLocation(location, direction, damage);
+    public void notifyModelOfAttack(Location location, int damage) {
+        model.applyDamageToEntitiesByLocation(location, damage);
     }
 
     public void notifyModelOfUnitUpdate() {

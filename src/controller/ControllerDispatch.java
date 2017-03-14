@@ -55,7 +55,7 @@ public class ControllerDispatch {
     }
 
     public void handleCommandActivation() {
-        Entity selectedInstance = (Entity) gameModel.getActivePlayer().getCurrentInstance();
+        Commandable selectedInstance = (Commandable) gameModel.getActivePlayer().getCurrentInstance();
         CommandType selectedCommandType = gameModel.getActivePlayer().getCurrentCommandType();
         activeState.update(selectedInstance);
         activeState.update(selectedCommandType);

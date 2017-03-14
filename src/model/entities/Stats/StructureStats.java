@@ -35,8 +35,7 @@ public class StructureStats extends Stats {
     }
 
     public StructureStats clone(){
-        StructureStats temp= new StructureStats(getDefensiveDamage(), getArmor(), getHealth(),
+        return new StructureStats(getDefensiveDamage(), getArmor(), getHealth(),
                                                 getUpkeep(), getVisionRadius());
-        return temp;
     }
 }

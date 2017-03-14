@@ -58,11 +58,11 @@ public class Cursor extends Commandable {
         location.moveSouth();
     }
 
-    public void moveWest() {
+    private void moveWest() {
         location.moveWest();
     }
 
-    public void moveEast() {
+    private void moveEast() {
         location.moveEast();
     }
 

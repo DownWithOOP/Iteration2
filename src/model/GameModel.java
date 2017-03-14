@@ -1,12 +1,17 @@
 package model;
 
 import controller.CommandRelay;
+import controller.commands.Direction;
+import model.common.Location;
 import model.map.Map;
 import model.player.Player;
 import utilities.ObserverInterfaces.MapObserver;
 import utilities.ObserverInterfaces.StatusObserver;
 import utilities.ObserverInterfaces.StructureObserver;
 import utilities.ObserverInterfaces.UnitObserver;
+import utilities.id.CustomID;
+
+import java.util.HashMap;
 
 /**
  * Created by Konrad on 2/17/2017.
@@ -14,6 +19,7 @@ import utilities.ObserverInterfaces.UnitObserver;
 public class GameModel {
 
     private Player[] playersList;
+    private java.util.Map<CustomID, Player> playersMap = new HashMap<>();
     private int activePlayerIndex; // this is the player whose current turn it is
     private Map masterMap; // the map that will have the global map, each player will have their own map as well
 
@@ -37,6 +43,7 @@ public class GameModel {
                 temp = new Player(i+1,masterMap, new CommandRelay(this), observer, unitObserver, structureObserver, statusObserver, 0,0); // TODO give players unique maps
             }
             playersList[i] = temp;
+            playersMap.put(temp.getCustomID(), temp);
         }
         // when game starts, player 1 is starting
         this.activePlayerIndex = 0;
@@ -67,6 +74,17 @@ public class GameModel {
 
     public int getActivePlayerIndex() {
         return activePlayerIndex;
+    }
+
+    public void applyDamageToEntitiesByLocation(Location location, int damage) {
+        CustomID playerBeingAttacked = masterMap.getPlayerOnTile(location);
+        if (playersMap.containsKey(playerBeingAttacked)) {
+            playersMap.get(playerBeingAttacked).applyDamageToEntitiesOnLocation(location, damage);
+        }
+        else {
+            //TODO whaaaaaaaaaaaaaaaaaaaaa?
+            //nothing to attack you idiot
+        }
     }
 }
 

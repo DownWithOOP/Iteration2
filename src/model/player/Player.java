@@ -4,6 +4,7 @@ import controller.CommandRelay;
 import controller.availablecommands.Commandable;
 import controller.commands.CommandType;
 import controller.commands.CycleDirection;
+import model.common.Location;
 import utilities.ObserverInterfaces.*;
 import model.map.Map;
 import utilities.id.CustomID;
@@ -54,18 +55,22 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
     }
 
     public void cycleMode(CycleDirection direction){
+        entities.cycleMode(direction);
         this.notifyStatusObservers(); // yay status viewport
     }
 
     public void cycleType(CycleDirection direction){
+        entities.cycleType(direction);
         this.notifyStatusObservers(); // yay status viewport
     }
 
     public void cycleInstance(CycleDirection direction){
+        entities.cycleInstance(direction);
         this.notifyStatusObservers(); // yay status viewport
     }
 
     public void cycleCommand(CycleDirection direction){
+        entities.cycleCommand(direction);
         this.notifyStatusObservers(); // yay status viewport
         //System.out.println("command cycle not hooked up yet :(");
     }
@@ -128,5 +133,7 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
     public CustomID getCustomID() { return customID; }
 
 
-
+    public void applyDamageToEntitiesOnLocation(Location location, int damage) {
+        entities.applyDamageToEntitiesOnLocation(location, damage);
+    }
 }

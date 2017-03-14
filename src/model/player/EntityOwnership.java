@@ -9,16 +9,14 @@ import controller.commands.CycleDirection;
 import model.Mode;
 import model.RallyPoint;
 import model.RenderInformation.*;
+import model.common.Location;
 import model.entities.Entity;
 import model.entities.EntityType;
 import model.entities.Stats.UnitStats;
 import model.entities.UnitFactory;
 import model.entities.structure.Capital;
 import model.entities.structure.Structure;
-import model.entities.unit.Colonist;
-import model.entities.unit.Explorer;
-import model.entities.unit.Melee;
-import model.entities.unit.Unit;
+import model.entities.unit.*;
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
@@ -71,21 +69,18 @@ public class EntityOwnership {
         //armyList = new ArrayList<>(10);
         structureList = new ArrayList<>(1);
         rallyPointList= new ArrayList<>(20);
+
+        this.unitFactory = new UnitFactory(commandRelay);
+        this.commandRelay = commandRelay;
+
+
         initializeLists();
         initializeUnits(startingX, startingY);
-        initializeStructures();
         changeMode(modes[cycleModeIndex]);
         this.playerId = playerId;
 
-        this.unitFactory = new UnitFactory(commandRelay);
 
         System.out.println("End of E.O. constructor; cycle type index is: " + cycleTypeIndex);
-    }
-
-    private void initializeStructures() {
-        //TODO change the id number,
-        // TODO strucuture should be intialized by colonist later
-        //addStructure(IdType.CAPITAL, new Capital(playerId,"idnumber"));
     }
 
     private void initializeUnits(int startingX, int startingY) {
@@ -447,10 +442,6 @@ public class EntityOwnership {
             System.out.println("Instance list is empty");
             return null;
         }
-        System.out.println("cycle type index in getCommand " + cycleTypeIndex);
-        System.out.println("cycle instance index in getCommand " + cycleInstanceIndex);
-        System.out.println("cycle command index in getCommand " + cycleCommandIndex);
-        System.out.println("get current command says " + currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex).getIterableCommand(cycleCommandIndex));
         return currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex).getIterableCommand(cycleCommandIndex);
     }
 
@@ -522,4 +513,41 @@ public class EntityOwnership {
         return modes[cycleModeIndex];
     }
 
+    public void applyDamageToEntitiesOnLocation(Location location, int damage) {
+        List<FighterUnit> unitsToDamage = new ArrayList<>();
+        List<Structure> structuresToDamage = new ArrayList<>();
+
+        for (List<Entity> list : unitList) {
+            for (Entity entity : list) {
+                //TODO this violates TDA uggggggggggh
+                if (entity.getLocation().equals(location)) {
+                    //We ONLY care about fighter units
+                    try {
+                        unitsToDamage.add((FighterUnit) entity);
+                    }
+                    catch (ClassCastException e) {
+                        //do nothing, we don't damage units w/o health
+                    }
+                }
+            }
+        }
+
+        for (List<Entity> list : structureList) {
+            for (Entity entity : list) {
+                if (entity.getLocation().equals(location)) {
+                    structuresToDamage.add((Structure) entity);
+                }
+            }
+        }
+
+        int damageToApply = damage/(unitsToDamage.size() + structuresToDamage.size());
+
+        for (FighterUnit unitTakingDamage : unitsToDamage) {
+            unitTakingDamage.takeDamage(damageToApply);
+        }
+        for (Structure structureTakingDamage : structuresToDamage) {
+            structureTakingDamage.takeDamage(damageToApply);
+        }
+
+    }
 }

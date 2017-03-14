@@ -51,9 +51,9 @@ public class Army extends Entity implements Fighter {
 
     @Override
     public void attack(Direction direction) {
-        System.out.println("attack " + direction.toString());
+       System.out.println("attack " + direction.toString());
 
-       commandRelay.notifyModelOfAttack(getLocation(), direction, ((FighterUnitStats)entityStats).getOffensiveDamage());
+       commandRelay.notifyModelOfAttack(getLocation().move(direction), ((FighterUnitStats)entityStats).getOffensiveDamage());
     }
 
     @Override
