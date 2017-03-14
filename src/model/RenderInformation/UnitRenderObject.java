@@ -1,5 +1,6 @@
 package model.RenderInformation;
 
+import model.entities.EntityId;
 import model.entities.Stats.UnitStats;
 import utilities.id.CustomID;
 import utilities.id.IdType;
@@ -12,13 +13,14 @@ public class UnitRenderObject {
     private int locationX; // X location on map Unit is located
     private int locationY; // Y location on map Unit is located
     private IdType idType; // type of unit so we know which assets to render, along with unit ownership
-    private CustomID unitId;
+
+    private EntityId id;
     private UnitStats unitStats;
     // TODO later add more info like stats
 
-    public UnitRenderObject(CustomID unitId, IdType idType, int locationX, int locationY, UnitStats unitStats){
-        this.unitId = unitId;
-        this.idType = idType;
+    public UnitRenderObject(EntityId id, int locationX, int locationY, UnitStats unitStats){
+        this.id = id;
+        this.idType = id.getIdType();
         this.locationX = locationX;
         this.locationY = locationY;
         this.unitStats = unitStats;
@@ -26,8 +28,8 @@ public class UnitRenderObject {
     public IdType getIdType(){
         return this.idType;
     }
-    public CustomID getUnitId(){
-        return this.unitId;
+    public EntityId getUnitId(){
+        return this.id;
     }
     public int getLocationX(){
         return this.locationX;
@@ -36,5 +38,9 @@ public class UnitRenderObject {
         return this.locationY;
     }
     public UnitStats getUnitStats(){return this.unitStats; };
+
+    public EntityId getId() {
+        return id;
+    }
 
 }

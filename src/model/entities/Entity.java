@@ -166,17 +166,6 @@ public abstract class Entity extends Commandable {
 
     public static void main(String[] args){
 
-        //Entity e = new Melee(new CustomID(IdType.MELEE, "id"), "id1", 0, 0);
-        //Command command = new PowerUpCommand(e);
-        //e.addToQueue(command);
-        //Unit unit = new Melee(new CustomID(IdType.MELEE, "id"), "id1", 0, 0);
-        //Command command2 = new AbandonArmyCommand(unit);
-        //e.addToQueue(command2);
-
-        //e.executeQueue();
-        //e.executeQueue();
-        //e.executeQueue();
-        //e.executeQueue();
 
         //Entity e = new Melee(new CustomID(IdType.MELEE, "id"), "id1", 0, 0);
 
@@ -186,7 +175,6 @@ public abstract class Entity extends Commandable {
 //        e.executeQueue();
 //        e.executeQueue();
 //        e.getLocation();
-
     }
 
 }

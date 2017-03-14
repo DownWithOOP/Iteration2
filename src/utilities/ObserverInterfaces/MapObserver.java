@@ -2,6 +2,7 @@ package utilities.ObserverInterfaces;
 
 
 import model.RenderInformation.*;
+import model.entities.EntityId;
 import utilities.id.CustomID;
 
 /**
@@ -9,8 +10,8 @@ import utilities.id.CustomID;
  */
 public interface MapObserver {
     void update(int playerNumber, MapRenderInformation mapRenderInformation, UnitRenderInformation unitRenderInformation, StructureRenderInformation structureRenderInformation);
-    void updateUnit(CustomID unitId, UnitRenderObject unitRenderObject);
-    void updateStructure(CustomID structureId, StructureRenderObject structureRenderObject);
+    void updateUnit(EntityId unitId, UnitRenderObject unitRenderObject);
+    void updateStructure(EntityId structureId, StructureRenderObject structureRenderObject);
     MapRenderInformation share();
     TileRenderObject[][] getPlayerXRenderMap(int playerNumber);
 }

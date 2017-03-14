@@ -16,10 +16,13 @@ import model.ActiveState;
 import model.Cursor;
 import model.GameModel;
 import model.common.Location;
-import model.entities.Entity;
 import model.entities.structure.Structure;
 import model.entities.structure.StructureType;
 import model.entities.unit.*;
+import model.entities.EntityId;
+import model.entities.unit.Army;
+import model.entities.unit.Explorer;
+import model.entities.unit.Unit;
 import utilities.ObserverInterfaces.StatusObserver;
 import utilities.ObserverInterfaces.StructureObserver;
 import utilities.ObserverInterfaces.UnitObserver;
@@ -40,7 +43,7 @@ public class ControllerDispatch {
         availableCommands = new AvailableCommands();
         gameModel = new GameModel(playerNumber, mapDisplayObserver, unitObserver, structureObserver, statusObserver);
         //TODO: do we really need to define activeState like this/ does everything need to be static? --consider restructuring
-        activeState = new ActiveState(new Cursor(new CommandRelay(gameModel), new Location(4,4)));
+        ActiveState.getInstance().init(new Cursor(new Location(4,4)));
         setGameModelMap();
     }
 
@@ -68,7 +71,7 @@ public class ControllerDispatch {
 
 
         //ActiveState.relayCommand(CommandType.ACTIVATE_COMMAND);
-
+        ActiveState.getInstance().relayCommand(CommandType.ACTIVATE_COMMAND);
 
         //System.out.println("controller dispatch says that command is " + selectedCommandType);
 //        switch(selectedCommandType) {
@@ -107,8 +110,8 @@ public class ControllerDispatch {
         activeState.update(selectedCommandType);
 
         StructureType structType = StructureType.valueOf(structureTypeStr);
-        ActiveState.constructModifier(structType);
-        ActiveState.relayCommand(CommandType.BUILD_STRUCTURE);
+        ActiveState.getInstance().constructModifier(structType);
+        ActiveState.getInstance().relayCommand(CommandType.BUILD_STRUCTURE);
     }
 
     public void handleCreateUnitCommand(String unitTypeStr) {
@@ -118,12 +121,44 @@ public class ControllerDispatch {
         activeState.update(selectedCommandType);
 
         UnitType unitType = UnitType.valueOf(unitTypeStr);
-        ActiveState.constructModifier(unitType);
-        ActiveState.relayCommand(CommandType.CREATE_UNIT);
+        ActiveState.getInstance().constructModifier(unitType);
+        ActiveState.getInstance().relayCommand(CommandType.CREATE_UNIT);
     }
 
     public void handleHealUnitCommand(String unitStr) {
         //FighterUnit unit = unitStr;
+    }
+    public void handleCommandActivationFromView() {
+        //View needs to have set the necessary information in active state before calling this
+        ActiveState.getInstance().relayCommand(CommandType.ACTIVATE_COMMAND);
+
+        //System.out.println("controller dispatch says that command is " + selectedCommandType);
+//        switch(selectedCommandType) {
+//            case DISBAND:
+//                selectedInstance.addToQueue(new DisbandCommand((Army)selectedInstance));
+//                break;
+//            case POWER_UP:
+//                selectedInstance.addToQueue(new PowerUpCommand(selectedInstance));
+//                break;
+//            case POWER_DOWN:
+//                selectedInstance.addToQueue(new PowerDownCommand(selectedInstance));
+//                break;
+//            case CANCEL_QUEUE:
+//                selectedInstance.addToQueue(new CancelQueueCommand(selectedInstance));
+//                break;
+//            case DECOMMISSION:
+//                selectedInstance.addToQueue(new DecommissionCommand(selectedInstance));
+//                break;
+//            case ABANDON_ARMY:
+//                selectedInstance.addToQueue(new AbandonArmyCommand((Unit)selectedInstance));
+//                break;
+//            case PROSPECT:
+//                selectedInstance.addToQueue(new ProspectCommand((Explorer) selectedInstance));
+//                break;
+//            default:
+//                System.out.print("Invalid command");
+//                break;
+//        }
     }
 
     //TODO: ASK  IF THIS WILL WORK WHEN THE PLAYERS ARE CHANGED
@@ -174,5 +209,17 @@ public class ControllerDispatch {
 
     public int getActivePlayerNumber() {
         return gameModel.getActivePlayerIndex() + 1;
+    }
+
+    public void updateActiveStateCommandable(EntityId commandableId) {
+        activeState.update(gameModel.getEntity(commandableId));
+    }
+
+    public void updateActiveStateModifier(int armyNumber) {
+        activeState.constructModifier(armyNumber);
+    }
+
+    public void updateActiveStateCommand(CommandType commandType) {
+        activeState.update(commandType);
     }
 }

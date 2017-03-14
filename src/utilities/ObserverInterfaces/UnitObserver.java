@@ -3,6 +3,7 @@ package utilities.ObserverInterfaces;
 import model.RenderInformation.MapRenderInformation;
 import model.RenderInformation.UnitRenderInformation;
 import model.RenderInformation.UnitRenderObject;
+import model.entities.EntityId;
 import utilities.id.CustomID;
 
 /**
@@ -10,6 +11,6 @@ import utilities.id.CustomID;
  */
 public interface UnitObserver {
     void update(UnitRenderInformation unitRenderInformation);
-    void updateUnit(CustomID unitId, UnitRenderObject unitRenderObject);
+    void updateUnit(EntityId unitId, UnitRenderObject unitRenderObject);
     UnitRenderInformation share();
 }

@@ -1,27 +1,21 @@
 package view;
 
-import javafx.scene.*;
-import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import model.ActiveState;
 import model.RenderInformation.*;
-import model.entities.EntityType;
-import model.map.tile.resources.Resource;
-import model.map.tile.resources.ResourceType;
 import model.map.tile.terrain.TerrainType;
-import org.omg.CORBA.IDLType;
 import utilities.ObserverInterfaces.MiniMapObserver;
 import utilities.ObserverInterfaces.MiniMapSubject;
 import utilities.id.IdType;
 import view.utilities.Assets;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Konrad on 3/1/2017.
@@ -37,11 +31,9 @@ public class AreaViewport implements MiniMapSubject{
     private MapRenderInformation mapRenderInformation;
     private UnitRenderInformation unitRenderInformation;
     private StructureRenderInformation structureRenderInformation;
-    private int selectX;
-    private int selectY;
     private int gridSizeX;
     private int gridSizeY;
-    private boolean alteranteColumn;
+    private boolean alternateColumn;
     private boolean overlayOn = false;
     private boolean displayFood = true;
     private boolean displayOre = true;
@@ -73,9 +65,7 @@ public class AreaViewport implements MiniMapSubject{
         this.fastCameraSpeed = 31;
 
         this.cameraSpeed = 41;
-        this.selectX = 6; // starting X of selected tile
-        this.selectY = 6; // starting Y of selected tile
-        this.alteranteColumn = true;
+        this.alternateColumn = true;
         this.canvas.addEventFilter(MouseEvent.MOUSE_MOVED,
                 event -> {
                     if(event.getSceneX() > 850){ // move to the right slow
@@ -148,102 +138,173 @@ public class AreaViewport implements MiniMapSubject{
         GraphicsContext gc = canvas.getGraphicsContext2D();
         double width = grass.getWidth();
         double height = grass.getHeight();
-        if(alteranteColumn){
-            gc.drawImage(select,0.75*width*selectX+ cameraX,height*1*-selectY+ cameraY + width*0.45);
+//        if(alternateColumn){
+//            gc.drawImage(select,0.75*width*selectX+ cameraX,height*1*-selectY+ cameraY + width*0.45);
+//        } else {
+//            gc.drawImage(select,0.75*width*selectX+ cameraX,height*1*-selectY+ cameraY + width*0.9);
+//        }
+        if(alternateColumn){
+            gc.drawImage(select,0.75*width* ActiveState.getInstance().getCursor().getX()+ cameraX,height*1*-ActiveState.getInstance().getCursor().getY()+ cameraY + width*0.45);
         } else {
-            gc.drawImage(select,0.75*width*selectX+ cameraX,height*1*-selectY+ cameraY + width*0.9);
+            gc.drawImage(select,0.75*width*ActiveState.getInstance().getCursor().getX()+ cameraX,height*1*-ActiveState.getInstance().getCursor().getY()+ cameraY + width*0.9);
         }
     }
 
     /** selection control **/
 
     public void selectNorth(){
-        this.selectY++; // update value
-        if(this.selectY >= gridSizeY){
-            this.selectY = gridSizeY-1;
-        }
+//        this.selectY++; // update value
+//        if(this.selectY >= gridSizeY){
+//            this.selectY = gridSizeY-1;
+//        }
+        ActiveState.getInstance().getCursor().moveNorth();
         updateCanvas();
     }
     public void selectSouth(){
-        this.selectY--; // update value
-        if(this.selectY < 0){
-            this.selectY = 0;
-        }
+//        this.selectY--; // update value
+//        if(this.selectY < 0){
+//            this.selectY = 0;
+//        }
+        ActiveState.getInstance().getCursor().moveSouth();
         updateCanvas(); // rerender entire map
 
     }
     public void selectNE(){
-        this.selectX++; // update value
-        if(this.alteranteColumn){  // column #1
-            this.selectY++;
-            if(this.selectX+1 > this.gridSizeX || this.selectY+1 > gridSizeY){
-                this.selectX--; // reset to original position and don't alternate if out of bounds
-                this.selectY--;
-            } else {
-                this.alteranteColumn = false;
+//        this.selectX++; // update value
+//        if(this.alternateColumn){  // column #1
+//            this.selectY++;
+//            if(this.selectX+1 > this.gridSizeX || this.selectY+1 > gridSizeY){
+//                this.selectX--; // reset to original position and don't alternate if out of bounds
+//                this.selectY--;
+//            } else {
+//                this.alternateColumn = false;
+//            }
+//        } else { // column #2
+//            if(this.selectX+1 > this.gridSizeX){
+//                this.selectX--; // restore to original position if out of bounds and don't rotate
+//            } else {  this.alternateColumn = true; }
+//        }
+        ActiveState.getInstance().getCursor().moveEast();
+        if(this.alternateColumn){
+            ActiveState.getInstance().getCursor().moveNorth();
+            if(ActiveState.getInstance().getCursor().getX()+1 > this.gridSizeX || ActiveState.getInstance().getCursor().getY() + 1 > this.gridSizeY){
+                ActiveState.getInstance().getCursor().moveWest();
+                ActiveState.getInstance().getCursor().moveSouth();
+            } else{
+                this.alternateColumn = false;
             }
-        } else { // column #2
-            if(this.selectX+1 > this.gridSizeX){
-                this.selectX--; // restore to original position if out of bounds and don't rotate
-            } else {  this.alteranteColumn = true; }
+        } else {
+            if(ActiveState.getInstance().getCursor().getX()+1 > this.gridSizeX){
+                ActiveState.getInstance().getCursor().moveWest();
+            } else {
+                this.alternateColumn = true;
+            }
         }
         updateCanvas(); // rerender entire map
     }
     public void selectSE(){
-        this.selectX++; // update value
-        if(this.alteranteColumn){
-            if(selectX+1 > gridSizeX){ // out of bounds, don't alternate, stay in same place
-                this.selectX--;
+//        this.selectX++; // update value
+//        if(this.alternateColumn){
+//            if(selectX+1 > gridSizeX){ // out of bounds, don't alternate, stay in same place
+//                this.selectX--;
+//            } else {
+//                this.alternateColumn = false;
+//            }
+//        } else {
+//            this.selectY--;
+//            if(this.selectY < 0 || this.selectX+1 > gridSizeX  ){ // out of bounds, keep in original position, don't change column
+//                this.selectY++;
+//                this.selectX--;
+//            } else {
+//                this.alternateColumn = true;
+//            }
+//        }
+        ActiveState.getInstance().getCursor().moveEast();
+        if(this.alternateColumn){
+            if(ActiveState.getInstance().getCursor().getX() + 1 > this.gridSizeX){
+                ActiveState.getInstance().getCursor().moveWest();
             } else {
-                this.alteranteColumn = false;
+                this.alternateColumn = false;
             }
         } else {
-            this.selectY--;
-            if(this.selectY < 0 || this.selectX+1 > gridSizeX  ){ // out of bounds, keep in original position, don't change column
-                this.selectY++;
-                this.selectX--;
+            ActiveState.getInstance().getCursor().moveSouth();
+            if(ActiveState.getInstance().getCursor().getY() < 0 || ActiveState.getInstance().getCursor().getX() + 1 > this.gridSizeX){
+                ActiveState.getInstance().getCursor().moveNorth();
+                ActiveState.getInstance().getCursor().moveWest();
             } else {
-                this.alteranteColumn = true;
+                this.alternateColumn = true;
             }
         }
         updateCanvas();
     }
 
     public void selectSW(){
-        this.selectX--; // update value
-        if(this.alteranteColumn){
-            if(this.selectX < 0){
-                this.selectX++;
+//        this.selectX--; // update value
+//        if(this.alternateColumn){
+//            if(this.selectX < 0){
+//                this.selectX++;
+//            } else {
+//                this.alternateColumn = false;
+//            }
+//        } else {
+//            this.selectY--;
+//            if(this.selectY < 0 || this.selectX < 0){ // out of bounds, keep original position, don't alternate
+//                this.selectX++;
+//                this.selectY++;
+//            } else{
+//                this.alternateColumn = true;
+//            }
+//        }
+        ActiveState.getInstance().getCursor().moveWest();
+        if(this.alternateColumn){
+            if(ActiveState.getInstance().getCursor().getX() < 0){
+                ActiveState.getInstance().getCursor().moveEast();
             } else {
-                this.alteranteColumn = false;
+                this.alternateColumn = false;
             }
         } else {
-            this.selectY--;
-            if(this.selectY < 0 || this.selectX < 0){ // out of bounds, keep original position, don't alternate
-                this.selectX++;
-                this.selectY++;
-            } else{
-                this.alteranteColumn = true;
+            ActiveState.getInstance().getCursor().moveSouth();
+            if(ActiveState.getInstance().getCursor().getY() < 0 || ActiveState.getInstance().getCursor().getX() < 0){
+                ActiveState.getInstance().getCursor().moveEast();
+                ActiveState.getInstance().getCursor().moveNorth();
+            } else {
+                this.alternateColumn = true;
             }
         }
          updateCanvas();
     }
     public void selectNW(){
-        this.selectX--; // update value
-        if(this.alteranteColumn){
-                this.selectY++;
-                if(this.selectY+1 > gridSizeY || this.selectX < 0){ // out of bounds, restore to original place, don't alternatete
-                    this.selectX++;
-                    this.selectY--;
-                } else{
-                    this.alteranteColumn = false; // coordinates are valid
-                }
-            }
-        else {
-            if (this.selectX < 0) {
-                this.selectX++;  // bad, reset to original
+//        this.selectX--; // update value
+//        if(this.alternateColumn){
+//                this.selectY++;
+//                if(this.selectY+1 > gridSizeY || this.selectX < 0){ // out of bounds, restore to original place, don't alternatete
+//                    this.selectX++;
+//                    this.selectY--;
+//                } else{
+//                    this.alternateColumn = false; // coordinates are valid
+//                }
+//            }
+//        else {
+//            if (this.selectX < 0) {
+//                this.selectX++;  // bad, reset to original
+//            } else {
+//                this.alternateColumn = true; // coordinate is good
+//            }
+//        }
+        ActiveState.getInstance().getCursor().moveWest();
+        if(this.alternateColumn){
+            ActiveState.getInstance().getCursor().moveNorth();
+            if(ActiveState.getInstance().getCursor().getY() + 1 > this.gridSizeY || ActiveState.getInstance().getCursor().getX() < 0){
+                ActiveState.getInstance().getCursor().moveEast();
+                ActiveState.getInstance().getCursor().moveSouth();
             } else {
-                this.alteranteColumn = true; // coordinate is good
+                this.alternateColumn = false;
+            }
+        } else {
+            if(ActiveState.getInstance().getCursor().getX() < 0){
+                ActiveState.getInstance().getCursor().moveEast();
+            } else {
+                this.alternateColumn = true;
             }
         }
         updateCanvas();
@@ -275,10 +336,10 @@ public class AreaViewport implements MiniMapSubject{
      */
 
     public int returnXCoordinate(){
-        return this.selectX;
+        return ActiveState.getInstance().getCursor().getX();
     }
     public int returnYCoordinate(){
-        return this.selectY;
+        return ActiveState.getInstance().getCursor().getY();
     }
 
     /** actually draws and renders the map that is currently stored in teh mapRenderInformation

@@ -5,7 +5,9 @@ import controller.availablecommands.Commandable;
 import controller.commands.CommandType;
 import controller.commands.CycleDirection;
 import model.common.Location;
+import model.entities.EntityId;
 import model.entities.unit.Army;
+import model.entities.unit.FighterUnit;
 import utilities.ObserverInterfaces.*;
 import model.map.Map;
 import utilities.id.CustomID;
@@ -145,5 +147,15 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
 
     public void createArmy() {
         entities.createArmy();
+        notifyUnitObservers();
+    }
+
+    public Commandable getEntity(EntityId commandableId) {
+        return entities.getEntity(commandableId);
+    }
+
+    public void addFighterUnitToArmy(FighterUnit fighterUnit, int armyNumber) {
+        entities.addExistingFighterUnitToArmy(fighterUnit, armyNumber);
+        notifyUnitObservers();
     }
 }

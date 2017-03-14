@@ -37,7 +37,7 @@ public class CommandFactory {
         simpleCommandResult.put(CommandType.BUILD_CAPITAL, (commandable -> (new BuildCapitalCommand((Colonist) commandable))));
         simpleCommandResult.put(CommandType.DISBAND, (commandable) -> (new DisbandCommand((Army) commandable)));
         simpleCommandResult.put(CommandType.ABANDON_ARMY, (commandable) -> (new AbandonArmyCommand((Unit) commandable)));
-        simpleCommandResult.put(CommandType.FOCUS, (commandable) -> (new FocusCommand((RallyPoint) commandable)));
+        //simpleCommandResult.put(CommandType.FOCUS, (commandable) -> (new FocusCommand((RallyPoint) commandable)));
 
 
     }
@@ -50,8 +50,6 @@ public class CommandFactory {
      * @return
      */
     public Command createSimpleCommand(CommandType commandType, Commandable commandable) {
-
-        System.out.println("is it a simple command? " + simpleCommandResult.containsKey(commandType));
 
         try {
             if (simpleCommandResult.containsKey(commandType)) {

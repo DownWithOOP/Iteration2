@@ -2,6 +2,7 @@ package utilities.ObserverInterfaces;
 
 import model.RenderInformation.StructureRenderInformation;
 import model.RenderInformation.StructureRenderObject;
+import model.entities.EntityId;
 import utilities.id.CustomID;
 
 /**
@@ -9,6 +10,6 @@ import utilities.id.CustomID;
  */
 public interface StructureObserver {
     void update(StructureRenderInformation structureRenderInformation);
-    void updateStructure(CustomID structureId, StructureRenderObject structureRenderObject);
+    void updateStructure(EntityId structureId, StructureRenderObject structureRenderObject);
     StructureRenderInformation share();
 }

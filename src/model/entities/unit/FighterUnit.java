@@ -61,7 +61,7 @@ public class FighterUnit extends Unit {
 
     @Override
     public void joinArmy(int armyNumber) {
-
+        commandRelay.notifyModelOfUnitJoiningArmy(this, armyNumber);
     }
 
     @Override
