@@ -25,7 +25,7 @@ public class Tile implements Subject {
 
     private Terrain terrain;
     private AreaEffect areaEffect;
-    private CustomID entityID;
+    private CustomID playerId;
     private List<Resource> resources;
     private Item item;
 
@@ -42,13 +42,13 @@ public class Tile implements Subject {
      * Entity related stuff
      */
 
-    public void setEntity(CustomID entityID){
-        this.entityID = entityID;
+    public void setPlayerId(CustomID playerId){
+        this.playerId = playerId;
         this.hasEntity = true;
     }
 
     public void removeEntity(){
-        this.entityID = null;
+        this.playerId = null;
         this.hasEntity = false;
     }
 
@@ -75,10 +75,6 @@ public class Tile implements Subject {
 
     public AreaEffect getAreaEffect() {
         return areaEffect;
-    }
-
-    public CustomID getEntityID() {
-        return entityID;
     }
 
     public List<Resource> getResources() {
@@ -115,4 +111,6 @@ public class Tile implements Subject {
     public void notifyObserver() {
 
     }
+
+    public CustomID getPlayerId() { return playerId; }
 }

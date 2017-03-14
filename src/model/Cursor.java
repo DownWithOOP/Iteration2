@@ -1,5 +1,6 @@
 package model;
 
+import controller.CommandRelay;
 import controller.availablecommands.AvailableCommands;
 import controller.availablecommands.Commandable;
 import controller.commands.Command;
@@ -16,6 +17,12 @@ import java.util.HashMap;
 public class Cursor {
     protected Location location;
     private HashMap<Direction, MoveInterface> movingFunctionMap = new HashMap<>();
+
+    static ArrayList<CommandType> cursorCommand = new ArrayList<>();
+
+    static {
+        cursorCommand.add(CommandType.MOVE);
+    }
 
     public Cursor(Location location) {
         this.location = location;

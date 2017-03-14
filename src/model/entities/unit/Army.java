@@ -1,5 +1,6 @@
 package model.entities.unit;
 
+import controller.CommandRelay;
 import controller.commands.CommandType;
 import controller.commands.Direction;
 import model.RallyPoint;
@@ -15,6 +16,7 @@ import utilities.id.IdType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -41,16 +43,26 @@ public class Army extends Entity implements Fighter {
 
     }
 
-    //TODO initialize rally point
-    public Army(CustomID playerId, String id, int locationX, int locationY) {
-        super(playerId, id, locationX, locationY);
+    public Army(CommandRelay commandRelay, CustomID playerId, String id, int locationX, int locationY) {
+        super(commandRelay, playerId, id, locationX, locationY);
         addAllCommands(armyCommand);
-        rallyPoint=new RallyPoint(getLocation(),this);
+        rallyPoint = new RallyPoint(commandRelay, getLocation(),this);
+
+        //TODO remove. just for testing
+        reinforcements.put(new EntityId(IdType.MELEE, playerId, "?"), new Melee(null, playerId, "?aslkd", 0,0));
+        reinforcements.put(new EntityId(IdType.MELEE, playerId, "?"), new Melee(null, playerId, "?24", 0,0));
+        reinforcements.put(new EntityId(IdType.MELEE, playerId, "?"), new Melee(null, playerId, "?lkj", 0,0));
+        reinforcements.put(new EntityId(IdType.MELEE, playerId, "?"), new Melee(null, playerId, "?fd", 0,0));
+        reinforcements.put(new EntityId(IdType.MELEE, playerId, "?"), new Melee(null, playerId, "a;slk?", 0,0));
+        battleGroup.put(new EntityId(IdType.MELEE, playerId, "?"), new Melee(null, playerId, "?/???", 0,0));
+        battleGroup.put(new EntityId(IdType.MELEE, playerId, "?"), new Melee(null, playerId, "??", 0,0));
     }
 
     @Override
     public void attack(Direction direction) {
-        System.out.println("attack " + direction.toString());
+       System.out.println("attack " + direction.toString());
+
+       //commandRelay.notifyModelOfAttack(getLocation().move(direction), ((FighterUnitStats)entityStats).getOffensiveDamage());
     }
 
     @Override
@@ -248,5 +260,37 @@ public class Army extends Entity implements Fighter {
         }
     }
 
+
+    public List<List<Entity>> getSubModeLists() {
+        List<List<Entity>> subModeLists = new ArrayList<>();
+        subModeLists.add(0,getWholeArmy());
+        subModeLists.add(1,getBattleGroup());
+        subModeLists.add(2,getReinforcements());
+
+        return subModeLists;
+    }
+
+    private List<Entity> getWholeArmy() {
+        List<Entity> reinforcements = getReinforcements();
+        List<Entity> battleGroup = getBattleGroup();
+        battleGroup.addAll(reinforcements);
+        return battleGroup;
+    }
+
+    public List<Entity> getReinforcements(){
+        return getList(reinforcements);
+    }
+
+    public List<Entity> getBattleGroup(){
+        return getList(battleGroup);
+    }
+
+    public List<Entity> getList(HashMap<EntityId, Unit>map){
+        List<Entity> temp= new ArrayList<>();
+         for (Entity entity: map.values()) {
+             temp.add(entity);
+         }
+       return temp;
+     }
 
 }

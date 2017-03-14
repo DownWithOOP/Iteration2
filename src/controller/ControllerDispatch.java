@@ -55,7 +55,7 @@ public class ControllerDispatch {
     }
 
     public void handleCommandActivation() {
-        Entity selectedInstance = (Entity) gameModel.getActivePlayer().getCurrentInstance();
+        Commandable selectedInstance = (Commandable) gameModel.getActivePlayer().getCurrentInstance();
         CommandType selectedCommandType = gameModel.getActivePlayer().getCurrentCommandType();
         activeState.update(selectedInstance);
         activeState.update(selectedCommandType);
@@ -109,7 +109,7 @@ public class ControllerDispatch {
         commandHashMap.put(CommandType.CYCLE_INSTANCE_PREV, new CycleInstancePrev(gameModel.getActivePlayer()));
         commandHashMap.put(CommandType.CYCLE_COMMAND_NEXT, new CycleCommandNext(gameModel.getActivePlayer()));
         commandHashMap.put(CommandType.CYCLE_COMMAND_PREV, new CycleCommandPrev(gameModel.getActivePlayer()));
-
+        commandHashMap.put(CommandType.CREATE_ARMY, new CreateArmy(gameModel.getActivePlayer()));
     }
 
     public void updateActiveController(Controller newActiveController) {
@@ -118,7 +118,7 @@ public class ControllerDispatch {
         commandHashMap.put(CommandType.MOVE_CAMERA_DOWN, new MoveCameraDown(newActiveController));
         commandHashMap.put(CommandType.MOVE_CAMERA_LEFT, new MoveCameraLeft(newActiveController));
 
-        //Put in cursor commands if we have a main view controller
+        //Put in cursor commands to our map if we have a main view controller
         //Otherwise, remove cursor commands from map (if they exist) so cursor doesn't move when not on main menu
         try {
             MainViewController newActiveMainViewController = (MainViewController) newActiveController;

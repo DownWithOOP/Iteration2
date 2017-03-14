@@ -104,7 +104,7 @@ public class MVCInputHandler {
         handleDirection.put(KeyCode.NUMPAD3 + "", Direction.SOUTH_EAST);
         handleDirection.put(KeyCode.NUMPAD7 + "", Direction.NORTH_WEST);
         handleDirection.put(KeyCode.NUMPAD8 + "", Direction.NORTH);
-        handleDirection.put(KeyCode.NUMPAD9 + "", Direction.EAST);
+        handleDirection.put(KeyCode.NUMPAD9 + "", Direction.NORTH_EAST);
 
         handleNumbers.put(KeyCode.DIGIT0.toString(),0);
         handleNumbers.put(KeyCode.DIGIT1.toString(),1);

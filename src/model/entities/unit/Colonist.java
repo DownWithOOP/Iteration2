@@ -1,5 +1,6 @@
 package model.entities.unit;
 
+import controller.CommandRelay;
 import controller.commands.Command;
 import controller.commands.CommandType;
 import model.entities.EntityType;
@@ -25,11 +26,11 @@ public class Colonist extends FighterUnit {
         colonistCommand.add(CommandType.BUILD_CAPITAL);
     }
 
-    public Colonist(CustomID playerId, String id, int locationX, int locationY) {
-        super(playerId, id, locationX, locationY);
+    public Colonist(CommandRelay commandRelay, CustomID playerId, String id, int locationX, int locationY) {
+        super(commandRelay, playerId, id, locationX, locationY);
 //        entityCommand.add(CommandType.BUILD_CAPITAL);
         addAllCommands(colonistCommand);
-        this.capitalFactory = new StructureFactory();
+        this.capitalFactory = new StructureFactory(commandRelay);
     }
 
     @Override

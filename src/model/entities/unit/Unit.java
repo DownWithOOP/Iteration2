@@ -1,5 +1,6 @@
 package model.entities.unit;
 
+import controller.CommandRelay;
 import controller.commands.CommandType;
 import model.RenderInformation.UnitRenderInformation;
 import model.RenderInformation.UnitRenderObject;
@@ -36,8 +37,8 @@ public abstract class Unit extends Entity implements UnitSubject, MapSubject {
     /**
      * @param playerId
      */
-    public Unit(CustomID playerId,String id, int locationX, int locationY) {
-        super(playerId, id, locationX, locationY);
+    public Unit(CommandRelay commandRelay, CustomID playerId, String id, int locationX, int locationY) {
+        super(commandRelay, playerId, id, locationX, locationY);
 //        entityCommand.add(CommandType.ABANDON_ARMY);
 //        entityCommand.add(CommandType.ADVANCE_TO_RALLY_POINT);
 //        entityCommand.add(CommandType.JOIN_ARMY);

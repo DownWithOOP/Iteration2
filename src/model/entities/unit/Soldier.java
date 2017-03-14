@@ -1,5 +1,6 @@
 package model.entities.unit;
 
+import controller.CommandRelay;
 import utilities.id.CustomID;
 
 /**
@@ -13,7 +14,7 @@ public class Soldier extends FighterUnit {
      * @param locationX
      * @param locationY
      */
-    public Soldier(CustomID playerId, String id, int locationX, int locationY) {
-        super(playerId, id, locationX, locationY);
+    public Soldier(CommandRelay commandRelay, CustomID playerId, String id, int locationX, int locationY) {
+        super(commandRelay, playerId, id, locationX, locationY);
     }
 }

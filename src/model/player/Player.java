@@ -1,9 +1,11 @@
 package model.player;
 
+import controller.CommandRelay;
 import controller.availablecommands.Commandable;
 import controller.commands.CommandType;
 import controller.commands.CycleDirection;
-import model.Selection;
+import model.common.Location;
+import model.entities.unit.Army;
 import utilities.ObserverInterfaces.*;
 import model.map.Map;
 import utilities.id.CustomID;
@@ -19,7 +21,6 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
 
     private EntityOwnership entities;
     private ResourceOwnership resources;
-    private Selection currentSelection;
     private CustomID customID;
     private Map playerMap; // this map will contain the map that the specific player can see
     private ArrayList<MapObserver> mapObservers = new ArrayList<MapObserver>(); // will contain observers that get notified of changes
@@ -28,14 +29,12 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
     private ArrayList<StatusObserver> statusObservers = new ArrayList<>(); // will contain observers that get notified of changes
     private int playerNumber; // players should know what # they are
 
-    public Player(int playerNumber, Map map, MapObserver observer, UnitObserver unitObserver, StructureObserver structureObserver, StatusObserver statusObserver, int startingX, int startingY){
+    public Player(int playerNumber, Map map, CommandRelay commandRelay, MapObserver observer, UnitObserver unitObserver, StructureObserver structureObserver, StatusObserver statusObserver, int startingX, int startingY){
 
         this.playerNumber = playerNumber;
         customID=new CustomID(IdType.PLAYER,"newPlayer");
-        entities = new EntityOwnership(customID, startingX, startingY); //TODO should entity ownership know Player?
-        entities.setUnitObservers(unitObserver, observer);
+        entities = new EntityOwnership(customID, commandRelay, startingX, startingY); //TODO should entity ownership know Player?
         resources = new ResourceOwnership(customID);
-        currentSelection = new Selection(entities.getCurrentInstance()); //TODO rename method
         this.playerMap = map; // TODO for the moment global map is shared, later each player will have own map
         this.registerMapObserver(observer);
         this.registerUnitObserver(unitObserver);
@@ -57,23 +56,22 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
     }
 
     public void cycleMode(CycleDirection direction){
-        currentSelection.updateSelectedCommandable(entities.cycleMode(direction));
+        entities.cycleMode(direction);
         this.notifyStatusObservers(); // yay status viewport
     }
 
     public void cycleType(CycleDirection direction){
-        currentSelection.updateSelectedCommandable(entities.cycleType(direction));
+        entities.cycleType(direction);
         this.notifyStatusObservers(); // yay status viewport
     }
 
     public void cycleInstance(CycleDirection direction){
-        currentSelection.updateSelectedCommandable(entities.cycleInstance(direction));
+        entities.cycleInstance(direction);
         this.notifyStatusObservers(); // yay status viewport
     }
 
     public void cycleCommand(CycleDirection direction){
-        //TODO cycle through actions
-        currentSelection.updateSelectedCommand(entities.cycleCommand(direction));
+        entities.cycleCommand(direction);
         this.notifyStatusObservers(); // yay status viewport
         //System.out.println("command cycle not hooked up yet :(");
     }
@@ -136,5 +134,11 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
     public CustomID getCustomID() { return customID; }
 
 
+    public void applyDamageToEntitiesOnLocation(Location location, int damage) {
+        entities.applyDamageToEntitiesOnLocation(location, damage);
+    }
 
+    public void createArmy() {
+        entities.createArmy();
+    }
 }

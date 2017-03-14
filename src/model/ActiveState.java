@@ -56,25 +56,30 @@ public class ActiveState {
      * @param commandType
      */
     private void relayActionableCommand(CommandType commandType) {
+
         Command cursorCommand;
 
+        System.out.println("active state relay actionable command, command type " + commandType);
         if (activeCommandType != null && checkIfCommandCanBePerformed(activeCommandType)) {
             activeCommand = commandFactory.createActionableCommand(activeCommandType, activeCommandable, modifier);
 
             if (activeCommand != null) {
+                System.out.println("active state relay actionable command active command executed");
                 activeCommand.execute();
             }
         }
 
+        //cursor move changed
         if (modifier.getModifierType() == ModifierType.DIRECTION) {
 
             if (cursor!=null) {
-                //cursorCommand = commandFactory.createActionableCommand(CommandType.MOVE, cursor, modifier);
-
-
+//                cursorCommand = commandFactory.createActionableCommand(CommandType.MOVE, cursor, modifier);
+//
 //                if (cursorCommand != null) {
+//                    System.out.println("active state relay actionable command cursor command executed");
 //                    cursorCommand.execute();
 //                }
+
             }
         }
 
@@ -87,11 +92,14 @@ public class ActiveState {
      */
     private void relaySimpleCommand(CommandType commandType) {
         if (commandType == CommandType.ACTIVATE_COMMAND && activeCommandType != null) {
+            System.out.println("activating active command of type " + activeCommandType);
+            System.out.println("can action be performed? " + checkIfCommandCanBePerformed(activeCommandType));
             if (checkIfCommandCanBePerformed(activeCommandType)) {
                 activeCommand = commandFactory.createSimpleCommand(activeCommandType, activeCommandable);
 
                 if (activeCommand != null) {
                     //activeCommand.execute();
+                    System.out.println("active state relay simply command active command queued");
                     activeCommandable.addToQueue(activeCommand);
                 }
             }
@@ -99,6 +107,7 @@ public class ActiveState {
 
         if (checkCommandAvailability(commandType) && commandType == CommandType.FOCUS) {
             Command tempCommand = commandFactory.createSimpleCommand(commandType, activeCommandable);
+            System.out.println("active state relay simply command focus command executed");
             tempCommand.execute();
         }
     }
@@ -119,21 +128,25 @@ public class ActiveState {
     }
 
     public void constructModifier(Direction direction) {
+        System.out.println("direction modifier constructing");
         clearModifier();
         modifier = new Modifier(direction);
     }
 
     public void constructModifier(int number) {
+        System.out.println("number modifier constructing");
         clearModifier();
         modifier = new Modifier(number);
     }
 
     public void constructModifier(UnitType unitType) {
+        System.out.println("unit type modifier constructing");
         clearModifier();
         modifier = new Modifier(unitType);
     }
 
     public void constructModifier(StructureType structureType) {
+        System.out.println("structure type modifier constructing");
         clearModifier();
         modifier = new Modifier(structureType);
     }
@@ -144,6 +157,7 @@ public class ActiveState {
 
     public void relayCommand(CommandType commandType) {
         if (modifier != null) {
+            System.out.println("active state relay command, and modifier is " + modifier.getModifierType());
             relayActionableCommand(commandType);
         } else {
             relaySimpleCommand(commandType);
@@ -156,8 +170,8 @@ public class ActiveState {
         //ActiveState activeState = new ActiveState(cursor);
         ActiveState.getInstance().init(cursor);
         ActiveState.getInstance().constructModifier(Direction.EAST);
-        Commandable ranged = new Ranged(new CustomID(IdType.RANGED, "ranged"), "ranged", 5, 5);
-        RallyPoint rallyPoint = new RallyPoint(new Location(5, 5), new Army(new CustomID(IdType.PLAYER,"hello"),"army",5,6));
+        //Commandable ranged = new Ranged(new CustomID(IdType.RANGED, "ranged"), "ranged", 5, 5);
+        //RallyPoint rallyPoint = new RallyPoint(new Location(5, 5), new Army(new CustomID(IdType.PLAYER,"hello"),"army",5,6));
         //activeCommandable = rallyPoint;
         ActiveState.getInstance().activeCommandType = CommandType.MOVE;
         ActiveState.getInstance().relayCommand(CommandType.MOVE);
@@ -173,7 +187,7 @@ public class ActiveState {
         ActiveState.getInstance().constructModifier(Direction.WEST);
         ActiveState.getInstance().relayCommand(CommandType.MOVE);
 
-        activeState.update(ranged);
+        //activeState.update(ranged);
         ActiveState.getInstance().activeCommandType = CommandType.JOIN_ARMY;
         ActiveState.getInstance().constructModifier(5);
         ActiveState.getInstance().relayCommand(CommandType.JOIN_ARMY);
@@ -181,7 +195,7 @@ public class ActiveState {
         ActiveState.getInstance().activeCommandType = CommandType.DECOMMISSION;
         ActiveState.getInstance().relayCommand(CommandType.ACTIVATE_COMMAND);
 
-        activeState.update(ranged);
+        //activeState.update(ranged);
         ActiveState.getInstance().activeCommandType = CommandType.JOIN_ARMY;
         ActiveState.getInstance().constructModifier(6);
         ActiveState.getInstance().relayCommand(CommandType.JOIN_ARMY);

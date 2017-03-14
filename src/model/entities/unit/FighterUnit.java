@@ -1,5 +1,6 @@
 package model.entities.unit;
 
+import controller.CommandRelay;
 import controller.commands.CommandType;
 import model.entities.Stats.FighterUnitStats;
 import model.entities.Stats.Stats;
@@ -24,8 +25,8 @@ public class FighterUnit extends Unit {
      * @param locationX
      * @param locationY
      */
-    public FighterUnit(CustomID playerId, String id, int locationX, int locationY) {
-        super(playerId, id, locationX, locationY);
+    public FighterUnit(CommandRelay commandRelay, CustomID playerId, String id, int locationX, int locationY) {
+        super(commandRelay, playerId, id, locationX, locationY);
 //        entityCommand.add(CommandType.ATTACK);
 //        entityCommand.add(CommandType.DEFEND);
         addAllCommands(fighterUnitCommand);
