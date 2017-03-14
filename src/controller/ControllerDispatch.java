@@ -92,6 +92,39 @@ public class ControllerDispatch {
 //        }
     }
 
+    public void handleCommandActivationFromView() {
+        //View needs to have set the necessary information in active state before calling this
+        ActiveState.relayCommand(CommandType.ACTIVATE_COMMAND);
+
+        //System.out.println("controller dispatch says that command is " + selectedCommandType);
+//        switch(selectedCommandType) {
+//            case DISBAND:
+//                selectedInstance.addToQueue(new DisbandCommand((Army)selectedInstance));
+//                break;
+//            case POWER_UP:
+//                selectedInstance.addToQueue(new PowerUpCommand(selectedInstance));
+//                break;
+//            case POWER_DOWN:
+//                selectedInstance.addToQueue(new PowerDownCommand(selectedInstance));
+//                break;
+//            case CANCEL_QUEUE:
+//                selectedInstance.addToQueue(new CancelQueueCommand(selectedInstance));
+//                break;
+//            case DECOMMISSION:
+//                selectedInstance.addToQueue(new DecommissionCommand(selectedInstance));
+//                break;
+//            case ABANDON_ARMY:
+//                selectedInstance.addToQueue(new AbandonArmyCommand((Unit)selectedInstance));
+//                break;
+//            case PROSPECT:
+//                selectedInstance.addToQueue(new ProspectCommand((Explorer) selectedInstance));
+//                break;
+//            default:
+//                System.out.print("Invalid command");
+//                break;
+//        }
+    }
+
     //TODO: ASK  IF THIS WILL WORK WHEN THE PLAYERS ARE CHANGED
     //^^^ it (should) work now :D - JS
     private void setGameModelMap() {

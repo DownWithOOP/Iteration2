@@ -49,11 +49,6 @@ public class Colonist extends FighterUnit {
         System.out.println("abandon army");
     }
 
-    @Override
-    public void joinArmy(int armyNumber) {
-        System.out.println("joined army "+ armyNumber);
-    }
-
     public Structure buildCapital(CustomID customId, String id) {
         return capitalFactory.getStructure(EntityType.CAPITAL, customId, id,(int)(super.getLocation().getX()),(int)(super.getLocation().getY()));
     }

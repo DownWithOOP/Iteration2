@@ -272,6 +272,6 @@ public class UnitViewController extends Controller
         this.controllerDispatch.updateActiveStateCommandable(selectedUnitId);
         this.controllerDispatch.updateActiveStateModifier(armyNumber);
         this.controllerDispatch.updateActiveStateCommand(CommandType.JOIN_ARMY);
-        this.controllerDispatch.handleCommandActivation();
+        this.controllerDispatch.handleCommandActivationFromView();
     }
 }

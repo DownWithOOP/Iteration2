@@ -583,6 +583,7 @@ public class EntityOwnership {
     }
 
     public void addExistingFighterUnitToArmy(FighterUnit fighterUnit, int armyNumber) {
-        armyList.get(armyNumber).registerUnit(fighterUnit);
+        selectedArmyIndex = armyNumber - 1;
+        armyList.get(selectedArmyIndex).registerUnit(fighterUnit);
     }
 }

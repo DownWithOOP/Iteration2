@@ -37,6 +37,7 @@ public class ActiveState {
     }
 
     public void update(CommandType commandType) {
+        System.out.println("update command type to " + commandType);
         activeCommandType = commandType;
     }
 

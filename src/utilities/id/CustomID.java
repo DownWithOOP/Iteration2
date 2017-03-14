@@ -23,11 +23,6 @@ public class CustomID {
 
 
     public boolean equals(CustomID customID) {
-        System.out.println(customID.getIdType());
-        System.out.println(type);
-        System.out.println(customID.getId());
-        System.out.println(id);
-        System.out.println((type == customID.getIdType() && id.equals(customID.getId())));
         return (type == customID.getIdType() && id.equals(customID.getId()));
     }
 

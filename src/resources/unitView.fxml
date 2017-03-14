@@ -39,7 +39,7 @@
          </font>
       </Label>
 
-      <Label alignment="CENTER" layoutX="828.0" layoutY="363.0" prefHeight="25.0" prefWidth="122.0" text="Armies" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="815.0" layoutY="249.0" prefHeight="25.0" prefWidth="122.0" text="Armies" textAlignment="CENTER">
          <font>
             <Font size="17.0" />
          </font>
@@ -49,9 +49,9 @@
       <TextFlow layoutX="442.0" layoutY="90.0" prefHeight="122.0" prefWidth="136.0" />
       <TextFlow layoutX="269.0" layoutY="249.0" prefHeight="113.0" prefWidth="309.0" />
       <Button layoutX="39.0" layoutY="25.0" mnemonicParsing="false" onAction="#handleChangeToMainView" text="Return" />
-      <TextArea fx:id="mission" layoutX="884.0" layoutY="107.0" prefHeight="251.0" prefWidth="294.0" />
-      <TextArea fx:id="stats" layoutX="610.0" layoutY="108.0" prefHeight="251.0" prefWidth="258.0" />
-      <TabPane fx:id="armyPane" layoutX="605.0" layoutY="404.0" prefHeight="240.0" prefWidth="575.0" tabClosingPolicy="UNAVAILABLE" />
+      <TextArea fx:id="mission" layoutX="884.0" layoutY="107.0" prefHeight="122.0" prefWidth="294.0" />
+      <TextArea fx:id="stats" layoutX="610.0" layoutY="108.0" prefHeight="122.0" prefWidth="258.0" />
+      <TabPane fx:id="armyPane" layoutX="605.0" layoutY="276.0" prefHeight="368.0" prefWidth="575.0" tabClosingPolicy="UNAVAILABLE" />
       <Button layoutX="1121.0" layoutY="672.0" mnemonicParsing="false" onAction="#handleCreateArmy" text="Create Army" />
       <Button layoutX="368.0" layoutY="685.0" mnemonicParsing="false" onAction="#addUnitToArmy" text="Add to Army" />
       <ComboBox fx:id="armyNumberComboBox" layoutX="494.0" layoutY="685.0" prefHeight="25.0" prefWidth="94.0" promptText="Army No." />

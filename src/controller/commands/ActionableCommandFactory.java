@@ -114,7 +114,6 @@ public class ActionableCommandFactory {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("in command factor command null? " + (command != null));
         return command;
     }
 

@@ -51,8 +51,6 @@ public class CommandFactory {
      */
     public Command createSimpleCommand(CommandType commandType, Commandable commandable) {
 
-        System.out.println("is it a simple command? " + simpleCommandResult.containsKey(commandType));
-
         try {
             if (simpleCommandResult.containsKey(commandType)) {
                 return simpleCommandResult.get(commandType).createCommand(commandable);
@@ -79,7 +77,6 @@ public class CommandFactory {
         Command command = null;
         try {
             command = actionableCommandFactory.createCommand(commandType, commandable, modifier);
-            System.out.println("in command factor command null? " + (command != null));
 
         } catch (Exception e) {
             System.out.println("check for the class type and the action to be performed");
