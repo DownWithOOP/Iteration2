@@ -1,5 +1,6 @@
 package model;
 
+import controller.CommandRelay;
 import controller.availablecommands.AvailableCommands;
 import controller.availablecommands.Commandable;
 import controller.commands.Command;
@@ -24,7 +25,8 @@ public class Cursor extends Commandable {
     }
 
 
-    public Cursor(Location location) {
+    public Cursor(CommandRelay commandRelay, Location location) {
+        super(commandRelay);
         this.location = location;
         initializeMovingFunctionMap();
         initializeCommand();

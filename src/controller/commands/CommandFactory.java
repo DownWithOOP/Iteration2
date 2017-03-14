@@ -96,59 +96,59 @@ public class CommandFactory {
 
 
     public static void main(String[] args) {
-        CustomID customID = new CustomID(IdType.PLAYER, "5");
-
-        Melee melee = new Melee(customID, "6", 0, 0);
-        Colonist colonist = new Colonist(customID, "6", 1, 1);
-        Army army = new Army(customID, "6", 2, 2);
-        RallyPoint rallyPoint = new RallyPoint(new Location(5, 6),new Army(new CustomID(IdType.PLAYER,"hello"),"army",5,6));
-        Cursor cursor = new Cursor(new Location(5, 6));
-
-        Command command;
-        CommandFactory commandFactory = new CommandFactory();
-
-        command = commandFactory.createSimpleCommand(CommandType.DECOMMISSION, melee);
-        command.execute();
-
-        command = commandFactory.createSimpleCommand(CommandType.ABANDON_ARMY, colonist);
-        command.execute();
-
-        command = commandFactory.createSimpleCommand(CommandType.POWER_UP, army);
-        command.execute();
-
-        /*Modifier modifier = new Modifier();
-        modifier.setModifier(Direction.EAST);
-        modifier.setModifier(5);
-
-        command = commandFactory.createActionableCommand(CommandType.ATTACK, army, modifier);
-        command.execute();
-
-
-        command = commandFactory.createActionableCommand(CommandType.JOIN_ARMY, colonist, modifier);
-        command.execute();
-
-        if (colonist.containsCommand(CommandType.ATTACK)) {
-            command = commandFactory.createActionableCommand(CommandType.ATTACK, colonist, modifier);
-            command.execute();
-        }
-
-        modifier.setModifier(Direction.WEST);
-        command = commandFactory.createActionableCommand(CommandType.DEFEND, army, modifier);
-        command.execute();
-
-        modifier.setModifier(Direction.NORTH);
-        command = commandFactory.createActionableCommand(CommandType.MOVE, rallyPoint, modifier);
-        command.execute();
-
-        modifier.setModifier(Direction.WEST);
-        command = commandFactory.createActionableCommand(CommandType.MOVE, cursor, modifier);
-        command.execute();
-
-        modifier.setModifier(Direction.EAST);
-        command = commandFactory.createActionableCommand(CommandType.MOVE, cursor, modifier);
-        command.execute();
-*/
-
+        //CustomID customID = new CustomID(IdType.PLAYER, "5");
+//
+        //Melee melee = new Melee(customID, "6", 0, 0);
+        //Colonist colonist = new Colonist(customID, "6", 1, 1);
+        //Army army = new Army(customID, "6", 2, 2);
+        //RallyPoint rallyPoint = new RallyPoint(new Location(5, 6),new Army(new CustomID(IdType.PLAYER,"hello"),"army",5,6));
+        //Cursor cursor = new Cursor(new Location(5, 6));
+//
+        //Command command;
+        //CommandFactory commandFactory = new CommandFactory();
+//
+        //command = commandFactory.createSimpleCommand(CommandType.DECOMMISSION, melee);
+        //command.execute();
+//
+        //command = commandFactory.createSimpleCommand(CommandType.ABANDON_ARMY, colonist);
+        //command.execute();
+//
+        //command = commandFactory.createSimpleCommand(CommandType.POWER_UP, army);
+        //command.execute();
+//
+        ///*Modifier modifier = new Modifier();
+        //modifier.setModifier(Direction.EAST);
+        //modifier.setModifier(5);
+//
+        //command = commandFactory.createActionableCommand(CommandType.ATTACK, army, modifier);
+        //command.execute();
+//
+//
+        //command = commandFactory.createActionableCommand(CommandType.JOIN_ARMY, colonist, modifier);
+        //command.execute();
+//
+        //if (colonist.containsCommand(CommandType.ATTACK)) {
+        //command = commandFactory.createActionableCommand(CommandType.ATTACK, colonist, modifier);
+        //command.execute();
+        //}
+//
+        //modifier.setModifier(Direction.WEST);
+        //command = commandFactory.createActionableCommand(CommandType.DEFEND, army, modifier);
+        //command.execute();
+//
+        //modifier.setModifier(Direction.NORTH);
+        //command = commandFactory.createActionableCommand(CommandType.MOVE, rallyPoint, modifier);
+        //command.execute();
+//
+        //modifier.setModifier(Direction.WEST);
+        //command = commandFactory.createActionableCommand(CommandType.MOVE, cursor, modifier);
+        //command.execute();
+//
+        //modifier.setModifier(Direction.EAST);
+        //command = commandFactory.createActionableCommand(CommandType.MOVE, cursor, modifier);
+        //command.execute();
+//*/
+//
     }
-
 }
+

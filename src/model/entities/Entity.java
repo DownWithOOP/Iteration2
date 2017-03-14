@@ -1,5 +1,6 @@
 package model.entities;
 
+import controller.CommandRelay;
 import controller.availablecommands.Commandable;
 import controller.commands.Command;
 import controller.commands.CommandType;
@@ -40,7 +41,8 @@ public abstract class Entity extends Commandable {
     /**
      * @param playerId
      */
-    public Entity(CustomID playerId, String id, int locationX, int locationY) {
+    public Entity(CommandRelay commandRelay, CustomID playerId, String id, int locationX, int locationY) {
+        super(commandRelay);
         setId(playerId, id);
         entityStats = setEntityStats();
         this.playerId = playerId;
@@ -153,16 +155,16 @@ public abstract class Entity extends Commandable {
     public String toString() { return entityId.toString();}
 
     public static void main(String[] args){
-        Entity e = new Melee(new CustomID(IdType.MELEE, "id"), "id1", 0, 0);
+        //Entity e = new Melee(new CustomID(IdType.MELEE, "id"), "id1", 0, 0);
         //Command command = new PowerUpCommand(e);
         //e.addToQueue(command);
-        Unit unit = new Melee(new CustomID(IdType.MELEE, "id"), "id1", 0, 0);
+        //Unit unit = new Melee(new CustomID(IdType.MELEE, "id"), "id1", 0, 0);
         //Command command2 = new AbandonArmyCommand(unit);
         //e.addToQueue(command2);
 
-        e.executeQueue();
-        e.executeQueue();
-        e.executeQueue();
-        e.executeQueue();
+        //e.executeQueue();
+        //e.executeQueue();
+        //e.executeQueue();
+        //e.executeQueue();
     }
 }

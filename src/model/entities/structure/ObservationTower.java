@@ -1,5 +1,6 @@
 package model.entities.structure;
 
+import controller.CommandRelay;
 import model.entities.Stats.NonStaffedStructureStats;
 import model.entities.Stats.Stats;
 import model.entities.Stats.StructureStats;
@@ -15,8 +16,8 @@ public class ObservationTower extends NonStaffedStructure {
      * @param playerId
      * @param id
      */
-    public ObservationTower(CustomID playerId, String id, int locationX, int locationY) {
-        super(playerId, id, locationX, locationY);
+    public ObservationTower(CommandRelay commandRelay, CustomID playerId, String id, int locationX, int locationY) {
+        super(commandRelay, playerId, id, locationX, locationY);
     }
 
     @Override

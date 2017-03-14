@@ -1,5 +1,6 @@
 package model.entities.unit;
 
+import controller.CommandRelay;
 import model.entities.Stats.FighterUnitStats;
 import model.entities.Stats.PassiveUnitStats;
 import model.entities.Stats.Stats;
@@ -16,8 +17,8 @@ public class PassiveUnit extends Unit {
      * @param locationX
      * @param locationY
      */
-    public PassiveUnit(CustomID playerId, String id, int locationX, int locationY) {
-        super(playerId, id, locationX, locationY);
+    public PassiveUnit(CommandRelay commandRelay, CustomID playerId, String id, int locationX, int locationY) {
+        super(commandRelay, playerId, id, locationX, locationY);
     }
 
     @Override

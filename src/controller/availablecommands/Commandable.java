@@ -1,5 +1,6 @@
 package controller.availablecommands;
 
+import controller.CommandRelay;
 import controller.commands.Command;
 import controller.commands.CommandType;
 
@@ -15,6 +16,12 @@ public abstract class Commandable {
     private Queue<Command> commandQueue = new ArrayDeque<>();
     private Command currentCommand;
     private int commandIterator = 0;
+
+    protected CommandRelay commandRelay;
+
+    public Commandable(CommandRelay commandRelay) {
+        this.commandRelay = commandRelay;
+    }
 
     protected void addAllCommands(ArrayList<CommandType> commandTypes) {
         totalCommands.addAll(commandTypes);

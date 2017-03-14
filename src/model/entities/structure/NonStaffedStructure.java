@@ -1,5 +1,6 @@
 package model.entities.structure;
 
+import controller.CommandRelay;
 import model.entities.Stats.NonStaffedStructureStats;
 import model.entities.Stats.Stats;
 import utilities.id.CustomID;
@@ -15,8 +16,8 @@ public class NonStaffedStructure extends Structure {
      * @param locationX
      * @param locationY
      */
-    public NonStaffedStructure(CustomID playerId, String id, int locationX, int locationY) {
-        super(playerId, id, locationX, locationY);
+    public NonStaffedStructure(CommandRelay commandRelay, CustomID playerId, String id, int locationX, int locationY) {
+        super(commandRelay, playerId, id, locationX, locationY);
     }
 
     @Override

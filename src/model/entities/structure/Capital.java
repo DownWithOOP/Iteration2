@@ -1,5 +1,6 @@
 package model.entities.structure;
 
+import controller.CommandRelay;
 import model.entities.EntityType;
 import model.entities.Stats.StaffedStructureStats;
 import model.entities.Stats.Stats;
@@ -16,9 +17,9 @@ public class Capital extends StaffedStructure {
     private UnitFactory unitFactory;
     private StructureStats capitalStats;
 
-    public Capital(CustomID playerId, String id, int locationX, int locationY) {
-        super(playerId, id, locationX, locationY);
-        this.unitFactory = new UnitFactory();
+    public Capital(CommandRelay commandRelay, CustomID playerId, String id, int locationX, int locationY) {
+        super(commandRelay, playerId, id, locationX, locationY);
+        this.unitFactory = new UnitFactory(commandRelay);
         this.capitalStats = new StructureStats(10,100,3,2,2);
     }
 

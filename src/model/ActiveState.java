@@ -139,39 +139,39 @@ public class ActiveState {
     }
 
     public static void main(String[] args) {
-        Cursor cursor = new Cursor(new Location(5, 5));
-        ActiveState activeState = new ActiveState(cursor);
-
-        ActiveState.constructModifier(Direction.EAST);
-        Commandable ranged = new Ranged(new CustomID(IdType.RANGED, "ranged"), "ranged", 5, 5);
-        RallyPoint rallyPoint = new RallyPoint(new Location(5, 5), new Army(new CustomID(IdType.PLAYER,"hello"),"army",5,6));
-        activeCommandable = rallyPoint;
-        activeCommandType = CommandType.MOVE;
-        ActiveState.relayCommand(CommandType.MOVE);
-        ActiveState.relayCommand(CommandType.FOCUS);
-
-
-        ActiveState.constructModifier(5);
-        ActiveState.relayCommand(CommandType.MOVE);
-
-        ActiveState.constructModifier(Direction.SOUTH);
-        ActiveState.relayCommand(CommandType.MOVE);
-
-        ActiveState.constructModifier(Direction.WEST);
-        ActiveState.relayCommand(CommandType.MOVE);
-
-        activeState.update(ranged);
-        activeCommandType = CommandType.JOIN_ARMY;
-        ActiveState.constructModifier(5);
-        ActiveState.relayCommand(CommandType.JOIN_ARMY);
-
-        activeCommandType = CommandType.DECOMMISSION;
-        ActiveState.relayCommand(CommandType.ACTIVATE_COMMAND);
-
-        activeState.update(ranged);
-        activeCommandType = CommandType.JOIN_ARMY;
-        ActiveState.constructModifier(6);
-        ActiveState.relayCommand(CommandType.JOIN_ARMY);
+        //Cursor cursor = new Cursor(new Location(5, 5));
+        //ActiveState activeState = new ActiveState(cursor);
+//
+        //ActiveState.constructModifier(Direction.EAST);
+        //Commandable ranged = new Ranged(new CustomID(IdType.RANGED, "ranged"), "ranged", 5, 5);
+        //RallyPoint rallyPoint = new RallyPoint(new Location(5, 5), new Army(new CustomID(IdType.PLAYER,"hello"),"army",5,6));
+        //activeCommandable = rallyPoint;
+        //activeCommandType = CommandType.MOVE;
+        //ActiveState.relayCommand(CommandType.MOVE);
+        //ActiveState.relayCommand(CommandType.FOCUS);
+//
+//
+        //ActiveState.constructModifier(5);
+        //ActiveState.relayCommand(CommandType.MOVE);
+//
+        //ActiveState.constructModifier(Direction.SOUTH);
+        //ActiveState.relayCommand(CommandType.MOVE);
+//
+        //ActiveState.constructModifier(Direction.WEST);
+        //ActiveState.relayCommand(CommandType.MOVE);
+//
+        //activeState.update(ranged);
+        //activeCommandType = CommandType.JOIN_ARMY;
+        //ActiveState.constructModifier(5);
+        //ActiveState.relayCommand(CommandType.JOIN_ARMY);
+//
+        //activeCommandType = CommandType.DECOMMISSION;
+        //ActiveState.relayCommand(CommandType.ACTIVATE_COMMAND);
+//
+        //activeState.update(ranged);
+        //activeCommandType = CommandType.JOIN_ARMY;
+        //ActiveState.constructModifier(6);
+        //ActiveState.relayCommand(CommandType.JOIN_ARMY);
 
     }
 

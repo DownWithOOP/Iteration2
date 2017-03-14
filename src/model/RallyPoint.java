@@ -1,5 +1,6 @@
 package model;
 
+import controller.CommandRelay;
 import controller.availablecommands.Commandable;
 import controller.commands.CommandType;
 import controller.commands.Direction;
@@ -24,8 +25,8 @@ public class RallyPoint extends Cursor {
     }
 
 
-    public RallyPoint(Location location,Army army) {
-        super(location);
+    public RallyPoint(CommandRelay commandRelay, Location location, Army army) {
+        super(commandRelay, location);
         addAllCommands(rallyPointCommand);
         this.army=army;
     }

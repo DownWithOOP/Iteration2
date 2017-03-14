@@ -1,5 +1,6 @@
 package model.entities.structure;
 
+import controller.CommandRelay;
 import model.entities.Stats.StaffedStructureStats;
 import model.entities.Stats.Stats;
 import model.entities.Stats.StructureStats;
@@ -16,8 +17,8 @@ public class Mine extends StaffedStructure {
      * @param playerId
      * @param id
      */
-    public Mine(CustomID playerId, String id, int locationX, int locationY) {
-        super(playerId, id, locationX, locationY);
+    public Mine(CommandRelay commandRelay, CustomID playerId, String id, int locationX, int locationY) {
+        super(commandRelay, playerId, id, locationX, locationY);
     }
 
     @Override

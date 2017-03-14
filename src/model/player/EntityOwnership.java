@@ -2,6 +2,7 @@ package model.player;
 
 //import controller.commands.ActionModifiers;
 //import model.common.Location;
+import controller.CommandRelay;
 import controller.availablecommands.Commandable;
 import controller.commands.CommandType;
 import controller.commands.CycleDirection;
@@ -9,7 +10,9 @@ import model.Mode;
 import model.RallyPoint;
 import model.RenderInformation.*;
 import model.entities.Entity;
+import model.entities.EntityType;
 import model.entities.Stats.UnitStats;
+import model.entities.UnitFactory;
 import model.entities.structure.Capital;
 import model.entities.structure.Structure;
 import model.entities.unit.Colonist;
@@ -59,7 +62,11 @@ public class EntityOwnership {
     private int cycleModeIndex = 1; //start in UNIT mode
     private CustomID playerId;
 
-    public EntityOwnership(CustomID playerId, int startingX, int startingY ) {
+    private CommandRelay commandRelay;
+
+    private UnitFactory unitFactory;
+
+    public EntityOwnership(CustomID playerId, CommandRelay commandRelay, int startingX, int startingY ) {
         unitList = new ArrayList<>(5);
         //armyList = new ArrayList<>(10);
         structureList = new ArrayList<>(1);
@@ -69,6 +76,8 @@ public class EntityOwnership {
         initializeStructures();
         changeMode(modes[cycleModeIndex]);
         this.playerId = playerId;
+
+        this.unitFactory = new UnitFactory(commandRelay);
 
         System.out.println("End of E.O. constructor; cycle type index is: " + cycleTypeIndex);
     }
@@ -81,9 +90,9 @@ public class EntityOwnership {
 
     private void initializeUnits(int startingX, int startingY) {
         //TODO change the id number
-        addUnit(IdType.EXPLORER, new Explorer(playerId,"0", startingX, startingY));
-        addUnit(IdType.EXPLORER, new Explorer(playerId,"1", startingX, startingY));
-        addUnit(IdType.COLONIST, new Colonist(playerId,"0", startingX, startingY));
+        addUnit(IdType.EXPLORER, unitFactory.getEntity(EntityType.EXPLORER, playerId,"0", startingX, startingY));
+        addUnit(IdType.EXPLORER, unitFactory.getEntity(EntityType.EXPLORER, playerId,"1", startingX, startingY));
+        addUnit(IdType.COLONIST, unitFactory.getEntity(EntityType.COLONIST, playerId,"0", startingX, startingY));
     }
 
     private void initializeLists() {
@@ -138,6 +147,7 @@ public class EntityOwnership {
             switch (entityType) {
                 case COLONIST:
                     returnValue = addToIndex(unitList, colonistIndex, entity);
+                    commandRelay.notifyModelOfUnitUpdate();
                     break;
                 case EXPLORER:
                     returnValue = addToIndex(unitList, explorerIndex, entity);
@@ -511,74 +521,5 @@ public class EntityOwnership {
     public Mode getCurrentMode() {
         return modes[cycleModeIndex];
     }
-
-
-    public static void main(String[] args) {
-        EntityOwnership entityOwnership = new EntityOwnership(new CustomID(IdType.PLAYER,"hello"), 5, 5);
-        //Army army = new Army(new Player("hello", new Map()), new Location(1, 2));
-        //Army army1 = new Army(new Player("world", new Map()), new Location(3, 2));
-        Melee melee = new Melee(new CustomID(IdType.PLAYER,"hello"),"5",1,1);
-        Melee melee1 = new Melee(new CustomID(IdType.PLAYER,"hello"),"5",1,2);
-        Melee melee2 = new Melee(new CustomID(IdType.PLAYER,"hello"),"5",1,3);
-        Melee melee3 = new Melee(new CustomID(IdType.PLAYER,"hello"),"5",2,2);
-        Melee melee4 = new Melee(new CustomID(IdType.PLAYER,"hello"),"5",0,0);
-        Explorer explorer1 = new Explorer(new CustomID(IdType.PLAYER,"hello"),"5",0,1);
-        Capital base = new Capital(new CustomID(IdType.PLAYER,"hello"),"5", 2,2);
-
-        boolean check = false;
-        check = entityOwnership.addEntity(explorer1);
-        check = entityOwnership.addEntity(melee);
-        check = entityOwnership.addEntity(melee1);
-        check = entityOwnership.addEntity(melee2);
-        check = entityOwnership.addEntity(melee3);
-        check = entityOwnership.addEntity(melee4);
-        check = entityOwnership.addEntity(base);
-
-        //TODO actually test army
-        //TODO change into assert statements?
-        Entity entity = entityOwnership.changeMode(Mode.ARMY);
-        Entity entity1 = entityOwnership.changeMode(Mode.UNIT);
-        System.out.println("currentmodelist after unit cycle" + entityOwnership.currentModeList);
-        Melee entity2 = (Melee) entityOwnership.cycleInstance(CycleDirection.INCREMENT);
-        System.out.println("returned entity after instance cycle" + entity2);
-        System.out.println("cycleinstanceindex after instance cycle" + entityOwnership.cycleInstanceIndex);
-        entity2 = (Melee) entityOwnership.cycleInstance(CycleDirection.INCREMENT);
-        entity2 = (Melee) entityOwnership.cycleInstance(CycleDirection.INCREMENT);
-        entity2 = (Melee) entityOwnership.cycleInstance(CycleDirection.DECREMENT);
-        entity = entityOwnership.changeMode(Mode.ARMY);
-        entity = entityOwnership.cycleInstance(CycleDirection.INCREMENT);
-        entity = entityOwnership.cycleInstance(CycleDirection.INCREMENT);
-        entity = entityOwnership.cycleInstance(CycleDirection.INCREMENT);
-        entity = entityOwnership.cycleInstance(CycleDirection.DECREMENT);
-        entity = entityOwnership.cycleInstance(CycleDirection.INCREMENT);
-        entity = entityOwnership.changeMode(Mode.UNIT);
-
-        entity1 = entityOwnership.cycleType(CycleDirection.DECREMENT);
-        System.out.println("returned entity after type cycle decrement " + entity1);
-        entity = entityOwnership.cycleType(CycleDirection.INCREMENT);
-        System.out.println("returned entity after type cycle increment " + entity);
-
-        System.out.println("does getCurrentInstance work? " + entityOwnership.getCurrentInstance());
-
-        entityOwnership.removeEntity(melee);
-
-        Entity enti3 = entityOwnership.changeMode(Mode.STRUCTURE);
-
-        //entityOwnership.switchArmy(ActionModifiers.one); TODO test switch army
-        System.out.println("check " + check);
-        System.out.println("unitlist " + entityOwnership.unitList);
-        System.out.println("structurelist " + entityOwnership.structureList);
-        System.out.println("currentmodelist " + entityOwnership.currentModeList);
-        System.out.println("selectedrallypoint " + entityOwnership.selectedRallyPoint);
-        System.out.println("rangedindex " + entityOwnership.rangedIndex);
-        System.out.println("meleeindex " + entityOwnership.meleeIndex);
-        System.out.println("colonistindex " + entityOwnership.colonistIndex);
-        System.out.println("explorerindex " + entityOwnership.explorerIndex);
-
-        System.out.println("cycletypeindex " + entityOwnership.cycleTypeIndex);
-        System.out.println("cycleinstanceindex " + entityOwnership.cycleInstanceIndex);
-        System.out.println("selectedarmyindex " + entityOwnership.selectedArmyIndex);
-        System.out.println("cyclemodeindex " + entityOwnership.cycleModeIndex);
-   }
 
 }

@@ -1,5 +1,6 @@
 package model.entities.unit;
 
+import controller.CommandRelay;
 import controller.commands.CommandType;
 import controller.commands.Direction;
 import model.RallyPoint;
@@ -42,15 +43,17 @@ public class Army extends Entity implements Fighter {
     }
 
     //TODO initialize rally point
-    public Army(CustomID playerId, String id, int locationX, int locationY) {
-        super(playerId, id, locationX, locationY);
+    public Army(CommandRelay commandRelay, CustomID playerId, String id, int locationX, int locationY) {
+        super(commandRelay, playerId, id, locationX, locationY);
         addAllCommands(armyCommand);
-        rallyPoint=new RallyPoint(getLocation(),this);
+        rallyPoint = new RallyPoint(commandRelay, getLocation(),this);
     }
 
     @Override
     public void attack(Direction direction) {
         System.out.println("attack " + direction.toString());
+
+       commandRelay.notifyModelOfAttack(getLocation(), direction, ((FighterUnitStats)entityStats).getOffensiveDamage());
     }
 
     @Override

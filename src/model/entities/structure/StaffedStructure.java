@@ -1,5 +1,6 @@
 package model.entities.structure;
 
+import controller.CommandRelay;
 import model.entities.Stats.Stats;
 import model.entities.Stats.StructureStats;
 import model.entities.unit.Worker;
@@ -20,8 +21,8 @@ public class StaffedStructure extends Structure {
      * @param locationX
      * @param locationY
      */
-    public StaffedStructure(CustomID playerId, String id, int locationX, int locationY) {
-        super(playerId, id, locationX, locationY);
+    public StaffedStructure(CommandRelay commandRelay, CustomID playerId, String id, int locationX, int locationY) {
+        super(commandRelay, playerId, id, locationX, locationY);
         this.workers = new ArrayList<Worker>();
     }
 

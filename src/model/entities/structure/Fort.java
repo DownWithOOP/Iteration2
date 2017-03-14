@@ -1,5 +1,6 @@
 package model.entities.structure;
 
+import controller.CommandRelay;
 import model.entities.EntityType;
 import model.entities.Stats.FortStats;
 import model.entities.UnitFactory;
@@ -15,9 +16,9 @@ import utilities.id.IdType;
 public class Fort extends StaffedStructure {
     private UnitFactory unitFactory;
 
-    public Fort(CustomID playerId, String id, int locationX, int locationY) {
-        super(playerId, id, locationX, locationY);
-        unitFactory = new UnitFactory();
+    public Fort(CommandRelay commandRelay, CustomID playerId, String id, int locationX, int locationY) {
+        super(commandRelay, playerId, id, locationX, locationY);
+        unitFactory = new UnitFactory(commandRelay);
     }
 
     // Fort creates soldiers (Melee and Unit)

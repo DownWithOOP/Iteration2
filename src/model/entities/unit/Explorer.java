@@ -1,5 +1,6 @@
 package model.entities.unit;
 
+import controller.CommandRelay;
 import controller.commands.CommandType;
 import model.entities.Fighter;
 import model.entities.Stats.FighterUnitStats;
@@ -25,8 +26,8 @@ public class Explorer extends FighterUnit {
      * @param playerId
      * @param id
      */
-    public Explorer(CustomID playerId, String id, int locationX, int locationY) {
-        super(playerId, id, locationX, locationY);
+    public Explorer(CommandRelay commandRelay, CustomID playerId, String id, int locationX, int locationY) {
+        super(commandRelay, playerId, id, locationX, locationY);
 //        entityCommand.add(CommandType.PROSPECT);
         addAllCommands(explorerCommand);
     }

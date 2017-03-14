@@ -40,7 +40,7 @@ public class ControllerDispatch {
         availableCommands = new AvailableCommands();
         gameModel = new GameModel(playerNumber, mapDisplayObserver, unitObserver, structureObserver, statusObserver);
         //TODO: do we really need to define activeState like this/ does everything need to be static? --consider restructuring
-        activeState = new ActiveState(new Cursor(new Location(4,4)));
+        activeState = new ActiveState(new Cursor(new CommandRelay(gameModel), new Location(4,4)));
         setGameModelMap();
     }
 
@@ -116,7 +116,7 @@ public class ControllerDispatch {
         commandHashMap.put(CommandType.MOVE_CAMERA_DOWN, new MoveCameraDown(newActiveController));
         commandHashMap.put(CommandType.MOVE_CAMERA_LEFT, new MoveCameraLeft(newActiveController));
 
-        //Put in cursor commands if we have a main view controller
+        //Put in cursor commands to our map if we have a main view controller
         //Otherwise, remove cursor commands from map (if they exist) so cursor doesn't move when not on main menu
         try {
             MainViewController newActiveMainViewController = (MainViewController) newActiveController;
