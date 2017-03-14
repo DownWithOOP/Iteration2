@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -94,6 +95,10 @@ public class MainViewController extends Controller{
     protected void enableKeyboardInput() {
         this.getStage().getScene().addEventFilter(KeyEvent.KEY_PRESSED,
                 event -> {
+                    if (event.getCode() == KeyCode.E) {
+                        controllerDispatch.handleCommand(CommandType.END_TURN);
+                        currentPlayerLabel.setText("Current Player: Player " + controllerDispatch.getActivePlayerNumber());
+                    }
                     CommandType receivedCommand;
                     MVCInputHandler mvcInputHandler = new MVCInputHandler();
                     receivedCommand = mvcInputHandler.interpretInput(event);
@@ -129,6 +134,8 @@ public class MainViewController extends Controller{
         stage.setTitle(text);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(commandLabel.getScene().getWindow());
+        Controller inputController = loader.getController();
+        inputController.setDispatch(controllerDispatch);
         stage.showAndWait();
     }
 
@@ -261,7 +268,7 @@ public class MainViewController extends Controller{
         cycleLabels.put("instance", instanceLabel);
         cycleLabels.put("command", commandLabel);
 
-        argumentCommands.put("BUILD_STRUCTURE", "/resources/buildStructurePopUp.fxml");
+        argumentCommands.put("DECOMMISSION", "/resources/buildStructurePopUp.fxml");
         argumentCommands.put("CREATE_UNIT", "/resources/createUnitPopUp.fxml");
         argumentCommands.put("HEAL_UNIT", "/resources/healUnitPopUp.fxml");
 

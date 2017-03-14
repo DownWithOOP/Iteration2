@@ -26,17 +26,17 @@
          <children>
             <Label fx:id="selectStructureLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="306.0" text="Which structure do you want to build?" textAlignment="CENTER" />
             <Label fx:id="selectStructLocationLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="306.0" text="Where do you want to build the structure?" textAlignment="CENTER" GridPane.rowIndex="1" />
-            <Button fx:id="buildStructButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="245.0" text="Build Structure" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Button fx:id="buildStructButton" onAction="#handleBuildStructure" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="245.0" text="Build Structure" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
             <Button fx:id="cancelButton" onAction="#closePopUp" mnemonicParsing="false" prefHeight="27.0" prefWidth="257.0" text="Cancel" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-            <ChoiceBox prefHeight="27.0" prefWidth="251.0" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+            <ChoiceBox fx:id="structureComboBox" prefHeight="27.0" prefWidth="251.0" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                <items>
                  <FXCollections fx:factory="observableArrayList">
-                     <String fx:value="Farm" />
-                     <String fx:value="Fort" />
-                     <String fx:value="Mine" />
-                     <String fx:value="Observation Tower" />
-                     <String fx:value="Power Plant" />
-                     <String fx:value="University" />
+                     <String fx:value="FARM" />
+                     <String fx:value="FORT" />
+                     <String fx:value="MINE" />
+                     <String fx:value="OBSERVATION_TOWER" />
+                     <String fx:value="POWER_PLANT" />
+                     <String fx:value="UNIVERSITY" />
                  </FXCollections>
                 </items>
             </ChoiceBox>

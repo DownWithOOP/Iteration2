@@ -31,7 +31,7 @@
                 </Menu>
                 <Menu id="currentPlayerMenu" mnemonicParsing="false" text="Player">
                     <items>
-                        <MenuItem fx:id="endTurnMenuItem" mnemonicParsing="false" onAction="#handleEndTurn" text="End Turn" />
+                        <MenuItem fx:id="endTurnMenuItem" mnemonicParsing="false" onAction="#handleEndTurn" text="End Turn (E)" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Viewports">

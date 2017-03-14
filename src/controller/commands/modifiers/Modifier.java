@@ -2,6 +2,7 @@ package controller.commands.modifiers;
 
 import controller.commands.Direction;
 import model.entities.structure.StructureType;
+import model.entities.unit.Unit;
 import model.entities.unit.UnitType;
 
 /**
@@ -12,6 +13,7 @@ public class Modifier {
     public int number;
     public UnitType unitType;
     public StructureType structureType;
+    public Unit unit;
     private ModifierType modifierType;
 
     public Modifier(Direction direction) {
@@ -32,6 +34,11 @@ public class Modifier {
     public Modifier(StructureType structureType) {
         this.structureType = structureType;
         modifierType=ModifierType.STRUCTURE_TYPE;
+    }
+
+    public Modifier(Unit unit) {
+        this.unit = unit;
+        modifierType = ModifierType.UNIT;
     }
 
     public ModifierType getModifierType(){

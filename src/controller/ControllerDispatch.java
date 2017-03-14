@@ -16,7 +16,9 @@ import model.ActiveState;
 import model.Cursor;
 import model.GameModel;
 import model.common.Location;
-import model.entities.Entity;
+import model.entities.structure.Structure;
+import model.entities.structure.StructureType;
+import model.entities.unit.*;
 import model.entities.EntityId;
 import model.entities.unit.Army;
 import model.entities.unit.Explorer;
@@ -56,12 +58,19 @@ public class ControllerDispatch {
     }
 
     public void handleCommandActivation() {
-        Commandable selectedInstance = (Commandable) gameModel.getActivePlayer().getCurrentInstance();
+        Commandable selectedInstance = gameModel.getActivePlayer().getCurrentInstance();
         CommandType selectedCommandType = gameModel.getActivePlayer().getCurrentCommandType();
-        activeState.update(selectedInstance);
-        activeState.update(selectedCommandType);
+        //activeState.update(selectedInstance);
+        //activeState.update(selectedCommandType);
         System.out.println("Added to Queue: " + selectedCommandType.toString());
 
+        if (selectedCommandType == CommandType.MOVE) {
+            selectedInstance.addToQueue(new MoveUnitCommand((Unit)selectedInstance, 6 ,5));
+        }
+//        //ActiveState.relayCommand(CommandType.ACTIVATE_COMMAND);
+
+
+        //ActiveState.relayCommand(CommandType.ACTIVATE_COMMAND);
         ActiveState.getInstance().relayCommand(CommandType.ACTIVATE_COMMAND);
 
         //System.out.println("controller dispatch says that command is " + selectedCommandType);
@@ -94,6 +103,31 @@ public class ControllerDispatch {
 
     }
 
+    public void handleBuildStructureCommand(String structureTypeStr) {
+        Commandable selectedInstance = gameModel.getActivePlayer().getCurrentInstance();
+        CommandType selectedCommandType = gameModel.getActivePlayer().getCurrentCommandType();
+        activeState.update(selectedInstance);
+        activeState.update(selectedCommandType);
+
+        StructureType structType = StructureType.valueOf(structureTypeStr);
+        ActiveState.getInstance().constructModifier(structType);
+        ActiveState.getInstance().relayCommand(CommandType.BUILD_STRUCTURE);
+    }
+
+    public void handleCreateUnitCommand(String unitTypeStr) {
+        Commandable selectedInstance = gameModel.getActivePlayer().getCurrentInstance();
+        CommandType selectedCommandType = gameModel.getActivePlayer().getCurrentCommandType();
+        activeState.update(selectedInstance);
+        activeState.update(selectedCommandType);
+
+        UnitType unitType = UnitType.valueOf(unitTypeStr);
+        ActiveState.getInstance().constructModifier(unitType);
+        ActiveState.getInstance().relayCommand(CommandType.CREATE_UNIT);
+    }
+
+    public void handleHealUnitCommand(String unitStr) {
+        //FighterUnit unit = unitStr;
+    }
     public void handleCommandActivationFromView() {
         //View needs to have set the necessary information in active state before calling this
         ActiveState.getInstance().relayCommand(CommandType.ACTIVATE_COMMAND);

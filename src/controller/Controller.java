@@ -15,7 +15,7 @@ public abstract class Controller implements Initializable {
 
     }
 
-    protected void setDispatch(ControllerDispatch controllerDispatch){
+    public void setDispatch(ControllerDispatch controllerDispatch){
         this.controllerDispatch = controllerDispatch;
     }
 

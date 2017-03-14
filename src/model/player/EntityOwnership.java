@@ -18,9 +18,15 @@ import model.entities.Stats.UnitStats;
 import model.entities.UnitFactory;
 import model.entities.structure.Capital;
 import model.entities.structure.Structure;
+
+import model.entities.unit.*;
+
+import model.entities.unit.Colonist;
+import model.entities.unit.Explorer;
+import model.entities.unit.Melee;
+import model.entities.unit.Unit;
 import utilities.ObserverInterfaces.MapObserver;
 import utilities.ObserverInterfaces.UnitObserver;
-import model.entities.unit.*;
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
