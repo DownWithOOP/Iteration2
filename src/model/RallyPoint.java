@@ -26,7 +26,7 @@ public class RallyPoint extends Cursor {
 
     public RallyPoint(Location location,Army army) {
         super(location);
-        addAllCommands(rallyPointCommand);
+        //addAllCommands(rallyPointCommand);
         this.army=army;
     }
 

@@ -60,12 +60,12 @@ public class ActiveState {
         if (modifier.getModifierType() == ModifierType.DIRECTION) {
 
             if (cursor!=null) {
-                cursorCommand = commandFactory.createActionableCommand(CommandType.MOVE, cursor, modifier);
+                //cursorCommand = commandFactory.createActionableCommand(CommandType.MOVE, cursor, modifier);
 
 
-                if (cursorCommand != null) {
-                    cursorCommand.execute();
-                }
+//                if (cursorCommand != null) {
+//                    cursorCommand.execute();
+//                }
             }
         }
 
@@ -129,6 +129,10 @@ public class ActiveState {
         modifier = new Modifier(structureType);
     }
 
+    public static Cursor getCursor(){
+        return cursor;
+    }
+
     public static void relayCommand(CommandType commandType) {
         if (modifier != null) {
             relayActionableCommand(commandType);
@@ -145,7 +149,7 @@ public class ActiveState {
         ActiveState.constructModifier(Direction.EAST);
         Commandable ranged = new Ranged(new CustomID(IdType.RANGED, "ranged"), "ranged", 5, 5);
         RallyPoint rallyPoint = new RallyPoint(new Location(5, 5), new Army(new CustomID(IdType.PLAYER,"hello"),"army",5,6));
-        activeCommandable = rallyPoint;
+        //activeCommandable = rallyPoint;
         activeCommandType = CommandType.MOVE;
         ActiveState.relayCommand(CommandType.MOVE);
         ActiveState.relayCommand(CommandType.FOCUS);

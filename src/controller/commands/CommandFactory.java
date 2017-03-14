@@ -37,7 +37,7 @@ public class CommandFactory {
         simpleCommandResult.put(CommandType.BUILD_CAPITAL, (commandable -> (new BuildCapitalCommand((Colonist) commandable))));
         simpleCommandResult.put(CommandType.DISBAND, (commandable) -> (new DisbandCommand((Army) commandable)));
         simpleCommandResult.put(CommandType.ABANDON_ARMY, (commandable) -> (new AbandonArmyCommand((Unit) commandable)));
-        simpleCommandResult.put(CommandType.FOCUS, (commandable) -> (new FocusCommand((RallyPoint) commandable)));
+        //simpleCommandResult.put(CommandType.FOCUS, (commandable) -> (new FocusCommand((RallyPoint) commandable)));
 
 
     }

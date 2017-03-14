@@ -13,38 +13,12 @@ import java.util.HashMap;
 /**
  * Created by jordi on 2/28/2017.
  */
-public class Cursor extends Commandable {
+public class Cursor {
     protected Location location;
     private HashMap<Direction, MoveInterface> movingFunctionMap = new HashMap<>();
 
-    static ArrayList<CommandType> cursorCommand = new ArrayList<>();
-
-    static {
-        cursorCommand.add(CommandType.MOVE);
-    }
-
-
     public Cursor(Location location) {
         this.location = location;
-        initializeMovingFunctionMap();
-        initializeCommand();
-    }
-
-    private void initializeCommand(){
-        addAllCommands(cursorCommand);
-    }
-
-    private void initializeMovingFunctionMap() {
-
-        movingFunctionMap.put(Direction.NORTH, () -> moveNorth());
-        movingFunctionMap.put(Direction.SOUTH, () -> moveSouth());
-        movingFunctionMap.put(Direction.EAST, () -> moveEast());
-        movingFunctionMap.put(Direction.WEST, () -> moveWest());
-        movingFunctionMap.put(Direction.NORTH_EAST, () -> moveNorthEast());
-        movingFunctionMap.put(Direction.NORTH_WEST, () -> moveNorthWest());
-        movingFunctionMap.put(Direction.SOUTH_EAST, () -> moveSouthEast());
-        movingFunctionMap.put(Direction.SOUTH_WEST, () -> moveSouthWest());
-
     }
 
     public void moveNorth() {
@@ -64,26 +38,6 @@ public class Cursor extends Commandable {
         location.moveEast();
     }
 
-    public void moveNorthEast() {
-        moveNorth();
-        moveEast();
-    }
-
-    public void moveSouthEast() {
-        moveSouth();
-        moveEast();
-    }
-
-    public void moveSouthWest() {
-        moveSouth();
-        moveWest();
-    }
-
-    public void moveNorthWest() {
-        moveNorth();
-        moveWest();
-    }
-
     public void addCursorToAvailableCommands(AvailableCommands availableCommands) {
         HashMap<CommandType, Command> cursorCommand;
 //        cursorCommand.put()
@@ -91,6 +45,14 @@ public class Cursor extends Commandable {
 
     public Location getLocation() {
         return location;
+    }
+
+    public int getX(){
+        return (int)location.getX();
+    }
+
+    public int getY(){
+        return (int)location.getY();
     }
 
     public void move(Direction direction) {

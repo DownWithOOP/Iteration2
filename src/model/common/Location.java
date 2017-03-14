@@ -14,11 +14,11 @@ public class Location extends Point {
     }
 
     public void moveNorth(){
-        super.setLocation(this.getX(), this.getY()-1);
+        super.setLocation(this.getX(), this.getY()+1);
     }
 
     public void moveSouth(){
-        super.setLocation(this.getX(), this.getY()+1);
+        super.setLocation(this.getX(), this.getY()-1);
     }
 
     public void moveWest(){

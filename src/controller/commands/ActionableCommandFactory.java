@@ -28,7 +28,7 @@ public class ActionableCommandFactory {
 
     static {
         //cursor
-        actionableCommandDirection.put(CommandType.MOVE, (commandable, modifier) -> (new MoveCommand((Cursor) commandable, modifier.direction)));
+        //actionableCommandDirection.put(CommandType.MOVE, (commandable, modifier) -> (new MoveCommand((Cursor) commandable, modifier.direction)));
         // TODO add W,A,S,D move_map_Camera stuff
 
         //army
