@@ -64,7 +64,7 @@ public class ControllerDispatch {
         System.out.println("Added to Queue: " + selectedCommandType.toString());
 
         if (selectedCommandType == CommandType.MOVE) {
-            selectedInstance.addToQueue(new MoveUnitCommand((Unit)selectedInstance, 6 ,5));
+            selectedInstance.addToQueue(new MoveUnitCommand((Unit)selectedInstance, ActiveState.getInstance().getCursor().getX() ,ActiveState.getInstance().getCursor().getY()));
         }
 //        //ActiveState.relayCommand(CommandType.ACTIVATE_COMMAND);
 
