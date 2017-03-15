@@ -167,6 +167,10 @@ public class EntityOwnership {
                 removeEntity(unitList.get(2).get(0)); //remove colonist
                 addEntity(unitFactory.getEntity(EntityType.MELEE, playerId, (int)entity.getLocation().getX(), (int)entity.getLocation().getY()));
                 addEntity(unitFactory.getEntity(EntityType.MELEE, playerId, (int)entity.getLocation().getX(), (int)entity.getLocation().getY()));
+                for (int i = 0; i < 5; i++) {
+                    workerList.add((Worker) unitFactory.getEntity(EntityType.WORKER, playerId, (int)entity.getLocation().getX(), (int)entity.getLocation().getY()));
+                }
+                System.out.println(workerList);
                 result = addToIndex(structureList, capitalIndex, entity);
                 break;
             case FARM:
@@ -849,7 +853,7 @@ public class EntityOwnership {
         }
 
         if (armyToAddWorkersTo != null) {
-            armyToAddWorkersTo.addWorkers(workersOnLocation, location);
+            //armyToAddWorkersTo.addWorkers(workersOnLocation, location);
         }
 
     }
