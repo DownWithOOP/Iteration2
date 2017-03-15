@@ -144,14 +144,19 @@ public class AreaViewport implements MiniMapSubject{
         this.gridSizeY = renderData[0].length;
         updateCanvas();
         notifyObservers(); // update mini map
-        selectJumpLocation(cursorX, cursorY);
     }
 
     // currently cycled unit that is in that status viewport
     public void getCurrentActiveUnit(String string, int locationX, int locationY){
         this.selectedUnit = string;
+        if(this.cursorX != locationX || this.cursorY != locationY){
+            // change cursor location
+            selectJumpLocation(cursorX, cursorY);
+        }
+
         this.cursorX = locationX;
         this.cursorY = locationY;
+
     }
 
     public void drawSelection(){
