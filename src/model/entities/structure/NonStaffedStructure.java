@@ -4,6 +4,7 @@ import controller.CommandRelay;
 import model.entities.Stats.NonStaffedStructureStats;
 import model.entities.Stats.Stats;
 import model.map.tile.resources.Resource;
+import model.map.tile.resources.ResourceType;
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
@@ -23,6 +24,8 @@ public class NonStaffedStructure extends Structure {
 
     public NonStaffedStructure(CommandRelay commandRelay, CustomID playerId, String id, int locationX, int locationY) {
         super(commandRelay, playerId, id, locationX, locationY);
+        energyResource = new Resource(ResourceType.ENERGY, 0);
+        oreResource = new Resource(ResourceType.ORE, 0);
     }
 
     /**
