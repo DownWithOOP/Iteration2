@@ -487,6 +487,8 @@ public class EntityOwnership {
                 armyRenderObject = new ArmyRenderObject(army.getEntityId(), rallyPointList.get(selectedArmyIndex).getLocation(), false);
             }
 
+            army.checkIfRecruitsAtRallyPoint();
+
             for (Entity entity : army.getBattleGroup()) {
                 Unit unit = (Unit) entity; //we know that everything in army is a unit
                 UnitStats unitStats = unit.getUnitStats().clone(); // deep clone so as not to mess anything up

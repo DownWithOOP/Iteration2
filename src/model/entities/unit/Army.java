@@ -297,12 +297,10 @@ public class Army extends Entity implements Fighter {
      }
 
     public void move(Location newLocation) {
-        System.out.println("am I going to move the army? " + distanceFromCurrentLocation(newLocation));
-        System.out.println("old loc " + getLocation());
-        System.out.println("new loc " + newLocation);
         if (distanceFromCurrentLocation(newLocation)) {
             moveBattleGroup(newLocation);
             moveReinforcements(newLocation);
+            setLocation(newLocation.getXCoord(), newLocation.getYCoord());
         }
     }
 
@@ -310,5 +308,13 @@ public class Army extends Entity implements Fighter {
         Location oldLocation = getLocation();
         int distance = (int)(Math.sqrt(Math.pow(newLocation.getXCoord()-oldLocation.getXCoord(),2) + Math.pow(newLocation.getYCoord()-oldLocation.getYCoord(),2)));
         return distance < ((UnitStats) entityStats).getMovement();
+    }
+
+    public void checkIfRecruitsAtRallyPoint() {
+        for (Unit reinforcementUnit : reinforcements.values()) {
+            if (reinforcementUnit.getLocation().equals(rallyPoint.getLocation())) {
+                arrivedRallyPoint((FighterUnit) reinforcementUnit);
+            }
+        }
     }
 }
