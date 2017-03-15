@@ -36,6 +36,7 @@ import utilities.id.IdType;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Handles relationships between a Player and all of their Entities. The responsibilities of this class include
@@ -235,6 +236,12 @@ public class EntityOwnership {
      */
     public void distributeResource(EntityId entityId, Resource resource){
         entities.get(entityId).receiveResource(resource);
+    }
+
+    public void consumeResources(){
+        for(Map.Entry<EntityId, Entity> entity : entities.entrySet()){
+            entity.getValue().consumeResources();
+        }
     }
 
     public static int next(int size, int index) {
