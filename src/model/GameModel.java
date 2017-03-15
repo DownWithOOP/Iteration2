@@ -5,6 +5,7 @@ import controller.availablecommands.Commandable;
 import controller.commands.Direction;
 import model.common.Location;
 import model.entities.EntityId;
+import model.entities.structure.Structure;
 import model.entities.unit.FighterUnit;
 import model.map.Map;
 import model.player.Player;
@@ -100,6 +101,10 @@ public class GameModel {
 
     public void addRallyPoint(RallyPoint rallyPoint, int armyNumber) {
         getActivePlayer().addRallyPoint(rallyPoint, armyNumber);
+    }
+
+    public void addStructure(Structure structure) {
+        getActivePlayer().addStructure(structure);
     }
 }
 
