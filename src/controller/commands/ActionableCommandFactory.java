@@ -3,16 +3,12 @@ package controller.commands;
 import controller.availablecommands.Commandable;
 import controller.commands.entitycommand.armycommand.AttackCommand;
 import controller.commands.entitycommand.armycommand.DefendCommand;
-import controller.commands.entitycommand.cursorcommand.MoveCommand;
 import controller.commands.entitycommand.unitcommand.AdvanceToRallyPointCommand;
 import controller.commands.entitycommand.unitcommand.JoinArmyCommand;
-import controller.commands.entitycommand.unitcommand.workercommand.BuildStructureCommand;
 import controller.commands.modifiers.Modifier;
 import controller.commands.modifiers.ModifierType;
-import model.Cursor;
 import model.entities.unit.Army;
 import model.entities.unit.Unit;
-import model.entities.unit.Worker;
 
 import java.util.HashMap;
 

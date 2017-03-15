@@ -104,4 +104,13 @@ public abstract class Commandable {
     public Command getCurrentCommand() {
         return currentCommand;
     }
+
+    // Get a list of all missions/commands currently in the commandable's queue
+    public String missionsToString() {
+        String str = "";
+        for (Command command : commandQueue) {
+            str += command.getCommandType().toString() + "\n";
+        }
+        return str;
+    }
 }
