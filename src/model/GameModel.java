@@ -44,7 +44,7 @@ public class GameModel {
             if(i ==0){ // player 1
                 temp = new Player(1,masterMap, new CommandRelay(this), observer, unitObserver, structureObserver, statusObserver, playerObservator, 6,4); // TODO, give players unique maps
             } else if( i== 1){
-                temp = new Player(2,masterMap, new CommandRelay(this), observer, unitObserver, structureObserver, statusObserver, playerObservator, 6, 3); // TODO, give players unique maps
+                temp = new Player(2,masterMap, new CommandRelay(this), observer, unitObserver, structureObserver, statusObserver, playerObservator, 14, 7); // TODO, give players unique maps
             } else {
                 temp = new Player(i+1,masterMap, new CommandRelay(this), observer, unitObserver, structureObserver, statusObserver, playerObservator, 0,0); // TODO give players unique maps
             }
