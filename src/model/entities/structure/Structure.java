@@ -3,6 +3,7 @@ package model.entities.structure;
 import controller.CommandRelay;
 import model.entities.Entity;
 import model.entities.EntityType;
+import model.map.tile.resources.Resource;
 import model.entities.Stats.Stats;
 import model.entities.Stats.StructureStats;
 import utilities.id.CustomID;

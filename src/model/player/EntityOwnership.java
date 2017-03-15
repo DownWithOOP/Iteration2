@@ -15,6 +15,7 @@ import model.common.Location;
 import model.entities.Entity;
 import model.entities.EntityId;
 import model.entities.EntityType;
+
 import model.entities.Stats.UnitStats;
 import model.entities.UnitFactory;
 import model.entities.structure.Capital;
@@ -26,12 +27,14 @@ import model.entities.unit.Colonist;
 import model.entities.unit.Explorer;
 import model.entities.unit.Melee;
 import model.entities.unit.Unit;
+import model.map.tile.resources.Resource;
 import utilities.ObserverInterfaces.MapObserver;
 import utilities.ObserverInterfaces.UnitObserver;
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -51,6 +54,9 @@ public class EntityOwnership {
     List<List<Entity>> structureList;         //base=0
     List<List<Entity>> currentModeList;
     List<RallyPoint> rallyPointList;
+
+    //A list of all entities for lookup purposes
+    HashMap<EntityId, Entity> entities;
 
     Mode modes[] = Mode.values();
     ArmyMode armySubModes[] = ArmyMode.values();
@@ -94,7 +100,7 @@ public class EntityOwnership {
         armyList = new ArrayList<>(typeRestriction);
         structureList = new ArrayList<>(1);
         rallyPointList= new ArrayList<>(typeRestriction);
-
+        entities = new HashMap<>();
         this.unitFactory = new UnitFactory(commandRelay);
         this.commandRelay = commandRelay;
         this.idManager = new EntityIdManager();
@@ -141,9 +147,10 @@ public class EntityOwnership {
         //TODO handle adding army
 
         returnValue = addStructure(entityType, entity);
-        if (returnValue == false) {
+        if (!returnValue) {
             returnValue = addUnit(entityType, entity);
         }
+        //entities.put(entity.getEntityId(), entity);
         return returnValue;
     }
 
@@ -189,6 +196,7 @@ public class EntityOwnership {
     private boolean addToIndex(List<List<Entity>> entityList, int index, Entity entity) {
         if (entityList.get(index).isEmpty() || entityList.get(index).size() < typeRestriction && !entityList.get(index).contains(entity)) {
             entityList.get(index).add(entity);
+            entities.put(entity.getEntityId(), entity);
             return true;
         }
         return false;
@@ -221,6 +229,13 @@ public class EntityOwnership {
         return returnValue;
     }
 
+    /**
+     *  This method distributes a resource to a particular entity
+     *  loooll
+     */
+    public void distributeResource(EntityId entityId, Resource resource){
+        entities.get(entityId).receiveResource(resource);
+    }
 
     public static int next(int size, int index) {
 
@@ -328,6 +343,18 @@ public class EntityOwnership {
                 cycleCommandIndex = previous(selectedRallyPoint.getIterableCommandsSize(), cycleCommandIndex);
             }
             return selectedRallyPoint.getIterableCommand(cycleCommandIndex);
+        }
+        else if (getCurrentMode() == Mode.ARMY) {
+            if (selectedArmy == null) {
+                return null;
+            }
+            if (direction == CycleDirection.INCREMENT) {
+                cycleCommandIndex = next(selectedArmy.getIterableCommandsSize(), cycleCommandIndex);
+            }
+            if (direction == CycleDirection.DECREMENT) {
+                cycleCommandIndex = previous(selectedArmy.getIterableCommandsSize(), cycleCommandIndex);
+            }
+            return selectedArmy.getIterableCommand(cycleCommandIndex);
         }
         if (currentModeList == null || currentModeList.get(cycleTypeIndex).size()==0) {
             return null;
@@ -465,6 +492,7 @@ public class EntityOwnership {
                 unitList.get(meleeIndex).remove(entity);
                 break;
         }
+        entities.remove(entity.getEntityId());
     }
 
     public UnitRenderInformation returnUnitRenderInformation() {
@@ -533,6 +561,14 @@ public class EntityOwnership {
         if (getCurrentMode() == Mode.RALLY_POINT) {
             if (selectedRallyPoint != null) {
                 return selectedRallyPoint.getIterableCommand(cycleCommandIndex);
+            }
+            else {
+                return null;
+            }
+        }
+        else if (getCurrentMode() == Mode.ARMY) {
+            if (selectedArmy != null) {
+                return selectedArmy.getIterableCommand(cycleCommandIndex);
             }
             else {
                 return null;
@@ -669,12 +705,12 @@ public class EntityOwnership {
         }
 
         System.out.println("applying damage");
-        int damageToApply = damage/(unitsToDamage.size() + structuresToDamage.size());
+
         for (FighterUnit unitTakingDamage : unitsToDamage) {
-            unitTakingDamage.takeDamage(damageToApply);
+            unitTakingDamage.takeDamage(damage);
         }
         for (Structure structureTakingDamage : structuresToDamage) {
-            structureTakingDamage.takeDamage(damageToApply);
+            structureTakingDamage.takeDamage(damage);
         }
 
     }
@@ -727,5 +763,22 @@ public class EntityOwnership {
         else {
             return getCurrentInstance();
         }
+    }
+
+    public Commandable getInstance(int indexToSelect) {
+        if (getCurrentMode() == Mode.RALLY_POINT && indexToSelect < rallyPointList.size()) {
+            //do nothing
+        }
+        else if (getCurrentMode() == Mode.ARMY && indexToSelect < armyList.size()) {
+            selectedArmy = armyList.get(indexToSelect);
+            selectedArmyIndex = indexToSelect;
+            selectedRallyPoint = rallyPointList.get(selectedArmyIndex);
+            return selectedArmy;
+        }
+        else if (indexToSelect < currentModeList.get(cycleTypeIndex).size()) {
+            cycleInstanceIndex = indexToSelect;
+            return getCurrentInstance();
+        }
+        return null;
     }
 }

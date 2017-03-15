@@ -85,5 +85,5 @@ public class FighterUnit extends Unit {
         return getFighterUnitStats().getMaxHealth();
     }
 
-    public FighterUnitStats getFighterUnitStats() { return ((FighterUnitStats)entityStats).clone();}
+    public FighterUnitStats getFighterUnitStats() { return ((FighterUnitStats)entityStats);}
 }

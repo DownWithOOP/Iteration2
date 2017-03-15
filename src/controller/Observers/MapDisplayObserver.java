@@ -78,7 +78,6 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
             initializeNewPlayer(playerNumber); // if size of ArrayList is too small, then player does not have one initialized
         }
 
-        System.out.println("currently active player :" + this.currPlayerNumber);
         // go through TileRender objects change any that have visibility level 2, down to level 1
         TileRenderObject[][] userData = playerTiles.get(playerNumber-1);
         for(int i=0; i<mapSizeX; i++){
@@ -89,6 +88,8 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
                 if(check.getVisibilityLevel() == 2){
                     check.setVisibilityToOne();
                     check.removeAllEnemies();
+                } else if (check.getVisibilityLevel() == 1){
+                    // do nothing
                 }
                 if(allVisible){ // sets everything to visible
                     check.setVisibilityTwo();

@@ -23,6 +23,7 @@ public class CommandRelay {
     }
 
     public void notifyModelOfAttack(Location location, int damage) {
+        System.out.println("apply damage of " + damage);
         model.applyDamageToEntitiesByLocation(location, damage);
     }
 
