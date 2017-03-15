@@ -383,7 +383,6 @@ public class AreaViewport implements MiniMapSubject{
                         // 1, we'll handle this later
                         // TODO greyed out area
 
-
                     } else{
                         // must be 2, fully visible display everything that is there
                         TerrainType type = render.getTerrainType();
@@ -427,6 +426,9 @@ public class AreaViewport implements MiniMapSubject{
                                             if(id.equals(IdType.EXPLORER)){
                                                 gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
                                             }
+                                            if(id.equals(IdType.CAPITAL)){
+                                               // gc.drawImage(TODO..place here ,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                            }
 
                                             if(startOfNewTurn && entities.size() != 0){
                                                 selectJumpLocation(j,i);
@@ -434,6 +436,7 @@ public class AreaViewport implements MiniMapSubject{
                                                 startOfNewTurn = false;
                                             }
                                         }
+                            
                                         // now draw resource values if the overlay is on
                                         if(resourceDisplay.equals("") || !overlayOn){
                                             // don't display anything
@@ -469,6 +472,10 @@ public class AreaViewport implements MiniMapSubject{
                                             if(id.equals(IdType.EXPLORER)){
                                                 gc.drawImage(colonist,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
                                             }
+                                            if(id.equals(IdType.CAPITAL)){
+                                               // TODO gc.drawImage(,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                            }
+
                                         }
 
                                         // now draw resource values if the overlay is on
