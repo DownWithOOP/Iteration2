@@ -8,6 +8,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import model.RallyPoint;
 import model.RenderInformation.StatusRenderInformation;
 import model.entities.Entity;
 import model.entities.Stats.StatsType;
@@ -57,12 +58,14 @@ public class StatusViewport {
         //Label selectedEntityLabel =  new Label(statusRenderInformation.getInstanceString());
         this.statsGrid.getChildren().clear();
         VBox vb = new VBox();
-        Entity currentInstance =  (Entity) statusRenderInformation.getInstance();
-        if (currentInstance != null) {
-            for (Map.Entry<StatsType, Integer>entry : currentInstance.getStats().getStatsMap().entrySet()) {
-                Label label = new Label(entry.getKey().toString() + ": " + entry.getValue());
-                label.setStyle("-fx-font-size: 10;" + "-fx-font-weight: BOLD;");
-                vb.getChildren().add(label);
+        if (!statusRenderInformation.getModeString().equals("RALLY_POINT")) {
+            Entity currentInstance =  (Entity) statusRenderInformation.getInstance();
+            if (currentInstance != null) {
+                for (Map.Entry<StatsType, Integer>entry : currentInstance.getStats().getStatsMap().entrySet()) {
+                    Label label = new Label(entry.getKey().toString() + ": " + entry.getValue());
+                    label.setStyle("-fx-font-size: 10;" + "-fx-font-weight: BOLD;");
+                    vb.getChildren().add(label);
+                }
             }
         }
 
