@@ -35,6 +35,8 @@ public class Army extends Entity implements Fighter {
 
     private RallyPoint rallyPoint;
 
+    private boolean alternateColumn;
+
     static ArrayList<CommandType> armyCommand = new ArrayList<>();
 
     static {
@@ -48,13 +50,34 @@ public class Army extends Entity implements Fighter {
         super(commandRelay, playerId, id, locationX, locationY);
         addAllCommands(armyCommand);
 
+        alternateColumn = true;
     }
 
     @Override
     public void attack(Direction direction) {
-       System.out.println("attack " + direction.toString());
 
-       //commandRelay.notifyModelOfAttack(getLocation().move(direction), ((FighterUnitStats)entityStats).getOffensiveDamage());
+        Location attackLocation = new Location(getLocation().getXCoord(), getLocation().getYCoord());
+        switch (direction) {
+            case NORTH_EAST:
+                attackLocation.moveEast();
+                attackLocation.moveNorth();
+                break;
+            case NORTH:
+                attackLocation.moveNorth();
+                break;
+            case NORTH_WEST:
+                attackLocation.moveNorth();
+                attackLocation.moveWest();
+            case SOUTH_EAST:
+                attackLocation.moveSouth();
+                attackLocation.moveEast();
+            case SOUTH:
+                attackLocation.moveSouth();
+            case SOUTH_WEST:
+                attackLocation.moveSouth();
+                attackLocation.moveWest();
+        }
+       commandRelay.notifyModelOfAttack(attackLocation, ((FighterUnitStats)entityStats).getOffensiveDamage());
     }
 
     @Override
