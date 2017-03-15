@@ -34,11 +34,12 @@ public class Capital extends StaffedStructure {
     }
 
     // Capital produces explorers and workers
-    public Unit createUnit(EntityType entityType, CustomID customID, String id) {
+    public void createUnit(EntityType entityType, CustomID customID, String id) {
         if (entityType.equals(EntityType.EXPLORER) || entityType.equals(EntityType.WORKER)) {
-            return unitFactory.getEntity(entityType, customID, id, (int)(super.getLocation().getX()),(int) (super.getLocation().getY()));
+            Unit unit = unitFactory.getEntity(entityType, customID, id, (int)(super.getLocation().getX()),(int) (super.getLocation().getY()));
+            commandRelay.notifyModelOfUnitCreation(unit);
         }
-        return null;
+        return;
     }
 
     public void healUnit(FighterUnit unitToHeal) {

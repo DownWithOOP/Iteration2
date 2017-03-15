@@ -5,6 +5,7 @@ import controller.commands.*;
 import controller.commands.modifiers.Modifier;
 import controller.commands.modifiers.ModifierType;
 import model.common.Location;
+import model.entities.EntityType;
 import model.entities.structure.StructureType;
 import model.entities.unit.Army;
 import model.entities.unit.Ranged;
@@ -59,9 +60,11 @@ public class ActiveState {
     private void relayActionableCommand(CommandType commandType) {
 
         Command cursorCommand;
+        System.out.println("Active Command Type: " + activeCommandType);
 
         if (activeCommandType != null && checkIfCommandCanBePerformed(activeCommandType)) {
             activeCommand = commandFactory.createActionableCommand(activeCommandType, activeCommandable, modifier);
+            System.out.println("Active Command: " + activeCommand);
             if (activeCommand != null) {
                 System.out.println("we add command to queue in active state");
                 activeCommandable.addToQueue(activeCommand);
@@ -138,17 +141,17 @@ public class ActiveState {
         modifier = new Modifier(number);
     }
 
-    public void constructModifier(UnitType unitType) {
+    public void constructModifier(EntityType entityType) {
         System.out.println("unit type modifier constructing");
         clearModifier();
-        modifier = new Modifier(unitType);
+        modifier = new Modifier(entityType);
     }
 
-    public void constructModifier(StructureType structureType) {
-        System.out.println("structure type modifier constructing");
-        clearModifier();
-        modifier = new Modifier(structureType);
-    }
+//    public void constructModifier(StructureType structureType) {
+//        System.out.println("structure type modifier constructing");
+//        clearModifier();
+//        modifier = new Modifier(structureType);
+//    }
 
     public Cursor getCursor(){
         return cursor;
