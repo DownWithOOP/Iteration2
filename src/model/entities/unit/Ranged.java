@@ -1,5 +1,6 @@
 package model.entities.unit;
 
+import controller.CommandRelay;
 import model.entities.Stats.FighterUnitStats;
 import model.entities.Stats.Stats;
 import utilities.id.CustomID;
@@ -10,8 +11,8 @@ import utilities.id.IdType;
  */
 public class Ranged extends Soldier {
 
-    public Ranged(CustomID playerId, String id, int locationX, int locationY) {
-        super(playerId, id, locationX, locationY);
+    public Ranged(CommandRelay commandRelay, CustomID playerId, String id, int locationX, int locationY) {
+        super(commandRelay, playerId, id, locationX, locationY);
     }
     @Override
     protected IdType getIdType() {

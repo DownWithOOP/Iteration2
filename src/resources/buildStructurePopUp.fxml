@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<Pane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ingamecontrollertypes.PopUpController">
+   <children>
+      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="210.0" prefWidth="600.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label fx:id="selectStructureLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="306.0" text="Which structure do you want to build?" textAlignment="CENTER" />
+            <Label fx:id="selectStructLocationLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="306.0" text="Where do you want to build the structure?" textAlignment="CENTER" GridPane.rowIndex="1" />
+            <Button fx:id="buildStructButton" onAction="#handleBuildStructure" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="27.0" prefWidth="245.0" text="Build Structure" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Button fx:id="cancelButton" onAction="#closePopUp" mnemonicParsing="false" prefHeight="27.0" prefWidth="257.0" text="Cancel" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <ChoiceBox fx:id="structureComboBox" prefHeight="27.0" prefWidth="251.0" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+               <items>
+                 <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="FARM" />
+                     <String fx:value="FORT" />
+                     <String fx:value="MINE" />
+                     <String fx:value="OBSERVATION_TOWER" />
+                     <String fx:value="POWER_PLANT" />
+                     <String fx:value="UNIVERSITY" />
+                 </FXCollections>
+                </items>
+            </ChoiceBox>
+            <ChoiceBox prefHeight="27.0" prefWidth="252.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+   </children>
+</Pane>

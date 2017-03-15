@@ -1,5 +1,6 @@
 package model.entities.unit;
 
+import controller.CommandRelay;
 import controller.commands.CommandType;
 import model.entities.Stats.FighterUnitStats;
 import utilities.id.CustomID;
@@ -10,20 +11,25 @@ import model.entities.Stats.Stats;
 import model.entities.Stats.UnitStats;
 import utilities.id.IdType;
 
+import java.util.ArrayList;
+
 /**
  * Created by jordi on 2/24/2017.
  */
 public class Worker extends PassiveUnit {
     private StructureFactory structureFactory;
 
-//    static {
-//        entityCommand.add(CommandType.BUILD_STRUCTURE);
-//    }
+    static ArrayList<CommandType> workerCommand= new ArrayList<>();
 
-    public Worker(CustomID playerId, String id, int startingX, int startingY) {
-        super(playerId, id, startingX, startingY);
-        entityCommand.add(CommandType.BUILD_STRUCTURE);
-        this.structureFactory = new StructureFactory();
+    static {
+        workerCommand.add(CommandType.BUILD_STRUCTURE);
+    }
+
+    public Worker(CommandRelay commandRelay, CustomID playerId, String id, int startingX, int startingY) {
+        super(commandRelay, playerId, id, startingX, startingY);
+//        entityCommand.add(CommandType.BUILD_STRUCTURE);
+        addAllCommands(workerCommand);
+        this.structureFactory = new StructureFactory(commandRelay);
     }
 
     @Override

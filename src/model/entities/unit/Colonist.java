@@ -1,5 +1,7 @@
 package model.entities.unit;
 
+import controller.CommandRelay;
+import controller.commands.Command;
 import controller.commands.CommandType;
 import model.entities.EntityType;
 import model.entities.Stats.FighterUnitStats;
@@ -10,20 +12,25 @@ import model.entities.Stats.UnitStats;
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * Created by jordi on 2/24/2017.
  */
 public class Colonist extends FighterUnit {
     private StructureFactory capitalFactory;
 
-//    static {
-//        entityCommand.add(CommandType.BUILD_CAPITAL);
-//    }
+    private static ArrayList<CommandType> colonistCommand= new ArrayList<>();
+    static {
+        colonistCommand.add(CommandType.BUILD_CAPITAL);
+    }
 
-    public Colonist(CustomID playerId, String id, int locationX, int locationY) {
-        super(playerId, id, locationX, locationY);
-        entityCommand.add(CommandType.BUILD_CAPITAL);
-        this.capitalFactory = new StructureFactory();
+    public Colonist(CommandRelay commandRelay, CustomID playerId, String id, int locationX, int locationY) {
+        super(commandRelay, playerId, id, locationX, locationY);
+//        entityCommand.add(CommandType.BUILD_CAPITAL);
+        addAllCommands(colonistCommand);
+        this.capitalFactory = new StructureFactory(commandRelay);
     }
 
     @Override
@@ -33,18 +40,13 @@ public class Colonist extends FighterUnit {
 
     @Override
     protected Stats setEntityStats() {
-        return new FighterUnitStats(0,0,0,0,0,0,0,0);
+        return new FighterUnitStats(0,0,0,0,0,5,0,0);
     }
 
 
     @Override
     public void abandonArmy() {
         System.out.println("abandon army");
-    }
-
-    @Override
-    public void joinArmy(int armyNumber) {
-        System.out.println("joined army "+ armyNumber);
     }
 
     public Structure buildCapital(CustomID customId, String id) {

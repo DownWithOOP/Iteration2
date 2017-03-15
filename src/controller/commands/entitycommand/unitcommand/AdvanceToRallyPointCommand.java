@@ -15,11 +15,14 @@ public class AdvanceToRallyPointCommand extends UnitCommand{
         this.number=number;
     }
 
+    public int getNumber() {
+        return number;
+    }
 
     @Override
     public boolean execute() {
         if(super.execute()) {
-            unit.advanceToRallyPoint(number);
+            getUnit().advanceToRallyPoint(getNumber());
             return true;
         }
         return false;

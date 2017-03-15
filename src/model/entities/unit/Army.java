@@ -1,8 +1,10 @@
 package model.entities.unit;
 
+import controller.CommandRelay;
 import controller.commands.CommandType;
 import controller.commands.Direction;
 import model.RallyPoint;
+import model.common.Location;
 import model.entities.Entity;
 import model.entities.EntityId;
 import model.entities.Fighter;
@@ -14,6 +16,9 @@ import utilities.id.IdType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Created by jordi on 2/24/2017.
@@ -23,8 +28,11 @@ public class Army extends Entity implements Fighter {
 
     HashMap<EntityId, Unit> reinforcements = new HashMap<>();
     HashMap<EntityId, Unit> battleGroup = new HashMap<>();
-    private RallyPoint rallyPoint;
 
+    //TODO do we need this?
+    Queue<Location> pathQueue = new LinkedBlockingQueue<>();
+
+    private RallyPoint rallyPoint;
 
     static ArrayList<CommandType> armyCommand = new ArrayList<>();
 
@@ -35,21 +43,33 @@ public class Army extends Entity implements Fighter {
 
     }
 
-    public Army(CustomID playerId, String id, int locationX, int locationY) {
-        super(playerId, id, locationX, locationY);
+    public Army(CommandRelay commandRelay, CustomID playerId, String id, int locationX, int locationY) {
+        super(commandRelay, playerId, id, locationX, locationY);
         addAllCommands(armyCommand);
+
     }
 
+    /**
+     * Resource consumption
+     */
+
+
+
+    /**
+     * Army commands
+     * @param direction
+     */
     @Override
     public void attack(Direction direction) {
-        System.out.println("attack " + direction.toString());
+       System.out.println("attack " + direction.toString());
+
+       //commandRelay.notifyModelOfAttack(getLocation().move(direction), ((FighterUnitStats)entityStats).getOffensiveDamage());
     }
 
     @Override
     public void defend(Direction direction) {
         System.out.println("defend " + direction.toString());
     }
-
 
     @Override
     public void decommission() {
@@ -80,7 +100,7 @@ public class Army extends Entity implements Fighter {
 
     }
 
-
+    //TODO maeby make different register functions for fighters and workers
     public void registerUnit(Unit unit) {
         EntityId unitId = unit.getEntityId();
         FighterUnitStats unitStats = (FighterUnitStats) unit.getUnitStats();
@@ -93,7 +113,16 @@ public class Army extends Entity implements Fighter {
         int health = unitStats.getHealth();
 
         if (this.playerId.equals(unit.getPlayerId())) {
+            System.out.println("registering unit");
+            //handle the first unit added; that is when rally point is created
+            if (battleGroup.isEmpty() && reinforcements.isEmpty()) {
+                battleGroup.put(unitId, unit);
+                setBattleGroupStats(attack, defense, health, upKeep);
+                rallyPoint = new RallyPoint(commandRelay, unit.getLocation(),this);
+                commandRelay.notifyModelOfRallyPointCreation(rallyPoint, Integer.parseInt(getEntityId().getId()));
+            }
             if (rallyPoint.getLocation().equals(unit.getLocation())) {
+                System.out.println("rally point location is " + rallyPoint.getLocation());
                 battleGroup.put(unitId, unit);
                 setBattleGroupStats(attack, defense, health, upKeep);
             } else {
@@ -120,12 +149,11 @@ public class Army extends Entity implements Fighter {
             setBattleGroupStats(attack, defense, health, upKeep);
 
         }
-        if (reinforcements.containsKey(unitId)) {
+        else if (reinforcements.containsKey(unitId)) {
             reinforcements.remove(unitId);
         }
 
     }
-
 
     private void setBattleGroupStats(int attack, int defense, int health, int upkeep) {
         setBattleGroupAttackPower(attack);
@@ -162,8 +190,7 @@ public class Army extends Entity implements Fighter {
 
     private void setBattleGroupMovementSpeed() {
         int slowestSpeed = Integer.MAX_VALUE;
-        for (Unit unit :
-                battleGroup.values()) {
+        for (Unit unit : battleGroup.values()) {
             int temp = unit.getUnitMovement();
             if (temp < slowestSpeed) {
                 ((UnitStats) entityStats).setMovement(temp);
@@ -176,8 +203,7 @@ public class Army extends Entity implements Fighter {
 
     private void setBattleGroupVisionRadius() {
         int currentVisionRadius = 0;
-        for (Unit unit :
-                battleGroup.values()) {
+        for (Unit unit : battleGroup.values()) {
             int temp = unit.getVisionRadius();
             if (temp > currentVisionRadius) {
                 entityStats.setVisionRadius(temp);
@@ -193,20 +219,88 @@ public class Army extends Entity implements Fighter {
 
     }
 
-    private void moveBattleGroup() {
+    //Move each unit one tile
+    private void moveBattleGroup(Location nextTile) {
+        for (Unit battleGroupMember : battleGroup.values()) {
+            battleGroupMember.moveUnit(nextTile.getXCoord(),nextTile.getYCoord());
+        }
 
     }
 
+    //TODO do we need this to be private if we're using updatePathQueue? if not, make it private and make movement controlled by path queue
     public void changeTargetLocation() {
 
     }
 
-    private void changeReinforcementsLocation() {
+    private void changeReinforcementsLocation(Queue<Location> pathToRallyPoint) {
+        Queue<Location> copyOfPath = new LinkedBlockingQueue<>(pathToRallyPoint);
+        Location locationToMoveTo = null;
+
+        //Keep polling until locationToMoveTo holds the last location in queue--that location is the location we want to move to
+        while (!copyOfPath.isEmpty()){
+            locationToMoveTo = copyOfPath.poll();
+        }
+        moveReinforcements(locationToMoveTo);
 
     }
 
+    //Called by RallyPoint to let army know that its RallyPoint has moved
+    public void updatePathQueue(Queue<Location> newPathQueue) {
+        pathQueue = newPathQueue;
+        //TODO changeTargetLocation() too?
+        //Notify reinforcements that the rally point location has changed
+        changeReinforcementsLocation(newPathQueue);
+    }
+
+    private void moveReinforcements(Location newLocation) {
+        for (Unit reinforcementUnit : reinforcements.values()) {
+            reinforcementUnit.moveUnit(newLocation.getXCoord(),newLocation.getYCoord());
+        }
+    }
+
+    //TODO is this input arg right?
+    public void arrivedRallyPoint(FighterUnit fighterUnit){
+        if (this.playerId == fighterUnit.getPlayerId()) {
+            reinforcements.remove(fighterUnit.getEntityId());
+            battleGroup.put(fighterUnit.getEntityId(),fighterUnit);
+            setBattleGroupStats(fighterUnit.getFighterUnitStats().getOffensiveDamage(),
+                    fighterUnit.getFighterUnitStats().getDefensiveDamage(),
+                    fighterUnit.getFighterUnitStats().getHealth(),
+                    fighterUnit.getUnitStats().getUpkeep());
+        }
+    }
 
 
+    public List<List<Entity>> getSubModeLists() {
+        List<List<Entity>> subModeLists = new ArrayList<>();
+        subModeLists.add(0,getWholeArmy());
+        subModeLists.add(1,getBattleGroup());
+        subModeLists.add(2,getReinforcements());
 
+        return subModeLists;
+    }
+
+    private List<Entity> getWholeArmy() {
+        List<Entity> reinforcements = getReinforcements();
+        List<Entity> battleGroup = getBattleGroup();
+        battleGroup.addAll(reinforcements);
+        return battleGroup;
+    }
+
+    public List<Entity> getReinforcements(){
+        return getList(reinforcements);
+    }
+
+    public List<Entity> getBattleGroup(){
+        return getList(battleGroup);
+    }
+
+    public List<Entity> getList(HashMap<EntityId, Unit>map){
+        List<Entity> temp= new ArrayList<>();
+         for (Entity entity: map.values()) {
+             temp.add(entity);
+         }
+       return temp;
+     }
 
 }

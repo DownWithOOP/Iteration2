@@ -14,10 +14,15 @@ public class JoinArmyCommand extends UnitCommand{
         this.number=number;
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     @Override
     public boolean execute() {
         if(super.execute()) {
-            unit.joinArmy(number);
+            System.out.println("join army executing");
+            getUnit().joinArmy(getNumber());
             return true;
         }
         return false;

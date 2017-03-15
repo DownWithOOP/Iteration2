@@ -1,6 +1,5 @@
 package controller.commands.entitycommand.armycommand;
 
-import controller.commands.Command;
 import controller.commands.Direction;
 import model.entities.unit.Army;
 
@@ -14,12 +13,17 @@ public class AttackCommand extends ArmyCommand {
     public AttackCommand(Army army, Direction direction){
         super(army, 1);
         this.direction=direction;
+        System.out.println("attack command build with direction " + direction.toString());
+    }
+
+    public Direction getDirection() {
+        return direction;
     }
 
     @Override
     public boolean execute() {
         if(super.execute()) {
-            army.attack(direction);
+            getArmy().attack(getDirection());
             return true;
         }
         return false;

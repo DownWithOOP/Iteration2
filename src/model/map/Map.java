@@ -14,6 +14,7 @@ import model.map.tile.terrain.Terrain;
 import model.map.tile.terrain.TerrainType;
 import utilities.MapXMLParser;
 import utilities.Observer;
+import utilities.id.CustomID;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,7 +31,7 @@ public class Map {
     private HashMap<Location, Tile> tiles;
 
     private static String OS = System.getProperty("os.name").toLowerCase();
-    private final String XML_PATH = "Iteration2/res/map/Map.xml";
+    private final String XML_PATH = "res/map/Map.xml";
     private final String XML_PATH2 = "res/map/Map.xml";
 
     public Map() {
@@ -192,4 +193,7 @@ public class Map {
         System.out.println(map.getTile(new Location(0, 1)));
     }
 
+    public CustomID getPlayerOnTile(Location location) {
+        return getTile(location).getPlayerId();
+    }
 }

@@ -13,10 +13,11 @@ public class EntityId extends CustomID {
     public EntityId(IdType idType, CustomID playerId, String id) {
         super(idType, id);
         this.playerId = playerId;
+        System.out.println("player id of entity id " + this.playerId);
     }
 
-    public String getPlayerId() {
-        return playerId.getId();
+    public CustomID getPlayerId() {
+        return playerId;
     }
 
 

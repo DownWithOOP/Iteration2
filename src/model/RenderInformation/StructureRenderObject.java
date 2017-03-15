@@ -11,12 +11,18 @@ public class StructureRenderObject {
     private int locationX; // X location on the map the Structure is located
     private int locationY; // Y location on the map the Structure is located
     private IdType idType; // type of Structure so we know which assets to render
+    private CustomID structureId;
     // TODO later more information such as structure missions
 
-    public StructureRenderObject(IdType idType, int locationX, int locationY){
+    public StructureRenderObject(CustomID structureId, IdType idType, int locationX, int locationY){
+        this.structureId = structureId;
         this.idType = idType;
         this.locationX = locationX;
         this.locationY = locationY;
+    }
+
+    public CustomID getStructureId() {
+        return structureId;
     }
     public IdType getIdType() { return this.idType; };
     public int getLocationX(){

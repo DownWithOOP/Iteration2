@@ -1,5 +1,6 @@
 package model.entities.unit;
 
+import controller.CommandRelay;
 import model.entities.Stats.FighterUnitStats;
 import model.entities.Stats.Stats;
 import model.entities.Stats.UnitStats;
@@ -16,8 +17,8 @@ public class Melee extends FighterUnit{
      * @param playerId
      * @param id
      */
-    public Melee(CustomID playerId, String id, int locationX, int locationY) {
-        super(playerId, id, locationX, locationY);
+    public Melee(CommandRelay commandRelay, CustomID playerId, String id, int locationX, int locationY) {
+        super(commandRelay, playerId, id, locationX, locationY);
     }
 
     @Override
@@ -27,7 +28,7 @@ public class Melee extends FighterUnit{
 
     @Override
     protected Stats setEntityStats() {
-        return new FighterUnitStats(0,0,0,0,0,0,0,0);
+        return new FighterUnitStats(0,0,0,0,0,5,0,0);
     }
 
     @Override

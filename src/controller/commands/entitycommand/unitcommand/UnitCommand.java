@@ -14,4 +14,8 @@ public abstract class UnitCommand extends AbstractCommand {
         super(numTurns);
         this.unit=unit;
     }
+
+    public Unit getUnit() {
+        return unit;
+    }
 }
