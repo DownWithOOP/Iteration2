@@ -12,6 +12,9 @@ import model.entities.EntityId;
 import model.entities.structure.Structure;
 import model.entities.unit.Army;
 import model.entities.unit.FighterUnit;
+import model.entities.unit.Unit;
+import model.map.tile.resources.Resource;
+import model.map.tile.resources.ResourceType;
 import utilities.ObserverInterfaces.*;
 import model.map.Map;
 import utilities.id.CustomID;
@@ -46,6 +49,9 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
         entities.setUnitObservers(unitObserver, observer);
 
         resources = new ResourceOwnership(customID);
+        resources.addResource(new Resource(ResourceType.ENERGY, 100));
+        resources.addResource(new Resource(ResourceType.ORE, 100));
+        resources.addResource(new Resource(ResourceType.FOOD, 100));
         this.playerMap = map; // TODO for the moment global map is shared, later each player will have own map
         this.registerMapObserver(observer);
         this.registerUnitObserver(unitObserver);
@@ -64,6 +70,25 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
         this.notifyUnitObservers(); // and lets not forget the units
         this.notifyMapObservers(); // at the start of the game we want to give the player map to render
         this.notifyStatusObservers(); // yay status viewport
+    }
+
+    /**
+     * Resource allocation and distribution
+     */
+    public void giveResourcesToPlayer(Resource resource){
+        resources.addResource(resource);
+    }
+
+    public void distributeEnergyResource(EntityId entityId){
+        entities.distributeResource(entityId, resources.allocateEnergyResource());
+    }
+
+    public void distributeOreResource(EntityId entityId){
+        entities.distributeResource(entityId, resources.allocateOreResource());
+    }
+
+    public void distributeFoodResource(EntityId entityId){
+        entities.distributeResource(entityId, resources.allocateFoodResource());
     }
 
     public void cycleMode(CycleDirection direction){
@@ -171,6 +196,24 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
         notifyUnitObservers();
     }
 
+
+    public void addUnit(Unit unit) {
+        entities.addEntity(unit);
+        notifyUnitObservers();
+    }
+
+    public int getEnergyResourceLevel() {
+        return resources.getEnergyResources().getLevel();
+    }
+
+    public int getOreResourceLevel() {
+        return resources.getOreResources().getLevel();
+    }
+
+    public int getFoodResourceLevel() {
+        return resources.getFoodResources().getLevel();
+    }
+
     public void addStructure(Structure structure) {
         entities.addEntity(structure);
         notifyStructureObservers();
@@ -185,4 +228,5 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
         notifyStatusObservers();
         notifyUnitObservers();
     }
+
 }

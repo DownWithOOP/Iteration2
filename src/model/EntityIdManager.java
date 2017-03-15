@@ -35,13 +35,13 @@ public class EntityIdManager {
     }
 
     private void initializeWorkerIds() {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 200; i++) {
             workerIds.add(i);
         }
     }
 
     private void initializeUnitIds() {
-        for (int i=0; i < 10; i++) {
+        for (int i=0; i < 20; i++) {
             colonistIds.add(i);
             explorerIds.add(i);
             meleeIds.add(i);
@@ -50,7 +50,7 @@ public class EntityIdManager {
     }
 
     private void initializeStructureIds() {
-        for (int i=0; i< 10; i++) {
+        for (int i=0; i< 20; i++) {
             capitalIds.add(i);
             farmIds.add(i);
             fortIds.add(i);
@@ -101,6 +101,7 @@ public class EntityIdManager {
     }
 
     public String getExplorerId() {
+        System.out.println("getting explorer id from " + explorerIds);
         return getId(explorerIds);
      }
 
