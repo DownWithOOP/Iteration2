@@ -111,7 +111,6 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
         MapRenderObject[][] mapInfo = mapRenderInformation.getRenderObjectMap();
 
         for(UnitRenderObject unit : playerUnitData){
-            System.out.println("current active player " + currPlayerNumber + "  : " + unit.getLocationX() + " " + unit.getLocationY());
             // we set the location of where the unit currently is as 2 (100% visible)
             TileRenderObject temp = userData[unit.getLocationX()][unit.getLocationY()];
             temp.setVisibilityTwo();
@@ -178,6 +177,20 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
                     // don't add, not visible
                 }
             }
+            ArrayList<StructureRenderObject> structureData = currStructureRenderInformation2.returnRenderInformation();
+            for(StructureRenderObject enemyStructure : structureData){
+                TileRenderObject check = userData[enemyStructure.getLocationX()][enemyStructure.getLocationY()];
+                if(check.getVisibilityLevel() == 2){
+                    if(playerTiles.size() < 2){
+                        // start of game, don't
+                    } else {
+                        playerTiles.get(currPlayerNumber-1)[enemyStructure.getLocationX()][enemyStructure.getLocationY()].addEnemyEntity(enemyStructure.getIdType());
+                    }
+                } else{
+                    // don't add, not visible
+                }
+            }
+
         }
 
         if(currPlayerNumber == 2){
@@ -194,11 +207,21 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
                     // don't add, not visible
                 }
             }
+
+            ArrayList<StructureRenderObject> structureData = currStructureRenderInformation1.returnRenderInformation();
+            for(StructureRenderObject enemyStructure : structureData){
+                TileRenderObject check = userData[enemyStructure.getLocationX()][enemyStructure.getLocationY()];
+                if(check.getVisibilityLevel() == 2){
+                    if(playerTiles.size() < 2){
+                        // start of game, don't
+                    } else {
+                        playerTiles.get(currPlayerNumber-1)[enemyStructure.getLocationX()][enemyStructure.getLocationY()].addEnemyEntity(enemyStructure.getIdType());
+                    }
+                } else{
+                    // don't add, not visible
+                }
+            }
         }
-
-
-
-
 
         if(allVisible){
             for(int i=0; i<mapSizeX; i++){

@@ -31,7 +31,7 @@ public class Map {
     private HashMap<Location, Tile> tiles;
 
     private static String OS = System.getProperty("os.name").toLowerCase();
-    private final String XML_PATH = "res/map/Map.xml";
+    private final String XML_PATH = "Iteration2/res/map/Map.xml";
     private final String XML_PATH2 = "res/map/Map.xml";
 
     public Map() {

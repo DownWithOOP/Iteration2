@@ -36,6 +36,7 @@ import utilities.id.IdType;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Handles relationships between a Player and all of their Entities. The responsibilities of this class include
@@ -103,7 +104,7 @@ public class EntityOwnership {
         entities = new HashMap<>();
         this.unitFactory = new UnitFactory(commandRelay);
         this.commandRelay = commandRelay;
-        this.idManager = new EntityIdManager();
+        this.idManager = EntityIdManager.getInstance();
 
         this.playerId = playerId;
 
@@ -116,9 +117,9 @@ public class EntityOwnership {
 
     private void initializeUnits(int startingX, int startingY) {
         //TODO change the id number
-        addUnit(IdType.EXPLORER, unitFactory.getEntity(EntityType.EXPLORER, playerId,"0", startingX, startingY));
-        addUnit(IdType.EXPLORER, unitFactory.getEntity(EntityType.EXPLORER, playerId,"1", startingX, startingY));
-        addUnit(IdType.COLONIST, unitFactory.getEntity(EntityType.COLONIST, playerId,"0", startingX, startingY));
+        addUnit(IdType.EXPLORER, unitFactory.getEntity(EntityType.EXPLORER, playerId, startingX-2, startingY));
+        addUnit(IdType.EXPLORER, unitFactory.getEntity(EntityType.EXPLORER, playerId, startingX, startingY));
+        addUnit(IdType.COLONIST, unitFactory.getEntity(EntityType.COLONIST, playerId, startingX, startingY+2));
     }
 
     private void initializeLists() {
@@ -160,8 +161,8 @@ public class EntityOwnership {
             case CAPITAL:
                 result = addToIndex(structureList, 0, entity);
                 removeEntity(unitList.get(2).get(0)); //remove colonist
-                addEntity(unitFactory.getEntity(EntityType.MELEE, playerId, "0", (int)entity.getLocation().getX(), (int)entity.getLocation().getY()));
-                addEntity(unitFactory.getEntity(EntityType.MELEE, playerId, "1", (int)entity.getLocation().getX(), (int)entity.getLocation().getY()));
+                addEntity(unitFactory.getEntity(EntityType.MELEE, playerId, (int)entity.getLocation().getX(), (int)entity.getLocation().getY()));
+                addEntity(unitFactory.getEntity(EntityType.MELEE, playerId, (int)entity.getLocation().getX(), (int)entity.getLocation().getY()));
                 result = addToIndex(structureList, capitalIndex, entity);
                 break;
             case FARM:
@@ -235,6 +236,12 @@ public class EntityOwnership {
      */
     public void distributeResource(EntityId entityId, Resource resource){
         entities.get(entityId).receiveResource(resource);
+    }
+
+    public void consumeResources(){
+        for(Map.Entry<EntityId, Entity> entity : entities.entrySet()){
+            entity.getValue().consumeResources();
+        }
     }
 
     public static int next(int size, int index) {
@@ -477,19 +484,54 @@ public class EntityOwnership {
                 //rallyPointList.remove(((Army)entity).getRallyPoint());
                 //break;
             case CAPITAL:
-                structureList.get(0).remove(entity);
+                structureList.get(capitalIndex).remove(entity);
+                idManager.removeCapitalId(entity.getEntityId().getId());
+                break;
+            case FARM:
+                structureList.get(farmIndex).remove(entity);
+                idManager.removeFarmId(entity.getEntityId().getId());
+                break;
+            case FORT:
+                structureList.get(fortIndex).remove(entity);
+                idManager.removeFortId(entity.getEntityId().getId());
+                break;
+            case MINE:
+                structureList.get(mineIndex).remove(entity);
+                idManager.removeMineId(entity.getEntityId().getId());
+                break;
+            case OBSERVATION_TOWER:
+                structureList.get(observationTowerIndex).remove(entity);
+                idManager.removeObservationTowerId(entity.getEntityId().getId());
+                break;
+            case POWER_PLANT:
+                structureList.get(powerPlantIndex).remove(entity);
+                idManager.removePowerPlantId(entity.getEntityId().getId());
+                break;
+            case UNIVERSITY:
+                structureList.get(observationTowerIndex).remove(entity);
+                idManager.removeUniversityId(entity.getEntityId().getId());
+                break;
+            case ARMY:
                 break;
             case RANGED:
                 unitList.get(rangedIndex).remove(entity);
+                idManager.removeRangedId(entity.getEntityId().getId());
                 break;
             case COLONIST:
                 unitList.get(colonistIndex).remove(entity);
+                idManager.removeColonistId(entity.getEntityId().getId());
                 break;
             case EXPLORER:
                 unitList.get(explorerIndex).remove(entity);
+                idManager.removeExplorerId(entity.getEntityId().getId());
                 break;
             case MELEE:
                 unitList.get(meleeIndex).remove(entity);
+                idManager.removeMeleeId(entity.getEntityId().getId());
+                break;
+            case WORKER:
+                break;
+            case PLAYER:
                 break;
         }
         entities.remove(entity.getEntityId());
