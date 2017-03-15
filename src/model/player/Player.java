@@ -55,6 +55,8 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
         entities.setUnitObservers(unitObserver, observer);
 
         keymap = new HashMap<KeyCode, String>();
+
+        // Defualt keys
         keymap.put(KeyCode.NUMPAD2, "SOUTH");
         keymap.put(KeyCode.NUMPAD8, "NORTH");
         keymap.put(KeyCode.NUMPAD7, "NW");
