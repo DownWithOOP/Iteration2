@@ -1,5 +1,6 @@
 package controller;
 
+import com.sun.tools.doclint.Entity;
 import controller.Observers.MapDisplayObserver;
 import controller.availablecommands.AvailableCommands;
 import controller.availablecommands.Commandable;
@@ -18,6 +19,7 @@ import model.Cursor;
 import model.GameModel;
 import model.RallyPoint;
 import model.common.Location;
+import model.entities.EntityType;
 import model.entities.structure.Structure;
 import model.entities.structure.StructureType;
 import model.entities.unit.*;
@@ -113,8 +115,8 @@ public class ControllerDispatch {
         ActiveState.getInstance().update(selectedInstance);
         ActiveState.getInstance().update(selectedCommandType);
 
-        StructureType structType = StructureType.valueOf(structureTypeStr);
-        ActiveState.getInstance().constructModifier(structType);
+        EntityType entityType = EntityType.valueOf(structureTypeStr);
+        ActiveState.getInstance().constructModifier(entityType);
         ActiveState.getInstance().relayCommand(CommandType.BUILD_STRUCTURE);
     }
 
@@ -124,8 +126,8 @@ public class ControllerDispatch {
         ActiveState.getInstance().update(selectedInstance);
         ActiveState.getInstance().update(selectedCommandType);
 
-        UnitType unitType = UnitType.valueOf(unitTypeStr);
-        ActiveState.getInstance().constructModifier(unitType);
+        EntityType entityType = EntityType.valueOf(unitTypeStr);
+        ActiveState.getInstance().constructModifier(entityType);
         ActiveState.getInstance().relayCommand(CommandType.CREATE_UNIT);
     }
 

@@ -62,6 +62,7 @@ public class AreaViewport implements MiniMapSubject{
     Image grey = Assets.getInstance().GREY;
     Image melee = Assets.getInstance().MELEE;
     Image ranged = Assets.getInstance().RANGED;
+    Image worker = Assets.getInstance().WORKER;
     Image capital = Assets.getInstance().CAPITAL;
 
 
@@ -551,6 +552,9 @@ public class AreaViewport implements MiniMapSubject{
                                             if(id.equals(IdType.RANGED)){
                                                 gc.drawImage(ranged,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
                                             }
+                                            if(id.equals(IdType.WORKER)){
+                                                gc.drawImage(worker,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                            }
                                             if (id.equals(IdType.CAPITAL)) { //draw capital
                                                 gc.drawImage(capital,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
                                             }
@@ -581,6 +585,9 @@ public class AreaViewport implements MiniMapSubject{
                                                 gc.drawImage(melee,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
                                             }
                                             if(id.equals(IdType.RANGED)){
+                                                gc.drawImage(ranged,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                            }
+                                            if(id.equals(IdType.WORKER)){
                                                 gc.drawImage(ranged,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
                                             }
                                             if (id.equals(IdType.CAPITAL)) { //draw capital
