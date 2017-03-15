@@ -144,6 +144,7 @@ public class MainViewController extends Controller{
     protected void render() {
         this.areaViewport.UpdateRenderInfo(this.mapObserver.share(), this.unitObserver.share(), this.structureObserver.share(), this.mapObserver.getPlayerXRenderMap(controllerDispatch.getActivePlayerNumber())); // displays the map
         this.statusViewport.updateRenderInfo(this.statusObserver.share());
+        this.areaViewport.getCurrentActiveUnit(this.statusObserver.share().getInstanceString());
     }
 
     //Move methods for moving with keyboard - JS

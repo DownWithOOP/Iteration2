@@ -530,6 +530,8 @@ public class EntityOwnership {
         renderInfo.updateTypeString(getCurrentType());
         renderInfo.updateInstanceString(getCurrentInstance());
         renderInfo.updateCommandString(getCurrentCommand());
+
+        // TODO FILL THIS INFORMATION IN  renderInfo.updateLocationInfo();
         System.out.println("return status info says that command is " + getCurrentCommand());
 
         return renderInfo;

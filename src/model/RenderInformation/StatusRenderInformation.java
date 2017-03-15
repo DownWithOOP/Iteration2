@@ -13,6 +13,8 @@ public class StatusRenderInformation {
     private String typeString;
     private String instanceString;
     private String commandString;
+    private int locationX;
+    private int locationY;
 
     //TODO account for other part of status viewport
 
@@ -23,6 +25,8 @@ public class StatusRenderInformation {
         typeString = "";
         instanceString = "";
         commandString = "";
+        locationX = -1;
+        locationY = -1;
     }
 
     public void updateModeString(Mode newMode) {
@@ -36,6 +40,11 @@ public class StatusRenderInformation {
         else {
             typeString = "No Selected Type Available";
         }
+    }
+
+    public void updateLocationInfo(int locationX, int locationY){
+        this.locationX = locationX;
+        this.locationY = locationY;
     }
 
     public void updateInstanceString(Commandable selectedCommandable) {

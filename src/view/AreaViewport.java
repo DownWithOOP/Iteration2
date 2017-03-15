@@ -44,6 +44,7 @@ public class AreaViewport implements MiniMapSubject{
     private TileRenderObject[][] renderData;
     private ArrayList<MiniMapObserver> miniMapObservers= new ArrayList<MiniMapObserver>();
     private boolean startOfNewTurn = true;
+    private String selectedUnit;
 
     Image grass = Assets.getInstance().GRASS;
     Image water = Assets.getInstance().WATER;
@@ -142,6 +143,11 @@ public class AreaViewport implements MiniMapSubject{
         updateCanvas();
         notifyObservers(); // update mini map
 
+    }
+
+    // currently cycled unit that is in that status viewport
+    public void getCurrentActiveUnit(String string){
+        this.selectedUnit = string;
     }
 
     public void drawSelection(){
@@ -362,7 +368,6 @@ public class AreaViewport implements MiniMapSubject{
      */
     public void updateCanvas(){
 
-
         int sizeX = renderData.length;
         int sizeY = renderData[0].length;
 
@@ -502,7 +507,7 @@ public class AreaViewport implements MiniMapSubject{
                                                 gc.drawImage(ranged,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
                                             }
                                             if (id.equals(IdType.CAPITAL)) { //draw capital
-                                                gc.drawImage(capital, 0.75 * width * j + cameraX, height * 1 * -i + cameraY + width * 0.45);
+                                                gc.drawImage(capital,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
                                             }
                                             if(startOfNewTurn && entities.size() != 0){
                                                 selectJumpLocation(j,i);
@@ -555,9 +560,6 @@ public class AreaViewport implements MiniMapSubject{
                                             if (id.equals(IdType.CAPITAL)) { //draw capital
                                                 gc.drawImage(capital, 0.75*width*j + cameraX, height*1*-i+ cameraY+height);
                                             }
-                                            if(id.equals(IdType.CAPITAL)){
-                                               // TODO gc.drawImage(,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
-                                            }
 
                                         }
 
@@ -571,7 +573,6 @@ public class AreaViewport implements MiniMapSubject{
                     }
             }
         }
-
         drawSelection();
         drawRallyPoints();
     }
