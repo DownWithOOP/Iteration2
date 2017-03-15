@@ -17,10 +17,7 @@ import model.map.tile.resources.ResourceType;
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
@@ -39,7 +36,7 @@ public class Army extends Entity implements Fighter {
 
     Resource foodResource;
 
-    private boolean alternateColumn;
+    private boolean hasWorkers;
 
     static ArrayList<CommandType> armyCommand = new ArrayList<>();
 
@@ -54,7 +51,7 @@ public class Army extends Entity implements Fighter {
         super(commandRelay, playerId, id, locationX, locationY);
         addAllCommands(armyCommand);
         foodResource = new Resource(ResourceType.FOOD, 0);
-        alternateColumn = true;
+        hasWorkers = false;
     }
 
     /**
@@ -388,7 +385,33 @@ public class Army extends Entity implements Fighter {
         for (Worker worker: workersOnLocation) {
             System.out.println(worker);
             battleGroup.put(worker.getEntityId(), worker);
+            hasWorkers = true;
         }
         System.out.println("bg after workers added " +  battleGroup);
+    }
+
+    public boolean hasWorkers() {
+        return hasWorkers;
+    }
+
+    public List<Worker> getWorkers() {
+        List<Worker> workers = new ArrayList<>();
+
+        Iterator<Map.Entry<EntityId, Unit>> iter = battleGroup.entrySet().iterator();
+        while (iter.hasNext()) {
+            Map.Entry<EntityId, Unit> entry = (Map.Entry<EntityId, Unit>) iter.next();
+            EntityId id = entry.getKey();
+            System.out.println("is this an army worker " + id);
+            if (id.getIdType().equals(IdType.WORKER)) {
+                workers.add((Worker) battleGroup.get(id));
+            }
+        }
+
+        for (Worker worker : workers) {
+            battleGroup.remove(worker.getEntityId());
+        }
+
+        hasWorkers = false;
+        return workers;
     }
 }

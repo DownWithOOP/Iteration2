@@ -172,11 +172,11 @@ public class EntityOwnership {
         return returnValue;
     }
 
-    public boolean addStructure(IdType entityType, Entity entity) {
+    private boolean addStructure(IdType entityType, Entity entity) {
         boolean result = false;
         switch (entityType) {
             case CAPITAL:
-                result = addToIndex(structureList, 0, entity);
+                //result = addToIndex(structureList, 0, entity);
                 removeEntity(unitList.get(2).get(0)); //remove colonist
                 addEntity(unitFactory.getEntity(EntityType.MELEE, playerId, (int)entity.getLocation().getX(), (int)entity.getLocation().getY()));
                 addEntity(unitFactory.getEntity(EntityType.MELEE, playerId, (int)entity.getLocation().getX(), (int)entity.getLocation().getY()));
@@ -866,7 +866,7 @@ public class EntityOwnership {
         }
 
         if (armyToAddWorkersTo != null) {
-            //armyToAddWorkersTo.addWorkers(workersOnLocation, location);
+            armyToAddWorkersTo.addWorkers(workersOnLocation, location);
         }
 
     }

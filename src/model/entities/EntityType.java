@@ -15,8 +15,8 @@ public enum EntityType {
     CAPITAL,
     FARM,
     MINE,
-    POWERPLANT,
+    POWER_PLANT,
     FORT,
-    OBSERVATIONTOWER,
+    OBSERVATION_TOWER,
     UNIVERSITY
 }

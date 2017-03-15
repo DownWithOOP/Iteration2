@@ -2,19 +2,19 @@ package controller.commands;
 
 import controller.availablecommands.Commandable;
 import controller.commands.entitycommand.armycommand.AttackCommand;
+import controller.commands.entitycommand.armycommand.BuildStructureCommand;
 import controller.commands.entitycommand.armycommand.DefendCommand;
 import controller.commands.entitycommand.structureCommand.capitalcommand.CreateUnitCommand;
 import controller.commands.entitycommand.structureCommand.capitalcommand.HealUnitCommand;
 import controller.commands.entitycommand.unitcommand.AdvanceToRallyPointCommand;
 import controller.commands.entitycommand.unitcommand.JoinArmyCommand;
-import controller.commands.entitycommand.unitcommand.workercommand.BuildStructureCommand;
 import controller.commands.modifiers.Modifier;
 import controller.commands.modifiers.ModifierType;
+import model.RallyPoint;
 import model.entities.structure.Capital;
 import model.entities.unit.Army;
 import model.entities.unit.FighterUnit;
 import model.entities.unit.Unit;
-import model.entities.unit.Worker;
 
 import java.util.HashMap;
 
@@ -42,13 +42,13 @@ public class ActionableCommandFactory {
         actionableCommandNumber.put(CommandType.JOIN_ARMY, (commandable, modifier) -> (new JoinArmyCommand((Unit) commandable, modifier.number)));
         actionableCommandNumber.put(CommandType.ADVANCE_TO_RALLY_POINT, (commandable, modifier) -> (new AdvanceToRallyPointCommand((Unit) commandable, modifier.number)));
 
-        //actionableCommandStructureType.put(CommandType.BUILD_STRUCTURE, (commandable, modifier) -> (new BuildStructureCommand((Worker) commandable, modifier.entityType)));
+        actionableCommandUnitType.put(CommandType.BUILD_STRUCTURE, (commandable, modifier) -> (new BuildStructureCommand((RallyPoint) commandable, modifier.entityType)));
         actionableCommandUnitType.put(CommandType.CREATE_UNIT, (commandable, modifier) -> (new CreateUnitCommand((Capital) commandable, modifier.entityType)));
         actionableCommandUnitType.put(CommandType.HEAL_UNIT, (commandable, modifier) -> (new HealUnitCommand((Capital) commandable, (FighterUnit) modifier.unit)));
 
         actionableCommandType.put(ModifierType.DIRECTION, (commandType, commandable, modifier) -> (createDirectionableCommand(commandType, commandable, modifier)));
         actionableCommandType.put(ModifierType.NUMBER, (commandType, commandable, modifier) -> (createNumberedCommand(commandType, commandable, modifier)));
-        //actionableCommandType.put(ModifierType.STRUCTURE_TYPE, (commandType, commandable, modifier) -> (createStructureTypeCommand(commandType, commandable, modifier)));
+        actionableCommandType.put(ModifierType.STRUCTURE_TYPE, (commandType, commandable, modifier) -> (createStructureTypeCommand(commandType, commandable, modifier)));
         actionableCommandType.put(ModifierType.ENTITY_TYPE, (commandType, commandable, modifier) -> (createUnitTypeCommand(commandType, commandable, modifier)));
     }
 
@@ -114,6 +114,7 @@ public class ActionableCommandFactory {
     }
 
     public static Command createCommand(CommandType commandType, Commandable commandable, Modifier modifier) {
+        System.out.println("what is modifier type in actcomfact createcmd? " + modifier.getModifierType());
         ModifierTypeWrapper modifierTypeWrapper = actionableCommandType.get(modifier.getModifierType());
         Command command = null;
         try {

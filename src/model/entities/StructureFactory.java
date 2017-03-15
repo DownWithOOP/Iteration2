@@ -23,6 +23,7 @@ public class StructureFactory {
         if (structureType == null) {
             return null;
         }
+        System.out.println("struct fact building " + structureType);
         switch(structureType) {
             case CAPITAL:
                 return new Capital(commandRelay, customID, entityIdManager.getCapitalId(), locationX, locationY);
@@ -32,9 +33,9 @@ public class StructureFactory {
                 return new Fort(commandRelay, customID, entityIdManager.getFortId(), locationX, locationY);
             case MINE:
                 return new Mine(commandRelay, customID, entityIdManager.getMineId(), locationX, locationY);
-            case OBSERVATIONTOWER:
+            case OBSERVATION_TOWER:
                 return new ObservationTower(commandRelay, customID, entityIdManager.getObservationTowerId(), locationX, locationY);
-            case POWERPLANT:
+            case POWER_PLANT:
                 return new PowerPlant(commandRelay, customID, entityIdManager.getPowerPlantId(), locationX, locationY);
             case UNIVERSITY:
                 return new University(commandRelay, customID, entityIdManager.getUniversityId(), locationX, locationY);
