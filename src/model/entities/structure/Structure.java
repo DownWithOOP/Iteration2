@@ -33,7 +33,8 @@ public abstract class Structure extends Entity {
         int currentHealth = getStructureStats().getHealth();
         int damageTaken = offensiveDamage - getStructureStats().getArmor();
         if (currentHealth - damageTaken <= 0) {
-            //TODO: unit is dead - notify command relay
+            //unit is dead - notify command relay
+            commandRelay.notifyModelOfStructureRemoval(this);
         }
         else {
             getStructureStats().setHealth(currentHealth - damageTaken);

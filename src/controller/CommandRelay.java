@@ -43,8 +43,16 @@ public class CommandRelay {
         model.addUnit(unit);
     }
 
+    public void notifyModelOfUnitRemoval(Unit unit) {
+        model.removeUnit(unit);
+    }
+
     public void notifyModelOfStructureCreation(Structure structure) {
         model.addStructure(structure);
+    }
+
+    public void notifyModelOfStructureRemoval(Structure structure) {
+        model.removeStructure(structure);
     }
 
     public void updateTilePlayerId(CustomID playerId, Location location) {

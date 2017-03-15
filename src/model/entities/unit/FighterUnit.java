@@ -37,7 +37,7 @@ public class FighterUnit extends Unit {
         int currentHealth = getFighterUnitStats().getHealth();
         int damageTaken = offensiveDamage - getFighterUnitStats().getArmor();
         if (currentHealth - damageTaken <= 0) {
-            //TODO: unit is dead - notify entity ownership?
+            commandRelay.notifyModelOfUnitRemoval(this); //unit is dead -- notify game model
         }
         else {
             getFighterUnitStats().setHealth(currentHealth - damageTaken);

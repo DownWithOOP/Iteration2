@@ -202,6 +202,11 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
         notifyUnitObservers();
     }
 
+    public void removeUnit(Unit unit) {
+        entities.removeEntity(unit);
+        notifyUnitObservers();
+    }
+
     public int getEnergyResourceLevel() {
         return resources.getEnergyResources().getLevel();
     }
@@ -216,6 +221,11 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
 
     public void addStructure(Structure structure) {
         entities.addEntity(structure);
+        notifyStructureObservers();
+    }
+
+    public void removeStructure(Structure structure) {
+        entities.removeEntity(structure);
         notifyStructureObservers();
     }
 
