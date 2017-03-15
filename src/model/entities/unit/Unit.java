@@ -66,7 +66,6 @@ public abstract class Unit extends Entity implements UnitSubject, MapSubject {
             //Do this to get the current render object
             super.setLocation(newX, newY);
             notifyUnitObservers();
-            notifyMapObservers();
 
         } else {
             System.out.println("Movement distance too far");
