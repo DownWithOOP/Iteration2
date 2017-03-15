@@ -59,6 +59,7 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
     }
     public void endTurn(){
         System.out.println(this.toString() + " is ending their turn");
+        entities.consumeResources();
 
     }
     public void startTurn(){
