@@ -118,8 +118,16 @@ public class GameModel {
         getActivePlayer().addUnit(unit);
     }
 
+    public void removeUnit(Unit unit) {
+        getActivePlayer().removeUnit(unit);
+    }
+
     public void addStructure(Structure structure) {
         getActivePlayer().addStructure(structure);
+    }
+
+    public void removeStructure(Structure structure) {
+        getActivePlayer().removeStructure(structure);
     }
 
     public void updateTilePlayerId(CustomID playerId, Location location) {
