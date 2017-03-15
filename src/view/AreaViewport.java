@@ -43,7 +43,6 @@ public class AreaViewport implements MiniMapSubject{
     private int slowCameraSpeed;
     private TileRenderObject[][] renderData;
     private ArrayList<MiniMapObserver> miniMapObservers= new ArrayList<MiniMapObserver>();
-    private boolean startOfNewTurn = true;
 
     Image grass = Assets.getInstance().GRASS;
     Image water = Assets.getInstance().WATER;
@@ -122,9 +121,7 @@ public class AreaViewport implements MiniMapSubject{
         }
     }
 
-    public void endTurnOccured(){
-        this.startOfNewTurn = true;
-    }
+
 
     public void UpdateRenderInfo(MapRenderInformation renderMap, UnitRenderInformation renderUnit, StructureRenderInformation renderStructure, TileRenderObject[][] renderData){
         this.mapRenderInformation = renderMap;
@@ -148,7 +145,7 @@ public class AreaViewport implements MiniMapSubject{
 //        } else {
 //            gc.drawImage(select,0.75*width*selectX+ cameraX,height*1*-selectY+ cameraY + width*0.9);
 //        }
-        if(ActiveState.getInstance().getCursor().getX()%2 == 0){
+        if(alternateColumn){
             gc.drawImage(select,0.75*width* ActiveState.getInstance().getCursor().getX()+ cameraX,height*1*-ActiveState.getInstance().getCursor().getY()+ cameraY + width*0.45);
         } else {
             gc.drawImage(select,0.75*width*ActiveState.getInstance().getCursor().getX()+ cameraX,height*1*-ActiveState.getInstance().getCursor().getY()+ cameraY + width*0.9);
@@ -156,11 +153,6 @@ public class AreaViewport implements MiniMapSubject{
     }
 
     /** selection control **/
-
-    public void selectJumpLocation(int locationX, int locationY){
-        ActiveState.getInstance().getCursor().updateCursorLocation(locationX, locationY);
-    }
-
 
     public void selectNorth(){
 //        this.selectY++; // update value
@@ -417,20 +409,12 @@ public class AreaViewport implements MiniMapSubject{
 
                                         // now we draw any friendly structures and units
                                         ArrayList<IdType> entities = render.getUserEntities();
-
-
                                         for(IdType id : entities){
-
                                             if(id.equals(IdType.COLONIST)){ // draw colonist
                                                 gc.drawImage(colonist,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
                                             }
                                             if(id.equals(IdType.EXPLORER)){
                                                 gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
-                                            }
-
-                                            if(startOfNewTurn && entities.size() != 0){
-                                                selectJumpLocation(j,i);
-                                                startOfNewTurn = false;
                                             }
                                         }
                                         // now draw resource values if the overlay is on
@@ -456,11 +440,6 @@ public class AreaViewport implements MiniMapSubject{
                                         // draw friendly units and structures
                                         ArrayList<IdType> entities = render.getUserEntities();
                                         for(IdType id : entities){
-
-                                            if(startOfNewTurn && entities.size() != 0){
-                                                selectJumpLocation(j,i);
-                                                startOfNewTurn = false;
-                                            }
                                             if(id.equals(IdType.COLONIST)){ // draw colonist
                                                 gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
                                             }
@@ -486,8 +465,8 @@ public class AreaViewport implements MiniMapSubject{
     }
 
     private void drawRallyPoints() {
-        //System.out.println("trying to drawing rally points");
-        //System.out.println(unitRenderInformation.returnArmyInformation());
+        System.out.println("trying to drawing rally points");
+        System.out.println(unitRenderInformation.returnArmyInformation());
         GraphicsContext gc = canvas.getGraphicsContext2D();
         double width = grass.getWidth();
         double height = grass.getHeight();

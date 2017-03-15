@@ -97,7 +97,6 @@ public class MainViewController extends Controller{
                 event -> {
                     if (event.getCode() == KeyCode.E) {
                         controllerDispatch.handleCommand(CommandType.END_TURN);
-                        this.areaViewport.endTurnOccured();
                         currentPlayerLabel.setText("Current Player: Player " + controllerDispatch.getActivePlayerNumber());
                     }
                     CommandType receivedCommand;
