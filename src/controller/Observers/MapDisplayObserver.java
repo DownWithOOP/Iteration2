@@ -102,7 +102,6 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
             else {
                 offSet =-1;
             }
-
             int LOS = unit.getUnitStats().getVisionRadius();
             if(LOS <= 1){ // set 1 radius out as all visible
                 updateLevelOneLOS(playerNumber,offSet,unit.getLocationX(),unit.getLocationY(),mapInfo);
@@ -111,7 +110,31 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
                 updateLevelTwoLOS(playerNumber,offSet,unit.getLocationX(),unit.getLocationY(),mapInfo);
             }
         }
-            // structures can wait for later
+
+        ArrayList<StructureRenderObject> playerStructureInfo = structureRenderInformation.returnRenderInformation();
+        for(StructureRenderObject structure: playerStructureInfo){
+
+            TileRenderObject temp = userData[structure.getLocationX()][structure.getLocationY()];
+            temp.setVisibilityTwo();
+            temp.addUserEntity(structure.getIdType());
+
+            int offSet = 0;
+            if(structure.getLocationX()%2 == 0){
+                offSet = 0; }
+            else {
+                offSet =-1;
+            }
+
+            // int LOS = structure.
+            int LOS = structure.getStructureStats().getVisionRadius();
+            if(LOS <= 1){ // set 1 radius out as all visible
+                updateLevelOneLOS(playerNumber,offSet,structure.getLocationX(),structure.getLocationY(),mapInfo);
+            }
+            if(LOS <= 2){ // set 2 radius out as all visible
+                updateLevelTwoLOS(playerNumber,offSet,structure.getLocationX(),structure.getLocationY(),mapInfo);
+            }
+        }
+
 
         if(allVisible){
             for(int i=0; i<mapSizeX; i++){

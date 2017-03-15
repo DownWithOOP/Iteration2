@@ -13,7 +13,6 @@ public class MapRenderInformation {
     public MapRenderInformation(int mapX, int mapY){
         this.MapX = mapX;
         this.MapY = mapY;
-        System.out.println("mapX: " +mapX+ " mapY: " +mapY);
         this.renderInfo = new MapRenderObject[mapX][mapY];
     }
     public void addTileToRenderObject(Tile tile, int x, int y){
