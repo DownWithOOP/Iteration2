@@ -88,6 +88,7 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
                 check.removeUserEntity();
                 if(check.getVisibilityLevel() == 2){
                     check.setVisibilityToOne();
+                    check.removeAllEnemies();
                 }
                 if(allVisible){ // sets everything to visible
                     check.setVisibilityTwo();
@@ -133,6 +134,7 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
 
 
 
+
         ArrayList<StructureRenderObject> playerStructureInfo = structureRenderInformation.returnRenderInformation();
         for(StructureRenderObject structure: playerStructureInfo){
 
@@ -161,6 +163,41 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
         // now go through any enemy structures and units that may be visible
 
 
+        if(currPlayerNumber == 1 && playerTiles.size() > 1){
+            ArrayList<UnitRenderObject> enemyUnitData = currUnitRenderInformation2.returnRenderInformation();
+            for(UnitRenderObject enemyUnit : enemyUnitData){
+                TileRenderObject check = userData[enemyUnit.getLocationX()][enemyUnit.getLocationY()];
+                if(check.getVisibilityLevel() == 2){
+                    if(playerTiles.size() < 2){
+                        // start of game, don't
+                    } else {
+                        playerTiles.get(currPlayerNumber-1)[enemyUnit.getLocationX()][enemyUnit.getLocationY()].addEnemyEntity(enemyUnit.getIdType());
+                    }
+                } else{
+                    // don't add, not visible
+                }
+            }
+        }
+
+        if(currPlayerNumber == 2){
+            ArrayList<UnitRenderObject> enemyUnitData = currUnitRenderInformation1.returnRenderInformation();
+            for(UnitRenderObject enemyUnit : enemyUnitData){
+                TileRenderObject check = userData[enemyUnit.getLocationX()][enemyUnit.getLocationY()];
+                if(check.getVisibilityLevel() == 2){
+                    if(playerTiles.size() < 2){
+                        // start of game, don't
+                    } else {
+                        playerTiles.get(currPlayerNumber-1)[enemyUnit.getLocationX()][enemyUnit.getLocationY()].addEnemyEntity(enemyUnit.getIdType());
+                    }
+                } else{
+                    // don't add, not visible
+                }
+            }
+        }
+
+
+
+
 
         if(allVisible){
             for(int i=0; i<mapSizeX; i++){
@@ -181,10 +218,9 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
 
     @Override
     public void updateUnit(EntityId unitId, UnitRenderObject unitRenderObject){
-        //this.currUnitRenderInformation = unitRenderInformation;
-
         if(currPlayerNumber == 1){
             if(currUnitRenderInformation1!=null){
+
                 currUnitRenderInformation1.removeUnit(unitId);
                 currUnitRenderInformation1.addUnit(unitRenderObject);
                 update(currPlayerNumber, currMapRenderInformation1, currUnitRenderInformation1, currStructureRenderInformation1);
@@ -202,7 +238,6 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
 
     @Override
     public void updateStructure(EntityId structureId, StructureRenderObject structureRenderObject){
-        //this.currStructureRenderInformation = structureRenderInformation;
         if(currPlayerNumber == 1){
             if(currStructureRenderInformation1!=null){
                 currStructureRenderInformation1.removeStructure(structureId);
