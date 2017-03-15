@@ -104,6 +104,8 @@ public class EntityOwnership {
         structureList = new ArrayList<>(1);
         rallyPointList= new ArrayList<>(typeRestriction);
         entities = new HashMap<>();
+        workerList = new ArrayList<>();
+
         this.unitFactory = new UnitFactory(commandRelay);
         this.commandRelay = commandRelay;
         this.idManager = EntityIdManager.getInstance();

@@ -84,7 +84,12 @@ public class EntityIdManager {
            return;
         }
 
-        ids.add(findIndexForId(armyIds, id), id);
+        if (findIndexForId(ids, id) != -1) {
+            ids.add(findIndexForId(ids, id), id);
+        }
+        else {
+            ids.add(id);
+        }
     }
 
     private int findIndexForId(ArrayList<Integer> ids, int id) {
