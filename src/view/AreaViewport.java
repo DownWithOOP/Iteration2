@@ -48,6 +48,7 @@ public class AreaViewport implements MiniMapSubject{
     private String selectedUnit = "something";
     private int cursorX;
     private int cursorY;
+    private int activePlayerNumber = 1;
 
     Image grass = Assets.getInstance().GRASS;
     Image water = Assets.getInstance().WATER;
@@ -60,10 +61,12 @@ public class AreaViewport implements MiniMapSubject{
     Image research = Assets.getInstance().RESEARCH;
     Image colonist = Assets.getInstance().COLONIST;
     Image explorer = Assets.getInstance().EXPLORER;
+    Image explorer2 = Assets.getInstance().EXPLORER2;
     Image grey = Assets.getInstance().GREY;
     Image melee = Assets.getInstance().MELEE;
     Image ranged = Assets.getInstance().RANGED;
     Image capital = Assets.getInstance().CAPITAL;
+    Image colonist2 = Assets.getInstance().COLONIST2;
 
 
     public AreaViewport(VBox vbox, Canvas canvas, MiniMap miniMap){
@@ -133,6 +136,11 @@ public class AreaViewport implements MiniMapSubject{
 
     public void endTurnOccured(){
         this.startOfNewTurn = true;
+        if(this.activePlayerNumber == 1){
+            this.activePlayerNumber = 2;
+        } else{
+            this.activePlayerNumber = 1;
+        }
     }
 
     public void UpdateRenderInfo(MapRenderInformation renderMap, UnitRenderInformation renderUnit, StructureRenderInformation renderStructure, TileRenderObject[][] renderData){
@@ -444,13 +452,22 @@ public class AreaViewport implements MiniMapSubject{
                                 gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + width * 0.45 - 60 + height);
                             }
 
+                                /*
                                ArrayList<IdType>  info = render.getEnemyEntities();
                                 for(IdType temp : info){
                                     if(temp.equals(IdType.COLONIST)){ // draw colonist
-                                        gc.drawImage(colonist,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                        if(activePlayerNumber == 1){
+                                            gc.drawImage(colonist,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                        } else {
+                                            gc.drawImage(colonist2,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                        }
                                     }
                                     if(temp.equals(IdType.EXPLORER)){
-                                        gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                        if(activePlayerNumber == 1){
+                                            gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                        } else {
+                                            gc.drawImage(explorer2,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                        }
                                     }
                                     if(temp.equals(IdType.MELEE)){
                                         gc.drawImage(melee,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
@@ -461,7 +478,7 @@ public class AreaViewport implements MiniMapSubject{
                                     if (temp.equals(IdType.CAPITAL)) { //draw capital
                                         gc.drawImage(capital,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
                                     }
-                                }
+                                }  */
 
                         } else { // second type of column
 
@@ -487,15 +504,22 @@ public class AreaViewport implements MiniMapSubject{
                             } else {
                                 gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + (2 * height) - 60);
                             }
-
-
+                            /*
                             ArrayList<IdType>  info = render.getEnemyEntities();
                             for(IdType temp : info){
-                                if(temp.equals(IdType.COLONIST)){ // draw colonist
-                                    gc.drawImage(colonist,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                if(temp.equals(IdType.COLONIST)){ // draw colonisti(
+                                    if(activePlayerNumber == 1){
+                                        gc.drawImage(colonist2,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                    } else {
+                                        gc.drawImage(colonist,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                    }
                                 }
                                 if(temp.equals(IdType.EXPLORER)){
-                                    gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                    if(activePlayerNumber == 1){
+                                        gc.drawImage(explorer2,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                    } else {
+                                        gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                    }
                                 }
                                 if(temp.equals(IdType.MELEE)){
                                     gc.drawImage(melee,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
@@ -507,6 +531,7 @@ public class AreaViewport implements MiniMapSubject{
                                     gc.drawImage(capital,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
                                 }
                             }
+                            */
                         }
 
                     } else{
@@ -545,10 +570,18 @@ public class AreaViewport implements MiniMapSubject{
                                         for(IdType id : entities){
 
                                             if(id.equals(IdType.COLONIST)){ // draw colonist
-                                                gc.drawImage(colonist,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                                if(this.activePlayerNumber == 1){
+                                                    gc.drawImage(colonist,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                                } else {
+                                                    gc.drawImage(colonist2,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                                }
                                             }
                                             if(id.equals(IdType.EXPLORER)){
-                                                gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                                if(activePlayerNumber == 1){
+                                                    gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                                } else {
+                                                    gc.drawImage(explorer2,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                                }
                                             }
                                             if(id.equals(IdType.MELEE)){
                                                 gc.drawImage(melee,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
@@ -577,10 +610,18 @@ public class AreaViewport implements MiniMapSubject{
                                         for(IdType id : enemies){
 
                                             if(id.equals(IdType.COLONIST)){ // draw colonist
-                                                gc.drawImage(colonist,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                                if(activePlayerNumber == 1){
+                                                    gc.drawImage(colonist2,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                                } else {
+                                                    gc.drawImage(colonist,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                                }
                                             }
                                             if(id.equals(IdType.EXPLORER)){
-                                                gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                                if(activePlayerNumber == 1){
+                                                    gc.drawImage(explorer2,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                                } else {
+                                                    gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                                }
                                             }
                                             if(id.equals(IdType.MELEE)){
                                                 gc.drawImage(melee,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
@@ -621,10 +662,18 @@ public class AreaViewport implements MiniMapSubject{
                                                 startOfNewTurn = false;
                                             }
                                             if(id.equals(IdType.COLONIST)){ // draw colonist
-                                                gc.drawImage(colonist,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                                if(activePlayerNumber == 1){
+                                                    gc.drawImage(colonist,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                                } else {
+                                                    gc.drawImage(colonist2,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                                }
                                             }
                                             if(id.equals(IdType.EXPLORER)){
-                                                gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                                if(activePlayerNumber == 1){
+                                                    gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                                } else {
+                                                    gc.drawImage(explorer2,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                                }
                                             }
                                             if(id.equals(IdType.MELEE)){
                                                 gc.drawImage(melee,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
@@ -650,10 +699,19 @@ public class AreaViewport implements MiniMapSubject{
                                         for(IdType id : enemies){
 
                                             if(id.equals(IdType.COLONIST)){ // draw colonist
-                                                gc.drawImage(colonist,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                                if(activePlayerNumber == 1){
+                                                    gc.drawImage(colonist2,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                                } else {
+                                                    gc.drawImage(colonist,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                                }
+
                                             }
                                             if(id.equals(IdType.EXPLORER)){
-                                                gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                                if(activePlayerNumber == 1){
+                                                    gc.drawImage(explorer2,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                                } else {
+                                                    gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                                }
                                             }
                                             if(id.equals(IdType.MELEE)){
                                                 gc.drawImage(melee,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);

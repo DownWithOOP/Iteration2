@@ -49,7 +49,9 @@ public class Assets {
     public Image UNIVERSITY;
 
     public Image COLONIST;
+    public Image COLONIST2;
     public Image EXPLORER;
+    public Image EXPLORER2;
     public Image MELEE;
     public Image RANGED;
 
@@ -91,7 +93,9 @@ public class Assets {
 
             //units
             COLONIST = new Image("/images/entities/colonist.png");
+            COLONIST2 = new Image("/images/entities/colonist2.png");
             EXPLORER = new Image("/images/entities/explorer.png");
+            EXPLORER2 = new Image("/images/entities/explorer2.png");
             MELEE = new Image("/images/entities/melee.png");
             RANGED = new Image("/images/entities/ranged.png");
 
