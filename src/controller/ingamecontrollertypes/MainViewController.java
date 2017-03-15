@@ -18,6 +18,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.ActiveState;
 import model.map.Map;
 import utilities.ObserverInterfaces.MapObserver;
 import utilities.ObserverInterfaces.StatusObserver;
@@ -110,11 +111,8 @@ public class MainViewController extends Controller{
                                 "   Ore Resources: " + controllerDispatch.getPlayer().getOreResourceLevel() +
                                 "   Food Resources: " + controllerDispatch.getPlayer().getFoodResourceLevel());
                     }
-                    System.out.println(playerObservator.share().size() + " SIZE");
-
                     if(playerObservator.share().containsKey(event.getCode())){
                         String command = (String)playerObservator.share().get(event.getCode());
-                        System.out.println("COMMAND: "   + command);
                         if(command.equals("SOUTH")){
                             this.areaViewport.selectSouth();
                             controllerDispatch.updateActiveStateModifier(Direction.SOUTH);
@@ -175,6 +173,7 @@ public class MainViewController extends Controller{
         );
     }
 
+
     public void popUpView(String text) throws IOException {
         Stage stage = new Stage();
         //URL url = new File("/resources/buildStructurePopUp.fxml").toURL();
@@ -217,37 +216,48 @@ public class MainViewController extends Controller{
     }
 
 
-    public void handleKeyBoardSwitch(){
-
+    public void handleKeyBoardSwitch()throws IOException {
+        Stage stage = new Stage();
+        //URL url = new File("/resources/buildStructurePopUp.fxml").toURL();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/keyboardConfiguration.fxml"));
+        Parent root = loader.load();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Player " + controllerDispatch.getActivePlayerNumber() + " KeyBoard Configuration");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(commandLabel.getScene().getWindow());
+        CustomizationController inputController = loader.getController();
+        inputController.setDispatch(controllerDispatch);
+        inputController.getHashMap(playerObservator.share());
+        stage.showAndWait();
     }
 
     @FXML void selectNorth() throws IOException{
-        this.areaViewport.selectNorth(); // TODO hook this up to some keyboard input
+        this.areaViewport.selectNorth();
         controllerDispatch.updateActiveStateModifier(Direction.NORTH);
         updateCoordinatesForDebugging();
     }
     @FXML void selectSouth() throws IOException{
-        this.areaViewport.selectSouth(); // TODO hook this up to some keyboard input
+        this.areaViewport.selectSouth();
         controllerDispatch.updateActiveStateModifier(Direction.SOUTH);
         updateCoordinatesForDebugging();
     }
     @FXML void selectNE() throws IOException{
-        this.areaViewport.selectNE(); // TODO hook this up to some keyboard input
+        this.areaViewport.selectNE();
         controllerDispatch.updateActiveStateModifier(Direction.NORTH_EAST);
         updateCoordinatesForDebugging();
     }
     @FXML void selectSE() throws IOException{
-        this.areaViewport.selectSE(); // TODO hook this up to some keyboard input
+        this.areaViewport.selectSE();
         controllerDispatch.updateActiveStateModifier(Direction.SOUTH_EAST);
         updateCoordinatesForDebugging();
     }
     @FXML void selectSW() throws IOException{
-        this.areaViewport.selectSW(); // TODO hook this up to some keyboard input
+        this.areaViewport.selectSW();
         controllerDispatch.updateActiveStateModifier(Direction.SOUTH_WEST);
         updateCoordinatesForDebugging();
     }
     @FXML void selectNW() throws IOException{
-        this.areaViewport.selectNW();  // TODO hook this up to some keyboard input
+        this.areaViewport.selectNW();
         controllerDispatch.updateActiveStateModifier(Direction.NORTH_WEST);
         updateCoordinatesForDebugging();
     }
