@@ -56,6 +56,7 @@ public class AreaViewport implements MiniMapSubject{
     Image research = Assets.getInstance().RESEARCH;
     Image colonist = Assets.getInstance().COLONIST;
     Image explorer = Assets.getInstance().EXPLORER;
+    Image grey = Assets.getInstance().GREY;
 
     public AreaViewport(VBox vbox, Canvas canvas, MiniMap miniMap){
 
@@ -382,6 +383,70 @@ public class AreaViewport implements MiniMapSubject{
                     } else if(render.getVisibilityLevel() == 1){
                         // 1, we'll handle this later
                         // TODO greyed out area
+                        TerrainType type = render.getTerrainType();
+
+                        StringBuilder builder = new StringBuilder();
+                        if (displayFood) {
+                            builder.append("F: " + render.getFoodAmount() +"\n");
+                        }
+                        if (displayOre) {
+                            builder.append("O: " + render.getOreAmount() + "\n");
+                        }
+                        if (displayEnergy) {
+                            builder.append("E: " + render.getEnergyAmount() + "\n");
+                        }
+                        String resourceDisplay = builder.toString();
+
+                        if(render.getLocationX() % 2 == 0) { // first type of column
+
+                            if(type.equals(TerrainType.GRASS)){
+                                gc.drawImage(grass,
+                                        0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                            }
+                            else if(type.equals(TerrainType.DIRT)){
+                                gc.drawImage(dirt,
+                                        0.75*width*j+ cameraX,height*1*-i+ cameraY+ width*0.45);
+                            }
+                            else if(type.equals(TerrainType.WATER)){
+                                gc.drawImage(water,
+                                        0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                            }
+                            gc.drawImage(grey,
+                                    0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+
+                            // now draw resource values if the overlay is on
+                            if(resourceDisplay.equals("") || !overlayOn){
+                                // don't display anything
+                            } else {
+                                gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + width * 0.45 - 60 + height);
+                            }
+
+                        } else { // second type of column
+
+                            if(type.equals(TerrainType.GRASS)){
+                                gc.drawImage(grass,
+                                        0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                            }
+                            else if(type.equals(TerrainType.DIRT)){
+                                gc.drawImage(dirt,
+                                        0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                            }
+                            else if(type.equals(TerrainType.WATER)){
+                                gc.drawImage(water,
+                                        0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                            }
+
+                            gc.drawImage(grey,
+                                    0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+
+                            // now draw resource values if the overlay is on
+                            if(resourceDisplay.equals("") || !overlayOn){
+                                // don't display anything
+                            } else {
+                                gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + (2 * height) - 60);
+                            }
+
+                        }
 
                     } else{
                         // must be 2, fully visible display everything that is there

@@ -53,6 +53,7 @@ public class Assets {
 
     public Image MINIMAPBORDER;
     public Image SMALLPURPLE;
+    public Image GREY;
 
     public boolean init(){
 
@@ -88,6 +89,7 @@ public class Assets {
             RALLY_POINT = new Image("images/misc/rally_point.png");
             MINIMAPBORDER = new Image("images/misc/minMap.png");
             SMALLPURPLE = new Image("images/misc/smallPurple.png");
+            GREY = new Image("images/misc/GREY.png");
 
         } catch (Exception e){
             e.printStackTrace();
