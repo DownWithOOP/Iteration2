@@ -10,6 +10,7 @@ import javafx.scene.paint.Paint;
 import model.ActiveState;
 import model.RallyPoint;
 import model.RenderInformation.*;
+import model.entities.EntityId;
 import model.map.tile.terrain.TerrainType;
 import utilities.ObserverInterfaces.MiniMapObserver;
 import utilities.ObserverInterfaces.MiniMapSubject;
@@ -44,7 +45,7 @@ public class AreaViewport implements MiniMapSubject{
     private TileRenderObject[][] renderData;
     private ArrayList<MiniMapObserver> miniMapObservers= new ArrayList<MiniMapObserver>();
     private boolean startOfNewTurn = true;
-    private String selectedUnit;
+    private String selectedUnit = "something";
     private int cursorX;
     private int cursorY;
 
@@ -148,14 +149,18 @@ public class AreaViewport implements MiniMapSubject{
 
     // currently cycled unit that is in that status viewport
     public void getCurrentActiveUnit(String string, int locationX, int locationY){
-        this.selectedUnit = string;
-        if(this.cursorX != locationX || this.cursorY != locationY){
+
+        if(!this.selectedUnit.equals(string)){
             // change cursor location
-            selectJumpLocation(cursorX, cursorY);
+            selectJumpLocation(locationX, locationY);
+            this.selectedUnit = string;
+            this.cursorX = locationX;
+            this.cursorY = locationY;
+        } else {
+                // don't update
         }
 
-        this.cursorX = locationX;
-        this.cursorY = locationY;
+
 
     }
 
@@ -439,6 +444,25 @@ public class AreaViewport implements MiniMapSubject{
                                 gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + width * 0.45 - 60 + height);
                             }
 
+                               ArrayList<IdType>  info = render.getEnemyEntities();
+                                for(IdType temp : info){
+                                    if(temp.equals(IdType.COLONIST)){ // draw colonist
+                                        gc.drawImage(colonist,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                    }
+                                    if(temp.equals(IdType.EXPLORER)){
+                                        gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                    }
+                                    if(temp.equals(IdType.MELEE)){
+                                        gc.drawImage(melee,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                    }
+                                    if(temp.equals(IdType.RANGED)){
+                                        gc.drawImage(ranged,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                    }
+                                    if (temp.equals(IdType.CAPITAL)) { //draw capital
+                                        gc.drawImage(capital,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
+                                    }
+                                }
+
                         } else { // second type of column
 
                             if(type.equals(TerrainType.GRASS)){
@@ -464,6 +488,25 @@ public class AreaViewport implements MiniMapSubject{
                                 gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + (2 * height) - 60);
                             }
 
+
+                            ArrayList<IdType>  info = render.getEnemyEntities();
+                            for(IdType temp : info){
+                                if(temp.equals(IdType.COLONIST)){ // draw colonist
+                                    gc.drawImage(colonist,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                }
+                                if(temp.equals(IdType.EXPLORER)){
+                                    gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                }
+                                if(temp.equals(IdType.MELEE)){
+                                    gc.drawImage(melee,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                }
+                                if(temp.equals(IdType.RANGED)){
+                                    gc.drawImage(ranged,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                }
+                                if (temp.equals(IdType.CAPITAL)) { //draw capital
+                                    gc.drawImage(capital,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
+                                }
+                            }
                         }
 
                     } else{
@@ -517,7 +560,6 @@ public class AreaViewport implements MiniMapSubject{
                                                 gc.drawImage(capital,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
                                             }
                                             if(startOfNewTurn && entities.size() != 0){
-                                                selectJumpLocation(j,i);
                                                 changeCamera(j,i);
                                                 startOfNewTurn = false;
                                             }
