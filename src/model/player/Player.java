@@ -1,9 +1,11 @@
 package model.player;
 
 import controller.CommandRelay;
+import controller.Observers.PlayerObservator;
 import controller.availablecommands.Commandable;
 import controller.commands.CommandType;
 import controller.commands.CycleDirection;
+import javafx.scene.input.KeyCode;
 import model.ActiveState;
 import model.RallyPoint;
 import model.RenderInformation.StatusRenderInformation;
@@ -20,12 +22,14 @@ import model.map.Map;
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Konrad on 2/17/2017.
  */
-public class Player implements MapSubject, UnitSubject, StructureSubject, StatusSubject {
+public class Player implements MapSubject, UnitSubject, StructureSubject, StatusSubject, PlayerSubject {
 
 
     private EntityOwnership entities;
@@ -36,9 +40,11 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
     private ArrayList<UnitObserver> unitObservers = new ArrayList<UnitObserver>(); // will contain observers that get notified of changes
     private ArrayList<StructureObserver> structureObservers = new ArrayList<StructureObserver>(); // will contain observers that get notified of changes
     private ArrayList<StatusObserver> statusObservers = new ArrayList<>(); // will contain observers that get notified of changes
+    private ArrayList<PlayerObservator> playerObservators = new ArrayList<>();
+    private HashMap<KeyCode,String> keymap;
     private int playerNumber; // players should know what # they are
 
-    public Player(int playerNumber, Map map, CommandRelay commandRelay, MapObserver observer, UnitObserver unitObserver, StructureObserver structureObserver, StatusObserver statusObserver, int startingX, int startingY){
+    public Player(int playerNumber, Map map, CommandRelay commandRelay, MapObserver observer, UnitObserver unitObserver, StructureObserver structureObserver, StatusObserver statusObserver, PlayerObservator playerObservator, int startingX, int startingY){
 
         this.playerNumber = playerNumber;
         customID=new CustomID(IdType.PLAYER, String.valueOf(playerNumber));
@@ -47,6 +53,16 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
 
         entities = new EntityOwnership(customID, commandRelay,startingX, startingY); //TODO should entity ownership know Player?
         entities.setUnitObservers(unitObserver, observer);
+
+        keymap = new HashMap<KeyCode, String>();
+        keymap.put(KeyCode.NUMPAD2, "SOUTH");
+        keymap.put(KeyCode.NUMPAD8, "NORTH");
+        keymap.put(KeyCode.NUMPAD7, "NW");
+        keymap.put(KeyCode.NUMPAD1, "SW");
+        keymap.put(KeyCode.NUMPAD9, "NE");
+        keymap.put(KeyCode.NUMPAD3, "SE");
+
+
 
         resources = new ResourceOwnership(customID);
         resources.addResource(new Resource(ResourceType.ENERGY, 100));
@@ -57,6 +73,7 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
         this.registerUnitObserver(unitObserver);
         this.registerStructureObserver(structureObserver);
         this.registerStatusObserver(statusObserver);
+        this.registerPlayerObserver(playerObservator);
     }
     public void endTurn(){
         System.out.println(this.toString() + " is ending their turn");
@@ -71,6 +88,7 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
         this.notifyUnitObservers(); // and lets not forget the units
         this.notifyMapObservers(); // at the start of the game we want to give the player map to render
         this.notifyStatusObservers(); // yay status viewport
+        this.notifyObservers(); // for the key mapping
     }
 
     /**
@@ -140,6 +158,20 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
     public void unregister(StructureObserver o) { structureObservers.remove(o);}
     @Override
     public void unregister(StatusObserver o) { statusObservers.remove(o);}
+    @Override
+    public void registerPlayerObserver(PlayerObservator o) {
+        playerObservators.add(o);
+    }
+    @Override
+    public void unregister(MiniMapObserver o) {
+        playerObservators.remove(o);
+    }
+    @Override
+    public void notifyObservers() {
+        for(PlayerObservator playerObservator : playerObservators){
+           playerObservator.update(keymap);
+        }
+    }
 
     @Override
     public void notifyMapObservers() { // IMPORTANT!! CALL THIS WHENEVER THE MAP IS UPDATED SO THE VIEW REFRESHES
