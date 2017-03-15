@@ -52,6 +52,7 @@ public class Assets {
     public Image EXPLORER;
     public Image MELEE;
     public Image RANGED;
+    public Image WORKER;
 
     public Image SELECT;
     public Image DARKNESS;
@@ -94,6 +95,7 @@ public class Assets {
             EXPLORER = new Image("/images/entities/explorer.png");
             MELEE = new Image("/images/entities/melee.png");
             RANGED = new Image("/images/entities/ranged.png");
+            WORKER = new Image("/images/entities/worker.png");
 
             //misc
             SELECT = new Image("images/misc/select.png");

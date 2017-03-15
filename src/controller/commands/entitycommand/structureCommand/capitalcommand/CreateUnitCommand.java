@@ -13,12 +13,12 @@ public class CreateUnitCommand extends CapitalCommand {
     private CustomID customId;
     private String id;
 
-    public CreateUnitCommand(Capital capital, EntityType entityToCreate, CustomID customId, String id) {
+    public CreateUnitCommand(Capital capital, EntityType entityToCreate) {
         super(capital, 3);
         super.setCommandType(CommandType.CREATE_UNIT);
         this.entityToCreate = entityToCreate;
-        this.customId = customId;
-        this.id = id;
+        this.customId = capital.getPlayerId();
+        this.id = "0";
     }
 
     public EntityType getEntityToCreate() {

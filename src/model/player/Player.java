@@ -12,6 +12,7 @@ import model.entities.EntityId;
 import model.entities.structure.Structure;
 import model.entities.unit.Army;
 import model.entities.unit.FighterUnit;
+import model.entities.unit.Unit;
 import utilities.ObserverInterfaces.*;
 import model.map.Map;
 import utilities.id.CustomID;
@@ -168,6 +169,11 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
 
     public void addRallyPoint(RallyPoint rallyPoint, int armyNumber) {
         entities.addRallyPoint(rallyPoint, armyNumber);
+        notifyUnitObservers();
+    }
+
+    public void addUnit(Unit unit) {
+        entities.addEntity(unit);
         notifyUnitObservers();
     }
 

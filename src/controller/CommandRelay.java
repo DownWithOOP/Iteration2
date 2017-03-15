@@ -6,6 +6,7 @@ import model.RallyPoint;
 import model.common.Location;
 import model.entities.structure.Structure;
 import model.entities.unit.FighterUnit;
+import model.entities.unit.Unit;
 import utilities.id.CustomID;
 
 /**
@@ -35,6 +36,10 @@ public class CommandRelay {
 
     public void notifyModelOfRallyPointCreation(RallyPoint rallyPoint, int armyNumber) {
         model.addRallyPoint(rallyPoint, armyNumber);
+    }
+
+    public void notifyModelOfUnitCreation(Unit unit) {
+        model.addUnit(unit);
     }
 
     public void notifyModelOfStructureCreation(Structure structure) {
