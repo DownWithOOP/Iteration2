@@ -63,6 +63,8 @@ public class MainViewController extends Controller{
     MenuItem oreOverlay;
     @FXML
     MenuItem energyOverlay;
+    @FXML
+    MenuItem keyboardMap;
 
     private Map currentMap;
     private AreaViewport areaViewport;
@@ -90,6 +92,7 @@ public class MainViewController extends Controller{
     public void takeInSwitchControllerRelay(SwitchControllerRelay switchControllerRelay){
         this.switchControllerRelay = switchControllerRelay;
     }
+
 
     @Override
     protected void enableKeyboardInput() {
@@ -142,9 +145,10 @@ public class MainViewController extends Controller{
 
     @Override
     protected void render() {
+        this.areaViewport.getCurrentActiveUnit(this.statusObserver.share().getInstanceString(), this.statusObserver.share().getLocationX(), this.statusObserver.share().getLocationY() );
         this.areaViewport.UpdateRenderInfo(this.mapObserver.share(), this.unitObserver.share(), this.structureObserver.share(), this.mapObserver.getPlayerXRenderMap(controllerDispatch.getActivePlayerNumber())); // displays the map
         this.statusViewport.updateRenderInfo(this.statusObserver.share());
-        this.areaViewport.getCurrentActiveUnit(this.statusObserver.share().getInstanceString());
+
     }
 
     //Move methods for moving with keyboard - JS
@@ -165,6 +169,10 @@ public class MainViewController extends Controller{
         areaViewport.changeCameraYMinus();
     }
 
+
+    public void handleKeyBoardSwitch(){
+
+    }
 
     @FXML void selectNorth() throws IOException{
         this.areaViewport.selectNorth(); // TODO hook this up to some keyboard input

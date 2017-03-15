@@ -45,6 +45,8 @@ public class AreaViewport implements MiniMapSubject{
     private ArrayList<MiniMapObserver> miniMapObservers= new ArrayList<MiniMapObserver>();
     private boolean startOfNewTurn = true;
     private String selectedUnit;
+    private int cursorX;
+    private int cursorY;
 
     Image grass = Assets.getInstance().GRASS;
     Image water = Assets.getInstance().WATER;
@@ -142,12 +144,14 @@ public class AreaViewport implements MiniMapSubject{
         this.gridSizeY = renderData[0].length;
         updateCanvas();
         notifyObservers(); // update mini map
-
+        selectJumpLocation(cursorX, cursorY);
     }
 
     // currently cycled unit that is in that status viewport
-    public void getCurrentActiveUnit(String string){
+    public void getCurrentActiveUnit(String string, int locationX, int locationY){
         this.selectedUnit = string;
+        this.cursorX = locationX;
+        this.cursorY = locationY;
     }
 
     public void drawSelection(){

@@ -32,6 +32,7 @@
                 <Menu id="currentPlayerMenu" mnemonicParsing="false" text="Player">
                     <items>
                         <MenuItem fx:id="endTurnMenuItem" mnemonicParsing="false" onAction="#handleEndTurn" text="End Turn (E)" />
+                  <MenuItem fx:id="keyboardMap" mnemonicParsing="false" onAction="#handleKeyBoardSwitch" text="Keyboard configuration" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Viewports">

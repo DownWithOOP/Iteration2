@@ -6,6 +6,7 @@ import controller.commands.CommandType;
 import controller.commands.CycleDirection;
 import model.ActiveState;
 import model.RallyPoint;
+import model.RenderInformation.StatusRenderInformation;
 import model.common.Location;
 import model.entities.EntityId;
 import model.entities.structure.Structure;
@@ -138,6 +139,7 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
     public void notifyStatusObservers() { // IMPORTANT!! CALL THIS WHENEVER ENTITY OWNERSHIP IS UPDATED SO THE VIEW REFRESHES
         for(StatusObserver statusObserver : statusObservers){
             //TODO maybe get status render info from current selection instead of entities. This would remove the double calls to functions in EntityOwnership
+            StatusRenderInformation temp = entities.returnStatusRenderInformation();
             statusObserver.update(entities.returnStatusRenderInformation());
         }
     }
