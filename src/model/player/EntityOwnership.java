@@ -59,6 +59,7 @@ public class EntityOwnership {
     int unitCap = 25;
     private RallyPoint selectedRallyPoint = null;
     private Army selectedArmy = null;
+
     //TODO don't hardcode the type indices and number of types
     private final int rangedIndex = 0;
     private final int meleeIndex = 1;
@@ -66,7 +67,14 @@ public class EntityOwnership {
     private final int explorerIndex = 3;
     private final int unitTypeNumber = 5;
 
-    private final int structureTypeNumber = 1;
+    private final int capitalIndex = 0;
+    private final int farmIndex = 1;
+    private final int fortIndex = 2;
+    private final int mineIndex = 3;
+    private final int observationTowerIndex = 4;
+    private final int powerPlantIndex = 5;
+    private final int universityIndex = 6;
+    private final int structureTypeNumber = 7;
 
     private int cycleTypeIndex = 0;
     private int cycleInstanceIndex = 0;
@@ -126,6 +134,7 @@ public class EntityOwnership {
         }
     }
 
+    //TODO remove this
     public boolean addEntity(Entity entity) {
         IdType entityType = entity.getEntityType();
         boolean returnValue = false;
@@ -143,7 +152,25 @@ public class EntityOwnership {
         boolean result = false;
         switch (entityType) {
             case CAPITAL:
-                result = addToIndex(structureList, 0, entity);
+                result = addToIndex(structureList, capitalIndex, entity);
+                break;
+            case FARM:
+                result = addToIndex(structureList, farmIndex, entity);
+                break;
+            case FORT:
+                result = addToIndex(structureList, fortIndex, entity);
+                break;
+            case MINE:
+                result = addToIndex(structureList, mineIndex, entity);
+                break;
+            case OBSERVATION_TOWER:
+                result = addToIndex(structureList, observationTowerIndex, entity);
+                break;
+            case POWER_PLANT:
+                result = addToIndex(structureList, powerPlantIndex, entity);
+                break;
+            case UNIVERSITY:
+                result = addToIndex(structureList, universityIndex, entity);
                 break;
         }
         return result;
