@@ -16,8 +16,8 @@ public class RunGame extends  Application{
 
         // we set the title of the stage
         primaryStage.setTitle("Space Cats!");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/WelcomeView.fxml"));
-        String cssSheet = this.getClass().getResource("resources/style.css").toExternalForm();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/welcomeView.fxml"));
+        String cssSheet = this.getClass().getResource("/resources/style.css").toExternalForm();
         GameLoader.load(primaryStage, loader, cssSheet);
     }
     // Starting point of the game
