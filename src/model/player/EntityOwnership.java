@@ -213,6 +213,12 @@ public class EntityOwnership {
     public Commandable cycleType(CycleDirection direction) {
         cycleInstanceIndex = 0;
         Entity temp = null;
+
+        if (getCurrentMode() == Mode.RALLY_POINT) {
+            //raly point doesn't cycle
+            return selectedRallyPoint;
+        }
+
         //TODO need both?
         if (currentModeList == null) {
             System.out.println("Cycle type cannot do anything b/c currentModeList is null");
@@ -222,10 +228,7 @@ public class EntityOwnership {
             System.out.println("Cycle type cannot do anything b/c currentModeList is empty");
             return null;
         }
-        if (getCurrentMode() == Mode.RALLY_POINT) {
-            //raly point doesn't cycle
-            return selectedRallyPoint;
-        }
+
         //TODO improve the cycling algorithm so we don't have to do this
         //We can now assume that we will cycle types, so check that there are types to cycle through
         if (!checkForInstancesInType()) {
@@ -238,6 +241,7 @@ public class EntityOwnership {
         if (direction == CycleDirection.DECREMENT) {
             temp=decrementType();
         }
+        System.out.println("cycle type index " + cycleTypeIndex);
         return temp;
     }
 
@@ -257,11 +261,13 @@ public class EntityOwnership {
     private Entity incrementType() {
         int i = cycleTypeIndex + 1;
         int listSize = currentModeList.size();
+        System.out.println("current mode list in inc type " + currentModeList);
         while (i != cycleTypeIndex) {
             if (i >= listSize) {
                 i %= listSize;
             }
             if (!currentModeList.get(i).isEmpty()) {
+                System.out.println("setting cycle index to " + i);
                 cycleTypeIndex = i;
                 return currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex);
             }
@@ -273,11 +279,13 @@ public class EntityOwnership {
     private Entity decrementType() {
         int i = cycleTypeIndex - 1;
         int listSize = currentModeList.size();
+        System.out.println("current mode list in inc type " + currentModeList);
         while (i != cycleTypeIndex) {
             if (i < 0) {
                 i=listSize-1;
             }
             if (!currentModeList.get(i).isEmpty()) {
+                System.out.println("setting cycle index to " + i);
                 cycleTypeIndex = i;
                 return currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex);
             }
@@ -286,6 +294,18 @@ public class EntityOwnership {
         return null;
     }
     public CommandType cycleCommand(CycleDirection direction) {
+        if (getCurrentMode() == Mode.RALLY_POINT) {
+            if (selectedRallyPoint == null) {
+                return null;
+            }
+            if (direction == CycleDirection.INCREMENT) {
+                cycleCommandIndex = next(selectedRallyPoint.getIterableCommandsSize(), cycleCommandIndex);
+            }
+            if (direction == CycleDirection.DECREMENT) {
+                cycleCommandIndex = previous(selectedRallyPoint.getIterableCommandsSize(), cycleCommandIndex);
+            }
+            return selectedRallyPoint.getIterableCommand(cycleCommandIndex);
+        }
         if (currentModeList == null || currentModeList.get(cycleTypeIndex).size()==0) {
             return null;
         }
@@ -317,8 +337,7 @@ public class EntityOwnership {
     }
 
     public RallyPoint cycleInstanceOfRallyPoint(CycleDirection direction){
-        System.out.println("cycling rally point instance");
-        if (rallyPointList == null) {
+        if (rallyPointList.isEmpty()) {
             return null;
         }
         if (direction == CycleDirection.INCREMENT) {
@@ -346,12 +365,17 @@ public class EntityOwnership {
 
     private Entity changeMode(Mode currentMode) {
         resetIndices();
+        System.out.println("cycle type index " + cycleTypeIndex);
+        System.out.println("changing mode to " + currentMode);
         switch (currentMode) {
             case ARMY:
                 if (!armyList.isEmpty() && armyList.size() - 1 >= selectedArmyIndex) {
                     selectedArmy = armyList.get(selectedArmyIndex);
                     currentModeList = selectedArmy.getSubModeLists();
                     selectedRallyPoint = null;
+                }
+                else {
+                    currentModeList = null;
                 }
                 break;
             case UNIT:
@@ -394,6 +418,7 @@ public class EntityOwnership {
         selectedArmyIndex = 0;
         cycleTypeIndex = 0;
         cycleInstanceIndex = 0;
+        cycleCommandIndex = 0;
     }
 
     public void removeEntity(Entity entity){
@@ -480,7 +505,15 @@ public class EntityOwnership {
     }
 
     public CommandType getCurrentCommand() {
-        if (currentModeList == null) {
+        if (getCurrentMode() == Mode.RALLY_POINT) {
+            if (selectedRallyPoint != null) {
+                return selectedRallyPoint.getIterableCommand(cycleCommandIndex);
+            }
+            else {
+                return null;
+            }
+        }
+        else if (currentModeList == null) {
             System.out.println("No current mode list available");
             return null;
         }
@@ -545,7 +578,7 @@ public class EntityOwnership {
             try {
                 return ( (Entity) currentCommandable).getEntityType().toString();
             }
-            catch (ClassCastException e) {
+            catch (ClassCastException | NullPointerException e ) {
                 return null;
             }
         }

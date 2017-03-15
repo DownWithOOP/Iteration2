@@ -23,12 +23,13 @@ public class RallyPoint extends Commandable {
     static ArrayList<CommandType> rallyPointCommand= new ArrayList<>();
     static {
         rallyPointCommand.add(CommandType.FOCUS);
+        rallyPointCommand.add(CommandType.MOVE);
     }
 
     public RallyPoint(CommandRelay commandRelay, Location location, Army army) {
         super(commandRelay);
         currentLocation = location;
-        //addAllCommands(rallyPointCommand);
+        addAllCommands(rallyPointCommand);
         this.army=army;
     }
 
