@@ -231,6 +231,7 @@ public class EntityOwnership {
                     break;
                 case WORKER:
                     workerList.add((Worker) entity);
+                    System.out.println("ADDING WORKER TO ENTITY OWNERSHIP");
                     break;
             }
         }
@@ -710,7 +711,6 @@ public class EntityOwnership {
             rp.executeQueue();
         }
         for (Army army : armyList) {
-            System.out.println("execute armies");
             army.executeQueue();
         }
     }

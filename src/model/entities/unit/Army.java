@@ -387,5 +387,6 @@ public class Army extends Entity implements Fighter {
         for (Worker worker: workersOnLocation) {
             battleGroup.put(worker.getEntityId(), worker);
         }
+        System.out.println("bg after workers added " +  battleGroup);
     }
 }
