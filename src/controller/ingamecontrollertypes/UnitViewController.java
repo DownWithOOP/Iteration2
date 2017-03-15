@@ -159,8 +159,8 @@ public class UnitViewController extends Controller
 
             armyPane.getTabs().clear();
             for (int i=0; i < armyRenderObjectList.size(); i++) {
-                armyNumberChoices.add(i+1);
                 ArmyRenderObject armyRenderObject = armyRenderObjectList.get(i);
+                armyNumberChoices.add(Integer.parseInt(armyRenderObject.getId().getId()));
 
                 Tab currentTab = new Tab();
                 currentTab.setText("Army " + armyRenderObject.getId().getId());

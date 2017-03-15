@@ -210,7 +210,7 @@ public class EntityOwnership {
         return index;
     }
 
-    public Entity cycleType(CycleDirection direction) {
+    public Commandable cycleType(CycleDirection direction) {
         cycleInstanceIndex = 0;
         Entity temp = null;
         //TODO need both?
@@ -221,6 +221,10 @@ public class EntityOwnership {
         if (currentModeList.isEmpty()) {
             System.out.println("Cycle type cannot do anything b/c currentModeList is empty");
             return null;
+        }
+        if (getCurrentMode() == Mode.RALLY_POINT) {
+            //raly point doesn't cycle
+            return selectedRallyPoint;
         }
         //TODO improve the cycling algorithm so we don't have to do this
         //We can now assume that we will cycle types, so check that there are types to cycle through
@@ -295,21 +299,25 @@ public class EntityOwnership {
         return currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex).getIterableCommand(cycleCommandIndex);
     }
 
-    public Entity cycleInstance(CycleDirection direction) {
+    public Commandable cycleInstance(CycleDirection direction) {
 
-        if (currentModeList == null || currentModeList.get(cycleTypeIndex).size()==0) {
-            return null;
-        }
-        if (direction == CycleDirection.INCREMENT) {
-            cycleInstanceIndex = next(currentModeList.get(cycleTypeIndex).size(), cycleInstanceIndex);
-        }
-        if (direction == CycleDirection.DECREMENT) {
-            cycleInstanceIndex = previous(currentModeList.get(cycleTypeIndex).size(), cycleInstanceIndex);
-        }
-        return currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex);
+       if (getCurrentMode() == Mode.RALLY_POINT) {
+            return cycleInstanceOfRallyPoint(direction);
+       }
+       if (currentModeList == null || currentModeList.get(cycleTypeIndex).size()==0) {
+           return null;
+       }
+       if (direction == CycleDirection.INCREMENT) {
+           cycleInstanceIndex = next(currentModeList.get(cycleTypeIndex).size(), cycleInstanceIndex);
+       }
+       if (direction == CycleDirection.DECREMENT) {
+           cycleInstanceIndex = previous(currentModeList.get(cycleTypeIndex).size(), cycleInstanceIndex);
+       }
+       return currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex);
     }
 
     public RallyPoint cycleInstanceOfRallyPoint(CycleDirection direction){
+        System.out.println("cycling rally point instance");
         if (rallyPointList == null) {
             return null;
         }
@@ -319,7 +327,10 @@ public class EntityOwnership {
         if (direction == CycleDirection.DECREMENT) {
             cycleInstanceIndex = previous(rallyPointList.size(), cycleInstanceIndex);
         }
-        return rallyPointList.get(cycleInstanceIndex);
+        selectedArmyIndex = cycleInstanceIndex;
+        selectedArmy = armyList.get(selectedArmyIndex);
+        selectedRallyPoint = rallyPointList.get(cycleInstanceIndex);
+        return selectedRallyPoint;
 
     }
 
@@ -352,8 +363,10 @@ public class EntityOwnership {
                 selectedRallyPoint=null;
                 break;
             case RALLY_POINT:
-                selectedRallyPoint = rallyPointList.get(0);
-                currentModeList = null;
+                if (!rallyPointList.isEmpty() && rallyPointList.size() -1 >= selectedArmyIndex) {
+                    selectedRallyPoint = rallyPointList.get(selectedArmyIndex);
+                    currentModeList = null;
+                }
                 break;
         }
         return returnEntityOnModeChange();
@@ -490,6 +503,9 @@ public class EntityOwnership {
      * @return current instance
      */
     public Commandable getCurrentInstance(){
+        if (getCurrentMode() == Mode.RALLY_POINT) {
+            return selectedRallyPoint;
+        }
         if (currentModeList == null) {
             System.out.println("No current mode list available");
             return null;
@@ -611,12 +627,16 @@ public class EntityOwnership {
     }
 
     public void addExistingFighterUnitToArmy(FighterUnit fighterUnit, int armyNumber) {
-        selectedArmyIndex = armyNumber - 1;
+        selectedArmyIndex = armyNumber;
         armyList.get(selectedArmyIndex).registerUnit(fighterUnit);
     }
 
     public void addRallyPoint(RallyPoint rallyPoint, int armyNumber) {
-        selectedArmyIndex = armyNumber - 1;
+        selectedArmyIndex = armyNumber;
+        System.out.println("adding rally point for army number " + selectedArmyIndex);
+        System.out.println(rallyPointList);
+        rallyPointList.remove(selectedArmyIndex); //rally point list will have a dummy rally point while army has no units
         rallyPointList.add(selectedArmyIndex, rallyPoint);
+        System.out.println(rallyPointList);
     }
 }

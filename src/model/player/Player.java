@@ -76,6 +76,7 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
     public void cycleInstance(CycleDirection direction){
         entities.cycleInstance(direction);
         this.notifyStatusObservers(); // yay status viewport
+        this.notifyUnitObservers();
     }
 
     public void cycleCommand(CycleDirection direction){

@@ -15,8 +15,9 @@ import java.util.Queue;
 /**
  * Created by Jonathen on 2/25/2017.
  */
-public class RallyPoint extends Cursor {
+public class RallyPoint extends Commandable {
     Queue<Location> path= new ArrayDeque<>();
+    Location currentLocation;
     Army army;
 
     static ArrayList<CommandType> rallyPointCommand= new ArrayList<>();
@@ -24,16 +25,17 @@ public class RallyPoint extends Cursor {
         rallyPointCommand.add(CommandType.FOCUS);
     }
 
-    public RallyPoint(CommandRelay commandRelay, Location location,Army army) {
-        super(location);
+    public RallyPoint(CommandRelay commandRelay, Location location, Army army) {
+        super(commandRelay);
+        currentLocation = location;
         //addAllCommands(rallyPointCommand);
         this.army=army;
     }
 
     public void move(Direction direction){
         System.out.print("rally point moves "+direction.toString()+" and then ");
-        super.move(direction);
-        path.add(location);
+        //super.move(direction);
+        //path.add(location);
     }
 
     public void focus(){
@@ -43,4 +45,12 @@ public class RallyPoint extends Cursor {
         path.clear();
     }
 
+    public Location getLocation() {
+        return currentLocation;
+    }
+
+    @Override
+    public String toString() {
+        return "RALLY POINT " + army.getEntityId().getId();
+    }
 }
