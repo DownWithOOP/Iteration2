@@ -140,6 +140,9 @@ public class EntityOwnership {
         switch (entityType) {
             case CAPITAL:
                 result = addToIndex(structureList, 0, entity);
+                removeEntity(unitList.get(2).get(0)); //remove colonist
+                addEntity(unitFactory.getEntity(EntityType.MELEE, playerId, "0", (int)entity.getLocation().getX(), (int)entity.getLocation().getY()));
+                addEntity(unitFactory.getEntity(EntityType.MELEE, playerId, "1", (int)entity.getLocation().getX(), (int)entity.getLocation().getY()));
                 break;
         }
         return result;

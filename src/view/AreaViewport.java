@@ -54,6 +54,9 @@ public class AreaViewport implements MiniMapSubject{
     Image research = Assets.getInstance().RESEARCH;
     Image colonist = Assets.getInstance().COLONIST;
     Image explorer = Assets.getInstance().EXPLORER;
+    Image melee = Assets.getInstance().MELEE;
+    Image ranged = Assets.getInstance().RANGED;
+    Image capital = Assets.getInstance().CAPITAL;
 
     public AreaViewport(VBox vbox, Canvas canvas, MiniMap miniMap){
 
@@ -415,6 +418,15 @@ public class AreaViewport implements MiniMapSubject{
                                             if(id.equals(IdType.EXPLORER)){
                                                 gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
                                             }
+                                            if(id.equals(IdType.MELEE)){
+                                                gc.drawImage(melee,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                            }
+                                            if(id.equals(IdType.RANGED)){
+                                                gc.drawImage(ranged,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                            }
+                                            if (id.equals(IdType.CAPITAL)) { //draw capital
+                                                gc.drawImage(capital, 0.75*width*j + cameraX, height*1*-i+ cameraY + width*0.45);
+                                            }
                                         }
                                         // now draw resource values if the overlay is on
                                         if(resourceDisplay.equals("") || !overlayOn){
@@ -440,10 +452,19 @@ public class AreaViewport implements MiniMapSubject{
                                         ArrayList<IdType> entities = render.getUserEntities();
                                         for(IdType id : entities){
                                             if(id.equals(IdType.COLONIST)){ // draw colonist
-                                                gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                                gc.drawImage(colonist,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
                                             }
                                             if(id.equals(IdType.EXPLORER)){
-                                                gc.drawImage(colonist,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                                gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                            }
+                                            if(id.equals(IdType.MELEE)){
+                                                gc.drawImage(melee,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                            }
+                                            if(id.equals(IdType.RANGED)){
+                                                gc.drawImage(ranged,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                            }
+                                            if (id.equals(IdType.CAPITAL)) { //draw capital
+                                                gc.drawImage(capital, 0.75*width*j + cameraX, height*1*-i+ cameraY+height);
                                             }
                                         }
 
@@ -464,8 +485,8 @@ public class AreaViewport implements MiniMapSubject{
     }
 
     private void drawRallyPoints() {
-        System.out.println("trying to drawing rally points");
-        System.out.println(unitRenderInformation.returnArmyInformation());
+        //System.out.println("trying to drawing rally points");
+        //System.out.println(unitRenderInformation.returnArmyInformation());
         GraphicsContext gc = canvas.getGraphicsContext2D();
         double width = grass.getWidth();
         double height = grass.getHeight();
