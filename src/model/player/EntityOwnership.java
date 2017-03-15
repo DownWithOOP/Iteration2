@@ -520,8 +520,8 @@ public class EntityOwnership {
         renderInfo.updateTypeString(getCurrentType());
         renderInfo.updateInstanceString(getCurrentInstance());
         renderInfo.updateCommandString(getCurrentCommand());
-        // TODO FILL THIS INFORMATION IN  renderInfo.updateLocationInfo();
-        System.out.println("return status info says that command is " + getCurrentCommand());
+        Location currentEntityLocation = getCurrentInstanceLocation();
+        renderInfo.updateLocationInfo(currentEntityLocation.getXCoord(), currentEntityLocation.getYCoord());
         return renderInfo;
     }
 
@@ -689,5 +689,14 @@ public class EntityOwnership {
         selectedArmyIndex = armyNumber;
         rallyPointList.remove(selectedArmyIndex); //rally point list will have a dummy rally point while army has no units
         rallyPointList.add(selectedArmyIndex, rallyPoint);
+    }
+
+    public Location getCurrentInstanceLocation() {
+        if (getCurrentMode() == Mode.RALLY_POINT) {
+            return selectedRallyPoint.getLocation();
+        }
+        else {
+            return ((Entity) getCurrentInstance()).getLocation();
+        }
     }
 }
