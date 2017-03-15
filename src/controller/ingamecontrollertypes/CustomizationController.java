@@ -257,81 +257,104 @@ public class CustomizationController extends Controller {
 
         this.keyOne.addEventFilter(KeyEvent.KEY_PRESSED, event ->
         {
-            keyOne.setText(" : " + event.getCode());
-            KeyCode answer = null;
-            for (KeyCode o : playerHashMap.keySet()) {
-                if (playerHashMap.get(o).equals("NORTH")) {
-                    answer = o;
+            if(!playerHashMap.containsKey(event.getCode())){
+                keyOne.setText(" : " + event.getCode());
+                KeyCode answer = null;
+                for (KeyCode o : playerHashMap.keySet()) {
+                    if (playerHashMap.get(o).equals("NORTH")) {
+                        answer = o;
+                    }
                 }
+                playerHashMap.remove(answer);
+                playerHashMap.put(event.getCode(),"NORTH");
+            } else {
+               keyOne.setText(" : NOPE");
             }
-            playerHashMap.remove(answer);
-            playerHashMap.put(event.getCode(),"NORTH");
         });
 
         this.keyTwo.addEventFilter(KeyEvent.KEY_PRESSED, event ->
         {
-            keyTwo.setText(" : " + event.getCode());
-            KeyCode answer = null;
-            for (KeyCode o : playerHashMap.keySet()) {
-                if (playerHashMap.get(o).equals("SOUTH")) {
-                    answer = o;
+            if(!playerHashMap.containsKey(event.getCode())) {
+                keyTwo.setText(" : " + event.getCode());
+                KeyCode answer = null;
+                for (KeyCode o : playerHashMap.keySet()) {
+                    if (playerHashMap.get(o).equals("SOUTH")) {
+                        answer = o;
+                    }
                 }
+                playerHashMap.remove(answer);
+                playerHashMap.put(event.getCode(), "SOUTH");
+            } else {
+                keyTwo.setText(" : NOPE");
             }
-            playerHashMap.remove(answer);
-            playerHashMap.put(event.getCode(),"SOUTH");
         });
 
         this.keyThree.addEventFilter(KeyEvent.KEY_PRESSED, event ->
         {
-            keyThree.setText(" : " + event.getCode());
-            KeyCode answer = null;
-            for (KeyCode o : playerHashMap.keySet()) {
-                if (playerHashMap.get(o).equals("NE")) {
-                    answer = o;
+            if(!playerHashMap.containsKey(event.getCode())) {
+                keyThree.setText(" : " + event.getCode());
+                KeyCode answer = null;
+                for (KeyCode o : playerHashMap.keySet()) {
+                    if (playerHashMap.get(o).equals("NE")) {
+                        answer = o;
+                    }
                 }
+                playerHashMap.remove(answer);
+                playerHashMap.put(event.getCode(), "NE");
+            } else {
+                keyThree.setText(" : NOPE");
             }
-            playerHashMap.remove(answer);
-            playerHashMap.put(event.getCode(),"NE");
         });
 
         this.keyFour.addEventFilter(KeyEvent.KEY_PRESSED, event ->
         {
-            keyFour.setText(" : " + event.getCode());
-            KeyCode answer = null;
-            for (KeyCode o : playerHashMap.keySet()) {
-                if (playerHashMap.get(o).equals("SE")) {
-                    answer = o;
+            if(!playerHashMap.containsKey(event.getCode())) {
+                keyFour.setText(" : " + event.getCode());
+                KeyCode answer = null;
+                for (KeyCode o : playerHashMap.keySet()) {
+                    if (playerHashMap.get(o).equals("SE")) {
+                        answer = o;
+                    }
                 }
+                playerHashMap.remove(answer);
+                playerHashMap.put(event.getCode(), "SE");
+            } else {
+                keyFour.setText(" : NOPE");
             }
-            playerHashMap.remove(answer);
-            playerHashMap.put(event.getCode(),"SE");
         });
 
         this.keyFive.addEventFilter(KeyEvent.KEY_PRESSED, event ->
         {
-
-            keyFive.setText(" : " + event.getCode());
-            KeyCode answer = null;
-            for (KeyCode o : playerHashMap.keySet()) {
-                if (playerHashMap.get(o).equals("NW")) {
-                    answer = o;
+            if(!playerHashMap.containsKey(event.getCode())) {
+                keyFive.setText(" : " + event.getCode());
+                KeyCode answer = null;
+                for (KeyCode o : playerHashMap.keySet()) {
+                    if (playerHashMap.get(o).equals("NW")) {
+                        answer = o;
+                    }
                 }
+                playerHashMap.remove(answer);
+                playerHashMap.put(event.getCode(), "NW");
+            } else {
+                keyFive.setText(" : NOPE");
             }
-            playerHashMap.remove(answer);
-            playerHashMap.put(event.getCode(),"NW");
         });
 
         this.keySix.addEventFilter(KeyEvent.KEY_PRESSED, event ->
         {
-            keySix.setText(" :" + event.getCode());
-            KeyCode answer = null;
-            for (KeyCode o : playerHashMap.keySet()) {
-                if (playerHashMap.get(o).equals("SW")) {
-                    answer = o;
+            if(!playerHashMap.containsKey(event.getCode())) {
+                keySix.setText(" :" + event.getCode());
+                KeyCode answer = null;
+                for (KeyCode o : playerHashMap.keySet()) {
+                    if (playerHashMap.get(o).equals("SW")) {
+                        answer = o;
+                    }
                 }
+                playerHashMap.remove(answer);
+                playerHashMap.put(event.getCode(), "SW");
+            } else {
+                keySix.setText(" : NOPE");
             }
-            playerHashMap.remove(answer);
-            playerHashMap.put(event.getCode(),"SW");
         });
     }
 }
