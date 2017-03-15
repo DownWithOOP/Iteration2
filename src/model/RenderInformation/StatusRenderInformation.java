@@ -3,6 +3,7 @@ package model.RenderInformation;
 import controller.availablecommands.Commandable;
 import controller.commands.CommandType;
 import model.Mode;
+import model.common.Location;
 
 /**
  * Created by Jonathen on 3/6/2017.
@@ -42,9 +43,12 @@ public class StatusRenderInformation {
         }
     }
 
-    public void updateLocationInfo(int locationX, int locationY){
-        this.locationX = locationX;
-        this.locationY = locationY;
+    public void updateLocationInfo(Location updatedLocation){
+        if (updatedLocation != null) {
+            this.locationX = locationX;
+            this.locationY = locationY;
+        }
+        //TODO what od if null?
     }
 
     public void updateInstanceString(Commandable selectedCommandable) {

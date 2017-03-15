@@ -520,8 +520,7 @@ public class EntityOwnership {
         renderInfo.updateTypeString(getCurrentType());
         renderInfo.updateInstanceString(getCurrentInstance());
         renderInfo.updateCommandString(getCurrentCommand());
-        Location currentEntityLocation = getCurrentInstanceLocation();
-        renderInfo.updateLocationInfo(currentEntityLocation.getXCoord(), currentEntityLocation.getYCoord());
+        renderInfo.updateLocationInfo(getCurrentInstanceLocation());
         return renderInfo;
     }
 
@@ -560,7 +559,7 @@ public class EntityOwnership {
         if (getCurrentMode() == Mode.RALLY_POINT) {
             return selectedRallyPoint;
         }
-        if (currentModeList == null) {
+        else if (currentModeList == null) {
             System.out.println("No current mode list available");
             return null;
         }
@@ -693,10 +692,20 @@ public class EntityOwnership {
 
     public Location getCurrentInstanceLocation() {
         if (getCurrentMode() == Mode.RALLY_POINT) {
-            return selectedRallyPoint.getLocation();
+            if (selectedRallyPoint != null) {
+                return selectedRallyPoint.getLocation();
+            }
+            else {
+                return null;
+            }
         }
         else {
-            return ((Entity) getCurrentInstance()).getLocation();
+            if (getCurrentInstance() != null) {
+                return ((Entity) getCurrentInstance()).getLocation();
+            }
+            else {
+                return null;
+            }
         }
     }
 }
