@@ -230,4 +230,7 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
         notifyUnitObservers();
     }
 
+    public void addWorkersToArmy(Location location, EntityId armyId) {
+        entities.addWorkersToArmy(location, armyId);
+    }
 }

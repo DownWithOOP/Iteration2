@@ -4,7 +4,9 @@ import controller.commands.Direction;
 import model.GameModel;
 import model.RallyPoint;
 import model.common.Location;
+import model.entities.EntityId;
 import model.entities.structure.Structure;
+import model.entities.unit.Army;
 import model.entities.unit.FighterUnit;
 import model.entities.unit.Unit;
 import utilities.id.CustomID;
@@ -49,5 +51,9 @@ public class CommandRelay {
 
     public void updateTilePlayerId(CustomID playerId, Location location) {
         model.updateTilePlayerId(playerId, location);
+    }
+
+    public void addWorkersToArmy(Location location, EntityId armyId) {
+        model.addWorkersToArmy(location, armyId);
     }
 }

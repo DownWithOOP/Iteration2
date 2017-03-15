@@ -56,6 +56,8 @@ public class EntityOwnership {
     List<List<Entity>> currentModeList;
     List<RallyPoint> rallyPointList;
 
+    List<Worker> workerList;
+
     //A list of all entities for lookup purposes
     HashMap<EntityId, Entity> entities;
 
@@ -224,6 +226,9 @@ public class EntityOwnership {
                     break;
                 case RANGED:
                     returnValue = addToIndex(unitList, rangedIndex, entity);
+                    break;
+                case WORKER:
+                    workerList.add((Worker) entity);
                     break;
             }
         }
@@ -822,5 +827,28 @@ public class EntityOwnership {
             return getCurrentInstance();
         }
         return null;
+    }
+
+    public void addWorkersToArmy(Location location, EntityId armyId) {
+
+        List<Worker> workersOnLocation = new ArrayList<>();
+        Army armyToAddWorkersTo = null;
+
+        for (Worker worker : workerList) {
+            if (worker.getLocation().equals(location)) {
+                workersOnLocation.add(worker);
+            }
+        }
+
+        for (Army army : armyList) {
+            if (army.getEntityId().equals(armyId)) {
+                armyToAddWorkersTo = army;
+            }
+        }
+
+        if (armyToAddWorkersTo != null) {
+            armyToAddWorkersTo.addWorkers(workersOnLocation, location);
+        }
+
     }
 }

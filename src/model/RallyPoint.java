@@ -24,6 +24,9 @@ public class RallyPoint extends Commandable {
     static {
         rallyPointCommand.add(CommandType.FOCUS);
         rallyPointCommand.add(CommandType.MOVE_RALLY_POINT);
+        rallyPointCommand.add(CommandType.PICKUP_WORKERS);
+        rallyPointCommand.add(CommandType.DROP_OFF_WORKERS);
+        rallyPointCommand.add(CommandType.BUILD);
     }
 
     public RallyPoint(CommandRelay commandRelay, Location location, Army army) {
@@ -53,5 +56,9 @@ public class RallyPoint extends Commandable {
     @Override
     public String toString() {
         return "RALLY POINT " + army.getEntityId().getId();
+    }
+
+    public void addWorkersToArmy() {
+        commandRelay.addWorkersToArmy(getLocation(), army.getEntityId());
     }
 }

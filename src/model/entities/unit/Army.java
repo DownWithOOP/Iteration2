@@ -372,4 +372,20 @@ public class Army extends Entity implements Fighter {
             }
         }
     }
+
+    public void addWorkers(List<Worker> workersOnLocation, Location location) {
+        //rp must be on workers' location in order to pick them up
+        if (!location.equals(rallyPoint.getLocation())) {
+            return;
+        }
+
+        //need bg to have soldiers
+        if (battleGroup.isEmpty()) {
+            return;
+        }
+
+        for (Worker worker: workersOnLocation) {
+            battleGroup.put(worker.getEntityId(), worker);
+        }
+    }
 }
