@@ -46,7 +46,8 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
 //        entities = new EntityOwnership(customID, commandRelay, startingX, startingY); //TODO should entity ownership know Player?
 
         entities = new EntityOwnership(customID, commandRelay,startingX, startingY); //TODO should entity ownership know Player?
-        entities.setUnitObservers(unitObserver, observer);
+        entities.setMapObserver(observer);
+        entities.setUnitObserver(unitObserver);
 
         resources = new ResourceOwnership(customID);
         resources.addResource(new Resource(ResourceType.ENERGY, 100));
@@ -147,12 +148,14 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
             // needs all the renderInformation to calculate fogOfWar
             System.out.println("player map: " +playerMap);
             mapObserver.update(this.playerNumber, playerMap.returnRenderInformation(), entities.returnUnitRenderInformation(), entities.returnStructureRenderInformation());
+            entities.setMapObserver(mapObserver);
         }
     }
     @Override
     public void notifyUnitObservers() { // IMPORTANT!! CALL THIS WHENEVER ANY ENTITIES/UNITS ARE UPDATED SO THE VIEW REFRESHES
         for(UnitObserver unitObserver : unitObservers){
             unitObserver.update(entities.returnUnitRenderInformation());
+            entities.setUnitObserver(unitObserver);
         }
     }
     @Override

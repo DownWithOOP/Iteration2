@@ -135,12 +135,25 @@ public class EntityOwnership {
         }
     }
 
-    public void setUnitObservers(UnitObserver unitObserver, MapObserver mapObserver){
+    public void setUnitObserver(UnitObserver unitObserver){
         for(int i = 0; i < unitList.size(); i++){
             for(int j = 0; j < unitList.get(i).size(); j++){
                 ((Unit) unitList.get(i).get(j)).registerUnitObserver(unitObserver);
+            }
+        }
+        for (int i = 0; i < workerList.size(); i++) {
+            workerList.get(i).registerUnitObserver(unitObserver);
+        }
+    }
+
+    public void setMapObserver(MapObserver mapObserver){
+        for(int i = 0; i < unitList.size(); i++){
+            for(int j = 0; j < unitList.get(i).size(); j++){
                 ((Unit) unitList.get(i).get(j)).registerMapObserver(mapObserver);
             }
+        }
+        for (int i = 0; i < workerList.size(); i++) {
+            workerList.get(i).registerMapObserver(mapObserver);
         }
     }
 

@@ -374,6 +374,7 @@ public class Army extends Entity implements Fighter {
     }
 
     public void addWorkers(List<Worker> workersOnLocation, Location location) {
+        System.out.println("ADDING WORKERS");
         //rp must be on workers' location in order to pick them up
         if (!location.equals(rallyPoint.getLocation())) {
             return;
@@ -385,6 +386,7 @@ public class Army extends Entity implements Fighter {
         }
 
         for (Worker worker: workersOnLocation) {
+            System.out.println(worker);
             battleGroup.put(worker.getEntityId(), worker);
         }
         System.out.println("bg after workers added " +  battleGroup);

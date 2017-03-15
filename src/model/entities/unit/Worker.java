@@ -2,7 +2,9 @@ package model.entities.unit;
 
 import controller.CommandRelay;
 import controller.commands.CommandType;
+import model.common.Location;
 import model.entities.Stats.FighterUnitStats;
+import model.entities.Stats.PassiveUnitStats;
 import utilities.id.CustomID;
 import model.entities.EntityType;
 import model.entities.StructureFactory;
@@ -27,7 +29,6 @@ public class Worker extends PassiveUnit {
 
     public Worker(CommandRelay commandRelay, CustomID playerId, String id, int startingX, int startingY) {
         super(commandRelay, playerId, id, startingX, startingY);
-//        entityCommand.add(CommandType.BUILD_STRUCTURE);
         addAllCommands(workerCommand);
         this.structureFactory = new StructureFactory(commandRelay);
     }
@@ -40,7 +41,7 @@ public class Worker extends PassiveUnit {
     //todo:this should not have attacking, defensive damage, range, only fighters have these
     @Override
     protected Stats setEntityStats() {
-        return new FighterUnitStats(0,0,0,0,0,0,0,0);
+        return new PassiveUnitStats(0,0,0);
     }
 
     // Worker can build all structures except capital
@@ -64,6 +65,12 @@ public class Worker extends PassiveUnit {
 
     @Override
     public void decommission() {
+
+    }
+
+    //Army needs to update the location of workers
+    public void updateLocation(Location location) {
+        setLocation(location.getXCoord(), location.getYCoord());
 
     }
 
