@@ -1,6 +1,7 @@
 package controller.commands.entitycommand.armycommand;
 
 import controller.commands.Command;
+import controller.commands.CommandType;
 import model.RallyPoint;
 import model.common.Location;
 
@@ -21,5 +22,15 @@ public class MoveRallyPointCommand implements Command {
     public boolean execute() {
         rallyPointToActOn.move(locationToMoveTo);
         return true;
+    }
+
+    @Override
+    public void setCommandType(CommandType commandType) {
+        //do nothing
+    }
+
+    @Override
+    public CommandType getCommandType() {
+        return CommandType.MOVE_RALLY_POINT;
     }
 }

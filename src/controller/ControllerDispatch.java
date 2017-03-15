@@ -168,11 +168,7 @@ public class ControllerDispatch {
     //TODO: ASK  IF THIS WILL WORK WHEN THE PLAYERS ARE CHANGED
     //^^^ it (should) work now :D - JS
     private void setGameModelMap() {
-        commandHashMap.put(CommandType.END_TURN, () -> {
-                                                            gameModel.endTurn();
-                                                            setGameModelMap();
-                                                            return true;
-                                                        });
+        commandHashMap.put(CommandType.END_TURN, new EndTurn(gameModel, this));
         commandHashMap.put(CommandType.CYCLE_MODE_NEXT, new CycleModeNext(gameModel.getActivePlayer()));
         commandHashMap.put(CommandType.CYCLE_MODE_PREV, new CycleModePrev(gameModel.getActivePlayer()));
         commandHashMap.put(CommandType.CYCLE_TYPE_NEXT, new CycleTypeNext(gameModel.getActivePlayer()));
@@ -229,5 +225,9 @@ public class ControllerDispatch {
 
     public void updateActiveStateModifier(Direction direction) {
         ActiveState.getInstance().constructModifier(direction);
+    }
+
+    public void resetMap() {
+        setGameModelMap();
     }
 }

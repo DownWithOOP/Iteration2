@@ -33,7 +33,7 @@ public class FighterUnit extends Unit {
     }
 
     public void takeDamage(int offensiveDamage) {
-        System.out.println("taking damage");
+        System.out.println("taking damage " + offensiveDamage);
         int currentHealth = getFighterUnitStats().getHealth();
         int damageTaken = offensiveDamage - getFighterUnitStats().getArmor();
         if (currentHealth - damageTaken <= 0) {
@@ -42,6 +42,7 @@ public class FighterUnit extends Unit {
         else {
             getFighterUnitStats().setHealth(currentHealth - damageTaken);
         }
+        System.out.println(getFighterUnitStats().getHealth());
     }
 
 

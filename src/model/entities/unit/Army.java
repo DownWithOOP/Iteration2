@@ -180,6 +180,7 @@ public class Army extends Entity implements Fighter {
         setBattleGroupHealth(health);
         setBattleGroupUpkeep(upkeep);
         setBattleGroupVisionRadius();
+        System.out.println(((FighterUnitStats) entityStats).getOffensiveDamage());
     }
 
     private void setBattleGroupUpkeep(int upkeep) {
