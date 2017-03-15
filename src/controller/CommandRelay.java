@@ -6,6 +6,7 @@ import model.RallyPoint;
 import model.common.Location;
 import model.entities.structure.Structure;
 import model.entities.unit.FighterUnit;
+import utilities.id.CustomID;
 
 /**
  * Created by Jonathen on 3/14/2017.
@@ -38,5 +39,9 @@ public class CommandRelay {
 
     public void notifyModelOfStructureCreation(Structure structure) {
         model.addStructure(structure);
+    }
+
+    public void updateTilePlayerId(CustomID playerId, Location location) {
+        model.updateTilePlayerId(playerId, location);
     }
 }

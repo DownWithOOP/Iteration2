@@ -63,6 +63,7 @@ public class ActiveState {
         if (activeCommandType != null && checkIfCommandCanBePerformed(activeCommandType)) {
             activeCommand = commandFactory.createActionableCommand(activeCommandType, activeCommandable, modifier);
             if (activeCommand != null) {
+                System.out.println("we add command to queue in active state");
                 activeCommandable.addToQueue(activeCommand);
             }
         }

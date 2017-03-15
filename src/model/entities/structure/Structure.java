@@ -28,6 +28,7 @@ public abstract class Structure extends Entity {
     public StructureStats getStructureStats() { return ((StructureStats)entityStats).clone();}
 
     public void takeDamage(int offensiveDamage) {
+        System.out.println("taking damage");
         int currentHealth = getStructureStats().getHealth();
         int damageTaken = offensiveDamage - getStructureStats().getArmor();
         if (currentHealth - damageTaken <= 0) {

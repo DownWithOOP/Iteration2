@@ -3,6 +3,7 @@ package controller.ingamecontrollertypes;
 import controller.Controller;
 import controller.SwitchControllerRelay;
 import controller.commands.CommandType;
+import controller.commands.Direction;
 import controller.inputhandler.MVCInputHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -176,26 +177,32 @@ public class MainViewController extends Controller{
 
     @FXML void selectNorth() throws IOException{
         this.areaViewport.selectNorth(); // TODO hook this up to some keyboard input
+        controllerDispatch.updateActiveStateModifier(Direction.NORTH);
         updateCoordinatesForDebugging();
     }
     @FXML void selectSouth() throws IOException{
         this.areaViewport.selectSouth(); // TODO hook this up to some keyboard input
+        controllerDispatch.updateActiveStateModifier(Direction.SOUTH);
         updateCoordinatesForDebugging();
     }
     @FXML void selectNE() throws IOException{
         this.areaViewport.selectNE(); // TODO hook this up to some keyboard input
+        controllerDispatch.updateActiveStateModifier(Direction.NORTH_EAST);
         updateCoordinatesForDebugging();
     }
     @FXML void selectSE() throws IOException{
         this.areaViewport.selectSE(); // TODO hook this up to some keyboard input
+        controllerDispatch.updateActiveStateModifier(Direction.SOUTH_EAST);
         updateCoordinatesForDebugging();
     }
     @FXML void selectSW() throws IOException{
         this.areaViewport.selectSW(); // TODO hook this up to some keyboard input
+        controllerDispatch.updateActiveStateModifier(Direction.SOUTH_WEST);
         updateCoordinatesForDebugging();
     }
     @FXML void selectNW() throws IOException{
         this.areaViewport.selectNW();  // TODO hook this up to some keyboard input
+        controllerDispatch.updateActiveStateModifier(Direction.NORTH_WEST);
         updateCoordinatesForDebugging();
     }
     private void updateCoordinatesForDebugging(){ // for debugging, once game is working we can get rid of this

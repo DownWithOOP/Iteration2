@@ -38,7 +38,7 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
     public Player(int playerNumber, Map map, CommandRelay commandRelay, MapObserver observer, UnitObserver unitObserver, StructureObserver structureObserver, StatusObserver statusObserver, int startingX, int startingY){
 
         this.playerNumber = playerNumber;
-        customID=new CustomID(IdType.PLAYER,"newPlayer");
+        customID=new CustomID(IdType.PLAYER, String.valueOf(playerNumber));
 
 //        entities = new EntityOwnership(customID, commandRelay, startingX, startingY); //TODO should entity ownership know Player?
 
@@ -148,6 +148,7 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
 
 
     public void applyDamageToEntitiesOnLocation(Location location, int damage) {
+        System.out.println("player tellig entities to take dmg");
         entities.applyDamageToEntitiesOnLocation(location, damage);
     }
 
@@ -173,5 +174,9 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
     public void addStructure(Structure structure) {
         entities.addEntity(structure);
         notifyStructureObservers();
+    }
+
+    public Commandable getCurrentInstanceToCommand() {
+        return entities.getCurrentInstanceToCommand();
     }
 }

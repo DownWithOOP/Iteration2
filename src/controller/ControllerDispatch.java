@@ -5,6 +5,7 @@ import controller.availablecommands.AvailableCommands;
 import controller.availablecommands.Commandable;
 import controller.commands.Command;
 import controller.commands.CommandType;
+import controller.commands.Direction;
 import controller.commands.controllercommands.*;
 import controller.commands.entitycommand.armycommand.*;
 import controller.commands.entitycommand.entitycommand.*;
@@ -58,8 +59,8 @@ public class ControllerDispatch {
     }
 
     public void handleCommandActivation() {
-        Commandable selectedInstance = gameModel.getActivePlayer().getCurrentInstance();
         CommandType selectedCommandType = gameModel.getActivePlayer().getCurrentCommandType();
+        Commandable selectedInstance = gameModel.getActivePlayer().getCurrentInstanceToCommand();
         ActiveState.getInstance().update(selectedInstance);
         ActiveState.getInstance().update(selectedCommandType);
         System.out.println("Added to Queue: " + selectedCommandType.toString());
@@ -224,5 +225,9 @@ public class ControllerDispatch {
 
     public void updateActiveStateCommand(CommandType commandType) {
         ActiveState.getInstance().update(commandType);
+    }
+
+    public void updateActiveStateModifier(Direction direction) {
+        ActiveState.getInstance().constructModifier(direction);
     }
 }

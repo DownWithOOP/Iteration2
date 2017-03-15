@@ -111,8 +111,8 @@ public class EntityOwnership {
     private void initializeUnits(int startingX, int startingY) {
         //TODO change the id number
         addUnit(IdType.EXPLORER, unitFactory.getEntity(EntityType.EXPLORER, playerId,"0", startingX, startingY));
-        addUnit(IdType.EXPLORER, unitFactory.getEntity(EntityType.EXPLORER, playerId,"1", startingX+1, startingY));
-        addUnit(IdType.COLONIST, unitFactory.getEntity(EntityType.COLONIST, playerId,"0", startingX, startingY-1));
+        addUnit(IdType.EXPLORER, unitFactory.getEntity(EntityType.EXPLORER, playerId,"1", startingX, startingY));
+        addUnit(IdType.COLONIST, unitFactory.getEntity(EntityType.COLONIST, playerId,"0", startingX, startingY));
     }
 
     private void initializeLists() {
@@ -473,6 +473,7 @@ public class EntityOwnership {
             for (Entity entity : list) {
                 Unit unit = (Unit) entity;
                 UnitStats unitStats = unit.getUnitStats().clone(); // deep clone so as not to mess anything up
+                commandRelay.updateTilePlayerId(unit.getPlayerId(), unit.getLocation());
                 UnitRenderObject temp = new UnitRenderObject(unit.getEntityId(), (int)(unit.getLocation().getX()), (int)(unit.getLocation().getY()), unitStats);
                 renderInfo.addUnit(temp);
             }
@@ -480,6 +481,7 @@ public class EntityOwnership {
         for (int i = 0; i < armyList.size(); i++) {
             Army army = armyList.get(i);
             ArmyRenderObject armyRenderObject;
+            commandRelay.updateTilePlayerId(army.getPlayerId(), army.getLocation());
             if (selectedArmyIndex == i) {
                 armyRenderObject = new ArmyRenderObject(army.getEntityId(), rallyPointList.get(selectedArmyIndex).getLocation(), true);
             }
@@ -509,6 +511,7 @@ public class EntityOwnership {
         for (List<Entity> list : structureList) {
             for (Entity entity : list) {
                 Structure structure = (Structure) entity;
+                commandRelay.updateTilePlayerId(structure.getPlayerId(), structure.getLocation());
                 StructureRenderObject temp = new StructureRenderObject( structure.getEntityId(), structure.getEntityType(),(int)(structure.getLocation().getX()),(int)(structure.getLocation().getY()), structure.getStructureStats());
                 renderInfo.addStructure(temp);
             }
@@ -621,6 +624,10 @@ public class EntityOwnership {
         for (RallyPoint rp : rallyPointList) {
             rp.executeQueue();
         }
+        for (Army army : armyList) {
+            System.out.println("execute armies");
+            army.executeQueue();
+        }
     }
 
     //TODO get army
@@ -634,6 +641,7 @@ public class EntityOwnership {
     }
 
     public void applyDamageToEntitiesOnLocation(Location location, int damage) {
+        System.out.println("applying damage to entities on location " + location);
         List<FighterUnit> unitsToDamage = new ArrayList<>();
         List<Structure> structuresToDamage = new ArrayList<>();
 
@@ -660,6 +668,7 @@ public class EntityOwnership {
             }
         }
 
+        System.out.println("applying damage");
         int damageToApply = damage/(unitsToDamage.size() + structuresToDamage.size());
         for (FighterUnit unitTakingDamage : unitsToDamage) {
             unitTakingDamage.takeDamage(damageToApply);
@@ -708,6 +717,15 @@ public class EntityOwnership {
             else {
                 return null;
             }
+        }
+    }
+
+    public Commandable getCurrentInstanceToCommand() {
+        if (getCurrentMode() == Mode.ARMY) {
+            return selectedArmy;
+        }
+        else {
+            return getCurrentInstance();
         }
     }
 }

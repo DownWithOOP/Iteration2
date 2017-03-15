@@ -55,8 +55,8 @@ public class Army extends Entity implements Fighter {
 
     @Override
     public void attack(Direction direction) {
-
         Location attackLocation = new Location(getLocation().getXCoord(), getLocation().getYCoord());
+        System.out.println("army init attacking location " + attackLocation);
         switch (direction) {
             case NORTH_EAST:
                 attackLocation.moveEast();
@@ -68,16 +68,21 @@ public class Army extends Entity implements Fighter {
             case NORTH_WEST:
                 attackLocation.moveNorth();
                 attackLocation.moveWest();
+                break;
             case SOUTH_EAST:
                 attackLocation.moveSouth();
                 attackLocation.moveEast();
+                break;
             case SOUTH:
                 attackLocation.moveSouth();
+                break;
             case SOUTH_WEST:
                 attackLocation.moveSouth();
                 attackLocation.moveWest();
+                break;
         }
-       commandRelay.notifyModelOfAttack(attackLocation, ((FighterUnitStats)entityStats).getOffensiveDamage());
+        System.out.println("army attacking location " + attackLocation);
+        commandRelay.notifyModelOfAttack(attackLocation, ((FighterUnitStats)entityStats).getOffensiveDamage());
     }
 
     @Override

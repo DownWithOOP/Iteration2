@@ -23,6 +23,7 @@ public class AttackCommand extends ArmyCommand {
     @Override
     public boolean execute() {
         if(super.execute()) {
+            System.out.println("attack command executing");
             getArmy().attack(getDirection());
             return true;
         }
