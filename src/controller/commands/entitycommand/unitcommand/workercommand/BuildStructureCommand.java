@@ -12,11 +12,11 @@ public class BuildStructureCommand extends WorkerCommand {
     private EntityType entityType;
     private CustomID customID;
 
-    public BuildStructureCommand(Worker worker, EntityType entityType, CustomID customID) {
+    public BuildStructureCommand(Worker worker, EntityType entityType) {
         super(worker, 5);
         super.setCommandType(CommandType.BUILD_STRUCTURE);
         this.entityType = entityType;
-        this.customID = customID;
+        this.customID = worker.getPlayerId();
     }
 
     public EntityType getEntityType() {

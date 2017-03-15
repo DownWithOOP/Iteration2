@@ -26,6 +26,7 @@ import model.RenderInformation.ArmyRenderObject;
 import model.RenderInformation.UnitRenderInformation;
 import model.RenderInformation.UnitRenderObject;
 import model.entities.EntityId;
+import model.entities.EntityType;
 import model.entities.Stats.UnitStats;
 import utilities.ObserverInterfaces.UnitObserver;
 import java.util.ArrayList;
@@ -115,8 +116,9 @@ public class UnitViewController extends Controller
                 UnitStats unitStats = data.get(i).getUnitStats();
                 String missions = renderObject.getMissions();
                 label.setText("Type: " + renderObject.getIdType() + "  locationX: " + renderObject.getLocationX() + "  locationY: " + renderObject.getLocationY());
-                hb.getChildren().add(label);
-                hb.getChildren().add(new Button(""));
+//                if (data.get(i).getIdType() == IdType.COLONIST || data.get(i).getIdType() == EntityType.EXPLORER || data.get(i).getIdType() == EntityType.MELEE || data.get(i).getIdType() == EntityType.RANGED) {
+//
+//                }
                     vb.getChildren().add(label);
                     vb.getChildren().get((i)).addEventFilter(MouseEvent.MOUSE_PRESSED,
                             event -> {
