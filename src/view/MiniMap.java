@@ -38,6 +38,10 @@ public class MiniMap implements MiniMapObserver{
                 if(check.getVisibilityLevel() == 2){
                     gc.drawImage(dot,(200/36)*i,(116/16)*-j+100);
                 }
+                if(check.getVisibilityLevel() == 1){
+                    // TODO add a different image
+                    gc.drawImage(dot,(200/36)*i,(116/16)*-j+100);
+                }
             }
         }
     }
