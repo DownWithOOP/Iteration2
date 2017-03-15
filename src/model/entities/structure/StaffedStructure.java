@@ -30,6 +30,9 @@ public class StaffedStructure extends Structure {
     public StaffedStructure(CommandRelay commandRelay, CustomID playerId, String id, int locationX, int locationY) {
         super(commandRelay, playerId, id, locationX, locationY);
         this.workers = new ArrayList<Worker>();
+        energyResource = new Resource(ResourceType.ENERGY, 0);
+        foodResource = new Resource(ResourceType.FOOD, 0);
+        oreResource = new Resource(ResourceType.ORE, 0);
     }
 
     /**

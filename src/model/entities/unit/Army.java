@@ -53,7 +53,7 @@ public class Army extends Entity implements Fighter {
     public Army(CommandRelay commandRelay, CustomID playerId, String id, int locationX, int locationY) {
         super(commandRelay, playerId, id, locationX, locationY);
         addAllCommands(armyCommand);
-
+        foodResource = new Resource(ResourceType.FOOD, 0);
         alternateColumn = true;
     }
 

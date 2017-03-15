@@ -48,6 +48,7 @@ public abstract class Unit extends Entity implements UnitSubject, MapSubject {
 //        entityCommand.add(CommandType.JOIN_ARMY);
 //        entityCommand.add(CommandType.MOVE);
         addAllCommands(unitCommand);
+        foodResource = new Resource(ResourceType.FOOD, 0);
     }
 
     /**
