@@ -202,6 +202,7 @@ public class MainViewController extends Controller{
         this.coordinateInfo.setText(areaViewport.returnXCoordinate() + " " + areaViewport.returnYCoordinate());
     }
 
+
     @FXML
     public void handleChangeToStructureView(ActionEvent actionEvent) throws  IOException{
         this.switchControllerRelay.changeToStructure();}
@@ -285,6 +286,7 @@ public class MainViewController extends Controller{
         this.miniMap = new MiniMap(MinMap);
         this.areaViewport = new AreaViewport(vbox, canvas, miniMap);
         this.statusViewport = new StatusViewport(cycleLabels);
+        this.updateCoordinatesForDebugging();
 
     }
 
