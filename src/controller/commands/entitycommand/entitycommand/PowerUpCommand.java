@@ -1,5 +1,6 @@
 package controller.commands.entitycommand.entitycommand;
 
+import controller.commands.CommandType;
 import controller.commands.entitycommand.AbstractCommand;
 import model.entities.Entity;
 
@@ -9,6 +10,7 @@ import model.entities.Entity;
 public class PowerUpCommand extends EntityCommand {
     public PowerUpCommand(Entity entity) {
         super(entity, 1);
+        super.setCommandType(CommandType.POWER_UP);
     }
 
     @Override

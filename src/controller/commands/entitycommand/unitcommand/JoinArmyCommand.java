@@ -1,5 +1,6 @@
 package controller.commands.entitycommand.unitcommand;
 
+import controller.commands.CommandType;
 import model.entities.unit.Unit;
 
 /**
@@ -11,6 +12,7 @@ public class JoinArmyCommand extends UnitCommand{
 
     public JoinArmyCommand(Unit unit, int number) {
         super(unit, 1);
+        super.setCommandType(CommandType.JOIN_ARMY);
         this.number=number;
     }
 

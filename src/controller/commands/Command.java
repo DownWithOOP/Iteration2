@@ -8,4 +8,8 @@ import java.util.function.Consumer;
 public interface Command {
 
     boolean execute();
+
+    void setCommandType(CommandType commandType);
+    CommandType getCommandType();
+
 }
