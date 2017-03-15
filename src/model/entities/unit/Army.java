@@ -103,6 +103,7 @@ public class Army extends Entity implements Fighter {
         int health = unitStats.getHealth();
 
         if (this.playerId.equals(unit.getPlayerId())) {
+            System.out.println("registering unit");
             //handle the first unit added; that is when rally point is created
             if (battleGroup.isEmpty() && reinforcements.isEmpty()) {
                 battleGroup.put(unitId, unit);

@@ -21,6 +21,7 @@ public class JoinArmyCommand extends UnitCommand{
     @Override
     public boolean execute() {
         if(super.execute()) {
+            System.out.println("join army executing");
             getUnit().joinArmy(getNumber());
             return true;
         }
