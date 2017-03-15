@@ -1,6 +1,6 @@
-/*
+package model.entities;
 
-package model.entities.Tech;
+import javafx.event.ActionEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +11,7 @@ import java.util.Map.Entry;
 
 public class TechTree {
 
-    private Map<Tech, ArrayList<Tech> > techTree;
+    private Map<model.entities.Tech, ArrayList<Tech> > techTree;
     private Tech researchingTech;
     private int numTechsUnlocked;
 
@@ -102,71 +102,71 @@ public class TechTree {
     }
 }
 
-    public void intitializeTechTree()
-    {
-        TechTree techTree = new TechTree();//create new tech tree
-
-        Tech science = new Tech("Science", 0);//first tech
-        techTree.addTech(science);
-
-        Tech glass = new Tech("Glass", 2); //techs dependent on science
-        Tech leatherworking = new Tech("Leatherworking", 2);
-        Tech archery = new Tech("Archery", 2);
-        Tech agriculture = new Tech("Agriculture", 2);
-        Tech animalHusbandry = new Tech("Animal Husbandry",2);
-        Tech wheel = new Tech("Wheel", 2);
-        techTree.addTech(glass, science); //add them to the tree as dependents
-        techTree.addTech(leatherworking, science);
-        techTree.addTech(archery, science);
-        techTree.addTech(agriculture, science);
-        techTree.addTech(animalHusbandry, science);
-        techTree.addTech(wheel, science);
-
-        Tech telescopes = new Tech("Telescopes", 3); //stem from glass
-        Tech binoculars = new Tech("Bionculars", 4);
-        Tech scope = new Tech("Targeting Scope", 5);
-        techTree.addTech(telescopes, glass);
-        techTree.addTech(binoculars, telescopes);
-        techTree.addTech(scope, telescopes);
-
-        Tech metallurgy = new Tech("Metallurgy", 3);//stem from leatherworking
-        Tech ironworking = new Tech("Ironworking", 3);
-        Tech ironArmor = new Tech("Iron Armor", 4);
-        Tech shields = new Tech("Shields", 4);
-        Tech shieldArrows = new Tech("Shield Arrows", 5);
-        Tech ironSwords = new Tech("Iron Swords", 4);
-        Tech mefficiency = new Tech("Melee Efficiency", 3);
-        techTree.addTech(metallurgy, leatherworking);
-        techTree.addTech(ironworking, metallurgy);
-        techTree.addTech(ironArmor, ironworking);
-        techTree.addTech(shields, ironworking);
-        techTree.addTech(shieldArrows, shields);
-        techTree.addTech(ironArmor, ironworking);
-        techTree.addTech(ironSwords, ironworking);
-        techTree.addTech(mefficiency, ironSwords);
-
-        Tech catapults = new Tech("Catapults", 3);//stem from archery
-        Tech crossbows = new Tech("Crossbows", 5);
-        Tech refficiency = new Tech("Ranged Efficiency", 3);
-        techTree.addTech(catapults, archery);
-        techTree.addTech(crossbows, archery);
-        techTree.addTech(refficiency, crossbows);
-
-        Tech workerDensity = new Tech("Worker Density", 4);//stems from Agriculture because idk
-        techTree.addTech(workerDensity, agriculture);
-
-        Tech gastronomy = new Tech("Gastronomy", 4);//stem from animal husbandry
-        Tech aphrodisiac = new Tech("Aphrodisiac", 4);
-        Tech superSerum = new Tech("Super Serum", 5);
-        techTree.addTech(gastronomy, animalHusbandry);
-        techTree.addTech(aphrodisiac, gastronomy);
-        techTree.addTech(superSerum, gastronomy);
-
-        Tech chariots = new Tech("Chariots", 3);//stem from wheel
-        Tech fortification = new Tech("Fortification", 4);
-        Tech walls = new Tech("Walls", 4);
-        techTree.addTech(chariots, wheel, animalHusbandry);
-        techTree.addTech(fortification, wheel);
-        techTree.addTech(walls, fortification);
-    }
-*/
+    //public void intitializeTechTree()
+    //{
+        //TechTree techTree = new TechTree();//create new tech tree
+//
+        //Tech science = new Tech("Science", 0);//first tech
+        //techTree.addTech(science);
+//
+        //Tech glass = new Tech("Glass", 2); //techs dependent on science
+        //Tech leatherworking = new Tech("Leatherworking", 2);
+        //Tech archery = new Tech("Archery", 2);
+        //Tech agriculture = new Tech("Agriculture", 2);
+        //Tech animalHusbandry = new Tech("Animal Husbandry",2);
+        //Tech wheel = new Tech("Wheel", 2);
+        //techTree.addTech(glass, science); //add them to the tree as dependents
+        //techTree.addTech(leatherworking, science);
+        //techTree.addTech(archery, science);
+        //techTree.addTech(agriculture, science);
+        //techTree.addTech(animalHusbandry, science);
+        //techTree.addTech(wheel, science);
+//
+        //Tech telescopes = new Tech("Telescopes", 3); //stem from glass
+        //Tech binoculars = new Tech("Bionculars", 4);
+        //Tech scope = new Tech("Targeting Scope", 5);
+        //techTree.addTech(telescopes, glass);
+        //techTree.addTech(binoculars, telescopes);
+        //techTree.addTech(scope, telescopes);
+//
+        //Tech metallurgy = new Tech("Metallurgy", 3);//stem from leatherworking
+        //Tech ironworking = new Tech("Ironworking", 3);
+        //Tech ironArmor = new Tech("Iron Armor", 4);
+        //Tech shields = new Tech("Shields", 4);
+        //Tech shieldArrows = new Tech("Shield Arrows", 5);
+        //Tech ironSwords = new Tech("Iron Swords", 4);
+        //Tech mefficiency = new Tech("Melee Efficiency", 3);
+        //techTree.addTech(metallurgy, leatherworking);
+        //techTree.addTech(ironworking, metallurgy);
+        //techTree.addTech(ironArmor, ironworking);
+        //techTree.addTech(shields, ironworking);
+        //techTree.addTech(shieldArrows, shields);
+        //techTree.addTech(ironArmor, ironworking);
+        //techTree.addTech(ironSwords, ironworking);
+        //techTree.addTech(mefficiency, ironSwords);
+//
+        //Tech catapults = new Tech("Catapults", 3);//stem from archery
+        //Tech crossbows = new Tech("Crossbows", 5);
+        //Tech refficiency = new Tech("Ranged Efficiency", 3);
+        //techTree.addTech(catapults, archery);
+        //techTree.addTech(crossbows, archery);
+        //techTree.addTech(refficiency, crossbows);
+//
+        //Tech workerDensity = new Tech("Worker Density", 4);//stems from Agriculture because idk
+        //techTree.addTech(workerDensity, agriculture);
+//
+        //Tech gastronomy = new Tech("Gastronomy", 4);//stem from animal husbandry
+        //Tech aphrodisiac = new Tech("Aphrodisiac", 4);
+        //Tech superSerum = new Tech("Super Serum", 5);
+        //techTree.addTech(gastronomy, animalHusbandry);
+        //techTree.addTech(aphrodisiac, gastronomy);
+        //techTree.addTech(superSerum, gastronomy);
+//
+        //Tech chariots = new Tech("Chariots", 3);//stem from wheel
+        //Tech fortification = new Tech("Fortification", 4);
+        //Tech walls = new Tech("Walls", 4);
+        //techTree.addTech(chariots, wheel, animalHusbandry);
+        //techTree.addTech(fortification, wheel);
+        //techTree.addTech(walls, fortification);
+    //}
+//}

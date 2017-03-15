@@ -1,4 +1,4 @@
-package model.entities.Tech;
+package model.entities;
 
 public class Tech {
     private int timeToDevelop;

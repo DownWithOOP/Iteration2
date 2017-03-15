@@ -68,6 +68,12 @@ public class AreaViewport implements MiniMapSubject{
     Image ranged = Assets.getInstance().RANGED;
     Image worker = Assets.getInstance().WORKER;
     Image capital = Assets.getInstance().CAPITAL;
+    Image farm = Assets.getInstance().FARM;
+    Image fort = Assets.getInstance().FORT;
+    Image mine = Assets.getInstance().MINE;
+    Image observationTower = Assets.getInstance().OBSERVATION_TOWER;
+    Image powerPlant = Assets.getInstance().POWER_PLANT;
+    Image university = Assets.getInstance().UNIVERSITY;
     Image colonist2 = Assets.getInstance().COLONIST2;
 
 
@@ -596,6 +602,24 @@ public class AreaViewport implements MiniMapSubject{
                                             if (id.equals(IdType.CAPITAL)) { //draw capital
                                                 gc.drawImage(capital,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
                                             }
+                                            if (id.equals(IdType.FARM)) { //draw farm
+                                                gc.drawImage(farm,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
+                                            }
+                                            if (id.equals(IdType.FORT)) { //draw fort
+                                                gc.drawImage(fort,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
+                                            }
+                                            if (id.equals(IdType.MINE)) { //draw mine
+                                                gc.drawImage(mine,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
+                                            }
+                                            if (id.equals(IdType.OBSERVATION_TOWER)) { //draw observation tower
+                                                gc.drawImage(observationTower,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
+                                            }
+                                            if (id.equals(IdType.POWER_PLANT)) { //draw power plant
+                                                gc.drawImage(powerPlant,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
+                                            }
+                                            if (id.equals(IdType.UNIVERSITY)) { //draw university
+                                                gc.drawImage(university,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
+                                            }
                                             if(startOfNewTurn && entities.size() != 0){
                                                 changeCamera(j,i);
                                                 startOfNewTurn = false;
@@ -638,6 +662,24 @@ public class AreaViewport implements MiniMapSubject{
                                             }
                                             if (id.equals(IdType.CAPITAL)) { //draw capital
                                                 gc.drawImage(capital,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
+                                            }
+                                            if (id.equals(IdType.FARM)) { //draw farm
+                                                gc.drawImage(farm,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
+                                            }
+                                            if (id.equals(IdType.FORT)) { //draw fort
+                                                gc.drawImage(fort,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
+                                            }
+                                            if (id.equals(IdType.MINE)) { //draw mine
+                                                gc.drawImage(mine,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
+                                            }
+                                            if (id.equals(IdType.OBSERVATION_TOWER)) { //draw observation tower
+                                                gc.drawImage(observationTower,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
+                                            }
+                                            if (id.equals(IdType.POWER_PLANT)) { //draw power plant
+                                                gc.drawImage(powerPlant,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
+                                            }
+                                            if (id.equals(IdType.UNIVERSITY)) { //draw university
+                                                gc.drawImage(university,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
                                             }
                                             if(startOfNewTurn && entities.size() != 0){
                                                 selectJumpLocation(j,i);
@@ -690,6 +732,25 @@ public class AreaViewport implements MiniMapSubject{
                                             }
                                             if (id.equals(IdType.CAPITAL)) { //draw capital
                                                 gc.drawImage(capital, 0.75*width*j + cameraX, height*1*-i+ cameraY+height);
+
+                                            }
+                                            if (id.equals(IdType.FARM)) { //draw farm
+                                                gc.drawImage(farm,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
+                                            }
+                                            if (id.equals(IdType.FORT)) { //draw fort
+                                                gc.drawImage(fort,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
+                                            }
+                                            if (id.equals(IdType.MINE)) { //draw mine
+                                                gc.drawImage(mine,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
+                                            }
+                                            if (id.equals(IdType.OBSERVATION_TOWER)) { //draw observation tower
+                                                gc.drawImage(observationTower,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
+                                            }
+                                            if (id.equals(IdType.POWER_PLANT)) { //draw power plant
+                                                gc.drawImage(powerPlant,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
+                                            }
+                                            if (id.equals(IdType.UNIVERSITY)) { //draw university
+                                                gc.drawImage(university,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
                                             }
 
                                         }
@@ -728,6 +789,24 @@ public class AreaViewport implements MiniMapSubject{
                                             }
                                             if (id.equals(IdType.CAPITAL)) { //draw capital
                                                 gc.drawImage(capital, 0.75*width*j + cameraX, height*1*-i+ cameraY+height);
+                                            }
+                                            if (id.equals(IdType.FARM)) { //draw farm
+                                                gc.drawImage(farm,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
+                                            }
+                                            if (id.equals(IdType.FORT)) { //draw fort
+                                                gc.drawImage(fort,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
+                                            }
+                                            if (id.equals(IdType.MINE)) { //draw mine
+                                                gc.drawImage(mine,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
+                                            }
+                                            if (id.equals(IdType.OBSERVATION_TOWER)) { //draw observation tower
+                                                gc.drawImage(observationTower,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
+                                            }
+                                            if (id.equals(IdType.POWER_PLANT)) { //draw power plant
+                                                gc.drawImage(powerPlant,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
+                                            }
+                                            if (id.equals(IdType.UNIVERSITY)) { //draw university
+                                                gc.drawImage(university,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
                                             }
 
                                         }

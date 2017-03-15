@@ -345,7 +345,7 @@ public class MainViewController extends Controller{
         cycleLabels.put("instance", instanceLabel);
         cycleLabels.put("command", commandLabel);
 
-        argumentCommands.put("DECOMMISSION", "/resources/buildStructurePopUp.fxml");
+        argumentCommands.put("BUILD_STRUCTURE", "/resources/buildStructurePopUp.fxml");
         argumentCommands.put("CREATE_UNIT", "/resources/createUnitPopUp.fxml");
         argumentCommands.put("HEAL_UNIT", "/resources/healUnitPopUp.fxml");
 

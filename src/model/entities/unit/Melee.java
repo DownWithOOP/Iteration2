@@ -37,11 +37,6 @@ public class Melee extends FighterUnit{
     }
 
     @Override
-    public void joinArmy(int armyNumber) {
-        System.out.println("joined army " + armyNumber);
-    }
-
-    @Override
     public void decommission() {
         System.out.println("melee decommission");
     }

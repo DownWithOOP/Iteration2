@@ -4,6 +4,8 @@ import controller.availablecommands.Commandable;
 import controller.commands.commandablecommands.FocusCommand;
 import controller.commands.entitycommand.armycommand.DisbandCommand;
 import controller.commands.commandablecommands.CancelQueueCommand;
+//import controller.commands.entitycommand.armycommand.PickUpWorkerCommand;
+import controller.commands.entitycommand.armycommand.PickUpWorkerCommand;
 import controller.commands.entitycommand.entitycommand.DecommissionCommand;
 import controller.commands.entitycommand.entitycommand.PowerDownCommand;
 import controller.commands.entitycommand.entitycommand.PowerUpCommand;
@@ -39,6 +41,7 @@ public class CommandFactory {
         simpleCommandResult.put(CommandType.ABANDON_ARMY, (commandable) -> (new AbandonArmyCommand((Unit) commandable)));
         //simpleCommandResult.put(CommandType.FOCUS, (commandable) -> (new FocusCommand((RallyPoint) commandable)));
 
+        simpleCommandResult.put(CommandType.PICKUP_WORKERS, (commandable) -> (new PickUpWorkerCommand((RallyPoint) commandable)));
 
     }
 

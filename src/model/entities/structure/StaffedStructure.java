@@ -10,6 +10,7 @@ import utilities.id.CustomID;
 import utilities.id.IdType;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by LesliesLaptop on 3/8/17.
@@ -61,6 +62,12 @@ public class StaffedStructure extends Structure {
         energyResource.consumeResource(0.10);
         foodResource.consumeResource(0.10);
         oreResource.consumeResource(0.10);
+    }
+
+    public void addWorkers(List<Worker> workerList) {
+        for (Worker worker : workerList) {
+            addWorker(worker);
+        }
     }
 
     public void addWorker(Worker worker) {

@@ -56,6 +56,8 @@ public class EntityOwnership {
     List<List<Entity>> currentModeList;
     List<RallyPoint> rallyPointList;
 
+    List<Worker> workerList;
+
     //A list of all entities for lookup purposes
     HashMap<EntityId, Entity> entities;
 
@@ -102,6 +104,8 @@ public class EntityOwnership {
         structureList = new ArrayList<>(1);
         rallyPointList= new ArrayList<>(typeRestriction);
         entities = new HashMap<>();
+        workerList = new ArrayList<>();
+
         this.unitFactory = new UnitFactory(commandRelay);
         this.commandRelay = commandRelay;
         this.idManager = EntityIdManager.getInstance();
@@ -131,12 +135,25 @@ public class EntityOwnership {
         }
     }
 
-    public void setUnitObservers(UnitObserver unitObserver, MapObserver mapObserver){
+    public void setUnitObserver(UnitObserver unitObserver){
         for(int i = 0; i < unitList.size(); i++){
             for(int j = 0; j < unitList.get(i).size(); j++){
                 ((Unit) unitList.get(i).get(j)).registerUnitObserver(unitObserver);
+            }
+        }
+        for (int i = 0; i < workerList.size(); i++) {
+            workerList.get(i).registerUnitObserver(unitObserver);
+        }
+    }
+
+    public void setMapObserver(MapObserver mapObserver){
+        for(int i = 0; i < unitList.size(); i++){
+            for(int j = 0; j < unitList.get(i).size(); j++){
                 ((Unit) unitList.get(i).get(j)).registerMapObserver(mapObserver);
             }
+        }
+        for (int i = 0; i < workerList.size(); i++) {
+            workerList.get(i).registerMapObserver(mapObserver);
         }
     }
 
@@ -155,14 +172,18 @@ public class EntityOwnership {
         return returnValue;
     }
 
-    public boolean addStructure(IdType entityType, Entity entity) {
+    private boolean addStructure(IdType entityType, Entity entity) {
         boolean result = false;
         switch (entityType) {
             case CAPITAL:
-                result = addToIndex(structureList, 0, entity);
+                //result = addToIndex(structureList, 0, entity);
                 removeEntity(unitList.get(2).get(0)); //remove colonist
                 addEntity(unitFactory.getEntity(EntityType.MELEE, playerId, (int)entity.getLocation().getX(), (int)entity.getLocation().getY()));
                 addEntity(unitFactory.getEntity(EntityType.MELEE, playerId, (int)entity.getLocation().getX(), (int)entity.getLocation().getY()));
+                for (int i = 0; i < 5; i++) {
+                    workerList.add((Worker) unitFactory.getEntity(EntityType.WORKER, playerId, (int)entity.getLocation().getX(), (int)entity.getLocation().getY()));
+                }
+                System.out.println(workerList);
                 result = addToIndex(structureList, capitalIndex, entity);
                 break;
             case FARM:
@@ -224,6 +245,10 @@ public class EntityOwnership {
                     break;
                 case RANGED:
                     returnValue = addToIndex(unitList, rangedIndex, entity);
+                    break;
+                case WORKER:
+                    workerList.add((Worker) entity);
+                    System.out.println("ADDING WORKER TO ENTITY OWNERSHIP");
                     break;
             }
         }
@@ -703,8 +728,10 @@ public class EntityOwnership {
             rp.executeQueue();
         }
         for (Army army : armyList) {
-            System.out.println("execute armies");
             army.executeQueue();
+        }
+        for (Worker worker : workerList) {
+            worker.executeQueue();
         }
     }
 
@@ -822,5 +849,28 @@ public class EntityOwnership {
             return getCurrentInstance();
         }
         return null;
+    }
+
+    public void addWorkersToArmy(Location location, EntityId armyId) {
+
+        List<Worker> workersOnLocation = new ArrayList<>();
+        Army armyToAddWorkersTo = null;
+
+        for (Worker worker : workerList) {
+            if (worker.getLocation().equals(location)) {
+                workersOnLocation.add(worker);
+            }
+        }
+
+        for (Army army : armyList) {
+            if (army.getEntityId().equals(armyId)) {
+                armyToAddWorkersTo = army;
+            }
+        }
+
+        if (armyToAddWorkersTo != null) {
+            armyToAddWorkersTo.addWorkers(workersOnLocation, location);
+        }
+
     }
 }

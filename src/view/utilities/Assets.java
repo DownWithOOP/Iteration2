@@ -104,7 +104,7 @@ public class Assets {
             //misc
             SELECT = new Image("images/misc/select.png");
             DARKNESS = new Image("images/misc/darkness.png");
-            //RALLY_POINT = new Image("images/misc/rally_point.png");
+            RALLY_POINT = new Image("images/misc/rally_point.png");
             MINIMAPBORDER = new Image("images/misc/minMap.png");
             SMALLPURPLE = new Image("images/misc/smallPurple.png");
             GREY = new Image("images/misc/GREY.png");

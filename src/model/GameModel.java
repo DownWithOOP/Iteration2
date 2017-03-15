@@ -5,8 +5,10 @@ import controller.Observers.PlayerObservator;
 import controller.availablecommands.Commandable;
 import controller.commands.Direction;
 import model.common.Location;
+import model.entities.Entity;
 import model.entities.EntityId;
 import model.entities.structure.Structure;
+import model.entities.unit.Army;
 import model.entities.unit.FighterUnit;
 import model.entities.unit.Unit;
 import model.map.Map;
@@ -131,6 +133,10 @@ public class GameModel {
 
     public void updateTilePlayerId(CustomID playerId, Location location) {
         masterMap.setTilePlayerId(playerId, location);
+    }
+
+    public void addWorkersToArmy(Location location, EntityId armyId) {
+        getActivePlayer().addWorkersToArmy(location, armyId);
     }
 }
 
