@@ -106,7 +106,6 @@ public class EntityOwnership {
         changeMode(modes[cycleModeIndex]);
 
 
-        System.out.println("End of E.O. constructor; cycle type index is: " + cycleTypeIndex);
     }
 
     private void initializeUnits(int startingX, int startingY) {
@@ -177,11 +176,9 @@ public class EntityOwnership {
     }
 
     public boolean createArmy() {
-        System.out.println("army list size " + armyList.size());
         Army newArmy = new Army(commandRelay, playerId, idManager.getArmyId(), 0, 0);
         armyList.add(newArmy);
         rallyPointList.add(new RallyPoint(commandRelay, new Location(0,0), newArmy));
-        System.out.println("army list size after add" + armyList.size());
         return true;
     }
 
@@ -268,7 +265,6 @@ public class EntityOwnership {
         if (direction == CycleDirection.DECREMENT) {
             temp=decrementType();
         }
-        System.out.println("cycle type index " + cycleTypeIndex);
         return temp;
     }
 
@@ -288,13 +284,11 @@ public class EntityOwnership {
     private Entity incrementType() {
         int i = cycleTypeIndex + 1;
         int listSize = currentModeList.size();
-        System.out.println("current mode list in inc type " + currentModeList);
         while (i != cycleTypeIndex) {
             if (i >= listSize) {
                 i %= listSize;
             }
             if (!currentModeList.get(i).isEmpty()) {
-                System.out.println("setting cycle index to " + i);
                 cycleTypeIndex = i;
                 return currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex);
             }
@@ -306,13 +300,11 @@ public class EntityOwnership {
     private Entity decrementType() {
         int i = cycleTypeIndex - 1;
         int listSize = currentModeList.size();
-        System.out.println("current mode list in inc type " + currentModeList);
         while (i != cycleTypeIndex) {
             if (i < 0) {
                 i=listSize-1;
             }
             if (!currentModeList.get(i).isEmpty()) {
-                System.out.println("setting cycle index to " + i);
                 cycleTypeIndex = i;
                 return currentModeList.get(cycleTypeIndex).get(cycleInstanceIndex);
             }
@@ -392,8 +384,6 @@ public class EntityOwnership {
 
     private Entity changeMode(Mode currentMode) {
         resetIndices();
-        System.out.println("cycle type index " + cycleTypeIndex);
-        System.out.println("changing mode to " + currentMode);
         switch (currentMode) {
             case ARMY:
                 if (!armyList.isEmpty() && armyList.size() - 1 >= selectedArmyIndex) {
@@ -526,7 +516,6 @@ public class EntityOwnership {
         renderInfo.updateTypeString(getCurrentType());
         renderInfo.updateInstanceString(getCurrentInstance());
         renderInfo.updateCommandString(getCurrentCommand());
-        System.out.println("return status info says that command is " + getCurrentCommand());
 
         return renderInfo;
     }
@@ -623,6 +612,9 @@ public class EntityOwnership {
                 structureList.get(i).get(j).executeQueue();
             }
         }
+        for (RallyPoint rp : rallyPointList) {
+            rp.executeQueue();
+        }
     }
 
     //TODO get army
@@ -673,16 +665,13 @@ public class EntityOwnership {
     }
 
     public Commandable getEntity(EntityId commandableId) {
-        System.out.println("Getting entity based on id");
          for (List<Entity> list : unitList) {
              for (Entity entity : list) {
-                 System.out.println(entity.toString());
                  if (commandableId.equals(entity.getEntityId())) {
                      return entity;
                  }
              }
          }
-         System.out.println("no entity found based on id");
          return null;
     }
 
@@ -693,10 +682,7 @@ public class EntityOwnership {
 
     public void addRallyPoint(RallyPoint rallyPoint, int armyNumber) {
         selectedArmyIndex = armyNumber;
-        System.out.println("adding rally point for army number " + selectedArmyIndex);
-        System.out.println(rallyPointList);
         rallyPointList.remove(selectedArmyIndex); //rally point list will have a dummy rally point while army has no units
         rallyPointList.add(selectedArmyIndex, rallyPoint);
-        System.out.println(rallyPointList);
     }
 }

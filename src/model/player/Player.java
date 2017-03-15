@@ -4,6 +4,7 @@ import controller.CommandRelay;
 import controller.availablecommands.Commandable;
 import controller.commands.CommandType;
 import controller.commands.CycleDirection;
+import model.ActiveState;
 import model.RallyPoint;
 import model.common.Location;
 import model.entities.EntityId;

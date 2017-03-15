@@ -72,6 +72,7 @@ public abstract class Commandable {
     }
 
     public void addToQueue(Command command) {
+        System.out.println("ADDING TO QUEUE " + command);
         commandQueue.add(command);
     }
 
