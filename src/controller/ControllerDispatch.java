@@ -1,6 +1,7 @@
 package controller;
 
 import controller.Observers.MapDisplayObserver;
+import controller.Observers.PlayerObservator;
 import controller.availablecommands.AvailableCommands;
 import controller.availablecommands.Commandable;
 import controller.commands.Command;
@@ -42,9 +43,9 @@ public class ControllerDispatch {
     private GameModel gameModel;
     private HashMap<CommandType, Command> commandHashMap = new HashMap<>();
 
-    public ControllerDispatch(int playerNumber, MapDisplayObserver mapDisplayObserver, UnitObserver unitObserver, StructureObserver structureObserver, StatusObserver statusObserver) {
+    public ControllerDispatch(int playerNumber, MapDisplayObserver mapDisplayObserver, UnitObserver unitObserver, StructureObserver structureObserver, StatusObserver statusObserver, PlayerObservator playerObservator) {
         availableCommands = new AvailableCommands();
-        gameModel = new GameModel(playerNumber, mapDisplayObserver, unitObserver, structureObserver, statusObserver);
+        gameModel = new GameModel(playerNumber, mapDisplayObserver, unitObserver, structureObserver, statusObserver, playerObservator);
         ActiveState.getInstance().init(new Cursor(new Location(4,4)));
         setGameModelMap();
     }

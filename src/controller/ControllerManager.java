@@ -1,6 +1,7 @@
 package controller;
 
 import controller.Observers.MapDisplayObserver;
+import controller.Observers.PlayerObservator;
 import controller.ingamecontrollertypes.ControllerType;
 import controller.ingamecontrollertypes.MainViewController;
 import controller.ingamecontrollertypes.StructureViewController;
@@ -34,12 +35,14 @@ public class ControllerManager {
     private UnitObserver unitObserver;
     private StructureObserver structureObserver;
     private StatusObserver statusObserver;
+    private PlayerObservator playerObservator;
     private GameLoop timer;
 
     public ControllerManager(ControllerDispatch controllerDispatch, Stage primaryStage, MapDisplayObserver mapDisplayObserver, UnitObserver unitObserver,
-                             StructureObserver structureObserver, StatusObserver statusObserver) throws IOException {
+                             StructureObserver structureObserver, StatusObserver statusObserver, PlayerObservator playerObservator) throws IOException {
 
         // primary stage that is essentially the window
+        this.playerObservator = playerObservator;
         this.primaryStage = primaryStage;
         this.activeController = this.controllerMap.get(ControllerType.welcomeViewController);
         this.mapDisplayObserver = mapDisplayObserver;
@@ -78,7 +81,7 @@ public class ControllerManager {
         inputController.enableKeyboardInput();
         inputController.setDispatch(controllerDispatch);
         MainViewController temp =  (MainViewController)inputController; // Sketchy but we have to downCast to the MainView Controller type
-        temp.setObservers(mapDisplayObserver,unitObserver,structureObserver, statusObserver);
+        temp.setObservers(mapDisplayObserver,unitObserver,structureObserver, statusObserver, playerObservator);
         this.activeController = temp;
         if(timer == null){
             // start of game, don't call yet

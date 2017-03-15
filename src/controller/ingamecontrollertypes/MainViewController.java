@@ -1,6 +1,7 @@
 package controller.ingamecontrollertypes;
 
 import controller.Controller;
+import controller.Observers.PlayerObservator;
 import controller.SwitchControllerRelay;
 import controller.commands.CommandType;
 import controller.commands.Direction;
@@ -78,16 +79,19 @@ public class MainViewController extends Controller{
     private java.util.Map<String, String> argumentCommands = new HashMap<>();
     private SwitchControllerRelay switchControllerRelay;
     private MiniMap miniMap;
+    private PlayerObservator playerObservator;
 
     public MainViewController(){
         super();
 
     }
-    public void setObservers(MapObserver mapObserver, UnitObserver unitObserver, StructureObserver structureObserver, StatusObserver statusObserver){
+    public void setObservers(MapObserver mapObserver, UnitObserver unitObserver, StructureObserver structureObserver,
+                             StatusObserver statusObserver, PlayerObservator playerObservator){
         this.mapObserver = mapObserver;
         this.unitObserver = unitObserver;
         this.structureObserver = structureObserver;
         this.statusObserver = statusObserver;
+        this.playerObservator = playerObservator;
     }
 
     public void takeInSwitchControllerRelay(SwitchControllerRelay switchControllerRelay){
@@ -106,6 +110,45 @@ public class MainViewController extends Controller{
                                 "   Ore Resources: " + controllerDispatch.getPlayer().getOreResourceLevel() +
                                 "   Food Resources: " + controllerDispatch.getPlayer().getFoodResourceLevel());
                     }
+                    System.out.println(playerObservator.share().size() + " SIZE");
+
+                    if(playerObservator.share().containsKey(event.getCode())){
+                        String command = (String)playerObservator.share().get(event.getCode());
+                        System.out.println("COMMAND: "   + command);
+                        if(command.equals("SOUTH")){
+                            this.areaViewport.selectSouth();
+                            controllerDispatch.updateActiveStateModifier(Direction.SOUTH);
+                            updateCoordinatesForDebugging();
+                        }
+                        if(command.equals("NORTH")){
+                            this.areaViewport.selectNorth();
+                            controllerDispatch.updateActiveStateModifier(Direction.NORTH);
+                            updateCoordinatesForDebugging();
+                        }
+                        if(command.equals("NE")){
+                            this.areaViewport.selectNE();
+                            controllerDispatch.updateActiveStateModifier(Direction.NORTH_EAST);
+                            updateCoordinatesForDebugging();
+                        }
+                        if(command.equals("NW")){
+                            this.areaViewport.selectNW();
+                            controllerDispatch.updateActiveStateModifier(Direction.NORTH_WEST);
+                            updateCoordinatesForDebugging();
+                        }
+                        if(command.equals("SE")){
+                            this.areaViewport.selectSE();
+                            controllerDispatch.updateActiveStateModifier(Direction.SOUTH_EAST);
+                            updateCoordinatesForDebugging();
+                        }
+                        if(command.equals("SW")){
+                            this.areaViewport.selectSW();
+                            controllerDispatch.updateActiveStateModifier(Direction.SOUTH_WEST);
+                            updateCoordinatesForDebugging();
+                        }
+
+                    }
+
+
                     CommandType receivedCommand;
                     MVCInputHandler mvcInputHandler = new MVCInputHandler();
                     receivedCommand = mvcInputHandler.interpretInput(event);
@@ -154,7 +197,8 @@ public class MainViewController extends Controller{
 
     }
 
-    //Move methods for moving with keyboard - JS
+
+
     @Override
     public void moveLeft() {
         areaViewport.changeCameraXPlus();
