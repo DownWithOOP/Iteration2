@@ -16,6 +16,7 @@ public class StatusRenderInformation {
     private String commandString;
     private int locationX;
     private int locationY;
+    private Commandable instance;
 
     //TODO account for other part of status viewport
 
@@ -56,6 +57,7 @@ public class StatusRenderInformation {
     public void updateInstanceString(Commandable selectedCommandable) {
         if (selectedCommandable != null) {
             instanceString = selectedCommandable.toString();
+            this.instance = selectedCommandable;
         }
         else {
             instanceString = "No Selected Instance Available";
@@ -86,6 +88,11 @@ public class StatusRenderInformation {
     public String getInstanceString() {
         return instanceString;
     }
+
+    public Commandable getInstance() {
+        return instance;
+    }
+
     public String getCommandString() {
         return commandString;
     }
