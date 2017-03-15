@@ -41,6 +41,12 @@ public class Assets {
     public Image SKULL;
 
     public Image CAPITAL;
+    public Image FARM;
+    public Image FORT;
+    public Image MINE;
+    public Image OBSERVATION_TOWER;
+    public Image POWER_PLANT;
+    public Image UNIVERSITY;
 
     public Image COLONIST;
     public Image EXPLORER;
@@ -76,6 +82,12 @@ public class Assets {
 
             //structures
             CAPITAL = new Image("/images/entities/capital.png");
+            FARM = new Image("/images/entities/farm.png");
+            FORT = new Image("/images/entities/fort.png");
+            MINE = new Image("/images/entities/mine.png");
+            OBSERVATION_TOWER = new Image("/images/entities/observationtower.png");
+            POWER_PLANT = new Image("/images/entities/powerplant.png");
+            UNIVERSITY = new Image("/images/entities/university.png");
 
             //units
             COLONIST = new Image("/images/entities/colonist.png");
