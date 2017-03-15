@@ -58,11 +58,11 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
     public void startTurn(){
         System.out.println(this.toString() + " is starting their turn");
 
+        entities.executeCommands(); //execute all commands in each entity's queue
         this.notifyStructureObservers(); // we also want to update everyone with all our structure information
         this.notifyUnitObservers(); // and lets not forget the units
         this.notifyMapObservers(); // at the start of the game we want to give the player map to render
         this.notifyStatusObservers(); // yay status viewport
-        entities.executeCommands(); //execute all commands in each entity's queue
     }
 
     public void cycleMode(CycleDirection direction){
