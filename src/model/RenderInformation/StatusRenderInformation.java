@@ -45,10 +45,12 @@ public class StatusRenderInformation {
 
     public void updateLocationInfo(Location updatedLocation){
         if (updatedLocation != null) {
-            this.locationX = locationX;
-            this.locationY = locationY;
+            this.locationX = (int)updatedLocation.getX();
+            this.locationY = (int)updatedLocation.getY();
+        }else{
+            this.locationX = -1;
+            this.locationY = -1;
         }
-        //TODO what od if null?
     }
 
     public void updateInstanceString(Commandable selectedCommandable) {
@@ -69,6 +71,12 @@ public class StatusRenderInformation {
         }
     }
 
+    public int getLocationX(){
+        return this.locationX;
+    }
+    public int getLocationY(){
+        return this.locationY;
+    }
     public String getModeString() {
         return modeString;
     }
