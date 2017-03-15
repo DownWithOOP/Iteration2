@@ -53,7 +53,7 @@ public class Colonist extends FighterUnit {
 
     public void buildCapital(CustomID customId, String id) {
         System.out.println("BUILDING CAPITAL...");
-        Structure capital = capitalFactory.getStructure(EntityType.CAPITAL, customId, id,(int)(super.getLocation().getX()),(int)(super.getLocation().getY()+1));
+        Structure capital = capitalFactory.getStructure(EntityType.CAPITAL, customId, id,(int)(super.getLocation().getX()),(int)(super.getLocation().getY()));
         commandRelay.notifyModelOfStructureCreation(capital);
     }
 

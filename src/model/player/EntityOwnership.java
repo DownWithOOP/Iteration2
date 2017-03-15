@@ -483,7 +483,7 @@ public class EntityOwnership {
             for (Entity entity : list) {
                 Unit unit = (Unit) entity;
                 UnitStats unitStats = unit.getUnitStats().clone(); // deep clone so as not to mess anything up
-                UnitRenderObject temp = new UnitRenderObject(unit.getEntityId(), (int)(unit.getLocation().getX()), (int)(unit.getLocation().getY()), unitStats);
+                UnitRenderObject temp = new UnitRenderObject(unit.getEntityId(), (int)(unit.getLocation().getX()), (int)(unit.getLocation().getY()), unitStats, unit.missionsToString());
                 renderInfo.addUnit(temp);
             }
         }
@@ -500,12 +500,12 @@ public class EntityOwnership {
             for (Entity entity : army.getBattleGroup()) {
                 Unit unit = (Unit) entity; //we know that everything in army is a unit
                 UnitStats unitStats = unit.getUnitStats().clone(); // deep clone so as not to mess anything up
-                armyRenderObject.addUnitToBattleGroup(new UnitRenderObject(unit.getEntityId(), (int)(unit.getLocation().getX()), (int)(unit.getLocation().getY()), unitStats));
+                armyRenderObject.addUnitToBattleGroup(new UnitRenderObject(unit.getEntityId(), (int)(unit.getLocation().getX()), (int)(unit.getLocation().getY()), unitStats, unit.missionsToString()));
             }
             for (Entity entity : army.getReinforcements()) {
                 Unit unit = (Unit) entity; //we know that everything in army is a unit
                 UnitStats unitStats = unit.getUnitStats().clone(); // deep clone so as not to mess anything up
-                armyRenderObject.addUnitToReinforcements(new UnitRenderObject(unit.getEntityId(), (int)(unit.getLocation().getX()), (int)(unit.getLocation().getY()), unitStats));
+                armyRenderObject.addUnitToReinforcements(new UnitRenderObject(unit.getEntityId(), (int)(unit.getLocation().getX()), (int)(unit.getLocation().getY()), unitStats, unit.missionsToString()));
             }
             renderInfo.addArmy(armyRenderObject);
         }
@@ -517,7 +517,7 @@ public class EntityOwnership {
         for (List<Entity> list : structureList) {
             for (Entity entity : list) {
                 Structure structure = (Structure) entity;
-                StructureRenderObject temp = new StructureRenderObject( structure.getEntityId(), structure.getEntityType(),(int)(structure.getLocation().getX()),(int)(structure.getLocation().getY()), structure.getStructureStats());
+                StructureRenderObject temp = new StructureRenderObject( structure.getEntityId(), structure.getEntityType(),(int)(structure.getLocation().getX()),(int)(structure.getLocation().getY()), structure.getStructureStats(), structure.missionsToString());
                 renderInfo.addStructure(temp);
             }
         }

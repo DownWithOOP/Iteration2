@@ -1,6 +1,7 @@
 package controller.commands.entitycommand.unitcommand;
 
 import controller.commands.Command;
+import controller.commands.CommandType;
 import model.entities.unit.Unit;
 
 /**
@@ -12,6 +13,7 @@ public class AdvanceToRallyPointCommand extends UnitCommand{
 
     public AdvanceToRallyPointCommand(Unit unit, int number) {
         super(unit, 1);
+        super.setCommandType(CommandType.ADVANCE_TO_RALLY_POINT);
         this.number=number;
     }
 

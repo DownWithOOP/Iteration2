@@ -111,6 +111,7 @@ public class UnitViewController extends Controller
                 label2.setTextFill(Color.BLACK);
                 label2.setPadding(new Insets(15, 5, 10, 12));
                 UnitStats unitStats = data.get(i).getUnitStats();
+                String missions = renderObject.getMissions();
                 label.setText("Type: " + renderObject.getIdType() + "  locationX: " + renderObject.getLocationX() + "  locationY: " + renderObject.getLocationY());
                     vb.getChildren().add(label);
                     vb.getChildren().get((i)).addEventFilter(MouseEvent.MOUSE_PRESSED,
@@ -146,9 +147,7 @@ public class UnitViewController extends Controller
                     this.stats.setText("\t\t\tUnit Number: " + i + unitStats.getStatsString());
 
                     // update unit information with info regardin the particular unit
-                    this.mission.setText("\t\tUnit Number: " + i +
-                            "\n No missions yet " +
-                            "\n get working people!!");
+                    this.mission.setText("\t\tUnit Number: " + i + "\n" + missions);
                 }
             }
             pane.setContent(vb);

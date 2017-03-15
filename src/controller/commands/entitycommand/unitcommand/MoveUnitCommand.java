@@ -1,5 +1,6 @@
 package controller.commands.entitycommand.unitcommand;
 
+import controller.commands.CommandType;
 import model.entities.unit.Unit;
 
 /**
@@ -11,6 +12,7 @@ public class MoveUnitCommand extends UnitCommand {
 
     public MoveUnitCommand(Unit unit, int newX, int newY) {
         super(unit, 1);
+        super.setCommandType(CommandType.MOVE);
         this.newX = newX;
         this.newY = newY;
     }
@@ -30,5 +32,10 @@ public class MoveUnitCommand extends UnitCommand {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public CommandType getCommandType() {
+        return this.commandType;
     }
 }

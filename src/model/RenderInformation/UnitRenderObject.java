@@ -16,14 +16,16 @@ public class UnitRenderObject {
 
     private EntityId id;
     private UnitStats unitStats;
+    private String missions;
     // TODO later add more info like stats
 
-    public UnitRenderObject(EntityId id, int locationX, int locationY, UnitStats unitStats){
+    public UnitRenderObject(EntityId id, int locationX, int locationY, UnitStats unitStats, String missions){
         this.id = id;
         this.idType = id.getIdType();
         this.locationX = locationX;
         this.locationY = locationY;
         this.unitStats = unitStats;
+        this.missions = missions;
     }
     public IdType getIdType(){
         return this.idType;
@@ -41,6 +43,11 @@ public class UnitRenderObject {
 
     public EntityId getId() {
         return id;
+    }
+
+    public String getMissions() {
+        //System.out.println("Missions: " + this.missions);
+        return this.missions;
     }
 
 }

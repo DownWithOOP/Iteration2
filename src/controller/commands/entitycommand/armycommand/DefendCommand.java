@@ -1,6 +1,7 @@
 package controller.commands.entitycommand.armycommand;
 
 import controller.commands.Command;
+import controller.commands.CommandType;
 import controller.commands.Direction;
 import model.entities.unit.Army;
 
@@ -13,6 +14,7 @@ public class DefendCommand extends ArmyCommand{
 
     public DefendCommand(Army army, Direction direction){
         super(army, 1);
+        super.setCommandType(CommandType.DEFEND);
         this.direction = direction;
     }
 

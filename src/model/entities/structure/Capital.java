@@ -1,6 +1,7 @@
 package model.entities.structure;
 
 import controller.CommandRelay;
+import controller.commands.CommandType;
 import model.entities.EntityType;
 import model.entities.Stats.StaffedStructureStats;
 import model.entities.Stats.Stats;
@@ -10,6 +11,8 @@ import model.entities.unit.*;
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
+import java.util.ArrayList;
+
 /**
  * Created by jordi on 2/24/2017.
  */
@@ -17,10 +20,17 @@ public class Capital extends StaffedStructure {
     private UnitFactory unitFactory;
     private StructureStats capitalStats;
 
+    static ArrayList<CommandType> capitalCommand = new ArrayList<>();
+
+    static {
+        capitalCommand.add(CommandType.CREATE_UNIT);
+    }
+
     public Capital(CommandRelay commandRelay, CustomID playerId, String id, int locationX, int locationY) {
         super(commandRelay, playerId, id, locationX, locationY);
         this.unitFactory = new UnitFactory(commandRelay);
         this.capitalStats = new StructureStats(10,100,3,2,2);
+        addAllCommands(capitalCommand);
     }
 
     // Capital produces explorers and workers

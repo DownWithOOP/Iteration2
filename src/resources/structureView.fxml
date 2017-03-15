@@ -24,7 +24,7 @@
                 <Font size="15.0" />
             </font>
         </Label>
-        <ScrollPane hbarPolicy="NEVER" layoutX="39.0" layoutY="109.0" prefHeight="560.0" prefWidth="542.0">
+        <ScrollPane fx:id="pane" hbarPolicy="NEVER" layoutX="39.0" layoutY="109.0" prefHeight="560.0" prefWidth="542.0">
             <content>
                 <AnchorPane disable="true" minHeight="0.0" minWidth="0.0" prefHeight="598.0" prefWidth="623.0">
 
@@ -33,7 +33,7 @@
                </cursor></AnchorPane>
             </content>
         </ScrollPane>
-        <Label layoutX="750.0" layoutY="58.0" prefHeight="38.0" prefWidth="386.0" text="Stats                                           Mission" textAlignment="CENTER">
+        <Label layoutX="750.0" layoutY="58.0" prefHeight="38.0" prefWidth="386.0" text="Stats                                             Missions" textAlignment="CENTER">
             <font>
                 <Font size="17.0" />
             </font>
@@ -48,17 +48,17 @@
         <TextFlow layoutX="442.0" layoutY="90.0" prefHeight="122.0" prefWidth="136.0" />
         <TextFlow layoutX="269.0" layoutY="249.0" prefHeight="113.0" prefWidth="309.0" />
       <Button layoutX="39.0" layoutY="25.0" mnemonicParsing="false" onAction="#handleChangeToMainView" text="Return" />
-          <TextArea editable="false" layoutX="926.0" layoutY="105.0" prefHeight="317.0" prefWidth="256.0">
+          <TextArea fx:id="mission" editable="false" layoutX="926.0" layoutY="105.0" prefHeight="317.0" prefWidth="256.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </TextArea>
-          <TextArea editable="false" layoutX="644.0" layoutY="106.0" prefHeight="316.0" prefWidth="252.0">
+          <TextArea fx:id="stats" editable="false" layoutX="644.0" layoutY="106.0" prefHeight="316.0" prefWidth="252.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </TextArea>
-          <TextArea editable="false" layoutX="641.0" layoutY="488.0" prefHeight="176.0" prefWidth="548.0">
+          <TextArea fx:id="groups" editable="false" layoutX="641.0" layoutY="488.0" prefHeight="176.0" prefWidth="548.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
