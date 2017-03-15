@@ -34,9 +34,9 @@ public class Capital extends StaffedStructure {
     }
 
     // Capital produces explorers and workers
-    public Unit createUnit(EntityType entityType, CustomID customID, String id) {
+    public Unit createUnit(EntityType entityType, CustomID customID) {
         if (entityType.equals(EntityType.EXPLORER) || entityType.equals(EntityType.WORKER)) {
-            return unitFactory.getEntity(entityType, customID, id, (int)(super.getLocation().getX()),(int) (super.getLocation().getY()));
+            return unitFactory.getEntity(entityType, customID, (int)(super.getLocation().getX()),(int) (super.getLocation().getY()));
         }
         return null;
     }

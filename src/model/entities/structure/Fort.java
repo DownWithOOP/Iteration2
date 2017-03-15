@@ -22,9 +22,9 @@ public class Fort extends StaffedStructure {
     }
 
     // Fort creates soldiers (Melee and Unit)
-    public Unit createUnit(EntityType entityType, CustomID customID, String id) {
+    public Unit createUnit(EntityType entityType, CustomID customID) {
         if (entityType.equals(EntityType.MELEE) || entityType.equals(entityType.RANGED)) {
-            return unitFactory.getEntity(entityType, customID, id,(int)(super.getLocation().getX()),(int)(super.getLocation().getY()));
+            return unitFactory.getEntity(entityType, customID, (int)(super.getLocation().getX()),(int)(super.getLocation().getY()));
         }
         return null;
     }

@@ -51,9 +51,9 @@ public class Colonist extends FighterUnit {
         System.out.println("abandon army");
     }
 
-    public void buildCapital(CustomID customId, String id) {
+    public void buildCapital(CustomID customId) {
         System.out.println("BUILDING CAPITAL...");
-        Structure capital = capitalFactory.getStructure(EntityType.CAPITAL, customId, id,(int)(super.getLocation().getX()),(int)(super.getLocation().getY()));
+        Structure capital = capitalFactory.getStructure(EntityType.CAPITAL, customId, (int)(super.getLocation().getX()),(int)(super.getLocation().getY()));
         commandRelay.notifyModelOfStructureCreation(capital);
     }
 

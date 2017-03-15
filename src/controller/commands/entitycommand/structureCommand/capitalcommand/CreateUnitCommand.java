@@ -11,14 +11,12 @@ import utilities.id.CustomID;
 public class CreateUnitCommand extends CapitalCommand {
     private EntityType entityToCreate;
     private CustomID customId;
-    private String id;
 
-    public CreateUnitCommand(Capital capital, EntityType entityToCreate, CustomID customId, String id) {
+    public CreateUnitCommand(Capital capital, EntityType entityToCreate, CustomID customId) {
         super(capital, 3);
         super.setCommandType(CommandType.CREATE_UNIT);
         this.entityToCreate = entityToCreate;
         this.customId = customId;
-        this.id = id;
     }
 
     public EntityType getEntityToCreate() {
@@ -29,14 +27,10 @@ public class CreateUnitCommand extends CapitalCommand {
         return customId;
     }
 
-    public String getId() {
-        return id;
-    }
-
     @Override
     public boolean execute() {
         if(super.execute()) {
-            getCapital().createUnit(getEntityToCreate(), getCustomId(), getId());
+            getCapital().createUnit(getEntityToCreate(), getCustomId());
             return true;
         }
         return false;
