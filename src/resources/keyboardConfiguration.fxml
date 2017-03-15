@@ -33,7 +33,7 @@
             <Label text="SE" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
             <Label text="NW" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
             <Label text="SW" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="153.0" text="Import Configurations" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onAction="#importData" prefHeight="25.0" prefWidth="153.0" text="Import Configurations" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <Button mnemonicParsing="false" onAction="#exportControls" prefHeight="25.0" prefWidth="153.0" text="Export Configurations" GridPane.columnIndex="3" GridPane.rowIndex="3" />
             <TextField fx:id="keySix" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <TextField fx:id="keyFive" GridPane.columnIndex="1" GridPane.rowIndex="4" />
