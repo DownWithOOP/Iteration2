@@ -169,41 +169,5 @@ public class ActiveState {
         clearModifier();
     }
 
-    public static void main(String[] args) {
-        Cursor cursor = new Cursor(new Location(5, 5));
-        //ActiveState activeState = new ActiveState(cursor);
-        ActiveState.getInstance().init(cursor);
-        ActiveState.getInstance().constructModifier(Direction.EAST);
-        //Commandable ranged = new Ranged(new CustomID(IdType.RANGED, "ranged"), "ranged", 5, 5);
-        //RallyPoint rallyPoint = new RallyPoint(new Location(5, 5), new Army(new CustomID(IdType.PLAYER,"hello"),"army",5,6));
-        //activeCommandable = rallyPoint;
-        ActiveState.getInstance().activeCommandType = CommandType.MOVE;
-        ActiveState.getInstance().relayCommand(CommandType.MOVE);
-        ActiveState.getInstance().relayCommand(CommandType.FOCUS);
-
-
-        ActiveState.getInstance().constructModifier(5);
-        ActiveState.getInstance().relayCommand(CommandType.MOVE);
-
-        ActiveState.getInstance().constructModifier(Direction.SOUTH);
-        ActiveState.getInstance().relayCommand(CommandType.MOVE);
-
-        ActiveState.getInstance().constructModifier(Direction.WEST);
-        ActiveState.getInstance().relayCommand(CommandType.MOVE);
-
-        //activeState.update(ranged);
-        ActiveState.getInstance().activeCommandType = CommandType.JOIN_ARMY;
-        ActiveState.getInstance().constructModifier(5);
-        ActiveState.getInstance().relayCommand(CommandType.JOIN_ARMY);
-
-        ActiveState.getInstance().activeCommandType = CommandType.DECOMMISSION;
-        ActiveState.getInstance().relayCommand(CommandType.ACTIVATE_COMMAND);
-
-        //activeState.update(ranged);
-        ActiveState.getInstance().activeCommandType = CommandType.JOIN_ARMY;
-        ActiveState.getInstance().constructModifier(6);
-        ActiveState.getInstance().relayCommand(CommandType.JOIN_ARMY);
-
-    }
 
 }
