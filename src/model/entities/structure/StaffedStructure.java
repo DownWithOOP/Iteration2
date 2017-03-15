@@ -5,6 +5,7 @@ import model.entities.Stats.Stats;
 import model.entities.Stats.StructureStats;
 import model.map.tile.resources.Resource;
 import model.entities.unit.Worker;
+import model.map.tile.resources.ResourceType;
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
@@ -16,7 +17,9 @@ import java.util.ArrayList;
 public class StaffedStructure extends Structure {
     private ArrayList<Worker> workers;  // keeps a list of all workers staffing a structure object
 
+    private Resource energyResource;
     private Resource foodResource;
+    private Resource oreResource;
 
     /**
      * @param playerId
@@ -27,6 +30,34 @@ public class StaffedStructure extends Structure {
     public StaffedStructure(CommandRelay commandRelay, CustomID playerId, String id, int locationX, int locationY) {
         super(commandRelay, playerId, id, locationX, locationY);
         this.workers = new ArrayList<Worker>();
+    }
+
+    /**
+     * Resource consumption
+     */
+
+    @Override
+    public void receiveResource(Resource resource) {
+        switch(resource.getResourceType()){
+            case ENERGY:
+                energyResource.addResource(resource.getLevel());
+                break;
+            case FOOD:
+                foodResource.addResource(resource.getLevel());
+                break;
+            case ORE:
+                oreResource.addResource(resource.getLevel());
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void consumeResources() {
+        energyResource.consumeResource(0.10);
+        foodResource.consumeResource(0.10);
+        oreResource.consumeResource(0.10);
     }
 
     public void addWorker(Worker worker) {

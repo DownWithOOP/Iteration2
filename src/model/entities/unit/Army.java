@@ -11,6 +11,8 @@ import model.entities.Fighter;
 import model.entities.Stats.FighterUnitStats;
 import model.entities.Stats.Stats;
 import model.entities.Stats.UnitStats;
+import model.map.tile.resources.Resource;
+import model.map.tile.resources.ResourceType;
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
@@ -34,6 +36,8 @@ public class Army extends Entity implements Fighter {
 
     private RallyPoint rallyPoint;
 
+    Resource foodResource;
+
     static ArrayList<CommandType> armyCommand = new ArrayList<>();
 
     static {
@@ -52,8 +56,17 @@ public class Army extends Entity implements Fighter {
     /**
      * Resource consumption
      */
+    @Override
+    public void receiveResource(Resource resource) {
+        if(resource.getResourceType().equals(ResourceType.FOOD)){
+            foodResource.addResource(resource.getLevel());
+        }
+    }
 
-
+    @Override
+    public void consumeResources() {
+        foodResource.consumeResource(0.10);
+    }
 
     /**
      * Army commands

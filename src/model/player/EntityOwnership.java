@@ -92,7 +92,7 @@ public class EntityOwnership {
         armyList = new ArrayList<>(typeRestriction);
         structureList = new ArrayList<>(1);
         rallyPointList= new ArrayList<>(typeRestriction);
-
+        entities = new HashMap<>();
         this.unitFactory = new UnitFactory(commandRelay);
         this.commandRelay = commandRelay;
         this.idManager = new EntityIdManager();
@@ -142,7 +142,7 @@ public class EntityOwnership {
         if (!returnValue) {
             returnValue = addUnit(entityType, entity);
         }
-        entities.put(entity.getEntityId(), entity);
+        //entities.put(entity.getEntityId(), entity);
         return returnValue;
     }
 
@@ -168,6 +168,7 @@ public class EntityOwnership {
     private boolean addToIndex(List<List<Entity>> entityList, int index, Entity entity) {
         if (entityList.get(index).isEmpty() || entityList.get(index).size() < typeRestriction && !entityList.get(index).contains(entity)) {
             entityList.get(index).add(entity);
+            entities.put(entity.getEntityId(), entity);
             return true;
         }
         return false;
@@ -205,7 +206,7 @@ public class EntityOwnership {
      *  loooll
      */
     public void distributeResource(EntityId entityId, Resource resource){
-        entities.get(entityId);
+        entities.get(entityId).receiveResource(resource);
     }
 
     public static int next(int size, int index) {

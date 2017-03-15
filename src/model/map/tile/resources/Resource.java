@@ -20,6 +20,11 @@ public class Resource {
     //consumes some resource
     public int consumeResource(double percent){
         int amount = (int) (level*percent);
+        if(amount == 0){
+            int temp = level;
+            level = 0;
+            return temp;
+        }
         level = level - amount;
         return amount;
     }

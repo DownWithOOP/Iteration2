@@ -51,6 +51,22 @@ public class ResourceOwnership {
 
     }
 
+    public CustomID getPlayerID() {
+        return playerID;
+    }
+
+    public Resource getEnergyResources() {
+        return energyResources;
+    }
+
+    public Resource getOreResources() {
+        return oreResources;
+    }
+
+    public Resource getFoodResources() {
+        return foodResources;
+    }
+
     public Resource allocateEnergyResource(){
         int level = energyResources.consumeResource(0.10);
 

@@ -23,6 +23,7 @@ import model.entities.EntityId;
 import model.entities.unit.Army;
 import model.entities.unit.Explorer;
 import model.entities.unit.Unit;
+import model.player.Player;
 import utilities.ObserverInterfaces.StatusObserver;
 import utilities.ObserverInterfaces.StructureObserver;
 import utilities.ObserverInterfaces.UnitObserver;
@@ -208,6 +209,10 @@ public class ControllerDispatch {
 
     public int getActivePlayerNumber() {
         return gameModel.getActivePlayerIndex() + 1;
+    }
+
+    public Player getPlayer() {
+        return gameModel.getActivePlayer();
     }
 
     public void updateActiveStateCommandable(EntityId commandableId) {

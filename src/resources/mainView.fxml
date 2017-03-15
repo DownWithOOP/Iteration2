@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="741.0" prefWidth="1221.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ingamecontrollertypes.MainViewController">
+<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="741.0" prefWidth="1221.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ingamecontrollertypes.MainViewController">
     <children>
         <MenuBar fx:id="mainMenuBar" prefHeight="29.0" prefWidth="1222.0">
             <menus>
@@ -58,7 +58,7 @@
         </MenuBar>
         <VBox fx:id="vbox" prefHeight="699.0" prefWidth="1218.0">
             <children>
-            <Label fx:id="currentPlayerLabel" alignment="CENTER" prefHeight="17.0" prefWidth="204.0" text="Current Player: Player 1">
+            <Label fx:id="currentPlayerLabel" alignment="CENTER" prefHeight="17.0" prefWidth="1249.0" text="Current Player: Player 1   Energy Resources: 100   Ore Resources: 100   Food Resources: 100  ">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>

@@ -9,6 +9,7 @@ import model.entities.Entity;
 import model.entities.Stats.Stats;
 import model.entities.Stats.UnitStats;
 import model.map.tile.resources.Resource;
+import model.map.tile.resources.ResourceType;
 import utilities.ObserverInterfaces.MapObserver;
 import utilities.ObserverInterfaces.MapSubject;
 import utilities.ObserverInterfaces.UnitObserver;
@@ -49,14 +50,20 @@ public abstract class Unit extends Entity implements UnitSubject, MapSubject {
         addAllCommands(unitCommand);
     }
 
+    /**
+     * Resource consumption
+     * @param resource
+     */
     @Override
     public void receiveResource(Resource resource) {
-        //TODO
+        if(resource.getResourceType().equals(ResourceType.FOOD)){
+            foodResource = resource;
+        }
     }
 
     @Override
     public void consumeResources() {
-        //TODO
+        foodResource.consumeResource(0.10);
     }
 
     public abstract void abandonArmy();

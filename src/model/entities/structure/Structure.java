@@ -22,16 +22,6 @@ public abstract class Structure extends Entity {
         //TODO: addAllCommands to be placed here after all the structure actions are defined
     }
 
-    @Override
-    public void receiveResource(Resource resource) {
-        //TODO
-    }
-
-    @Override
-    public void consumeResources() {
-        //TODO
-    }
-
     protected Stats setEntityStats() {
         return new StructureStats(0,0,0,0,0);
     }
