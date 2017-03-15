@@ -58,7 +58,7 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
     public void update(int playerNumber, MapRenderInformation mapRenderInformation, UnitRenderInformation unitRenderInformation, StructureRenderInformation structureRenderInformation) {
 
         this.currPlayerNumber = playerNumber;
-        if(playerNumber == 1){
+        if(currPlayerNumber == 1){
             this.currMapRenderInformation1 = mapRenderInformation;
             this.currStructureRenderInformation1 = structureRenderInformation;
             this.currUnitRenderInformation1 = unitRenderInformation;
@@ -96,10 +96,20 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
         }
 
         // now we go through each of the units
-        ArrayList<UnitRenderObject> playerUnitData = unitRenderInformation.returnRenderInformation();
+
+        ArrayList<UnitRenderObject> playerUnitData;
+        if(playerNumber == 1){
+            playerUnitData = currUnitRenderInformation1.returnRenderInformation();
+        } else {
+            playerUnitData = currUnitRenderInformation2.returnRenderInformation();
+        }
+
+
+
         MapRenderObject[][] mapInfo = mapRenderInformation.getRenderObjectMap();
 
         for(UnitRenderObject unit : playerUnitData){
+            System.out.println("current active player " + currPlayerNumber + "  : " + unit.getLocationX() + " " + unit.getLocationY());
             // we set the location of where the unit currently is as 2 (100% visible)
             TileRenderObject temp = userData[unit.getLocationX()][unit.getLocationY()];
             temp.setVisibilityTwo();
@@ -113,13 +123,15 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
                 offSet =-1;
             }
             int LOS = unit.getUnitStats().getVisionRadius();
-            if(LOS <= 1){ // set 1 radius out as all visible
-                updateLevelOneLOS(playerNumber,offSet,unit.getLocationX(),unit.getLocationY(),mapInfo);
+            if(LOS <= 1) { // set 1 radius out as all visible
+                updateLevelOneLOS(playerNumber, offSet, unit.getLocationX(), unit.getLocationY(), mapInfo);
             }
             if(LOS <= 2){ // set 2 radius out as all visible
                 updateLevelTwoLOS(playerNumber,offSet,unit.getLocationX(),unit.getLocationY(),mapInfo);
             }
         }
+
+
 
         ArrayList<StructureRenderObject> playerStructureInfo = structureRenderInformation.returnRenderInformation();
         for(StructureRenderObject structure: playerStructureInfo){
@@ -145,6 +157,7 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
             }
         }
 
+
         // now go through any enemy structures and units that may be visible
 
 
@@ -164,7 +177,6 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
                 }
             }
         }
-
     }
 
     @Override
