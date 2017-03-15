@@ -14,6 +14,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -66,6 +67,8 @@ public class MainViewController extends Controller{
     MenuItem energyOverlay;
     @FXML
     MenuItem keyboardMap;
+    @FXML
+    Pane statsGrid;
 
     private Map currentMap;
     private AreaViewport areaViewport;
@@ -297,7 +300,7 @@ public class MainViewController extends Controller{
 
         this.miniMap = new MiniMap(MinMap);
         this.areaViewport = new AreaViewport(vbox, canvas, miniMap);
-        this.statusViewport = new StatusViewport(cycleLabels);
+        this.statusViewport = new StatusViewport(cycleLabels, statsGrid);
         this.updateCoordinatesForDebugging();
 
     }
