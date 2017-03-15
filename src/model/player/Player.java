@@ -78,8 +78,16 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
         resources.addResource(resource);
     }
 
-    public void distributeResource(EntityId entityId, Resource resource){
-        entities.distributeResource(entityId, resource);
+    public void distributeEnergyResource(EntityId entityId){
+        entities.distributeResource(entityId, resources.allocateEnergyResource());
+    }
+
+    public void distributeOreResource(EntityId entityId){
+        entities.distributeResource(entityId, resources.allocateOreResource());
+    }
+
+    public void distributeFoodResource(EntityId entityId){
+        entities.distributeResource(entityId, resources.allocateFoodResource());
     }
 
     public void cycleMode(CycleDirection direction){
