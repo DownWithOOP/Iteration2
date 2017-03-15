@@ -730,6 +730,9 @@ public class EntityOwnership {
         for (Army army : armyList) {
             army.executeQueue();
         }
+        for (Worker worker : workerList) {
+            worker.executeQueue();
+        }
     }
 
     //TODO get army

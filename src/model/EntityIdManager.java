@@ -84,7 +84,7 @@ public class EntityIdManager {
            return;
         }
 
-        if (findIndexForId(ids, id) != -1) {
+        if (findIndexForId(ids, id) >= 0) {
             ids.add(findIndexForId(ids, id), id);
         }
         else {

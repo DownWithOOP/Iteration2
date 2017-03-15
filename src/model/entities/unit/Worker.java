@@ -41,14 +41,7 @@ public class Worker extends PassiveUnit {
     //todo:this should not have attacking, defensive damage, range, only fighters have these
     @Override
     protected Stats setEntityStats() {
-        return new PassiveUnitStats(0,0,0);
-    }
-
-    // Worker can build all structures except capital
-    public void buildStructure(EntityType entityType, CustomID customID) {
-        if (!entityType.equals(EntityType.CAPITAL)) {
-            structureFactory.getStructure(entityType, customID, (int)(super.getLocation().getX()),(int)(super.getLocation().getY()));
-        }
+        return new PassiveUnitStats(5,0,0);
     }
 
     @Override
