@@ -48,7 +48,6 @@ public class AreaViewport implements MiniMapSubject{
     private String selectedUnit = "something";
     private int cursorX;
     private int cursorY;
-
     Image grass = Assets.getInstance().GRASS;
     Image water = Assets.getInstance().WATER;
     Image dirt = Assets.getInstance().DIRT;
@@ -131,9 +130,7 @@ public class AreaViewport implements MiniMapSubject{
         }
     }
 
-    public void endTurnOccured(){
-        this.startOfNewTurn = true;
-    }
+
 
     public void UpdateRenderInfo(MapRenderInformation renderMap, UnitRenderInformation renderUnit, StructureRenderInformation renderStructure, TileRenderObject[][] renderData){
         this.mapRenderInformation = renderMap;
@@ -173,7 +170,7 @@ public class AreaViewport implements MiniMapSubject{
 //        } else {
 //            gc.drawImage(select,0.75*width*selectX+ cameraX,height*1*-selectY+ cameraY + width*0.9);
 //        }
-        if(ActiveState.getInstance().getCursor().getX()%2 == 0){
+        if(alternateColumn){
             gc.drawImage(select,0.75*width* ActiveState.getInstance().getCursor().getX()+ cameraX,height*1*-ActiveState.getInstance().getCursor().getY()+ cameraY + width*0.45);
         } else {
             gc.drawImage(select,0.75*width*ActiveState.getInstance().getCursor().getX()+ cameraX,height*1*-ActiveState.getInstance().getCursor().getY()+ cameraY + width*0.9);
@@ -185,7 +182,6 @@ public class AreaViewport implements MiniMapSubject{
     public void selectJumpLocation(int locationX, int locationY){
         ActiveState.getInstance().getCursor().updateCursorLocation(locationX, locationY);
     }
-
 
     public void selectNorth(){
 //        this.selectY++; // update value
@@ -543,7 +539,6 @@ public class AreaViewport implements MiniMapSubject{
                                         // now we draw any friendly structures and units
                                         ArrayList<IdType> entities = render.getUserEntities();
                                         for(IdType id : entities){
-
                                             if(id.equals(IdType.COLONIST)){ // draw colonist
                                                 gc.drawImage(colonist,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
                                             }
@@ -676,6 +671,7 @@ public class AreaViewport implements MiniMapSubject{
     }
 
     private void drawRallyPoints() {
+
         GraphicsContext gc = canvas.getGraphicsContext2D();
         double width = grass.getWidth();
         double height = grass.getHeight();

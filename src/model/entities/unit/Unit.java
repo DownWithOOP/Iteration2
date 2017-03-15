@@ -8,6 +8,8 @@ import model.common.Location;
 import model.entities.Entity;
 import model.entities.Stats.Stats;
 import model.entities.Stats.UnitStats;
+import model.map.tile.resources.Resource;
+import model.map.tile.resources.ResourceType;
 import utilities.ObserverInterfaces.MapObserver;
 import utilities.ObserverInterfaces.MapSubject;
 import utilities.ObserverInterfaces.UnitObserver;
@@ -22,6 +24,8 @@ import java.util.ArrayList;
  */
 public abstract class Unit extends Entity implements UnitSubject, MapSubject {
     private ArrayList<Location> currentPath;
+
+    Resource foodResource;
 
     private UnitObserver unitObserver;
     private MapObserver mapObserver;
@@ -46,6 +50,21 @@ public abstract class Unit extends Entity implements UnitSubject, MapSubject {
         addAllCommands(unitCommand);
     }
 
+    /**
+     * Resource consumption
+     * @param resource
+     */
+    @Override
+    public void receiveResource(Resource resource) {
+        if(resource.getResourceType().equals(ResourceType.FOOD)){
+            foodResource = resource;
+        }
+    }
+
+    @Override
+    public void consumeResources() {
+        foodResource.consumeResource(0.10);
+    }
 
     public abstract void abandonArmy();
     public abstract void joinArmy(int armyNumber);

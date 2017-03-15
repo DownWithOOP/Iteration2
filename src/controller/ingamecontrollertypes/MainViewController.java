@@ -101,8 +101,10 @@ public class MainViewController extends Controller{
                 event -> {
                     if (event.getCode() == KeyCode.E) {
                         controllerDispatch.handleCommand(CommandType.END_TURN);
-                        this.areaViewport.endTurnOccured();
-                        currentPlayerLabel.setText("Current Player: Player " + controllerDispatch.getActivePlayerNumber());
+                        currentPlayerLabel.setText("Current Player: Player " + controllerDispatch.getActivePlayerNumber() +
+                                "   Energy Resources: " + controllerDispatch.getPlayer().getEnergyResourceLevel() +
+                                "   Ore Resources: " + controllerDispatch.getPlayer().getOreResourceLevel() +
+                                "   Food Resources: " + controllerDispatch.getPlayer().getFoodResourceLevel());
                     }
                     CommandType receivedCommand;
                     MVCInputHandler mvcInputHandler = new MVCInputHandler();
@@ -224,7 +226,10 @@ public class MainViewController extends Controller{
 
     public void handleEndTurn(ActionEvent actionEvent) {
         controllerDispatch.handleCommand(CommandType.END_TURN);
-        currentPlayerLabel.setText("Current Player: Player " + controllerDispatch.getActivePlayerNumber());
+        currentPlayerLabel.setText("Current Player: Player " + controllerDispatch.getActivePlayerNumber() +
+                                   "   Energy Resources: " + controllerDispatch.getPlayer().getEnergyResourceLevel() +
+                                   "   Ore Resources: " + controllerDispatch.getPlayer().getOreResourceLevel() +
+                                   "   Food Resources: " + controllerDispatch.getPlayer().getFoodResourceLevel());
     }
 
     public void returnToMainMenu() throws IOException {
