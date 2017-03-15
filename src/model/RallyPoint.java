@@ -23,7 +23,7 @@ public class RallyPoint extends Commandable {
     static ArrayList<CommandType> rallyPointCommand= new ArrayList<>();
     static {
         rallyPointCommand.add(CommandType.FOCUS);
-        rallyPointCommand.add(CommandType.MOVE);
+        rallyPointCommand.add(CommandType.MOVE_RALLY_POINT);
     }
 
     public RallyPoint(CommandRelay commandRelay, Location location, Army army) {
@@ -33,10 +33,10 @@ public class RallyPoint extends Commandable {
         this.army=army;
     }
 
-    public void move(Direction direction){
-        System.out.print("rally point moves "+direction.toString()+" and then ");
-        //super.move(direction);
-        //path.add(location);
+    public void move(Location newLocation){
+        System.out.println("rally point moving location to " + newLocation);
+        this.currentLocation = newLocation;
+        army.move(newLocation);
     }
 
     public void focus(){

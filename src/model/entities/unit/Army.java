@@ -3,6 +3,7 @@ package model.entities.unit;
 import controller.CommandRelay;
 import controller.commands.CommandType;
 import controller.commands.Direction;
+import controller.commands.entitycommand.unitcommand.MoveUnitCommand;
 import model.RallyPoint;
 import model.common.Location;
 import model.entities.Entity;
@@ -103,16 +104,15 @@ public class Army extends Entity implements Fighter {
         int health = unitStats.getHealth();
 
         if (this.playerId.equals(unit.getPlayerId())) {
-            System.out.println("registering unit");
             //handle the first unit added; that is when rally point is created
             if (battleGroup.isEmpty() && reinforcements.isEmpty()) {
                 battleGroup.put(unitId, unit);
                 setBattleGroupStats(attack, defense, health, upKeep);
+                setLocation(unit.getLocation().getXCoord(), unit.getLocation().getYCoord());
                 rallyPoint = new RallyPoint(commandRelay, unit.getLocation(),this);
                 commandRelay.notifyModelOfRallyPointCreation(rallyPoint, Integer.parseInt(getEntityId().getId()));
             }
             if (rallyPoint.getLocation().equals(unit.getLocation())) {
-                System.out.println("rally point location is " + rallyPoint.getLocation());
                 battleGroup.put(unitId, unit);
                 setBattleGroupStats(attack, defense, health, upKeep);
             } else {
@@ -189,6 +189,7 @@ public class Army extends Entity implements Fighter {
         if (battleGroup.isEmpty()) {
             ((UnitStats) entityStats).setMovement(0);
         }
+        System.out.println("update bg movement to " + ((UnitStats) entityStats).getMovement());
     }
 
     private void setBattleGroupVisionRadius() {
@@ -210,18 +211,20 @@ public class Army extends Entity implements Fighter {
     }
 
     //Move each unit one tile
-    private void moveBattleGroup(Location nextTile) {
+    private void moveBattleGroup(Location newLocation) {
         for (Unit battleGroupMember : battleGroup.values()) {
-            battleGroupMember.moveUnit(nextTile.getXCoord(),nextTile.getYCoord());
+            battleGroupMember.addToQueue(new MoveUnitCommand(battleGroupMember, newLocation.getXCoord(), newLocation.getYCoord()));
         }
 
     }
 
     //TODO do we need this to be private if we're using updatePathQueue? if not, make it private and make movement controlled by path queue
+    //TODO do this if we have path finding
     public void changeTargetLocation() {
 
     }
 
+    //TODO do this if we have path finding
     private void changeReinforcementsLocation(Queue<Location> pathToRallyPoint) {
         Queue<Location> copyOfPath = new LinkedBlockingQueue<>(pathToRallyPoint);
         Location locationToMoveTo = null;
@@ -244,7 +247,7 @@ public class Army extends Entity implements Fighter {
 
     private void moveReinforcements(Location newLocation) {
         for (Unit reinforcementUnit : reinforcements.values()) {
-            reinforcementUnit.moveUnit(newLocation.getXCoord(),newLocation.getYCoord());
+            reinforcementUnit.addToQueue(new MoveUnitCommand(reinforcementUnit, newLocation.getXCoord(), newLocation.getYCoord()));
         }
     }
 
@@ -293,4 +296,19 @@ public class Army extends Entity implements Fighter {
        return temp;
      }
 
+    public void move(Location newLocation) {
+        System.out.println("am I going to move the army? " + distanceFromCurrentLocation(newLocation));
+        System.out.println("old loc " + getLocation());
+        System.out.println("new loc " + newLocation);
+        if (distanceFromCurrentLocation(newLocation)) {
+            moveBattleGroup(newLocation);
+            moveReinforcements(newLocation);
+        }
+    }
+
+    private boolean distanceFromCurrentLocation(Location newLocation) {
+        Location oldLocation = getLocation();
+        int distance = (int)(Math.sqrt(Math.pow(newLocation.getXCoord()-oldLocation.getXCoord(),2) + Math.pow(newLocation.getYCoord()-oldLocation.getYCoord(),2)));
+        return distance < ((UnitStats) entityStats).getMovement();
+    }
 }

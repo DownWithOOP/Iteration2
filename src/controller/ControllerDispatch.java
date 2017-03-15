@@ -15,6 +15,7 @@ import controller.ingamecontrollertypes.MainViewController;
 import model.ActiveState;
 import model.Cursor;
 import model.GameModel;
+import model.RallyPoint;
 import model.common.Location;
 import model.entities.structure.Structure;
 import model.entities.structure.StructureType;
@@ -65,6 +66,9 @@ public class ControllerDispatch {
 
         if (selectedCommandType == CommandType.MOVE) {
             selectedInstance.addToQueue(new MoveUnitCommand((Unit)selectedInstance, ActiveState.getInstance().getCursor().getX() ,ActiveState.getInstance().getCursor().getY()));
+        }
+        else if (selectedCommandType == CommandType.MOVE_RALLY_POINT) {
+            selectedInstance.addToQueue(new MoveRallyPointCommand((RallyPoint)selectedInstance, ActiveState.getInstance().getCursor().getLocation()));
         }
 //        //ActiveState.relayCommand(CommandType.ACTIVATE_COMMAND);
 

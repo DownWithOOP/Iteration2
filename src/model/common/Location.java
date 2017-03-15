@@ -27,6 +27,11 @@ public class Location extends Point {
         super.setLocation(locationX, locationY);
     }
 
+    @Override
+    public Location clone() {
+        return new Location(x, y);
+    }
+
 
 
 

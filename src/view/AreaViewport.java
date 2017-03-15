@@ -585,7 +585,7 @@ public class AreaViewport implements MiniMapSubject{
             if(armyRenderObject.getRallyPointLocation().getX()%2 == 0){
                 gc.drawImage(rallyPoint,0.75*width* armyRenderObject.getRallyPointLocation().getX()+ cameraX,height*1*-armyRenderObject.getRallyPointLocation().getY()+ cameraY + width*0.45);
             } else {
-                gc.drawImage(rallyPoint,0.75*width* armyRenderObject.getRallyPointLocation().getX()+ cameraX,height*1*-armyRenderObject.getRallyPointLocation().getY()+ cameraY + width*0.45);
+                gc.drawImage(rallyPoint,0.75*width* armyRenderObject.getRallyPointLocation().getX()+ cameraX,height*1*-armyRenderObject.getRallyPointLocation().getY()+ cameraY + width*0.9);
             }
         }
     }
