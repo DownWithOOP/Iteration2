@@ -430,6 +430,7 @@ public class AreaViewport implements MiniMapSubject{
 
                                             if(startOfNewTurn && entities.size() != 0){
                                                 selectJumpLocation(j,i);
+                                                changeCamera(j,i);
                                                 startOfNewTurn = false;
                                             }
                                         }
@@ -459,6 +460,7 @@ public class AreaViewport implements MiniMapSubject{
 
                                             if(startOfNewTurn && entities.size() != 0){
                                                 selectJumpLocation(j,i);
+                                                changeCamera(j,i);
                                                 startOfNewTurn = false;
                                             }
                                             if(id.equals(IdType.COLONIST)){ // draw colonist
@@ -475,7 +477,6 @@ public class AreaViewport implements MiniMapSubject{
                                         } else {
                                             gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + (2 * height) - 60);
                                         }
-
                         }
                     }
             }
@@ -492,6 +493,13 @@ public class AreaViewport implements MiniMapSubject{
         for (ArmyRenderObject armyRenderObject : unitRenderInformation.returnArmyInformation()) {
             gc.drawImage(rallyPoint,0.75*width* armyRenderObject.getRallyPointLocation().getX()+ cameraX,height*1*-armyRenderObject.getRallyPointLocation().getY()+ cameraY + width*0.45);
         }
+    }
+
+    private void changeCamera(int locationX, int locationY){
+        double width = grass.getWidth();
+        double height = grass.getHeight();
+        this.cameraX = (-0.75*width*locationX)/2;
+        this.cameraY = 1.25*(height*locationY) ;
     }
 
     @Override
