@@ -5,6 +5,7 @@ import controller.availablecommands.Commandable;
 import controller.commands.Direction;
 import model.common.Location;
 import model.entities.EntityId;
+import model.entities.structure.Structure;
 import model.entities.unit.FighterUnit;
 import model.map.Map;
 import model.player.Player;
@@ -41,7 +42,7 @@ public class GameModel {
             if(i ==0){ // player 1
                 temp = new Player(1,masterMap, new CommandRelay(this), observer, unitObserver, structureObserver, statusObserver, 6,4); // TODO, give players unique maps
             } else if( i== 1){
-                temp = new Player(2,masterMap, new CommandRelay(this), observer, unitObserver, structureObserver, statusObserver, 24,10); // TODO, give players unique maps
+                temp = new Player(2,masterMap, new CommandRelay(this), observer, unitObserver, structureObserver, statusObserver, 6, 3); // TODO, give players unique maps
             } else {
                 temp = new Player(i+1,masterMap, new CommandRelay(this), observer, unitObserver, structureObserver, statusObserver, 0,0); // TODO give players unique maps
             }
@@ -80,9 +81,17 @@ public class GameModel {
     }
 
     public void applyDamageToEntitiesByLocation(Location location, int damage) {
-        CustomID playerBeingAttacked = masterMap.getPlayerOnTile(location);
-        if (playersMap.containsKey(playerBeingAttacked)) {
-            playersMap.get(playerBeingAttacked).applyDamageToEntitiesOnLocation(location, damage);
+        CustomID playerBeingAttackedId = masterMap.getPlayerOnTile(location);
+        System.out.println(playerBeingAttackedId + " is player being attacked");
+        if (playersMap.containsKey(playerBeingAttackedId)) {
+            Player playerBeingAttacked = playersMap.get(playerBeingAttackedId);
+            if (playerBeingAttacked.getCustomID().equals(getActivePlayer().getCustomID())) {
+                return; //don't attack yourself
+            }
+            else {
+                System.out.println(playerBeingAttackedId + " is actually being attacked");
+                playersMap.get(playerBeingAttackedId).applyDamageToEntitiesOnLocation(location, damage);
+            }
         }
         else {
             //TODO whaaaaaaaaaaaaaaaaaaaaa?
@@ -100,6 +109,14 @@ public class GameModel {
 
     public void addRallyPoint(RallyPoint rallyPoint, int armyNumber) {
         getActivePlayer().addRallyPoint(rallyPoint, armyNumber);
+    }
+
+    public void addStructure(Structure structure) {
+        getActivePlayer().addStructure(structure);
+    }
+
+    public void updateTilePlayerId(CustomID playerId, Location location) {
+        masterMap.setTilePlayerId(playerId, location);
     }
 }
 

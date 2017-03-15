@@ -23,6 +23,15 @@ public class Location extends Point {
     public int getXCoord() { return x;}
     public int getYCoord() { return y;}
 
+    public void jumpLocation(int locationX, int locationY){
+        super.setLocation(locationX, locationY);
+    }
+
+    @Override
+    public Location clone() {
+        return new Location(x, y);
+    }
+
 
 //    public boolean equals(Location location){
 //        int xCoord=location.getX();

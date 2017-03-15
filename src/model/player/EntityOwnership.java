@@ -65,6 +65,7 @@ public class EntityOwnership {
     int unitCap = 25;
     private RallyPoint selectedRallyPoint = null;
     private Army selectedArmy = null;
+
     //TODO don't hardcode the type indices and number of types
     private final int rangedIndex = 0;
     private final int meleeIndex = 1;
@@ -72,7 +73,14 @@ public class EntityOwnership {
     private final int explorerIndex = 3;
     private final int unitTypeNumber = 5;
 
-    private final int structureTypeNumber = 1;
+    private final int capitalIndex = 0;
+    private final int farmIndex = 1;
+    private final int fortIndex = 2;
+    private final int mineIndex = 3;
+    private final int observationTowerIndex = 4;
+    private final int powerPlantIndex = 5;
+    private final int universityIndex = 6;
+    private final int structureTypeNumber = 7;
 
     private int cycleTypeIndex = 0;
     private int cycleInstanceIndex = 0;
@@ -104,14 +112,13 @@ public class EntityOwnership {
         changeMode(modes[cycleModeIndex]);
 
 
-        System.out.println("End of E.O. constructor; cycle type index is: " + cycleTypeIndex);
     }
 
     private void initializeUnits(int startingX, int startingY) {
         //TODO change the id number
         addUnit(IdType.EXPLORER, unitFactory.getEntity(EntityType.EXPLORER, playerId,"0", startingX, startingY));
-        addUnit(IdType.EXPLORER, unitFactory.getEntity(EntityType.EXPLORER, playerId,"1", startingX+1, startingY));
-        addUnit(IdType.COLONIST, unitFactory.getEntity(EntityType.COLONIST, playerId,"0", startingX, startingY-1));
+        addUnit(IdType.EXPLORER, unitFactory.getEntity(EntityType.EXPLORER, playerId,"1", startingX, startingY));
+        addUnit(IdType.COLONIST, unitFactory.getEntity(EntityType.COLONIST, playerId,"0", startingX, startingY));
     }
 
     private void initializeLists() {
@@ -132,6 +139,7 @@ public class EntityOwnership {
         }
     }
 
+    //TODO remove this
     public boolean addEntity(Entity entity) {
         IdType entityType = entity.getEntityType();
         boolean returnValue = false;
@@ -151,17 +159,37 @@ public class EntityOwnership {
         switch (entityType) {
             case CAPITAL:
                 result = addToIndex(structureList, 0, entity);
+                removeEntity(unitList.get(2).get(0)); //remove colonist
+                addEntity(unitFactory.getEntity(EntityType.MELEE, playerId, "0", (int)entity.getLocation().getX(), (int)entity.getLocation().getY()));
+                addEntity(unitFactory.getEntity(EntityType.MELEE, playerId, "1", (int)entity.getLocation().getX(), (int)entity.getLocation().getY()));
+                result = addToIndex(structureList, capitalIndex, entity);
+                break;
+            case FARM:
+                result = addToIndex(structureList, farmIndex, entity);
+                break;
+            case FORT:
+                result = addToIndex(structureList, fortIndex, entity);
+                break;
+            case MINE:
+                result = addToIndex(structureList, mineIndex, entity);
+                break;
+            case OBSERVATION_TOWER:
+                result = addToIndex(structureList, observationTowerIndex, entity);
+                break;
+            case POWER_PLANT:
+                result = addToIndex(structureList, powerPlantIndex, entity);
+                break;
+            case UNIVERSITY:
+                result = addToIndex(structureList, universityIndex, entity);
                 break;
         }
         return result;
     }
 
     public boolean createArmy() {
-        System.out.println("army list size " + armyList.size());
         Army newArmy = new Army(commandRelay, playerId, idManager.getArmyId(), 0, 0);
         armyList.add(newArmy);
         rallyPointList.add(new RallyPoint(commandRelay, new Location(0,0), newArmy));
-        System.out.println("army list size after add" + armyList.size());
         return true;
     }
 
@@ -228,6 +256,12 @@ public class EntityOwnership {
     public Commandable cycleType(CycleDirection direction) {
         cycleInstanceIndex = 0;
         Entity temp = null;
+
+        if (getCurrentMode() == Mode.RALLY_POINT) {
+            //raly point doesn't cycle
+            return selectedRallyPoint;
+        }
+
         //TODO need both?
         if (currentModeList == null) {
             System.out.println("Cycle type cannot do anything b/c currentModeList is null");
@@ -237,10 +271,7 @@ public class EntityOwnership {
             System.out.println("Cycle type cannot do anything b/c currentModeList is empty");
             return null;
         }
-        if (getCurrentMode() == Mode.RALLY_POINT) {
-            //raly point doesn't cycle
-            return selectedRallyPoint;
-        }
+
         //TODO improve the cycling algorithm so we don't have to do this
         //We can now assume that we will cycle types, so check that there are types to cycle through
         if (!checkForInstancesInType()) {
@@ -301,6 +332,30 @@ public class EntityOwnership {
         return null;
     }
     public CommandType cycleCommand(CycleDirection direction) {
+        if (getCurrentMode() == Mode.RALLY_POINT) {
+            if (selectedRallyPoint == null) {
+                return null;
+            }
+            if (direction == CycleDirection.INCREMENT) {
+                cycleCommandIndex = next(selectedRallyPoint.getIterableCommandsSize(), cycleCommandIndex);
+            }
+            if (direction == CycleDirection.DECREMENT) {
+                cycleCommandIndex = previous(selectedRallyPoint.getIterableCommandsSize(), cycleCommandIndex);
+            }
+            return selectedRallyPoint.getIterableCommand(cycleCommandIndex);
+        }
+        else if (getCurrentMode() == Mode.ARMY) {
+            if (selectedArmy == null) {
+                return null;
+            }
+            if (direction == CycleDirection.INCREMENT) {
+                cycleCommandIndex = next(selectedArmy.getIterableCommandsSize(), cycleCommandIndex);
+            }
+            if (direction == CycleDirection.DECREMENT) {
+                cycleCommandIndex = previous(selectedArmy.getIterableCommandsSize(), cycleCommandIndex);
+            }
+            return selectedArmy.getIterableCommand(cycleCommandIndex);
+        }
         if (currentModeList == null || currentModeList.get(cycleTypeIndex).size()==0) {
             return null;
         }
@@ -332,8 +387,7 @@ public class EntityOwnership {
     }
 
     public RallyPoint cycleInstanceOfRallyPoint(CycleDirection direction){
-        System.out.println("cycling rally point instance");
-        if (rallyPointList == null) {
+        if (rallyPointList.isEmpty()) {
             return null;
         }
         if (direction == CycleDirection.INCREMENT) {
@@ -367,6 +421,9 @@ public class EntityOwnership {
                     selectedArmy = armyList.get(selectedArmyIndex);
                     currentModeList = selectedArmy.getSubModeLists();
                     selectedRallyPoint = null;
+                }
+                else {
+                    currentModeList = null;
                 }
                 break;
             case UNIT:
@@ -409,6 +466,7 @@ public class EntityOwnership {
         selectedArmyIndex = 0;
         cycleTypeIndex = 0;
         cycleInstanceIndex = 0;
+        cycleCommandIndex = 0;
     }
 
     public void removeEntity(Entity entity){
@@ -443,13 +501,15 @@ public class EntityOwnership {
             for (Entity entity : list) {
                 Unit unit = (Unit) entity;
                 UnitStats unitStats = unit.getUnitStats().clone(); // deep clone so as not to mess anything up
-                UnitRenderObject temp = new UnitRenderObject(unit.getEntityId(), (int)(unit.getLocation().getX()), (int)(unit.getLocation().getY()), unitStats);
+                commandRelay.updateTilePlayerId(unit.getPlayerId(), unit.getLocation());
+                UnitRenderObject temp = new UnitRenderObject(unit.getEntityId(), (int)(unit.getLocation().getX()), (int)(unit.getLocation().getY()), unitStats, unit.missionsToString());
                 renderInfo.addUnit(temp);
             }
         }
         for (int i = 0; i < armyList.size(); i++) {
             Army army = armyList.get(i);
             ArmyRenderObject armyRenderObject;
+            commandRelay.updateTilePlayerId(army.getPlayerId(), army.getLocation());
             if (selectedArmyIndex == i) {
                 armyRenderObject = new ArmyRenderObject(army.getEntityId(), rallyPointList.get(selectedArmyIndex).getLocation(), true);
             }
@@ -457,15 +517,17 @@ public class EntityOwnership {
                 armyRenderObject = new ArmyRenderObject(army.getEntityId(), rallyPointList.get(selectedArmyIndex).getLocation(), false);
             }
 
+            army.checkIfRecruitsAtRallyPoint();
+
             for (Entity entity : army.getBattleGroup()) {
                 Unit unit = (Unit) entity; //we know that everything in army is a unit
                 UnitStats unitStats = unit.getUnitStats().clone(); // deep clone so as not to mess anything up
-                armyRenderObject.addUnitToBattleGroup(new UnitRenderObject(unit.getEntityId(), (int)(unit.getLocation().getX()), (int)(unit.getLocation().getY()), unitStats));
+                armyRenderObject.addUnitToBattleGroup(new UnitRenderObject(unit.getEntityId(), (int)(unit.getLocation().getX()), (int)(unit.getLocation().getY()), unitStats, unit.missionsToString()));
             }
             for (Entity entity : army.getReinforcements()) {
                 Unit unit = (Unit) entity; //we know that everything in army is a unit
                 UnitStats unitStats = unit.getUnitStats().clone(); // deep clone so as not to mess anything up
-                armyRenderObject.addUnitToReinforcements(new UnitRenderObject(unit.getEntityId(), (int)(unit.getLocation().getX()), (int)(unit.getLocation().getY()), unitStats));
+                armyRenderObject.addUnitToReinforcements(new UnitRenderObject(unit.getEntityId(), (int)(unit.getLocation().getX()), (int)(unit.getLocation().getY()), unitStats, unit.missionsToString()));
             }
             renderInfo.addArmy(armyRenderObject);
         }
@@ -477,7 +539,8 @@ public class EntityOwnership {
         for (List<Entity> list : structureList) {
             for (Entity entity : list) {
                 Structure structure = (Structure) entity;
-                StructureRenderObject temp = new StructureRenderObject( structure.getEntityId(), structure.getEntityType(),(int)(structure.getLocation().getX()),(int)(structure.getLocation().getY()));
+                commandRelay.updateTilePlayerId(structure.getPlayerId(), structure.getLocation());
+                StructureRenderObject temp = new StructureRenderObject( structure.getEntityId(), structure.getEntityType(),(int)(structure.getLocation().getX()),(int)(structure.getLocation().getY()), structure.getStructureStats(), structure.missionsToString());
                 renderInfo.addStructure(temp);
             }
         }
@@ -490,13 +553,28 @@ public class EntityOwnership {
         renderInfo.updateTypeString(getCurrentType());
         renderInfo.updateInstanceString(getCurrentInstance());
         renderInfo.updateCommandString(getCurrentCommand());
-        System.out.println("return status info says that command is " + getCurrentCommand());
-
+        renderInfo.updateLocationInfo(getCurrentInstanceLocation());
         return renderInfo;
     }
 
     public CommandType getCurrentCommand() {
-        if (currentModeList == null) {
+        if (getCurrentMode() == Mode.RALLY_POINT) {
+            if (selectedRallyPoint != null) {
+                return selectedRallyPoint.getIterableCommand(cycleCommandIndex);
+            }
+            else {
+                return null;
+            }
+        }
+        else if (getCurrentMode() == Mode.ARMY) {
+            if (selectedArmy != null) {
+                return selectedArmy.getIterableCommand(cycleCommandIndex);
+            }
+            else {
+                return null;
+            }
+        }
+        else if (currentModeList == null) {
             System.out.println("No current mode list available");
             return null;
         }
@@ -522,7 +600,7 @@ public class EntityOwnership {
         if (getCurrentMode() == Mode.RALLY_POINT) {
             return selectedRallyPoint;
         }
-        if (currentModeList == null) {
+        else if (currentModeList == null) {
             System.out.println("No current mode list available");
             return null;
         }
@@ -561,7 +639,7 @@ public class EntityOwnership {
             try {
                 return ( (Entity) currentCommandable).getEntityType().toString();
             }
-            catch (ClassCastException e) {
+            catch (ClassCastException | NullPointerException e ) {
                 return null;
             }
         }
@@ -579,6 +657,13 @@ public class EntityOwnership {
                 structureList.get(i).get(j).executeQueue();
             }
         }
+        for (RallyPoint rp : rallyPointList) {
+            rp.executeQueue();
+        }
+        for (Army army : armyList) {
+            System.out.println("execute armies");
+            army.executeQueue();
+        }
     }
 
     //TODO get army
@@ -592,6 +677,7 @@ public class EntityOwnership {
     }
 
     public void applyDamageToEntitiesOnLocation(Location location, int damage) {
+        System.out.println("applying damage to entities on location " + location);
         List<FighterUnit> unitsToDamage = new ArrayList<>();
         List<Structure> structuresToDamage = new ArrayList<>();
 
@@ -618,27 +704,25 @@ public class EntityOwnership {
             }
         }
 
-        int damageToApply = damage/(unitsToDamage.size() + structuresToDamage.size());
+        System.out.println("applying damage");
+
         for (FighterUnit unitTakingDamage : unitsToDamage) {
-            unitTakingDamage.takeDamage(damageToApply);
+            unitTakingDamage.takeDamage(damage);
         }
         for (Structure structureTakingDamage : structuresToDamage) {
-            structureTakingDamage.takeDamage(damageToApply);
+            structureTakingDamage.takeDamage(damage);
         }
 
     }
 
     public Commandable getEntity(EntityId commandableId) {
-        System.out.println("Getting entity based on id");
          for (List<Entity> list : unitList) {
              for (Entity entity : list) {
-                 System.out.println(entity.toString());
                  if (commandableId.equals(entity.getEntityId())) {
                      return entity;
                  }
              }
          }
-         System.out.println("no entity found based on id");
          return null;
     }
 
@@ -649,10 +733,52 @@ public class EntityOwnership {
 
     public void addRallyPoint(RallyPoint rallyPoint, int armyNumber) {
         selectedArmyIndex = armyNumber;
-        System.out.println("adding rally point for army number " + selectedArmyIndex);
-        System.out.println(rallyPointList);
         rallyPointList.remove(selectedArmyIndex); //rally point list will have a dummy rally point while army has no units
         rallyPointList.add(selectedArmyIndex, rallyPoint);
-        System.out.println(rallyPointList);
+    }
+
+    public Location getCurrentInstanceLocation() {
+        if (getCurrentMode() == Mode.RALLY_POINT) {
+            if (selectedRallyPoint != null) {
+                return selectedRallyPoint.getLocation();
+            }
+            else {
+                return null;
+            }
+        }
+        else {
+            if (getCurrentInstance() != null) {
+                return ((Entity) getCurrentInstance()).getLocation();
+            }
+            else {
+                return null;
+            }
+        }
+    }
+
+    public Commandable getCurrentInstanceToCommand() {
+        if (getCurrentMode() == Mode.ARMY) {
+            return selectedArmy;
+        }
+        else {
+            return getCurrentInstance();
+        }
+    }
+
+    public Commandable getInstance(int indexToSelect) {
+        if (getCurrentMode() == Mode.RALLY_POINT && indexToSelect < rallyPointList.size()) {
+            //do nothing
+        }
+        else if (getCurrentMode() == Mode.ARMY && indexToSelect < armyList.size()) {
+            selectedArmy = armyList.get(indexToSelect);
+            selectedArmyIndex = indexToSelect;
+            selectedRallyPoint = rallyPointList.get(selectedArmyIndex);
+            return selectedArmy;
+        }
+        else if (indexToSelect < currentModeList.get(cycleTypeIndex).size()) {
+            cycleInstanceIndex = indexToSelect;
+            return getCurrentInstance();
+        }
+        return null;
     }
 }

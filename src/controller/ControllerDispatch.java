@@ -5,6 +5,7 @@ import controller.availablecommands.AvailableCommands;
 import controller.availablecommands.Commandable;
 import controller.commands.Command;
 import controller.commands.CommandType;
+import controller.commands.Direction;
 import controller.commands.controllercommands.*;
 import controller.commands.entitycommand.armycommand.*;
 import controller.commands.entitycommand.entitycommand.*;
@@ -15,6 +16,7 @@ import controller.ingamecontrollertypes.MainViewController;
 import model.ActiveState;
 import model.Cursor;
 import model.GameModel;
+import model.RallyPoint;
 import model.common.Location;
 import model.entities.structure.Structure;
 import model.entities.structure.StructureType;
@@ -42,7 +44,6 @@ public class ControllerDispatch {
     public ControllerDispatch(int playerNumber, MapDisplayObserver mapDisplayObserver, UnitObserver unitObserver, StructureObserver structureObserver, StatusObserver statusObserver) {
         availableCommands = new AvailableCommands();
         gameModel = new GameModel(playerNumber, mapDisplayObserver, unitObserver, structureObserver, statusObserver);
-        //TODO: do we really need to define activeState like this/ does everything need to be static? --consider restructuring
         ActiveState.getInstance().init(new Cursor(new Location(4,4)));
         setGameModelMap();
     }
@@ -52,20 +53,23 @@ public class ControllerDispatch {
         if (commandHashMap.containsKey(commandType)) {
             System.out.println("issuing command: " + commandHashMap.get(commandType).toString());
             commandHashMap.get(commandType).execute();
+
             return;
         }
-        //ActiveState.relayCommand(commandType);
     }
 
     public void handleCommandActivation() {
-        Commandable selectedInstance = gameModel.getActivePlayer().getCurrentInstance();
         CommandType selectedCommandType = gameModel.getActivePlayer().getCurrentCommandType();
+        Commandable selectedInstance = gameModel.getActivePlayer().getCurrentInstanceToCommand();
         ActiveState.getInstance().update(selectedInstance);
         ActiveState.getInstance().update(selectedCommandType);
         System.out.println("Added to Queue: " + selectedCommandType.toString());
 
         if (selectedCommandType == CommandType.MOVE) {
             selectedInstance.addToQueue(new MoveUnitCommand((Unit)selectedInstance, ActiveState.getInstance().getCursor().getX() ,ActiveState.getInstance().getCursor().getY()));
+        }
+        else if (selectedCommandType == CommandType.MOVE_RALLY_POINT) {
+            selectedInstance.addToQueue(new MoveRallyPointCommand((RallyPoint)selectedInstance, ActiveState.getInstance().getCursor().getLocation()));
         }
 //        //ActiveState.relayCommand(CommandType.ACTIVATE_COMMAND);
 
@@ -164,11 +168,7 @@ public class ControllerDispatch {
     //TODO: ASK  IF THIS WILL WORK WHEN THE PLAYERS ARE CHANGED
     //^^^ it (should) work now :D - JS
     private void setGameModelMap() {
-        commandHashMap.put(CommandType.END_TURN, () -> {
-                                                            gameModel.endTurn();
-                                                            setGameModelMap();
-                                                            return true;
-                                                        });
+        commandHashMap.put(CommandType.END_TURN, new EndTurn(gameModel, this));
         commandHashMap.put(CommandType.CYCLE_MODE_NEXT, new CycleModeNext(gameModel.getActivePlayer()));
         commandHashMap.put(CommandType.CYCLE_MODE_PREV, new CycleModePrev(gameModel.getActivePlayer()));
         commandHashMap.put(CommandType.CYCLE_TYPE_NEXT, new CycleTypeNext(gameModel.getActivePlayer()));
@@ -178,6 +178,15 @@ public class ControllerDispatch {
         commandHashMap.put(CommandType.CYCLE_COMMAND_NEXT, new CycleCommandNext(gameModel.getActivePlayer()));
         commandHashMap.put(CommandType.CYCLE_COMMAND_PREV, new CycleCommandPrev(gameModel.getActivePlayer()));
         commandHashMap.put(CommandType.CREATE_ARMY, new CreateArmy(gameModel.getActivePlayer()));
+        commandHashMap.put(CommandType.SELECT_INSTANCE_1, new SelectInstance(gameModel.getActivePlayer(), 1));
+        commandHashMap.put(CommandType.SELECT_INSTANCE_2, new SelectInstance(gameModel.getActivePlayer(), 2));
+        commandHashMap.put(CommandType.SELECT_INSTANCE_3, new SelectInstance(gameModel.getActivePlayer(), 3));
+        commandHashMap.put(CommandType.SELECT_INSTANCE_4, new SelectInstance(gameModel.getActivePlayer(), 4));
+        commandHashMap.put(CommandType.SELECT_INSTANCE_5, new SelectInstance(gameModel.getActivePlayer(), 5));
+        commandHashMap.put(CommandType.SELECT_INSTANCE_6, new SelectInstance(gameModel.getActivePlayer(), 6));
+        commandHashMap.put(CommandType.SELECT_INSTANCE_7, new SelectInstance(gameModel.getActivePlayer(), 7));
+        commandHashMap.put(CommandType.SELECT_INSTANCE_8, new SelectInstance(gameModel.getActivePlayer(), 8));
+        commandHashMap.put(CommandType.SELECT_INSTANCE_0, new SelectInstance(gameModel.getActivePlayer(), 0));
     }
 
     public void updateActiveController(Controller newActiveController) {
@@ -225,5 +234,13 @@ public class ControllerDispatch {
 
     public void updateActiveStateCommand(CommandType commandType) {
         ActiveState.getInstance().update(commandType);
+    }
+
+    public void updateActiveStateModifier(Direction direction) {
+        ActiveState.getInstance().constructModifier(direction);
+    }
+
+    public void resetMap() {
+        setGameModelMap();
     }
 }

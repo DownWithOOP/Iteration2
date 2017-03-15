@@ -79,15 +79,15 @@ public class MVCInputHandler {
         handleCommand.put(KeyCode.NUMPAD8 + "", CommandType.MOVE);
         handleCommand.put(KeyCode.NUMPAD9 + "", CommandType.MOVE);
 
-        handleCommand.put(KeyCode.DIGIT0.toString(),CommandType.JOIN_ARMY);
-        handleCommand.put(KeyCode.DIGIT1.toString(),CommandType.JOIN_ARMY);
-        handleCommand.put(KeyCode.DIGIT2.toString(),CommandType.JOIN_ARMY);
-        handleCommand.put(KeyCode.DIGIT3.toString(),CommandType.JOIN_ARMY);
-        handleCommand.put(KeyCode.DIGIT4.toString(),CommandType.JOIN_ARMY);
-        handleCommand.put(KeyCode.DIGIT5.toString(),CommandType.JOIN_ARMY);
-        handleCommand.put(KeyCode.DIGIT6.toString(),CommandType.JOIN_ARMY);
-        handleCommand.put(KeyCode.DIGIT7.toString(),CommandType.JOIN_ARMY);
-        handleCommand.put(KeyCode.DIGIT8.toString(),CommandType.JOIN_ARMY);
+        handleCommand.put(KeyCode.DIGIT0.toString(),CommandType.SELECT_INSTANCE_0);
+        handleCommand.put(KeyCode.DIGIT1.toString(),CommandType.SELECT_INSTANCE_1);
+        handleCommand.put(KeyCode.DIGIT2.toString(),CommandType.SELECT_INSTANCE_2);
+        handleCommand.put(KeyCode.DIGIT3.toString(),CommandType.SELECT_INSTANCE_3);
+        handleCommand.put(KeyCode.DIGIT4.toString(),CommandType.SELECT_INSTANCE_4);
+        handleCommand.put(KeyCode.DIGIT5.toString(),CommandType.SELECT_INSTANCE_5);
+        handleCommand.put(KeyCode.DIGIT6.toString(),CommandType.SELECT_INSTANCE_6);
+        handleCommand.put(KeyCode.DIGIT7.toString(),CommandType.SELECT_INSTANCE_7);
+        handleCommand.put(KeyCode.DIGIT8.toString(),CommandType.SELECT_INSTANCE_8);
 
         handleCommand.put(KeyCode.ENTER + "", CommandType.ACTIVATE_COMMAND);
         handleCommand.put(KeyCode.NUMPAD5 + "", CommandType.FOCUS);

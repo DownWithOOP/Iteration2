@@ -56,6 +56,12 @@ public class TileRenderObject {
     public ArrayList<IdType> getUserEntities(){
         return this.userEntities;
     }
+    public ArrayList<IdType> getEnemyEntities() { return this.enemyEntities; }
+    public void removeAllEnemies(){
+        this.enemyEntities = null;
+        this.enemyEntities = new ArrayList<IdType>();
+
+    }
     public int getVisibilityLevel(){
         return this.visibilityLevel;
     }

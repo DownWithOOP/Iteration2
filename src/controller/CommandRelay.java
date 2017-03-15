@@ -4,7 +4,9 @@ import controller.commands.Direction;
 import model.GameModel;
 import model.RallyPoint;
 import model.common.Location;
+import model.entities.structure.Structure;
 import model.entities.unit.FighterUnit;
+import utilities.id.CustomID;
 
 /**
  * Created by Jonathen on 3/14/2017.
@@ -20,6 +22,7 @@ public class CommandRelay {
     }
 
     public void notifyModelOfAttack(Location location, int damage) {
+        System.out.println("apply damage of " + damage);
         model.applyDamageToEntitiesByLocation(location, damage);
     }
 
@@ -33,5 +36,13 @@ public class CommandRelay {
 
     public void notifyModelOfRallyPointCreation(RallyPoint rallyPoint, int armyNumber) {
         model.addRallyPoint(rallyPoint, armyNumber);
+    }
+
+    public void notifyModelOfStructureCreation(Structure structure) {
+        model.addStructure(structure);
+    }
+
+    public void updateTilePlayerId(CustomID playerId, Location location) {
+        model.updateTilePlayerId(playerId, location);
     }
 }

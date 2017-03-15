@@ -196,4 +196,8 @@ public class Map {
     public CustomID getPlayerOnTile(Location location) {
         return getTile(location).getPlayerId();
     }
+
+    public void setTilePlayerId(CustomID playerId, Location location) {
+        getTile(location).setPlayerId(playerId);
+    }
 }

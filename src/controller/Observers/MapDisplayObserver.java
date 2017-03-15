@@ -21,9 +21,13 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
     private boolean allVisible = false; // FOR DEBUGGING ONLY, TURN ON IF NEED BE TO SEE EVERYTHING
 
     private int currPlayerNumber;
-    private MapRenderInformation currMapRenderInformation;
-    private UnitRenderInformation currUnitRenderInformation;
-    private StructureRenderInformation currStructureRenderInformation;
+    private MapRenderInformation currMapRenderInformation1;
+    private UnitRenderInformation currUnitRenderInformation1;
+    private StructureRenderInformation currStructureRenderInformation1;
+
+    private MapRenderInformation currMapRenderInformation2;
+    private UnitRenderInformation currUnitRenderInformation2;
+    private StructureRenderInformation currStructureRenderInformation2;
 
     public MapDisplayObserver(int numberOfPlayers){
         this.numberOfPlayers = numberOfPlayers;
@@ -54,9 +58,16 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
     public void update(int playerNumber, MapRenderInformation mapRenderInformation, UnitRenderInformation unitRenderInformation, StructureRenderInformation structureRenderInformation) {
 
         this.currPlayerNumber = playerNumber;
-        this.currMapRenderInformation = mapRenderInformation;
-        this.currStructureRenderInformation = structureRenderInformation;
-        this.currUnitRenderInformation = unitRenderInformation;
+        if(currPlayerNumber == 1){
+            this.currMapRenderInformation1 = mapRenderInformation;
+            this.currStructureRenderInformation1 = structureRenderInformation;
+            this.currUnitRenderInformation1 = unitRenderInformation;
+        } else {
+            this.currMapRenderInformation2 = mapRenderInformation;
+            this.currStructureRenderInformation2 = structureRenderInformation;
+            this.currUnitRenderInformation2 = unitRenderInformation;
+        }
+
 
         if(!initialized){
             // this gets called only once since immediatly we don't know the size of the map
@@ -67,6 +78,7 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
             initializeNewPlayer(playerNumber); // if size of ArrayList is too small, then player does not have one initialized
         }
 
+        System.out.println("currently active player :" + this.currPlayerNumber);
         // go through TileRender objects change any that have visibility level 2, down to level 1
         TileRenderObject[][] userData = playerTiles.get(playerNumber-1);
         for(int i=0; i<mapSizeX; i++){
@@ -76,6 +88,7 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
                 check.removeUserEntity();
                 if(check.getVisibilityLevel() == 2){
                     check.setVisibilityToOne();
+                    check.removeAllEnemies();
                 }
                 if(allVisible){ // sets everything to visible
                     check.setVisibilityTwo();
@@ -83,13 +96,21 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
             }
         }
 
-
-
         // now we go through each of the units
-        ArrayList<UnitRenderObject> playerUnitData = unitRenderInformation.returnRenderInformation();
+
+        ArrayList<UnitRenderObject> playerUnitData;
+        if(playerNumber == 1){
+            playerUnitData = currUnitRenderInformation1.returnRenderInformation();
+        } else {
+            playerUnitData = currUnitRenderInformation2.returnRenderInformation();
+        }
+
+
+
         MapRenderObject[][] mapInfo = mapRenderInformation.getRenderObjectMap();
 
         for(UnitRenderObject unit : playerUnitData){
+            System.out.println("current active player " + currPlayerNumber + "  : " + unit.getLocationX() + " " + unit.getLocationY());
             // we set the location of where the unit currently is as 2 (100% visible)
             TileRenderObject temp = userData[unit.getLocationX()][unit.getLocationY()];
             temp.setVisibilityTwo();
@@ -102,16 +123,81 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
             else {
                 offSet =-1;
             }
-
             int LOS = unit.getUnitStats().getVisionRadius();
-            if(LOS <= 1){ // set 1 radius out as all visible
-                updateLevelOneLOS(playerNumber,offSet,unit.getLocationX(),unit.getLocationY(),mapInfo);
+            if(LOS <= 1) { // set 1 radius out as all visible
+                updateLevelOneLOS(playerNumber, offSet, unit.getLocationX(), unit.getLocationY(), mapInfo);
             }
             if(LOS <= 2){ // set 2 radius out as all visible
                 updateLevelTwoLOS(playerNumber,offSet,unit.getLocationX(),unit.getLocationY(),mapInfo);
             }
         }
-            // structures can wait for later
+
+
+
+
+        ArrayList<StructureRenderObject> playerStructureInfo = structureRenderInformation.returnRenderInformation();
+        for(StructureRenderObject structure: playerStructureInfo){
+
+            TileRenderObject temp = userData[structure.getLocationX()][structure.getLocationY()];
+            temp.setVisibilityTwo();
+            temp.addUserEntity(structure.getIdType());
+
+            int offSet = 0;
+            if(structure.getLocationX()%2 == 0){
+                offSet = 0; }
+            else {
+                offSet =-1;
+            }
+
+            // int LOS = structure.
+            int LOS = structure.getStructureStats().getVisionRadius();
+            if(LOS <= 1){ // set 1 radius out as all visible
+                updateLevelOneLOS(playerNumber,offSet,structure.getLocationX(),structure.getLocationY(),mapInfo);
+            }
+            if(LOS <= 2){ // set 2 radius out as all visible
+                updateLevelTwoLOS(playerNumber,offSet,structure.getLocationX(),structure.getLocationY(),mapInfo);
+            }
+        }
+
+
+        // now go through any enemy structures and units that may be visible
+
+
+        if(currPlayerNumber == 1 && playerTiles.size() > 1){
+            ArrayList<UnitRenderObject> enemyUnitData = currUnitRenderInformation2.returnRenderInformation();
+            for(UnitRenderObject enemyUnit : enemyUnitData){
+                TileRenderObject check = userData[enemyUnit.getLocationX()][enemyUnit.getLocationY()];
+                if(check.getVisibilityLevel() == 2){
+                    if(playerTiles.size() < 2){
+                        // start of game, don't
+                    } else {
+                        playerTiles.get(currPlayerNumber-1)[enemyUnit.getLocationX()][enemyUnit.getLocationY()].addEnemyEntity(enemyUnit.getIdType());
+                    }
+                } else{
+                    // don't add, not visible
+                }
+            }
+        }
+
+        if(currPlayerNumber == 2){
+            ArrayList<UnitRenderObject> enemyUnitData = currUnitRenderInformation1.returnRenderInformation();
+            for(UnitRenderObject enemyUnit : enemyUnitData){
+                TileRenderObject check = userData[enemyUnit.getLocationX()][enemyUnit.getLocationY()];
+                if(check.getVisibilityLevel() == 2){
+                    if(playerTiles.size() < 2){
+                        // start of game, don't
+                    } else {
+                        playerTiles.get(currPlayerNumber-1)[enemyUnit.getLocationX()][enemyUnit.getLocationY()].addEnemyEntity(enemyUnit.getIdType());
+                    }
+                } else{
+                    // don't add, not visible
+                }
+            }
+        }
+
+
+
+
 
         if(allVisible){
             for(int i=0; i<mapSizeX; i++){
@@ -128,27 +214,44 @@ public class MapDisplayObserver implements utilities.ObserverInterfaces.MapObser
                 }
             }
         }
-
     }
 
     @Override
     public void updateUnit(EntityId unitId, UnitRenderObject unitRenderObject){
-        //this.currUnitRenderInformation = unitRenderInformation;
-        if(currUnitRenderInformation!=null){
-            currUnitRenderInformation.removeUnit(unitId);
-            currUnitRenderInformation.addUnit(unitRenderObject);
-            update(currPlayerNumber, currMapRenderInformation, currUnitRenderInformation, currStructureRenderInformation);
+        if(currPlayerNumber == 1){
+            if(currUnitRenderInformation1!=null){
+
+                currUnitRenderInformation1.removeUnit(unitId);
+                currUnitRenderInformation1.addUnit(unitRenderObject);
+                update(currPlayerNumber, currMapRenderInformation1, currUnitRenderInformation1, currStructureRenderInformation1);
+            }
         }
+        else {
+            if(currUnitRenderInformation2!=null){
+                currUnitRenderInformation2.removeUnit(unitId);
+                currUnitRenderInformation2.addUnit(unitRenderObject);
+                update(currPlayerNumber, currMapRenderInformation2, currUnitRenderInformation2, currStructureRenderInformation2);
+            }
+        }
+
     }
 
     @Override
     public void updateStructure(EntityId structureId, StructureRenderObject structureRenderObject){
-        //this.currStructureRenderInformation = structureRenderInformation;
-        if(currStructureRenderInformation!=null){
-            currStructureRenderInformation.removeStructure(structureId);
-            currStructureRenderInformation.addStructure(structureRenderObject);
-            update(currPlayerNumber, currMapRenderInformation, currUnitRenderInformation, currStructureRenderInformation);
+        if(currPlayerNumber == 1){
+            if(currStructureRenderInformation1!=null){
+                currStructureRenderInformation1.removeStructure(structureId);
+                currStructureRenderInformation1.addStructure(structureRenderObject);
+                update(currPlayerNumber, currMapRenderInformation1, currUnitRenderInformation1, currStructureRenderInformation1);
+            }
+        } else {
+            if(currStructureRenderInformation2!=null){
+                currStructureRenderInformation2.removeStructure(structureId);
+                currStructureRenderInformation2.addStructure(structureRenderObject);
+                update(currPlayerNumber, currMapRenderInformation2, currUnitRenderInformation2, currStructureRenderInformation2);
+            }
         }
+
     }
 
     @Override

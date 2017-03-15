@@ -1,5 +1,6 @@
 package controller.commands.entitycommand.unitcommand.explorercommand;
 
+import controller.commands.CommandType;
 import controller.commands.entitycommand.unitcommand.UnitCommand;
 import model.entities.unit.Explorer;
 import model.entities.unit.Unit;
@@ -11,6 +12,7 @@ public class ProspectCommand extends ExplorerCommand {
 
     public ProspectCommand(Explorer explorer) {
         super(explorer, 1);
+        super.setCommandType(CommandType.PROSPECT);
     }
 
     @Override

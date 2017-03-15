@@ -40,7 +40,13 @@ public class Assets {
     public Image RED_CROSS;
     public Image SKULL;
 
-    public Image BASE;
+    public Image CAPITAL;
+    public Image FARM;
+    public Image FORT;
+    public Image MINE;
+    public Image OBSERVATION_TOWER;
+    public Image POWER_PLANT;
+    public Image UNIVERSITY;
 
     public Image COLONIST;
     public Image EXPLORER;
@@ -53,6 +59,7 @@ public class Assets {
 
     public Image MINIMAPBORDER;
     public Image SMALLPURPLE;
+    public Image GREY;
 
     public boolean init(){
 
@@ -74,7 +81,13 @@ public class Assets {
             SKULL = new Image("/images/decals/skull.png");
 
             //structures
-            BASE = new Image("/images/entities/base.png");
+            CAPITAL = new Image("/images/entities/capital.png");
+            FARM = new Image("/images/entities/farm.png");
+            FORT = new Image("/images/entities/fort.png");
+            MINE = new Image("/images/entities/mine.png");
+            OBSERVATION_TOWER = new Image("/images/entities/observationtower.png");
+            POWER_PLANT = new Image("/images/entities/powerplant.png");
+            UNIVERSITY = new Image("/images/entities/university.png");
 
             //units
             COLONIST = new Image("/images/entities/colonist.png");
@@ -88,6 +101,7 @@ public class Assets {
             //RALLY_POINT = new Image("images/misc/rally_point.png");
             MINIMAPBORDER = new Image("images/misc/minMap.png");
             SMALLPURPLE = new Image("images/misc/smallPurple.png");
+            GREY = new Image("images/misc/GREY.png");
 
         } catch (Exception e){
             e.printStackTrace();

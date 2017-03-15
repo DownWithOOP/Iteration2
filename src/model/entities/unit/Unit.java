@@ -85,7 +85,6 @@ public abstract class Unit extends Entity implements UnitSubject, MapSubject {
             //Do this to get the current render object
             super.setLocation(newX, newY);
             notifyUnitObservers();
-            notifyMapObservers();
 
         } else {
             System.out.println("Movement distance too far");
@@ -95,7 +94,7 @@ public abstract class Unit extends Entity implements UnitSubject, MapSubject {
 
     private UnitRenderObject createRenderObject(){
         UnitStats unitStats = this.getUnitStats().clone(); // deep clone so as not to mess anything up
-        return new UnitRenderObject(this.getEntityId(), (int)(this.getLocation().getX()), (int)(this.getLocation().getY()), unitStats);
+        return new UnitRenderObject(this.getEntityId(), (int)(this.getLocation().getX()), (int)(this.getLocation().getY()), unitStats, this.missionsToString());
     }
 
     public void advanceToRallyPoint(int number){

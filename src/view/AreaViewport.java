@@ -43,7 +43,10 @@ public class AreaViewport implements MiniMapSubject{
     private int slowCameraSpeed;
     private TileRenderObject[][] renderData;
     private ArrayList<MiniMapObserver> miniMapObservers= new ArrayList<MiniMapObserver>();
-
+    private boolean startOfNewTurn = true;
+    private String selectedUnit;
+    private int cursorX;
+    private int cursorY;
     Image grass = Assets.getInstance().GRASS;
     Image water = Assets.getInstance().WATER;
     Image dirt = Assets.getInstance().DIRT;
@@ -55,6 +58,11 @@ public class AreaViewport implements MiniMapSubject{
     Image research = Assets.getInstance().RESEARCH;
     Image colonist = Assets.getInstance().COLONIST;
     Image explorer = Assets.getInstance().EXPLORER;
+    Image grey = Assets.getInstance().GREY;
+    Image melee = Assets.getInstance().MELEE;
+    Image ranged = Assets.getInstance().RANGED;
+    Image capital = Assets.getInstance().CAPITAL;
+
 
     public AreaViewport(VBox vbox, Canvas canvas, MiniMap miniMap){
 
@@ -133,6 +141,18 @@ public class AreaViewport implements MiniMapSubject{
         this.gridSizeY = renderData[0].length;
         updateCanvas();
         notifyObservers(); // update mini map
+    }
+
+    // currently cycled unit that is in that status viewport
+    public void getCurrentActiveUnit(String string, int locationX, int locationY){
+        this.selectedUnit = string;
+        if(this.cursorX != locationX || this.cursorY != locationY){
+            // change cursor location
+            selectJumpLocation(cursorX, cursorY);
+        }
+
+        this.cursorX = locationX;
+        this.cursorY = locationY;
 
     }
 
@@ -153,6 +173,10 @@ public class AreaViewport implements MiniMapSubject{
     }
 
     /** selection control **/
+
+    public void selectJumpLocation(int locationX, int locationY){
+        ActiveState.getInstance().getCursor().updateCursorLocation(locationX, locationY);
+    }
 
     public void selectNorth(){
 //        this.selectY++; // update value
@@ -349,7 +373,6 @@ public class AreaViewport implements MiniMapSubject{
      */
     public void updateCanvas(){
 
-
         int sizeX = renderData.length;
         int sizeY = renderData[0].length;
 
@@ -374,7 +397,70 @@ public class AreaViewport implements MiniMapSubject{
                     } else if(render.getVisibilityLevel() == 1){
                         // 1, we'll handle this later
                         // TODO greyed out area
+                        TerrainType type = render.getTerrainType();
 
+                        StringBuilder builder = new StringBuilder();
+                        if (displayFood) {
+                            builder.append("F: " + render.getFoodAmount() +"\n");
+                        }
+                        if (displayOre) {
+                            builder.append("O: " + render.getOreAmount() + "\n");
+                        }
+                        if (displayEnergy) {
+                            builder.append("E: " + render.getEnergyAmount() + "\n");
+                        }
+                        String resourceDisplay = builder.toString();
+
+                        if(render.getLocationX() % 2 == 0) { // first type of column
+
+                            if(type.equals(TerrainType.GRASS)){
+                                gc.drawImage(grass,
+                                        0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                            }
+                            else if(type.equals(TerrainType.DIRT)){
+                                gc.drawImage(dirt,
+                                        0.75*width*j+ cameraX,height*1*-i+ cameraY+ width*0.45);
+                            }
+                            else if(type.equals(TerrainType.WATER)){
+                                gc.drawImage(water,
+                                        0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                            }
+                            gc.drawImage(grey,
+                                    0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+
+                            // now draw resource values if the overlay is on
+                            if(resourceDisplay.equals("") || !overlayOn){
+                                // don't display anything
+                            } else {
+                                gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + width * 0.45 - 60 + height);
+                            }
+
+                        } else { // second type of column
+
+                            if(type.equals(TerrainType.GRASS)){
+                                gc.drawImage(grass,
+                                        0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                            }
+                            else if(type.equals(TerrainType.DIRT)){
+                                gc.drawImage(dirt,
+                                        0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                            }
+                            else if(type.equals(TerrainType.WATER)){
+                                gc.drawImage(water,
+                                        0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                            }
+
+                            gc.drawImage(grey,
+                                    0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+
+                            // now draw resource values if the overlay is on
+                            if(resourceDisplay.equals("") || !overlayOn){
+                                // don't display anything
+                            } else {
+                                gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + (2 * height) - 60);
+                            }
+
+                        }
 
                     } else{
                         // must be 2, fully visible display everything that is there
@@ -416,12 +502,53 @@ public class AreaViewport implements MiniMapSubject{
                                             if(id.equals(IdType.EXPLORER)){
                                                 gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
                                             }
+                                            if(id.equals(IdType.MELEE)){
+                                                gc.drawImage(melee,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                            }
+                                            if(id.equals(IdType.RANGED)){
+                                                gc.drawImage(ranged,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                            }
+                                            if (id.equals(IdType.CAPITAL)) { //draw capital
+                                                gc.drawImage(capital,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
+                                            }
+                                            if(startOfNewTurn && entities.size() != 0){
+                                                selectJumpLocation(j,i);
+                                                changeCamera(j,i);
+                                                startOfNewTurn = false;
+                                            }
                                         }
+                            
                                         // now draw resource values if the overlay is on
                                         if(resourceDisplay.equals("") || !overlayOn){
                                             // don't display anything
                                         } else {
                                             gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + width * 0.45 - 60 + height);
+                                        }
+
+
+                                        ArrayList<IdType> enemies = render.getEnemyEntities();
+                                        for(IdType id : enemies){
+
+                                            if(id.equals(IdType.COLONIST)){ // draw colonist
+                                                gc.drawImage(colonist,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                            }
+                                            if(id.equals(IdType.EXPLORER)){
+                                                gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                            }
+                                            if(id.equals(IdType.MELEE)){
+                                                gc.drawImage(melee,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                            }
+                                            if(id.equals(IdType.RANGED)){
+                                                gc.drawImage(ranged,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                            }
+                                            if (id.equals(IdType.CAPITAL)) { //draw capital
+                                                gc.drawImage(capital,0.75*width*j + cameraX,height*1*-i+cameraY + width * 0.45);
+                                            }
+                                            if(startOfNewTurn && entities.size() != 0){
+                                                selectJumpLocation(j,i);
+                                                changeCamera(j,i);
+                                                startOfNewTurn = false;
+                                            }
                                         }
                         }
                         else { // second column type
@@ -440,12 +567,28 @@ public class AreaViewport implements MiniMapSubject{
                                         // draw friendly units and structures
                                         ArrayList<IdType> entities = render.getUserEntities();
                                         for(IdType id : entities){
-                                            if(id.equals(IdType.COLONIST)){ // draw colonist
-                                                gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+
+                                            if(startOfNewTurn && entities.size() != 0){
+                                                selectJumpLocation(j,i);
+                                                changeCamera(j,i);
+                                                startOfNewTurn = false;
                                             }
-                                            if(id.equals(IdType.EXPLORER)){
+                                            if(id.equals(IdType.COLONIST)){ // draw colonist
                                                 gc.drawImage(colonist,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
                                             }
+                                            if(id.equals(IdType.EXPLORER)){
+                                                gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                            }
+                                            if(id.equals(IdType.MELEE)){
+                                                gc.drawImage(melee,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                            }
+                                            if(id.equals(IdType.RANGED)){
+                                                gc.drawImage(ranged,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                            }
+                                            if (id.equals(IdType.CAPITAL)) { //draw capital
+                                                gc.drawImage(capital, 0.75*width*j + cameraX, height*1*-i+ cameraY+height);
+                                            }
+
                                         }
 
                                         // now draw resource values if the overlay is on
@@ -455,11 +598,32 @@ public class AreaViewport implements MiniMapSubject{
                                             gc.strokeText(resourceDisplay, 0.75 * width * j + cameraX + 40, height * 1 * -i + cameraY + (2 * height) - 60);
                                         }
 
+                                        // now to draw enemy units
+                                        ArrayList<IdType> enemies = render.getEnemyEntities();
+                                        for(IdType id : enemies){
+
+                                            if(id.equals(IdType.COLONIST)){ // draw colonist
+                                                gc.drawImage(colonist,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                            }
+                                            if(id.equals(IdType.EXPLORER)){
+                                                gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                            }
+                                            if(id.equals(IdType.MELEE)){
+                                                gc.drawImage(melee,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                            }
+                                            if(id.equals(IdType.RANGED)){
+                                                gc.drawImage(ranged,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                            }
+                                            if (id.equals(IdType.CAPITAL)) { //draw capital
+                                                gc.drawImage(capital, 0.75*width*j + cameraX, height*1*-i+ cameraY+height);
+                                            }
+
+                                        }
+
                         }
                     }
             }
         }
-
         drawSelection();
         drawRallyPoints();
     }
@@ -470,8 +634,19 @@ public class AreaViewport implements MiniMapSubject{
         double width = grass.getWidth();
         double height = grass.getHeight();
         for (ArmyRenderObject armyRenderObject : unitRenderInformation.returnArmyInformation()) {
-            gc.drawImage(rallyPoint,0.75*width* armyRenderObject.getRallyPointLocation().getX()+ cameraX,height*1*-armyRenderObject.getRallyPointLocation().getY()+ cameraY + width*0.45);
+            if(armyRenderObject.getRallyPointLocation().getX()%2 == 0){
+                gc.drawImage(rallyPoint,0.75*width* armyRenderObject.getRallyPointLocation().getX()+ cameraX,height*1*-armyRenderObject.getRallyPointLocation().getY()+ cameraY + width*0.45);
+            } else {
+                gc.drawImage(rallyPoint,0.75*width* armyRenderObject.getRallyPointLocation().getX()+ cameraX,height*1*-armyRenderObject.getRallyPointLocation().getY()+ cameraY + width*0.9);
+            }
         }
+    }
+
+    private void changeCamera(int locationX, int locationY){
+        double width = grass.getWidth();
+        double height = grass.getHeight();
+        this.cameraX = (-0.75*width*locationX)/2;
+        this.cameraY = 1.25*(height*locationY) ;
     }
 
     @Override

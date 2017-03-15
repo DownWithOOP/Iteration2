@@ -3,6 +3,7 @@ package model.RenderInformation;
 import controller.availablecommands.Commandable;
 import controller.commands.CommandType;
 import model.Mode;
+import model.common.Location;
 
 /**
  * Created by Jonathen on 3/6/2017.
@@ -13,6 +14,8 @@ public class StatusRenderInformation {
     private String typeString;
     private String instanceString;
     private String commandString;
+    private int locationX;
+    private int locationY;
 
     //TODO account for other part of status viewport
 
@@ -23,6 +26,8 @@ public class StatusRenderInformation {
         typeString = "";
         instanceString = "";
         commandString = "";
+        locationX = -1;
+        locationY = -1;
     }
 
     public void updateModeString(Mode newMode) {
@@ -35,6 +40,16 @@ public class StatusRenderInformation {
         }
         else {
             typeString = "No Selected Type Available";
+        }
+    }
+
+    public void updateLocationInfo(Location updatedLocation){
+        if (updatedLocation != null) {
+            this.locationX = (int)updatedLocation.getX();
+            this.locationY = (int)updatedLocation.getY();
+        }else{
+            this.locationX = -1;
+            this.locationY = -1;
         }
     }
 
@@ -56,6 +71,12 @@ public class StatusRenderInformation {
         }
     }
 
+    public int getLocationX(){
+        return this.locationX;
+    }
+    public int getLocationY(){
+        return this.locationY;
+    }
     public String getModeString() {
         return modeString;
     }

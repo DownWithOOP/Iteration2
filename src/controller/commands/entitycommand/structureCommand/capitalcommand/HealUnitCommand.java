@@ -1,5 +1,6 @@
 package controller.commands.entitycommand.structureCommand.capitalcommand;
 
+import controller.commands.CommandType;
 import model.entities.structure.Capital;
 import model.entities.unit.FighterUnit;
 import model.entities.unit.Unit;
@@ -12,6 +13,7 @@ public class HealUnitCommand extends CapitalCommand {
 
     public HealUnitCommand(Capital capital, FighterUnit unitToHeal) {
         super(capital, 1);
+        super.setCommandType(CommandType.HEAL_UNIT);
         this.unitToHeal = unitToHeal;
     }
 

@@ -1,5 +1,6 @@
 package controller.commands.entitycommand.unitcommand;
 
+import controller.commands.CommandType;
 import model.entities.unit.Unit;
 
 /**
@@ -9,6 +10,7 @@ public class AbandonArmyCommand extends UnitCommand{
 
     public AbandonArmyCommand(Unit unit) {
         super(unit, 1);
+        super.setCommandType(CommandType.ABANDON_ARMY);
     }
 
     @Override

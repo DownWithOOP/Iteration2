@@ -1,5 +1,6 @@
 package controller.commands.entitycommand.unitcommand.workercommand;
 
+import controller.commands.CommandType;
 import model.entities.EntityType;
 import model.entities.unit.Worker;
 import utilities.id.CustomID;
@@ -14,6 +15,7 @@ public class BuildStructureCommand extends WorkerCommand {
 
     public BuildStructureCommand(Worker worker, EntityType entityType, CustomID customID, String id) {
         super(worker, 5);
+        super.setCommandType(CommandType.BUILD_STRUCTURE);
         this.entityType = entityType;
         this.customID = customID;
         this.id = id;

@@ -3,6 +3,7 @@ package controller.ingamecontrollertypes;
 import controller.Controller;
 import controller.SwitchControllerRelay;
 import controller.commands.CommandType;
+import controller.commands.Direction;
 import controller.inputhandler.MVCInputHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -63,6 +64,8 @@ public class MainViewController extends Controller{
     MenuItem oreOverlay;
     @FXML
     MenuItem energyOverlay;
+    @FXML
+    MenuItem keyboardMap;
 
     private Map currentMap;
     private AreaViewport areaViewport;
@@ -90,6 +93,7 @@ public class MainViewController extends Controller{
     public void takeInSwitchControllerRelay(SwitchControllerRelay switchControllerRelay){
         this.switchControllerRelay = switchControllerRelay;
     }
+
 
     @Override
     protected void enableKeyboardInput() {
@@ -144,8 +148,10 @@ public class MainViewController extends Controller{
 
     @Override
     protected void render() {
+        this.areaViewport.getCurrentActiveUnit(this.statusObserver.share().getInstanceString(), this.statusObserver.share().getLocationX(), this.statusObserver.share().getLocationY() );
         this.areaViewport.UpdateRenderInfo(this.mapObserver.share(), this.unitObserver.share(), this.structureObserver.share(), this.mapObserver.getPlayerXRenderMap(controllerDispatch.getActivePlayerNumber())); // displays the map
         this.statusViewport.updateRenderInfo(this.statusObserver.share());
+
     }
 
     //Move methods for moving with keyboard - JS
@@ -167,33 +173,44 @@ public class MainViewController extends Controller{
     }
 
 
+    public void handleKeyBoardSwitch(){
+
+    }
+
     @FXML void selectNorth() throws IOException{
         this.areaViewport.selectNorth(); // TODO hook this up to some keyboard input
+        controllerDispatch.updateActiveStateModifier(Direction.NORTH);
         updateCoordinatesForDebugging();
     }
     @FXML void selectSouth() throws IOException{
         this.areaViewport.selectSouth(); // TODO hook this up to some keyboard input
+        controllerDispatch.updateActiveStateModifier(Direction.SOUTH);
         updateCoordinatesForDebugging();
     }
     @FXML void selectNE() throws IOException{
         this.areaViewport.selectNE(); // TODO hook this up to some keyboard input
+        controllerDispatch.updateActiveStateModifier(Direction.NORTH_EAST);
         updateCoordinatesForDebugging();
     }
     @FXML void selectSE() throws IOException{
         this.areaViewport.selectSE(); // TODO hook this up to some keyboard input
+        controllerDispatch.updateActiveStateModifier(Direction.SOUTH_EAST);
         updateCoordinatesForDebugging();
     }
     @FXML void selectSW() throws IOException{
         this.areaViewport.selectSW(); // TODO hook this up to some keyboard input
+        controllerDispatch.updateActiveStateModifier(Direction.SOUTH_WEST);
         updateCoordinatesForDebugging();
     }
     @FXML void selectNW() throws IOException{
         this.areaViewport.selectNW();  // TODO hook this up to some keyboard input
+        controllerDispatch.updateActiveStateModifier(Direction.NORTH_WEST);
         updateCoordinatesForDebugging();
     }
     private void updateCoordinatesForDebugging(){ // for debugging, once game is working we can get rid of this
         this.coordinateInfo.setText(areaViewport.returnXCoordinate() + " " + areaViewport.returnYCoordinate());
     }
+
 
     @FXML
     public void handleChangeToStructureView(ActionEvent actionEvent) throws  IOException{
@@ -281,6 +298,7 @@ public class MainViewController extends Controller{
         this.miniMap = new MiniMap(MinMap);
         this.areaViewport = new AreaViewport(vbox, canvas, miniMap);
         this.statusViewport = new StatusViewport(cycleLabels);
+        this.updateCoordinatesForDebugging();
 
     }
 

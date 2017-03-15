@@ -4,9 +4,12 @@ import controller.CommandRelay;
 import controller.availablecommands.Commandable;
 import controller.commands.CommandType;
 import controller.commands.CycleDirection;
+import model.ActiveState;
 import model.RallyPoint;
+import model.RenderInformation.StatusRenderInformation;
 import model.common.Location;
 import model.entities.EntityId;
+import model.entities.structure.Structure;
 import model.entities.unit.Army;
 import model.entities.unit.FighterUnit;
 import model.map.tile.resources.Resource;
@@ -37,7 +40,7 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
     public Player(int playerNumber, Map map, CommandRelay commandRelay, MapObserver observer, UnitObserver unitObserver, StructureObserver structureObserver, StatusObserver statusObserver, int startingX, int startingY){
 
         this.playerNumber = playerNumber;
-        customID=new CustomID(IdType.PLAYER,"newPlayer");
+        customID=new CustomID(IdType.PLAYER, String.valueOf(playerNumber));
 
 //        entities = new EntityOwnership(customID, commandRelay, startingX, startingY); //TODO should entity ownership know Player?
 
@@ -61,11 +64,11 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
     public void startTurn(){
         System.out.println(this.toString() + " is starting their turn");
 
+        entities.executeCommands(); //execute all commands in each entity's queue
         this.notifyStructureObservers(); // we also want to update everyone with all our structure information
         this.notifyUnitObservers(); // and lets not forget the units
         this.notifyMapObservers(); // at the start of the game we want to give the player map to render
         this.notifyStatusObservers(); // yay status viewport
-        entities.executeCommands(); //execute all commands in each entity's queue
     }
 
     /**
@@ -152,6 +155,7 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
     public void notifyStatusObservers() { // IMPORTANT!! CALL THIS WHENEVER ENTITY OWNERSHIP IS UPDATED SO THE VIEW REFRESHES
         for(StatusObserver statusObserver : statusObservers){
             //TODO maybe get status render info from current selection instead of entities. This would remove the double calls to functions in EntityOwnership
+            StatusRenderInformation temp = entities.returnStatusRenderInformation();
             statusObserver.update(entities.returnStatusRenderInformation());
         }
     }
@@ -160,6 +164,7 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
 
 
     public void applyDamageToEntitiesOnLocation(Location location, int damage) {
+        System.out.println("player tellig entities to take dmg");
         entities.applyDamageToEntitiesOnLocation(location, damage);
     }
 
@@ -192,6 +197,21 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
 
     public int getFoodResourceLevel() {
         return resources.getFoodResources().getLevel();
+    }
+
+    public void addStructure(Structure structure) {
+        entities.addEntity(structure);
+        notifyStructureObservers();
+    }
+
+    public Commandable getCurrentInstanceToCommand() {
+        return entities.getCurrentInstanceToCommand();
+    }
+
+    public void getInstanceFromIndex(int indexToSelect) {
+        entities.getInstance(indexToSelect);
+        notifyStatusObservers();
+        notifyUnitObservers();
     }
 
 }

@@ -46,7 +46,6 @@ public class ActiveState {
     }
 
     public void update(CommandType commandType) {
-        System.out.println("update command type to " + commandType);
         activeCommandType = commandType;
     }
 
@@ -61,14 +60,10 @@ public class ActiveState {
 
         Command cursorCommand;
 
-        System.out.println("active state relay actionable command, command type " + commandType);
         if (activeCommandType != null && checkIfCommandCanBePerformed(activeCommandType)) {
             activeCommand = commandFactory.createActionableCommand(activeCommandType, activeCommandable, modifier);
-            System.out.println("active command not null? " + (activeCommand != null));
-            System.out.println("active command constructed");
             if (activeCommand != null) {
-                System.out.println("active state relay actionable command active command executed");
-                System.out.println(activeCommand);
+                System.out.println("we add command to queue in active state");
                 activeCommandable.addToQueue(activeCommand);
             }
         }

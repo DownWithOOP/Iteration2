@@ -1,5 +1,6 @@
 package controller.commands.entitycommand.structureCommand.capitalcommand;
 
+import controller.commands.CommandType;
 import model.entities.EntityType;
 import model.entities.structure.Capital;
 import utilities.id.CustomID;
@@ -14,6 +15,7 @@ public class CreateUnitCommand extends CapitalCommand {
 
     public CreateUnitCommand(Capital capital, EntityType entityToCreate, CustomID customId, String id) {
         super(capital, 3);
+        super.setCommandType(CommandType.CREATE_UNIT);
         this.entityToCreate = entityToCreate;
         this.customId = customId;
         this.id = id;

@@ -23,7 +23,7 @@ public class UnitRenderInformation {
     public boolean removeUnit(EntityId unitId) {
         for (UnitRenderObject unit : unitRenderInformation) {
             if (unit.getUnitId() == unitId) {
-                return unitRenderInformation.remove(unit);
+                    return unitRenderInformation.remove(unit);
             }
         }
         return false;

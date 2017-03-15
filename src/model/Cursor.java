@@ -45,6 +45,10 @@ public class Cursor {
         location.moveEast();
     }
 
+    public void updateCursorLocation(int locationX, int locationY){
+        location.jumpLocation(locationX, locationY);
+    }
+
     public void addCursorToAvailableCommands(AvailableCommands availableCommands) {
         HashMap<CommandType, Command> cursorCommand;
 //        cursorCommand.put()

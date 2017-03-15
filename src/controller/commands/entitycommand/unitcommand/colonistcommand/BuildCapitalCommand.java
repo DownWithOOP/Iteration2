@@ -1,5 +1,6 @@
 package controller.commands.entitycommand.unitcommand.colonistcommand;
 
+import controller.commands.CommandType;
 import model.entities.EntityType;
 import model.entities.unit.Colonist;
 import utilities.id.CustomID;
@@ -13,9 +14,10 @@ public class BuildCapitalCommand extends ColonistCommand {
     private String id;
 
     public BuildCapitalCommand(Colonist colonist) {
-        super(colonist, 5);
-        this.customID = new CustomID(IdType.CAPITAL, "capital");
-        this.id = "capital";
+        super(colonist, 2);
+        super.setCommandType(CommandType.BUILD_CAPITAL);
+        this.customID = colonist.getPlayerId();
+        this.id = "0";
     }
 
     public CustomID getCustomID() {

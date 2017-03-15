@@ -1,5 +1,6 @@
 package controller.commands.entitycommand.unitcommand;
 
+import controller.commands.CommandType;
 import controller.commands.entitycommand.AbstractCommand;
 import model.entities.unit.Unit;
 
@@ -18,4 +19,5 @@ public abstract class UnitCommand extends AbstractCommand {
     public Unit getUnit() {
         return unit;
     }
+
 }

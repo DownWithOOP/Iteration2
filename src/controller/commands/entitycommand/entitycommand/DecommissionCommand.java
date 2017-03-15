@@ -1,5 +1,6 @@
 package controller.commands.entitycommand.entitycommand;
 
+import controller.commands.CommandType;
 import controller.commands.entitycommand.AbstractCommand;
 import model.entities.Entity;
 
@@ -10,6 +11,7 @@ public class DecommissionCommand extends EntityCommand {
 
     public DecommissionCommand(Entity entity) {
         super(entity, 0);
+        super.setCommandType(CommandType.DECOMMISSION);
     }
 
     @Override

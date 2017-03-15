@@ -6,12 +6,14 @@ import controller.commands.CommandType;
 import model.entities.EntityType;
 import model.entities.Stats.FighterUnitStats;
 import model.entities.StructureFactory;
+import model.entities.structure.Capital;
 import model.entities.structure.Structure;
 import model.entities.Stats.Stats;
 import model.entities.Stats.UnitStats;
 import utilities.id.CustomID;
 import utilities.id.IdType;
 
+import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -40,7 +42,7 @@ public class Colonist extends FighterUnit {
 
     @Override
     protected Stats setEntityStats() {
-        return new FighterUnitStats(0,0,0,0,0,5,0,0);
+        return new FighterUnitStats(1,0,0,100,0,5,0,0);
     }
 
 
@@ -49,8 +51,10 @@ public class Colonist extends FighterUnit {
         System.out.println("abandon army");
     }
 
-    public Structure buildCapital(CustomID customId, String id) {
-        return capitalFactory.getStructure(EntityType.CAPITAL, customId, id,(int)(super.getLocation().getX()),(int)(super.getLocation().getY()));
+    public void buildCapital(CustomID customId, String id) {
+        System.out.println("BUILDING CAPITAL...");
+        Structure capital = capitalFactory.getStructure(EntityType.CAPITAL, customId, id,(int)(super.getLocation().getX()),(int)(super.getLocation().getY()));
+        commandRelay.notifyModelOfStructureCreation(capital);
     }
 
     @Override
