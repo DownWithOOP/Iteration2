@@ -8,6 +8,7 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -19,7 +20,9 @@ public class MapXMLParser {
     private Document doc;
 
     public void loadDocument(String path) throws Exception {
-        File xmlFile = new File(path);
+        URL url = getClass().getResource(path);
+        System.out.println(url.getPath());
+        File xmlFile = new File(url.getPath());
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         doc = dBuilder.parse(xmlFile);
