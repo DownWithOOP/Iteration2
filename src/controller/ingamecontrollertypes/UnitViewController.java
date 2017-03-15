@@ -55,6 +55,7 @@ public class UnitViewController extends Controller
 
     private VBox vb;
     private int hashcode;
+    private int numArmyTabs;
 
     private int selectedUnit; // used to keep track of which unit is clicked/currently selected and whose stats/missions need to be displayed
     private SwitchControllerRelay switchControllerRelay;
@@ -155,15 +156,17 @@ public class UnitViewController extends Controller
 
             List<ArmyRenderObject> armyRenderObjectList = unitRenderInformation.returnArmyInformation();
             List<Integer> armyNumberChoices = new ArrayList<>();
-            System.out.println("armyRenderobject list size " + armyRenderObjectList.size());
-            for (int i=0; i < armyRenderObjectList.size(); i++) {
-                System.out.println("rendering army objects ");
-                armyNumberChoices.add(i+1);
 
-                Tab currentTab = armyPane.getTabs().get(i);
+            armyPane.getTabs().clear();
+            for (int i=0; i < armyRenderObjectList.size(); i++) {
+                armyNumberChoices.add(i+1);
+                ArmyRenderObject armyRenderObject = armyRenderObjectList.get(i);
+
+                Tab currentTab = new Tab();
+                currentTab.setText("Army " + armyRenderObject.getId().getId());
+                currentTab.setContent(new HBox());
                 HBox currentTabHBox = (HBox) currentTab.getContent();
                 currentTabHBox.getChildren().clear(); //Prevent previous tabs from getting extraneous information when creating armies
-                ArmyRenderObject armyRenderObject = armyRenderObjectList.get(i);
 
                 VBox battleGroupBox = new VBox();
 
@@ -203,6 +206,7 @@ public class UnitViewController extends Controller
                     reinforcementsBox.getChildren().add(reUnitLabel);
                 }
                 currentTabHBox.getChildren().add(reinforcementsBox);
+                armyPane.getTabs().add(currentTab);
             }
 
             armyNumberComboBox.setItems(FXCollections.observableList(armyNumberChoices));
@@ -247,10 +251,6 @@ public class UnitViewController extends Controller
     }
 
     public void handleCreateArmy(ActionEvent actionEvent) {
-        Tab newArmyTab = new Tab();
-        newArmyTab.setText("Army " + (armyPane.getTabs().size() + 1));
-        newArmyTab.setContent(new HBox());
-        armyPane.getTabs().add(newArmyTab);
         this.controllerDispatch.handleCommand(CommandType.CREATE_ARMY);
     }
 
@@ -263,6 +263,8 @@ public class UnitViewController extends Controller
         this.mission.setStyle("-fx-font-weight: bold");
         this.mission.setFont(new Font(20));
         this.hashcode = 1;
+        System.out.println(numArmyTabs + " army tabs being inited");
+
     }
 
     public void addUnitToArmy(ActionEvent actionEvent) {

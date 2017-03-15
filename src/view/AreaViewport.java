@@ -49,6 +49,7 @@ public class AreaViewport implements MiniMapSubject{
     Image dirt = Assets.getInstance().DIRT;
     Image mountain = Assets.getInstance().CRATER;
     Image select = Assets.getInstance().SELECT;
+    Image rallyPoint = Assets.getInstance().RALLY_POINT;
     Image catFood = Assets.getInstance().CATFOOD;
     Image crystal = Assets.getInstance().CRYSTAL;
     Image research = Assets.getInstance().RESEARCH;
@@ -471,7 +472,7 @@ public class AreaViewport implements MiniMapSubject{
         double height = grass.getHeight();
         for (ArmyRenderObject armyRenderObject : unitRenderInformation.returnArmyInformation()) {
             System.out.println("drawing rally points");
-            gc.drawImage(select,0.75*width* armyRenderObject.getRallyPointLocation().getX()+ cameraX,height*1*-armyRenderObject.getRallyPointLocation().getY()+ cameraY + width*0.45);
+            gc.drawImage(rallyPoint,0.75*width* armyRenderObject.getRallyPointLocation().getX()+ cameraX,height*1*-armyRenderObject.getRallyPointLocation().getY()+ cameraY + width*0.45);
         }
     }
 

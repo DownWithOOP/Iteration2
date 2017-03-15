@@ -7,6 +7,7 @@ import controller.availablecommands.Commandable;
 import controller.commands.CommandType;
 import controller.commands.CycleDirection;
 import model.ArmyMode;
+import model.EntityIdManager;
 import model.Mode;
 import model.RallyPoint;
 import model.RenderInformation.*;
@@ -78,6 +79,8 @@ public class EntityOwnership {
 
     private UnitFactory unitFactory;
 
+    private EntityIdManager idManager;
+
     public EntityOwnership(CustomID playerId, CommandRelay commandRelay, int startingX, int startingY ) {
         unitList = new ArrayList<>(5);
         armyList = new ArrayList<>(typeRestriction);
@@ -86,6 +89,7 @@ public class EntityOwnership {
 
         this.unitFactory = new UnitFactory(commandRelay);
         this.commandRelay = commandRelay;
+        this.idManager = new EntityIdManager();
 
         this.playerId = playerId;
 
@@ -100,8 +104,8 @@ public class EntityOwnership {
     private void initializeUnits(int startingX, int startingY) {
         //TODO change the id number
         addUnit(IdType.EXPLORER, unitFactory.getEntity(EntityType.EXPLORER, playerId,"0", startingX, startingY));
-        addUnit(IdType.EXPLORER, unitFactory.getEntity(EntityType.EXPLORER, playerId,"1", startingX, startingY));
-        addUnit(IdType.COLONIST, unitFactory.getEntity(EntityType.COLONIST, playerId,"0", startingX, startingY));
+        addUnit(IdType.EXPLORER, unitFactory.getEntity(EntityType.EXPLORER, playerId,"1", startingX+1, startingY));
+        addUnit(IdType.COLONIST, unitFactory.getEntity(EntityType.COLONIST, playerId,"0", startingX, startingY-1));
     }
 
     private void initializeLists() {
@@ -147,7 +151,7 @@ public class EntityOwnership {
 
     public boolean createArmy() {
         System.out.println("army list size " + armyList.size());
-        Army newArmy = new Army(commandRelay, playerId, "1", 0, 0);
+        Army newArmy = new Army(commandRelay, playerId, idManager.getArmyId(), 0, 0);
         armyList.add(newArmy);
         rallyPointList.add(new RallyPoint(commandRelay, new Location(0,0), newArmy));
         System.out.println("army list size after add" + armyList.size());
