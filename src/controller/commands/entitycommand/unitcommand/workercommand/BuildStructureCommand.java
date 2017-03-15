@@ -11,14 +11,12 @@ import utilities.id.CustomID;
 public class BuildStructureCommand extends WorkerCommand {
     private EntityType entityType;
     private CustomID customID;
-    private String id;
 
-    public BuildStructureCommand(Worker worker, EntityType entityType, CustomID customID, String id) {
+    public BuildStructureCommand(Worker worker, EntityType entityType, CustomID customID) {
         super(worker, 5);
         super.setCommandType(CommandType.BUILD_STRUCTURE);
         this.entityType = entityType;
         this.customID = customID;
-        this.id = id;
     }
 
     public EntityType getEntityType() {
@@ -29,14 +27,10 @@ public class BuildStructureCommand extends WorkerCommand {
         return customID;
     }
 
-    public String getId() {
-        return id;
-    }
-
     @Override
     public boolean execute() {
         if(super.execute()) {
-            getWorker().buildStructure(getEntityType(), getCustomID(), getId());
+            getWorker().buildStructure(getEntityType(), getCustomID());
             return true;
         }
         return false;

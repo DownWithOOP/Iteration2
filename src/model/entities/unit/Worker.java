@@ -44,9 +44,9 @@ public class Worker extends PassiveUnit {
     }
 
     // Worker can build all structures except capital
-    public Structure buildStructure(EntityType entityType, CustomID customID, String id) {
+    public Structure buildStructure(EntityType entityType, CustomID customID) {
         if (!entityType.equals(EntityType.CAPITAL)) {
-            return structureFactory.getStructure(entityType, customID, id, (int)(super.getLocation().getX()),(int)(super.getLocation().getY()));
+            return structureFactory.getStructure(entityType, customID, (int)(super.getLocation().getX()),(int)(super.getLocation().getY()));
         }
         return null;
     }

@@ -1,6 +1,5 @@
 package controller;
 
-import com.sun.tools.doclint.Entity;
 import controller.Observers.MapDisplayObserver;
 import controller.availablecommands.AvailableCommands;
 import controller.availablecommands.Commandable;

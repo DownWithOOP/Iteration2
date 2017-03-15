@@ -1,6 +1,7 @@
 package model.entities;
 
 import controller.CommandRelay;
+import model.EntityIdManager;
 import model.entities.structure.*;
 import utilities.id.CustomID;
 
@@ -11,29 +12,32 @@ public class StructureFactory {
 
     private CommandRelay commandRelay;
 
+    private EntityIdManager entityIdManager;
+
     public StructureFactory(CommandRelay commandRelay) {
         this.commandRelay = commandRelay;
+        this.entityIdManager = EntityIdManager.getInstance();
     }
 
-    public Structure getStructure(EntityType structureType, CustomID customID, String id, int locationX, int locationY) {
+    public Structure getStructure(EntityType structureType, CustomID customID, int locationX, int locationY) {
         if (structureType == null) {
             return null;
         }
         switch(structureType) {
             case CAPITAL:
-                return new Capital(commandRelay, customID, id, locationX, locationY);
+                return new Capital(commandRelay, customID, entityIdManager.getCapitalId(), locationX, locationY);
             case FARM:
-                return new Farm(commandRelay, customID, id, locationX, locationY);
+                return new Farm(commandRelay, customID, entityIdManager.getFarmId(), locationX, locationY);
             case FORT:
-                return new Fort(commandRelay, customID, id, locationX, locationY);
+                return new Fort(commandRelay, customID, entityIdManager.getFortId(), locationX, locationY);
             case MINE:
-                return new Mine(commandRelay, customID, id, locationX, locationY);
+                return new Mine(commandRelay, customID, entityIdManager.getMineId(), locationX, locationY);
             case OBSERVATIONTOWER:
-                return new ObservationTower(commandRelay, customID, id, locationX, locationY);
+                return new ObservationTower(commandRelay, customID, entityIdManager.getObservationTowerId(), locationX, locationY);
             case POWERPLANT:
-                return new PowerPlant(commandRelay, customID, id, locationX, locationY);
+                return new PowerPlant(commandRelay, customID, entityIdManager.getPowerPlantId(), locationX, locationY);
             case UNIVERSITY:
-                return new University(commandRelay, customID, id, locationX, locationY);
+                return new University(commandRelay, customID, entityIdManager.getUniversityId(), locationX, locationY);
             default:
                 return null;
         }
