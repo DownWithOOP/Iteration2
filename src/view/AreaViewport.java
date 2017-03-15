@@ -57,6 +57,10 @@ public class AreaViewport implements MiniMapSubject{
     Image colonist = Assets.getInstance().COLONIST;
     Image explorer = Assets.getInstance().EXPLORER;
     Image grey = Assets.getInstance().GREY;
+    Image melee = Assets.getInstance().MELEE;
+    Image ranged = Assets.getInstance().RANGED;
+    Image capital = Assets.getInstance().CAPITAL;
+
 
     public AreaViewport(VBox vbox, Canvas canvas, MiniMap miniMap){
 
@@ -491,10 +495,15 @@ public class AreaViewport implements MiniMapSubject{
                                             if(id.equals(IdType.EXPLORER)){
                                                 gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
                                             }
-                                            if(id.equals(IdType.CAPITAL)){
-                                               // gc.drawImage(TODO..place here ,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                            if(id.equals(IdType.MELEE)){
+                                                gc.drawImage(melee,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
                                             }
-
+                                            if(id.equals(IdType.RANGED)){
+                                                gc.drawImage(ranged,0.75*width*j+ cameraX,height*1*-i+ cameraY + width*0.45);
+                                            }
+                                            if (id.equals(IdType.CAPITAL)) { //draw capital
+                                                gc.drawImage(capital, 0.75 * width * j + cameraX, height * 1 * -i + cameraY + width * 0.45);
+                                            }
                                             if(startOfNewTurn && entities.size() != 0){
                                                 selectJumpLocation(j,i);
                                                 changeCamera(j,i);
@@ -532,10 +541,19 @@ public class AreaViewport implements MiniMapSubject{
                                                 startOfNewTurn = false;
                                             }
                                             if(id.equals(IdType.COLONIST)){ // draw colonist
-                                                gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                                gc.drawImage(colonist,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
                                             }
                                             if(id.equals(IdType.EXPLORER)){
-                                                gc.drawImage(colonist,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                                gc.drawImage(explorer,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                            }
+                                            if(id.equals(IdType.MELEE)){
+                                                gc.drawImage(melee,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                            }
+                                            if(id.equals(IdType.RANGED)){
+                                                gc.drawImage(ranged,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);
+                                            }
+                                            if (id.equals(IdType.CAPITAL)) { //draw capital
+                                                gc.drawImage(capital, 0.75*width*j + cameraX, height*1*-i+ cameraY+height);
                                             }
                                             if(id.equals(IdType.CAPITAL)){
                                                // TODO gc.drawImage(,0.75*width*j+ cameraX,height*1*-i+ cameraY+height);

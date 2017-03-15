@@ -7,6 +7,7 @@ import controller.commands.CycleDirection;
 import model.RallyPoint;
 import model.common.Location;
 import model.entities.EntityId;
+import model.entities.structure.Structure;
 import model.entities.unit.Army;
 import model.entities.unit.FighterUnit;
 import utilities.ObserverInterfaces.*;
@@ -164,5 +165,10 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
     public void addRallyPoint(RallyPoint rallyPoint, int armyNumber) {
         entities.addRallyPoint(rallyPoint, armyNumber);
         notifyUnitObservers();
+    }
+
+    public void addStructure(Structure structure) {
+        entities.addEntity(structure);
+        notifyStructureObservers();
     }
 }

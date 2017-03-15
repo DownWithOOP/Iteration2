@@ -4,6 +4,7 @@ import controller.commands.Direction;
 import model.GameModel;
 import model.RallyPoint;
 import model.common.Location;
+import model.entities.structure.Structure;
 import model.entities.unit.FighterUnit;
 
 /**
@@ -33,5 +34,9 @@ public class CommandRelay {
 
     public void notifyModelOfRallyPointCreation(RallyPoint rallyPoint, int armyNumber) {
         model.addRallyPoint(rallyPoint, armyNumber);
+    }
+
+    public void notifyModelOfStructureCreation(Structure structure) {
+        model.addStructure(structure);
     }
 }
