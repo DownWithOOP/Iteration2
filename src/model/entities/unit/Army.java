@@ -121,6 +121,7 @@ public class Army extends Entity implements Fighter {
 
     //TODO maeby make different register functions for fighters and workers
     public void registerUnit(Unit unit) {
+        System.out.println("registering unit " + unit.getEntityId());
         EntityId unitId = unit.getEntityId();
         FighterUnitStats unitStats = (FighterUnitStats) unit.getUnitStats();
         int attack = unitStats.getOffensiveDamage();
@@ -140,10 +141,11 @@ public class Army extends Entity implements Fighter {
                 rallyPoint = new RallyPoint(commandRelay, unit.getLocation(),this);
                 commandRelay.notifyModelOfRallyPointCreation(rallyPoint, Integer.parseInt(getEntityId().getId()));
             }
-            if (rallyPoint.getLocation().equals(unit.getLocation())) {
+            else if (rallyPoint.getLocation().equals(unit.getLocation())) {
                 battleGroup.put(unitId, unit);
                 setBattleGroupStats(attack, defense, health, upKeep);
-            } else {
+            }
+            else {
                 reinforcements.put(unitId, unit);
                 //TODO: send the coordinates of the rally point to the unit
             }
@@ -180,7 +182,7 @@ public class Army extends Entity implements Fighter {
         setBattleGroupHealth(health);
         setBattleGroupUpkeep(upkeep);
         setBattleGroupVisionRadius();
-        System.out.println(((FighterUnitStats) entityStats).getOffensiveDamage());
+        System.out.println("bg off dmg " +((FighterUnitStats) entityStats).getOffensiveDamage());
     }
 
     private void setBattleGroupUpkeep(int upkeep) {

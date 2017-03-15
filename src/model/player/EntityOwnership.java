@@ -669,12 +669,12 @@ public class EntityOwnership {
         }
 
         System.out.println("applying damage");
-        int damageToApply = damage/(unitsToDamage.size() + structuresToDamage.size());
+
         for (FighterUnit unitTakingDamage : unitsToDamage) {
-            unitTakingDamage.takeDamage(damageToApply);
+            unitTakingDamage.takeDamage(damage);
         }
         for (Structure structureTakingDamage : structuresToDamage) {
-            structureTakingDamage.takeDamage(damageToApply);
+            structureTakingDamage.takeDamage(damage);
         }
 
     }
