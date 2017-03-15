@@ -54,6 +54,7 @@ public class UnitViewController extends Controller
     private ComboBox<Integer> armyNumberComboBox;
 
     private VBox vb;
+    private HBox hb;
     private int hashcode;
     private int numArmyTabs;
 
@@ -99,6 +100,7 @@ public class UnitViewController extends Controller
         } else {
             vb.getChildren().clear();
             for (int i = 0; i < data.size(); i++) {
+                hb.getChildren().clear();
                 UnitRenderObject renderObject = data.get(i);
                 Label label = new Label();
                 label.setTextFill(Color.BLACK);
@@ -113,6 +115,8 @@ public class UnitViewController extends Controller
                 UnitStats unitStats = data.get(i).getUnitStats();
                 String missions = renderObject.getMissions();
                 label.setText("Type: " + renderObject.getIdType() + "  locationX: " + renderObject.getLocationX() + "  locationY: " + renderObject.getLocationY());
+                hb.getChildren().add(label);
+                hb.getChildren().add(new Button(""));
                     vb.getChildren().add(label);
                     vb.getChildren().get((i)).addEventFilter(MouseEvent.MOUSE_PRESSED,
                             event -> {
@@ -256,6 +260,7 @@ public class UnitViewController extends Controller
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         vb = new VBox();
+        hb = new HBox();
         this.selectedUnit = 0;
         this.stats.setStyle("-fx-font-weight: bold");
         this.stats.setPadding(new Insets(5, 5, 5, 5));

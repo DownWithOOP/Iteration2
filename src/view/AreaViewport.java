@@ -48,7 +48,9 @@ public class AreaViewport implements MiniMapSubject{
     private String selectedUnit = "something";
     private int cursorX;
     private int cursorY;
+
     private int activePlayerNumber = 1;
+
     Image grass = Assets.getInstance().GRASS;
     Image water = Assets.getInstance().WATER;
     Image dirt = Assets.getInstance().DIRT;
