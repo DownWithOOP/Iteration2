@@ -33,8 +33,6 @@ public class Location extends Point {
     }
 
 
-
-
 //    public boolean equals(Location location){
 //        int xCoord=location.getX();
 //        int yCoord=location.getY();

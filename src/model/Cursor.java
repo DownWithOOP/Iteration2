@@ -49,8 +49,6 @@ public class Cursor {
         location.jumpLocation(locationX, locationY);
     }
 
-
-
     public void addCursorToAvailableCommands(AvailableCommands availableCommands) {
         HashMap<CommandType, Command> cursorCommand;
 //        cursorCommand.put()

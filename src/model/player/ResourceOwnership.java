@@ -7,6 +7,8 @@ import utilities.id.IdType;
 
 /**
  * Created by cduica on 3/9/17.
+ *
+ *  Manages relationship between player and resources
  */
 public class ResourceOwnership {
 
@@ -21,40 +23,48 @@ public class ResourceOwnership {
 
     public void addResource(Resource resource){
 
-        int currLevel;
-
         switch(resource.getResourceType()){
             case ENERGY:
                 if(energyResources == null) {
                     energyResources = resource;
                 } else {
-                    currLevel = energyResources.getLevel();
-                    currLevel += resource.getLevel();
-                    energyResources = new Resource(resource.getResourceType(), currLevel);
+                    energyResources.addResource(resource.getLevel());
                 }
                 break;
             case ORE:
                 if(oreResources == null){
                     oreResources = resource;
                 } else {
-                    currLevel = oreResources.getLevel();
-                    currLevel += resource.getLevel();
-                    oreResources = new Resource(resource.getResourceType(), currLevel);
+                    oreResources.addResource(resource.getLevel());
                 }
                 break;
             case FOOD:
                 if(foodResources == null){
                     foodResources = resource;
                 } else {
-                    currLevel = foodResources.getLevel();
-                    currLevel += resource.getLevel();
-                    foodResources = new Resource(resource.getResourceType(), currLevel);
+                    foodResources.addResource(resource.getLevel());
                 }
                 break;
             case EMPTY:
                 break;
         }
 
+    }
+
+    public CustomID getPlayerID() {
+        return playerID;
+    }
+
+    public Resource getEnergyResources() {
+        return energyResources;
+    }
+
+    public Resource getOreResources() {
+        return oreResources;
+    }
+
+    public Resource getFoodResources() {
+        return foodResources;
     }
 
     public Resource allocateEnergyResource(){

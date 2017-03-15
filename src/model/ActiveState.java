@@ -5,6 +5,7 @@ import controller.commands.*;
 import controller.commands.modifiers.Modifier;
 import controller.commands.modifiers.ModifierType;
 import model.common.Location;
+import model.entities.EntityType;
 import model.entities.structure.StructureType;
 import model.entities.unit.Army;
 import model.entities.unit.Ranged;
@@ -59,9 +60,11 @@ public class ActiveState {
     private void relayActionableCommand(CommandType commandType) {
 
         Command cursorCommand;
+        System.out.println("Active Command Type: " + activeCommandType);
 
         if (activeCommandType != null && checkIfCommandCanBePerformed(activeCommandType)) {
             activeCommand = commandFactory.createActionableCommand(activeCommandType, activeCommandable, modifier);
+            System.out.println("Active Command: " + activeCommand);
             if (activeCommand != null) {
                 System.out.println("we add command to queue in active state");
                 activeCommandable.addToQueue(activeCommand);
@@ -138,17 +141,17 @@ public class ActiveState {
         modifier = new Modifier(number);
     }
 
-    public void constructModifier(UnitType unitType) {
+    public void constructModifier(EntityType entityType) {
         System.out.println("unit type modifier constructing");
         clearModifier();
-        modifier = new Modifier(unitType);
+        modifier = new Modifier(entityType);
     }
 
-    public void constructModifier(StructureType structureType) {
-        System.out.println("structure type modifier constructing");
-        clearModifier();
-        modifier = new Modifier(structureType);
-    }
+//    public void constructModifier(StructureType structureType) {
+//        System.out.println("structure type modifier constructing");
+//        clearModifier();
+//        modifier = new Modifier(structureType);
+//    }
 
     public Cursor getCursor(){
         return cursor;
@@ -164,5 +167,41 @@ public class ActiveState {
         clearModifier();
     }
 
+    public static void main(String[] args) {
+        Cursor cursor = new Cursor(new Location(5, 5));
+        //ActiveState activeState = new ActiveState(cursor);
+        ActiveState.getInstance().init(cursor);
+        ActiveState.getInstance().constructModifier(Direction.EAST);
+        //Commandable ranged = new Ranged(new CustomID(IdType.RANGED, "ranged"), "ranged", 5, 5);
+        //RallyPoint rallyPoint = new RallyPoint(new Location(5, 5), new Army(new CustomID(IdType.PLAYER,"hello"),"army",5,6));
+        //activeCommandable = rallyPoint;
+        ActiveState.getInstance().activeCommandType = CommandType.MOVE;
+        ActiveState.getInstance().relayCommand(CommandType.MOVE);
+        ActiveState.getInstance().relayCommand(CommandType.FOCUS);
+
+
+        ActiveState.getInstance().constructModifier(5);
+        ActiveState.getInstance().relayCommand(CommandType.MOVE);
+
+        ActiveState.getInstance().constructModifier(Direction.SOUTH);
+        ActiveState.getInstance().relayCommand(CommandType.MOVE);
+
+        ActiveState.getInstance().constructModifier(Direction.WEST);
+        ActiveState.getInstance().relayCommand(CommandType.MOVE);
+
+        //activeState.update(ranged);
+        ActiveState.getInstance().activeCommandType = CommandType.JOIN_ARMY;
+        ActiveState.getInstance().constructModifier(5);
+        ActiveState.getInstance().relayCommand(CommandType.JOIN_ARMY);
+
+        ActiveState.getInstance().activeCommandType = CommandType.DECOMMISSION;
+        ActiveState.getInstance().relayCommand(CommandType.ACTIVATE_COMMAND);
+
+        //activeState.update(ranged);
+        ActiveState.getInstance().activeCommandType = CommandType.JOIN_ARMY;
+        ActiveState.getInstance().constructModifier(6);
+        ActiveState.getInstance().relayCommand(CommandType.JOIN_ARMY);
+
+    }
 
 }

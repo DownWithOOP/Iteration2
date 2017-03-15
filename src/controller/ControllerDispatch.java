@@ -1,5 +1,6 @@
 package controller;
 
+import com.sun.tools.doclint.Entity;
 import controller.Observers.MapDisplayObserver;
 import controller.availablecommands.AvailableCommands;
 import controller.availablecommands.Commandable;
@@ -18,6 +19,7 @@ import model.Cursor;
 import model.GameModel;
 import model.RallyPoint;
 import model.common.Location;
+import model.entities.EntityType;
 import model.entities.structure.Structure;
 import model.entities.structure.StructureType;
 import model.entities.unit.*;
@@ -25,6 +27,7 @@ import model.entities.EntityId;
 import model.entities.unit.Army;
 import model.entities.unit.Explorer;
 import model.entities.unit.Unit;
+import model.player.Player;
 import utilities.ObserverInterfaces.StatusObserver;
 import utilities.ObserverInterfaces.StructureObserver;
 import utilities.ObserverInterfaces.UnitObserver;
@@ -112,8 +115,8 @@ public class ControllerDispatch {
         ActiveState.getInstance().update(selectedInstance);
         ActiveState.getInstance().update(selectedCommandType);
 
-        StructureType structType = StructureType.valueOf(structureTypeStr);
-        ActiveState.getInstance().constructModifier(structType);
+        EntityType entityType = EntityType.valueOf(structureTypeStr);
+        ActiveState.getInstance().constructModifier(entityType);
         ActiveState.getInstance().relayCommand(CommandType.BUILD_STRUCTURE);
     }
 
@@ -123,8 +126,8 @@ public class ControllerDispatch {
         ActiveState.getInstance().update(selectedInstance);
         ActiveState.getInstance().update(selectedCommandType);
 
-        UnitType unitType = UnitType.valueOf(unitTypeStr);
-        ActiveState.getInstance().constructModifier(unitType);
+        EntityType entityType = EntityType.valueOf(unitTypeStr);
+        ActiveState.getInstance().constructModifier(entityType);
         ActiveState.getInstance().relayCommand(CommandType.CREATE_UNIT);
     }
 
@@ -217,6 +220,10 @@ public class ControllerDispatch {
 
     public int getActivePlayerNumber() {
         return gameModel.getActivePlayerIndex() + 1;
+    }
+
+    public Player getPlayer() {
+        return gameModel.getActivePlayer();
     }
 
     public void updateActiveStateCommandable(EntityId commandableId) {

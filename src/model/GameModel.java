@@ -7,6 +7,7 @@ import model.common.Location;
 import model.entities.EntityId;
 import model.entities.structure.Structure;
 import model.entities.unit.FighterUnit;
+import model.entities.unit.Unit;
 import model.map.Map;
 import model.player.Player;
 import utilities.ObserverInterfaces.MapObserver;
@@ -109,6 +110,10 @@ public class GameModel {
 
     public void addRallyPoint(RallyPoint rallyPoint, int armyNumber) {
         getActivePlayer().addRallyPoint(rallyPoint, armyNumber);
+    }
+
+    public void addUnit(Unit unit) {
+        getActivePlayer().addUnit(unit);
     }
 
     public void addStructure(Structure structure) {
