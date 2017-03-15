@@ -179,4 +179,10 @@ public class Player implements MapSubject, UnitSubject, StructureSubject, Status
     public Commandable getCurrentInstanceToCommand() {
         return entities.getCurrentInstanceToCommand();
     }
+
+    public void getInstanceFromIndex(int indexToSelect) {
+        entities.getInstance(indexToSelect);
+        notifyStatusObservers();
+        notifyUnitObservers();
+    }
 }

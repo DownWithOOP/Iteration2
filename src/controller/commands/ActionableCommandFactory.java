@@ -7,6 +7,7 @@ import controller.commands.entitycommand.unitcommand.AdvanceToRallyPointCommand;
 import controller.commands.entitycommand.unitcommand.JoinArmyCommand;
 import controller.commands.modifiers.Modifier;
 import controller.commands.modifiers.ModifierType;
+import controller.commands.playercommands.SelectInstance;
 import model.entities.unit.Army;
 import model.entities.unit.Unit;
 

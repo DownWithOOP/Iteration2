@@ -147,6 +147,7 @@ public class Army extends Entity implements Fighter {
             }
             else {
                 reinforcements.put(unitId, unit);
+                unit.addToQueue(new MoveUnitCommand(unit, rallyPoint.getLocation().getXCoord(), rallyPoint.getLocation().getYCoord()));
                 //TODO: send the coordinates of the rally point to the unit
             }
         }

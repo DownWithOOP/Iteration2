@@ -329,6 +329,18 @@ public class EntityOwnership {
             }
             return selectedRallyPoint.getIterableCommand(cycleCommandIndex);
         }
+        else if (getCurrentMode() == Mode.ARMY) {
+            if (selectedArmy == null) {
+                return null;
+            }
+            if (direction == CycleDirection.INCREMENT) {
+                cycleCommandIndex = next(selectedArmy.getIterableCommandsSize(), cycleCommandIndex);
+            }
+            if (direction == CycleDirection.DECREMENT) {
+                cycleCommandIndex = previous(selectedArmy.getIterableCommandsSize(), cycleCommandIndex);
+            }
+            return selectedArmy.getIterableCommand(cycleCommandIndex);
+        }
         if (currentModeList == null || currentModeList.get(cycleTypeIndex).size()==0) {
             return null;
         }
@@ -538,6 +550,14 @@ public class EntityOwnership {
                 return null;
             }
         }
+        else if (getCurrentMode() == Mode.ARMY) {
+            if (selectedArmy != null) {
+                return selectedArmy.getIterableCommand(cycleCommandIndex);
+            }
+            else {
+                return null;
+            }
+        }
         else if (currentModeList == null) {
             System.out.println("No current mode list available");
             return null;
@@ -727,5 +747,22 @@ public class EntityOwnership {
         else {
             return getCurrentInstance();
         }
+    }
+
+    public Commandable getInstance(int indexToSelect) {
+        if (getCurrentMode() == Mode.RALLY_POINT && indexToSelect < rallyPointList.size()) {
+            //do nothing
+        }
+        else if (getCurrentMode() == Mode.ARMY && indexToSelect < armyList.size()) {
+            selectedArmy = armyList.get(indexToSelect);
+            selectedArmyIndex = indexToSelect;
+            selectedRallyPoint = rallyPointList.get(selectedArmyIndex);
+            return selectedArmy;
+        }
+        else if (indexToSelect < currentModeList.get(cycleTypeIndex).size()) {
+            cycleInstanceIndex = indexToSelect;
+            return getCurrentInstance();
+        }
+        return null;
     }
 }

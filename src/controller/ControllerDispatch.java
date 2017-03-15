@@ -43,7 +43,6 @@ public class ControllerDispatch {
     public ControllerDispatch(int playerNumber, MapDisplayObserver mapDisplayObserver, UnitObserver unitObserver, StructureObserver structureObserver, StatusObserver statusObserver) {
         availableCommands = new AvailableCommands();
         gameModel = new GameModel(playerNumber, mapDisplayObserver, unitObserver, structureObserver, statusObserver);
-        //TODO: do we really need to define activeState like this/ does everything need to be static? --consider restructuring
         ActiveState.getInstance().init(new Cursor(new Location(4,4)));
         setGameModelMap();
     }
@@ -53,9 +52,9 @@ public class ControllerDispatch {
         if (commandHashMap.containsKey(commandType)) {
             System.out.println("issuing command: " + commandHashMap.get(commandType).toString());
             commandHashMap.get(commandType).execute();
+
             return;
         }
-        //ActiveState.relayCommand(commandType);
     }
 
     public void handleCommandActivation() {
@@ -178,6 +177,15 @@ public class ControllerDispatch {
         commandHashMap.put(CommandType.CYCLE_COMMAND_NEXT, new CycleCommandNext(gameModel.getActivePlayer()));
         commandHashMap.put(CommandType.CYCLE_COMMAND_PREV, new CycleCommandPrev(gameModel.getActivePlayer()));
         commandHashMap.put(CommandType.CREATE_ARMY, new CreateArmy(gameModel.getActivePlayer()));
+        commandHashMap.put(CommandType.SELECT_INSTANCE_1, new SelectInstance(gameModel.getActivePlayer(), 1));
+        commandHashMap.put(CommandType.SELECT_INSTANCE_2, new SelectInstance(gameModel.getActivePlayer(), 2));
+        commandHashMap.put(CommandType.SELECT_INSTANCE_3, new SelectInstance(gameModel.getActivePlayer(), 3));
+        commandHashMap.put(CommandType.SELECT_INSTANCE_4, new SelectInstance(gameModel.getActivePlayer(), 4));
+        commandHashMap.put(CommandType.SELECT_INSTANCE_5, new SelectInstance(gameModel.getActivePlayer(), 5));
+        commandHashMap.put(CommandType.SELECT_INSTANCE_6, new SelectInstance(gameModel.getActivePlayer(), 6));
+        commandHashMap.put(CommandType.SELECT_INSTANCE_7, new SelectInstance(gameModel.getActivePlayer(), 7));
+        commandHashMap.put(CommandType.SELECT_INSTANCE_8, new SelectInstance(gameModel.getActivePlayer(), 8));
+        commandHashMap.put(CommandType.SELECT_INSTANCE_0, new SelectInstance(gameModel.getActivePlayer(), 0));
     }
 
     public void updateActiveController(Controller newActiveController) {
