@@ -13,9 +13,9 @@ public class BuildCapitalCommand extends ColonistCommand {
     private String id;
 
     public BuildCapitalCommand(Colonist colonist) {
-        super(colonist, 5);
-        this.customID = new CustomID(IdType.CAPITAL, "capital");
-        this.id = "capital";
+        super(colonist, 2);
+        this.customID = colonist.getPlayerId();
+        this.id = "1";
     }
 
     public CustomID getCustomID() {

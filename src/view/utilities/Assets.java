@@ -40,7 +40,7 @@ public class Assets {
     public Image RED_CROSS;
     public Image SKULL;
 
-    public Image BASE;
+    public Image CAPITAL;
 
     public Image COLONIST;
     public Image EXPLORER;
@@ -74,7 +74,7 @@ public class Assets {
             SKULL = new Image("/images/decals/skull.png");
 
             //structures
-            BASE = new Image("/images/entities/base.png");
+            CAPITAL = new Image("/images/entities/capital.png");
 
             //units
             COLONIST = new Image("/images/entities/colonist.png");
